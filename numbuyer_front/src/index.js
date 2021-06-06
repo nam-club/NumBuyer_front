@@ -4,14 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux';
+import createStore from './redux/store/store';
+import { ConnectedRouter } from 'connected-react-router';
+import * as History from 'history';
 import { theme } from "./theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
+const history = History.createBrowserHistory();
+export const store = createStore(history);
+
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </Provider>
   </MuiThemeProvider>,
   document.getElementById('root')
 );
