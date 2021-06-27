@@ -38,7 +38,7 @@ const Game = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item xs={2} />
+                    <Grid item xs={1} />
                     <Grid item xs={2}>
                         <Card className={classes.answer}>
                             <h3 className={classes.tag}>Answer</h3>
@@ -62,6 +62,35 @@ const Game = () => {
                                     <Button size="large" className={classes.passButton}>PASS</Button>
                                 </Grid>
                             </Grid>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Card className={classes.player}>
+                            <h3 className={classes.tag}>Player1</h3>
+                            <h4 className={classes.tag}>×5</h4>
+                            <h4 className={classes.tag}>100</h4>
+                        </Card>
+                        <Card className={classes.player}>
+                            <h3 className={classes.tag}>Player2</h3>
+                            <h4 className={classes.tag}>×5</h4>
+                            <h4 className={classes.tag}>100</h4>
+                        </Card>
+                        <Card className={classes.player}>
+                            <h3 className={classes.tag}>Player3</h3>
+                            <h4 className={classes.tag}>×5</h4>
+                            <h4 className={classes.tag}>100</h4>
+                        </Card>
+                        <Card className={classes.player}>
+                            <h3 className={classes.tag}>Player4</h3>
+                            <h4 className={classes.tag}>×5</h4>
+                            <h4 className={classes.tag}>100</h4>
+                        </Card>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={10}>
+                        <Card className={classes.hand}>
+                            <h3 className={classes.handMessage} align="left">My Cards</h3>
                         </Card>
                     </Grid>
                 </Grid>

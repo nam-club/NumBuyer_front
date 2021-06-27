@@ -1,5 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles';
+import { positions } from '@material-ui/system';
 import grey from '@material-ui/core/colors/grey';
 import yellow from '@material-ui/core/colors/yellow';
 import orange from '@material-ui/core/colors/orange';
@@ -116,10 +117,10 @@ export const useStyles = makeStyles((theme) => ({
   auction: {
     background: yellow[200],
     marginLeft: 50,
-    marginRight: 10,
+    marginRight: 50,
   },
   auction_root: {
-    marginRight: 300,
+    marginRight: 100,
     padding: 10,
     background: grey[300],
   },
@@ -156,5 +157,23 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
         background: grey[500],
      },
+  },
+  player: {
+    background: grey[200],
+    marginTop: 5,
+    marginRight: 10,
+  },
+  hand: {
+    background: grey[200],
+    marginTop: 5,
+    marginLeft: 175,
+    marginRight: 100,
+    position: 'relative',
+    top: -150,
+  },
+  handMessage: {
+    color: grey[700],
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+    marginLeft: 10,
   },
 }));
