@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import createStore from './redux/store/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
-import { theme } from "./theme";
+import { theme } from "./templates/theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
 const history = History.createBrowserHistory();

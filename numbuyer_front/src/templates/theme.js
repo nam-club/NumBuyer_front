@@ -7,6 +7,7 @@ import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
 import pink from '@material-ui/core/colors/pink';
+import red from '@material-ui/core/colors/red';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -66,6 +67,10 @@ export const useStyles = makeStyles((theme) => ({
       color: grey[600],
       paddingTop: 80,
       marginTop: -50,
+  },
+  errorField: {
+    color: red[600],
+    background: red[100],
   },
   actionButton: {
       padding: 50,
@@ -172,6 +177,25 @@ export const useStyles = makeStyles((theme) => ({
     top: -150,
   },
   handMessage: {
+    color: grey[700],
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+    marginLeft: 10,
+  },
+  card: {
+    background: yellow[400],
+    marginLeft: 10,
+    marginBottom: 10,
+    width: 80
+  },
+  calc: {
+    background: grey[200],
+    marginTop: 5,
+    marginLeft: 175,
+    marginRight: 100,
+    position: 'relative',
+    top: -150,
+  },
+  calcMessage: {
     color: grey[700],
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
     marginLeft: 10,

@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import { useStyles } from '../theme';
+import { useStyles } from './theme';
+import TimeComponent from './components/TimeComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +18,7 @@ const Game = () => {
     const selector = useSelector(state => state);
 
     const [money, changeMoney] = React.useState('');
+    
 
     const classes = useStyles();
 
@@ -27,14 +29,11 @@ const Game = () => {
                 <Grid container>
                     <Grid item xs={9}>
                         <Card className={classes.box}>
-                            <h3 className={classes.naviMessage}>Distributing cards to players...</h3>
+                            <h3 className={classes.naviMessage}>{selector.game.message}</h3>
                         </Card>
                     </Grid>
                     <Grid item xs={3}>
-                        <Card className={classes.time}>
-                            <h3 className={classes.tag}>Time</h3>
-                            <h1 className={classes.message}>60</h1>
-                        </Card>
+                        <TimeComponent/>
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -65,32 +64,52 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={2}>
-                        <Card className={classes.player}>
-                            <h3 className={classes.tag}>Player1</h3>
-                            <h4 className={classes.tag}>×5</h4>
-                            <h4 className={classes.tag}>100</h4>
-                        </Card>
-                        <Card className={classes.player}>
-                            <h3 className={classes.tag}>Player2</h3>
-                            <h4 className={classes.tag}>×5</h4>
-                            <h4 className={classes.tag}>100</h4>
-                        </Card>
-                        <Card className={classes.player}>
-                            <h3 className={classes.tag}>Player3</h3>
-                            <h4 className={classes.tag}>×5</h4>
-                            <h4 className={classes.tag}>100</h4>
-                        </Card>
-                        <Card className={classes.player}>
-                            <h3 className={classes.tag}>Player4</h3>
-                            <h4 className={classes.tag}>×5</h4>
-                            <h4 className={classes.tag}>100</h4>
-                        </Card>
+                        {selector.players.players.map((value) => (
+                            <Card className={classes.player} key={value.id}>
+                                <h3 className={classes.tag}>{value.name}</h3>
+                                <h4 className={classes.tag}>×{value.cards.length}</h4>
+                                <h4 className={classes.tag}>{value.money}</h4>
+                            </Card>
+                        ))}
                     </Grid>
                 </Grid>
                 <Grid container>
                     <Grid item xs={10}>
                         <Card className={classes.hand}>
                             <h3 className={classes.handMessage} align="left">My Cards</h3>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <Card className={classes.card}>
+                                            <h1 className={classes.message}>2</h1>
+                                        </Card>
+                                    </td>
+                                    <td>
+                                        <Card className={classes.card}>
+                                            <h1 className={classes.message}>4</h1>
+                                        </Card>
+                                    </td>
+                                </tr>
+                            </table>
+                        </Card>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={10}>
+                        <Card className={classes.calc}>
+                            <h3 className={classes.calcMessage} align="left">Calculate Field</h3>
+                            <Grid item xs={1}>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                            </Grid>
                         </Card>
                     </Grid>
                 </Grid>

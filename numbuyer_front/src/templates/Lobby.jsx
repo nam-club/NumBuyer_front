@@ -2,7 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import { useStyles } from '../theme';
+import { setMessageAction, setStatusAction, setTimeAction } from '../redux/game/actions';
+
+import { useStyles } from './theme';
+import * as Constants from '../constants';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
@@ -23,14 +26,16 @@ const Lobby = () => {
                 <h1 className={classes.title}>NumBuyer</h1>
                 <Card className={classes.root}>
                     <h2 className={classes.menu}>Lobby</h2>
-                    <h3 className={classes.name}>{selector.players.players[0].name}</h3>
-                    <h3 className={classes.name}>{selector.players.players[1].name}</h3>
-                    <h3 className={classes.name}>{selector.players.players[2].name}</h3>
-                    <h3 className={classes.name}>{selector.players.players[3].name}</h3>
+                    {selector.players.players.map((value) => (<h3 key={value.id} className={classes.name}>{value.name}</h3>))}
                     <CardActions>
                         <div style={{ flexGrow: 1 }}></div>
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}
-                        onClick={() => {dispatch(push('/Game'));}}>Start</Button>
+                        onClick={() => {
+                            dispatch(setStatusAction({status: Constants.GIVE_CARD_ST}));
+                            dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
+                            dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+                            dispatch(push('/Game'));
+                        }}>Start</Button>
                     </CardActions>
                 </Card>
             </div>

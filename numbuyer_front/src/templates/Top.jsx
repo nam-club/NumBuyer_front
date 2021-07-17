@@ -1,12 +1,16 @@
 import React from 'react';
 
-import { useStyles } from '../theme';
+import { useStyles } from './theme';
+import * as Constants from '../constants';
 
-import { useDispatch} from 'react-redux';
+//import { CTX } from '../Socket';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import { setPlayersAction } from '../redux/players/actions';
 import { setRoomAction } from '../redux/room/actions';
+import { setValidAction, setErrMsgAction, setNameAction } from '../redux/top/actions';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
@@ -22,20 +26,66 @@ import Grid from '@material-ui/core/Grid';
 
 const Top = () => {
     const dispatch = useDispatch();
+    const selector = useSelector(state => state);
+    //const {joinQuickMatch, joinFriendMatch} = React.useContext(CTX);
 
-    const [name, changeName] = React.useState('');
     const [code, changeCode] = React.useState('');
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
+    const doChange = (e) => {
+        if(!e.target.value.match(Constants.NAME_EXP)) {
+            dispatch(setNameAction({name: e.target.value}));
+        }
+        if(e.target.value !== '' && !e.target.value.match(Constants.NAME_EXP)) {
+            dispatch(setValidAction({validFlg: false}));
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            if(e.target.value !== '') {
+                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+            }else {
+                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+            }
+        }
+    }
+
     const handleOpen = () => {
-        setOpen(true);
+        if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
+            setOpen(true);
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            if(selector.top.name !== '') {
+                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+            }else {
+                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+            }
+        }
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    const clickQuick = () => {
+        if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
+            dispatch(setPlayersAction({players: [
+                {id: "001", name: selector.top.name, money: 100, cards: []},
+                {id: "002", name: "aoki", money: 100, cards: []},
+                {id: "003", name: "maeda", money: 100, cards: []},
+                {id: "004", name: "nagasawa", money: 100, cards: []},
+            ]}));
+            //joinQuickMatch({id: "001", name: name, money: 100, cards: []});
+            dispatch(push('/Lobby'));
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            if(selector.top.name !== '') {
+                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+            }else {
+                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+            }
+        }
+    }
 
     return (
         <Typography component="div" align="center">
@@ -45,21 +95,16 @@ const Top = () => {
                 <Card className={classes.root}>
                     <CardContent>
                         <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                        id="standard-basic" label="Player Name" value={name} 
-                        onChange={e => changeName(e.target.value)} />
+                        id="standard-basic" label="Player Name" value={selector.top.name} 
+                        onChange={doChange}/>
+                        {selector.top.validFlg &&
+                            <p className={classes.errorField}>{selector.top.errMsg}</p>
+                        }
                     </CardContent>
                     <CardActions>
                         <Grid item xs={6}>
                             <Button size="large" className={classes.actionButton + " " + classes.quickButton}
-                            onClick={() => {
-                                dispatch(setPlayersAction({players: [
-                                    {id: "001", name: name, money: 100, cards: []},
-                                    {id: "002", name: "aoki", money: 100, cards: []},
-                                    {id: "003", name: "maeda", money: 100, cards: []},
-                                    {id: "004", name: "nagasawa", money: 100, cards: []},
-                                ]}));
-                                dispatch(push('/Lobby'));
-                            }}>Quick Match</Button>
+                            onClick={clickQuick}>Quick Match</Button>
                         </Grid>
                         <Grid item xs={6}>
                             <Button size="large" className={classes.actionButton + " " + classes.friendButton}
@@ -86,6 +131,7 @@ const Top = () => {
                             <Button size="large" className={classes.actionButton + " " + classes.friendButton} 
                             onClick={() => {
                                 dispatch(setRoomAction({code: code}));
+                                //joinFriendMatch(player);
                                 dispatch(push('/'));
                             }}>Create or Join</Button>
                         </div>
