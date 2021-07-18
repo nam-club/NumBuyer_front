@@ -8,7 +8,7 @@ import * as Constants from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import { setPlayersAction } from '../redux/players/actions';
+import { setPlayerAction, setPlayersAction } from '../redux/players/actions';
 import { setRoomAction } from '../redux/room/actions';
 import { setValidAction, setErrMsgAction, setNameAction } from '../redux/top/actions';
 
@@ -25,13 +25,12 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 const Top = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     //const {joinQuickMatch, joinFriendMatch} = React.useContext(CTX);
 
-    const [code, changeCode] = React.useState('');
-
-    const classes = useStyles();
+    const [code, setCode] = React.useState('');
     const [open, setOpen] = React.useState(false);
 
     const doChange = (e) => {
@@ -69,12 +68,10 @@ const Top = () => {
 
     const clickQuick = () => {
         if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
-            dispatch(setPlayersAction({players: [
-                {id: "001", name: selector.top.name, money: 100, cards: []},
-                {id: "002", name: "aoki", money: 100, cards: []},
-                {id: "003", name: "maeda", money: 100, cards: []},
-                {id: "004", name: "nagasawa", money: 100, cards: []},
-            ]}));
+            dispatch(setPlayerAction({id: "001", name: selector.top.name, money: Constants.MONEY, cards: []}));
+            dispatch(setPlayerAction({id: "002", name: "aoki", money: Constants.MONEY, cards: []}));
+            dispatch(setPlayerAction({id: "003", name: "maeda", money: Constants.MONEY, cards: []}));
+            dispatch(setPlayerAction({id: "004", name: "nagasawa", money: Constants.MONEY, cards: []}));
             //joinQuickMatch({id: "001", name: name, money: 100, cards: []});
             dispatch(push('/Lobby'));
         }else {
@@ -127,7 +124,7 @@ const Top = () => {
                         <div className={classes.paper}>
                             <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
                             id="standard-basic" label="Room Name" value={code} 
-                            onChange={e => changeCode(e.target.value)} />
+                            onChange={e => setCode(e.target.value)} />
                             <Button size="large" className={classes.actionButton + " " + classes.friendButton} 
                             onClick={() => {
                                 dispatch(setRoomAction({code: code}));

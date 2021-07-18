@@ -14,10 +14,11 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
 const Lobby = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
-    const classes = useStyles();
+    console.log(selector);
 
     return (
         <Typography component="div" align="center">
@@ -26,7 +27,7 @@ const Lobby = () => {
                 <h1 className={classes.title}>NumBuyer</h1>
                 <Card className={classes.root}>
                     <h2 className={classes.menu}>Lobby</h2>
-                    {selector.players.players.map((value) => (<h3 key={value.id} className={classes.name}>{value.name}</h3>))}
+                    {selector.players.map((value) => (<h3 key={value.id} className={classes.name}>{value.name}</h3>))}
                     <CardActions>
                         <div style={{ flexGrow: 1 }}></div>
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}

@@ -10,10 +10,10 @@ const initialState = {
     },
     game: {
         status: '',
-        message: '',
+        message: '　',
         time: 0,
-        answerCard: '',
-        AuctionCard: ''
+        answerCard: '　',
+        AuctionCard: '　'
     }
 };
 

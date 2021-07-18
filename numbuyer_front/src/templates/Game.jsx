@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import { useStyles } from './theme';
+import usePersist from '../Persist';
 import TimeComponent from './components/TimeComponent';
 
 import GlobalStyle from "../globalStyles";
@@ -14,13 +15,20 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 const Game = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
-    const [money, changeMoney] = React.useState('');
-    
+    const [gameData, setGameData] = usePersist("gameData", null);
 
-    const classes = useStyles();
+    const [ansCard, setAnsCard] = React.useState(gameData.game.ansCard);
+    const [aucCard, setAucCard] = React.useState(gameData.game.aucCard);
+    const [money, setMoney] = React.useState('');
+    //const [players, setPlayers] = React.useState(gameData.players.players);
+
+    React.useEffect(() => {
+        setGameData(selector);
+    }, [ansCard, aucCard]);
 
     return (
         <Typography component="div" align="center">
@@ -33,7 +41,8 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={3}>
-                        <TimeComponent/>
+                        <TimeComponent ansCard={ansCard} setAnsCard={setAnsCard}
+                         aucCard={aucCard} setAucCard={setAucCard} />
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -41,7 +50,7 @@ const Game = () => {
                     <Grid item xs={2}>
                         <Card className={classes.answer}>
                             <h3 className={classes.tag}>Answer</h3>
-                            <h1 className={classes.message}>22</h1>
+                            <h1 className={classes.message}>{ansCard}</h1>
                         </Card>
                     </Grid>
                     <Grid item xs={7}>
@@ -50,13 +59,13 @@ const Game = () => {
                                 <Grid item xs={5}>
                                     <Card className={classes.auction}>
                                         <h3 className={classes.tag}>Auction</h3>
-                                        <h1 className={classes.message}>9</h1>
+                                        <h1 className={classes.message}>{aucCard}</h1>
                                     </Card>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField inputProps={{className: classes.moneyField}} InputLabelProps={{className: classes.moneyField}}
                                     id="standard-basic" label="Please enter the bid amount" value={money} 
-                                    onChange={e => changeMoney(e.target.value)} />
+                                    onChange={e => setMoney(e.target.value)} />
                                     <Button size="large" className={classes.buyButton}>BUY</Button>
                                     <Button size="large" className={classes.passButton}>PASS</Button>
                                 </Grid>
@@ -64,7 +73,7 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={2}>
-                        {selector.players.players.map((value) => (
+                        {selector.players.map((value) => (
                             <Card className={classes.player} key={value.id}>
                                 <h3 className={classes.tag}>{value.name}</h3>
                                 <h4 className={classes.tag}>×{value.cards.length}</h4>
