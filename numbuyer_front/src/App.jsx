@@ -1,10 +1,13 @@
 import React from 'react';
 import Router from './Router';
+import Socket from './Socket';
 
 function App() {
   return (
     <main>
-      <Router />
+      <Socket>
+        <Router />
+      </Socket>
     </main>
   );
 }

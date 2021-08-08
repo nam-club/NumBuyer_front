@@ -8,8 +8,9 @@ export const CTX = React.createContext();
 let socket = io("http://localhost:8000/");
 
 export const joinQuickMatch = function(value) {
-    console.log(socket);
+    console.log(value);
     socket.emit('join/quick_match', value);
+    console.log("永沢");
 }
 
 export const joinFriendMatch = function(value) {
@@ -18,8 +19,12 @@ export const joinFriendMatch = function(value) {
 
 export default function Socket(props) {
     const dispatch = useDispatch();
+    console.log(socket);
+    console.log("前田")
 
     socket.on('game/join', function(msg) {
+        console.log("伊藤純平")
+        console.log(msg)
         dispatch(setPlayersAction({players: msg}))
     })
 

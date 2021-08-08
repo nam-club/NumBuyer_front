@@ -3,7 +3,7 @@ import React from 'react';
 import { useStyles } from './theme';
 import * as Constants from '../constants';
 
-//import { CTX } from '../Socket';
+import { CTX } from '../Socket';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -28,7 +28,7 @@ const Top = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    //const {joinQuickMatch, joinFriendMatch} = React.useContext(CTX);
+    const {joinQuickMatch, joinFriendMatch} = React.useContext(CTX);
 
     const [code, setCode] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -72,7 +72,7 @@ const Top = () => {
             dispatch(setPlayerAction({id: "002", name: "aoki", money: Constants.MONEY, cards: []}));
             dispatch(setPlayerAction({id: "003", name: "maeda", money: Constants.MONEY, cards: []}));
             dispatch(setPlayerAction({id: "004", name: "nagasawa", money: Constants.MONEY, cards: []}));
-            //joinQuickMatch({id: "001", name: name, money: 100, cards: []});
+            joinQuickMatch({name: selector.top.name});
             dispatch(push('/Lobby'));
         }else {
             dispatch(setValidAction({validFlg: true}));
