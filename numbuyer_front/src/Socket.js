@@ -1,9 +1,10 @@
 import React from 'react';
-import { io } from 'socket.io-client';
 import { useDispatch} from 'react-redux';
 import { setPlayersAction } from './redux/players/actions';
 
 export const CTX = React.createContext();
+
+const io = require("socket.io-client");
 
 let socket = io("http://localhost:8000/");
 
