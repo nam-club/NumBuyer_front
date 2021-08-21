@@ -10,12 +10,12 @@ let socket = io("http://localhost:8000/");
 
 export const joinQuickMatch = function(value) {
     console.log(value);
-    socket.emit('join/quick_match', value);
+    socket.emit('join/quick_match', JSON.stringify(value));
     console.log("永沢");
 }
 
 export const joinFriendMatch = function(value) {
-    socket.emit('join/quick_match', value);
+    socket.emit('join/quick_match', JSON.stringify(value));
 }
 
 export default function Socket(props) {
