@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
+import { CTX } from '../Socket';
+
 import { useStyles } from './theme';
 import usePersist from '../Persist';
 import TimeComponent from './components/TimeComponent';
@@ -23,12 +25,22 @@ const Game = () => {
 
     const [ansCard, setAnsCard] = React.useState(gameData.game.ansCard);
     const [aucCard, setAucCard] = React.useState(gameData.game.aucCard);
-    const [money, setMoney] = React.useState('');
+    const [fee, setFee] = React.useState('');
+    const {buyToServer} = React.useContext(CTX);
     //const [players, setPlayers] = React.useState(gameData.players.players);
 
     React.useEffect(() => {
         setGameData(selector);
     }, [ansCard, aucCard]);
+
+    const isOwn = (player) => {
+        return player.own == true;
+    }
+
+    const buyAucCard = () => {
+        console.log(fee);
+        buyToServer({playerId: selector.players.find(isOwn).id, money: Number(fee)});
+    }
 
     return (
         <Typography component="div" align="center">
@@ -64,9 +76,10 @@ const Game = () => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField inputProps={{className: classes.moneyField}} InputLabelProps={{className: classes.moneyField}}
-                                    id="standard-basic" label="Please enter the bid amount" value={money} 
-                                    onChange={e => setMoney(e.target.value)} />
-                                    <Button size="large" className={classes.buyButton}>BUY</Button>
+                                    id="standard-basic" label="Please enter the bid amount" value={fee} 
+                                    onChange={e => setFee(e.target.value)} />
+                                    <Button size="large" className={classes.buyButton}
+                                    onClick={buyAucCard}>BUY</Button>
                                     <Button size="large" className={classes.passButton}>PASS</Button>
                                 </Grid>
                             </Grid>
@@ -87,18 +100,17 @@ const Game = () => {
                         <Card className={classes.hand}>
                             <h3 className={classes.handMessage} align="left">My Cards</h3>
                             <table>
-                                <tr>
-                                    <td>
-                                        <Card className={classes.card}>
-                                            <h1 className={classes.message}>2</h1>
-                                        </Card>
-                                    </td>
-                                    <td>
-                                        <Card className={classes.card}>
-                                            <h1 className={classes.message}>4</h1>
-                                        </Card>
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        {selector.players.find(isOwn).cards.map((value) => (
+                                            <td>
+                                                <Card className={classes.card}>
+                                                    <h1 className={classes.message}>{value}</h1>
+                                                </Card>
+                                            </td>
+                                        ))}
+                                    </tr>
+                                </tbody>
                             </table>
                         </Card>
                     </Grid>
@@ -109,14 +121,16 @@ const Game = () => {
                             <h3 className={classes.calcMessage} align="left">Calculate Field</h3>
                             <Grid item xs={1}>
                                 <table>
-                                    <tr>
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                
+                                            </td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </Grid>
                         </Card>

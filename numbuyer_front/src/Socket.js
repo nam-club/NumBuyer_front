@@ -17,6 +17,10 @@ export const joinFriendMatch = function(value) {
     socket.emit('join/quick_match', value);
 }
 
+export const buyToServer = function(value) {
+    socket.emit('game/buy_to_server', value);
+}
+
 export default function Socket(props) {
     const dispatch = useDispatch();
     console.log(socket);
@@ -29,7 +33,7 @@ export default function Socket(props) {
     })
 
     return (
-        <CTX.Provider value={{joinQuickMatch, joinFriendMatch}}>
+        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, buyToServer}}>
             {props.children}
         </CTX.Provider>
     )

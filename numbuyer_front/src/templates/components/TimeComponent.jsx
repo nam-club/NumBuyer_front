@@ -42,6 +42,7 @@ const TimeComponent = (props) => {
                     dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
                     dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
                     setTime(Constants.GIVE_CARD_TIME);
+                    
                     break;
                 case Constants.GIVE_CARD_ST:
                     dispatch(setStatusAction({status: Constants.SHOW_ANS_ST}));
