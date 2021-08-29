@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -18,8 +19,6 @@ const Lobby = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
-    console.log(selector);
-
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
@@ -27,7 +26,7 @@ const Lobby = () => {
                 <h1 className={classes.title}>NumBuyer</h1>
                 <Card className={classes.root}>
                     <h2 className={classes.menu}>Lobby</h2>
-                    {selector.players.map((value) => (<h3 key={value.id} className={classes.name}>{value.name}</h3>))}
+                    {selector.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
                     <CardActions>
                         <div style={{ flexGrow: 1 }}></div>
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}

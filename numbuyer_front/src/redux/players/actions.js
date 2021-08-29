@@ -4,8 +4,9 @@ export const setPlayerAction = (playerState) => {
     return {
         type: "SET_PLAYER",
         payload: {
-            id: playerState.id,
-            name: playerState.name,
+            playerId: playerState.playerId,
+            playerName: playerState.playerName,
+            roomName: playerState.roomName,
             money: playerState.money,
             cards: playerState.cards,
             own: playerState.own

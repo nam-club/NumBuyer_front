@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function usePersist(ky, initVal) {
     const key = "hooks:" + ky;
