@@ -34,12 +34,12 @@ const Game = () => {
     }, [ansCard, aucCard]);
 
     const isOwn = (player) => {
-        return player.own == true;
+        return player.ownFlg == true;
     }
 
     const buyAucCard = () => {
         console.log(fee);
-        buyToServer({playerId: selector.players.find(isOwn).id, money: Number(fee)});
+        buyToServer({playerId: selector.players.find(isOwn).playerId, money: Number(fee)});
     }
 
     return (
@@ -87,8 +87,8 @@ const Game = () => {
                     </Grid>
                     <Grid item xs={2}>
                         {selector.players.map((value) => (
-                            <Card className={classes.player} key={value.id}>
-                                <h3 className={classes.tag}>{value.name}</h3>
+                            <Card className={classes.player} key={value.playerId}>
+                                <h3 className={classes.tag}>{value.playerName}</h3>
                                 <h4 className={classes.tag}>×{value.cards.length}</h4>
                                 <h4 className={classes.tag}>{value.money}</h4>
                             </Card>

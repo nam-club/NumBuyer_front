@@ -4,7 +4,7 @@ import initialState from '../store/initialState';
 export const PlayersReducer = (state = initialState.players, action) => {
     switch(action.type) {
         case Actions.SET_PLAYER:
-            state.push(action.payload);
+            state = [...state, action.payload];
             return state;
         case Actions.SET_PLAYERS:
             return {

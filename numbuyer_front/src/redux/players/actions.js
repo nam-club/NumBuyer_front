@@ -9,7 +9,7 @@ export const setPlayerAction = (playerState) => {
             roomName: playerState.roomName,
             money: playerState.money,
             cards: playerState.cards,
-            own: playerState.own
+            ownFlg: playerState.ownFlg
         }
     }
 }

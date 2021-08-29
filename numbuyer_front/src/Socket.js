@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch} from 'react-redux';
-import { setPlayerAction } from './redux/players/actions';
+import { setPlayersAction, setPlayerAction } from './redux/players/actions';
 
 export const CTX = React.createContext();
 
 const io = require("socket.io-client");
-
 let socket = io("http://localhost:8000/");
 
 let resObj = ""; 
@@ -28,6 +27,8 @@ export default function Socket(props) {
     console.log(socket);
 
     socket.on('game/join', function(msg) {
+        console.log(msg);
+        msg = '{"playerId":1,"playerName":"QUICK","roomName":"ITO","money":100,"cards":["1","+"],"ownFlg":true}';
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setPlayerAction(resObj));

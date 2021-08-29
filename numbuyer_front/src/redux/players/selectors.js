@@ -10,10 +10,10 @@ export const getPlayers = createSelector(
 
 export const getId = createSelector(
     [playerSelector],
-    state => state.id
+    state => state.playerId
 )
 
 export const getName = createSelector(
     [playerSelector],
-    state => state.name
+    state => state.playerName
 )
