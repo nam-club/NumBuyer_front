@@ -68,10 +68,10 @@ const Top = () => {
 
     const clickQuick = () => {
         if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
-            /*dispatch(setPlayerAction({id: "001", name: selector.top.name, money: Constants.MONEY, cards: []}));
-            dispatch(setPlayerAction({id: "002", name: "aoki", money: Constants.MONEY, cards: []}));
-            dispatch(setPlayerAction({id: "003", name: "maeda", money: Constants.MONEY, cards: []}));
-            dispatch(setPlayerAction({id: "004", name: "nagasawa", money: Constants.MONEY, cards: []}));*/
+            /*dispatch(setPlayerAction({id: "001", name: selector.top.name, coin: Constants.COIN, cards: []}));
+            dispatch(setPlayerAction({id: "002", name: "aoki", coin: Constants.COIN, cards: []}));
+            dispatch(setPlayerAction({id: "003", name: "maeda", coin: Constants.COIN, cards: []}));
+            dispatch(setPlayerAction({id: "004", name: "nagasawa", coin: Constants.COIN, cards: []}));*/
             joinQuickMatch({name: selector.top.name});
             dispatch(push('/Lobby'));
         }else {

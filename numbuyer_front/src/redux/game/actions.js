@@ -1,10 +1,10 @@
-export const SET_STATUS = "SET_STATUS";
+export const SET_STATE = "SET_STATE";
 
-export const setStatusAction = (statusState) => {
+export const setStateAction = (stateState) => {
     return {
-        type: "SET_STATUS",
+        type: "SET_STATE",
         payload: {
-            status: statusState.status
+            state: stateState.state
         }
     }
 }

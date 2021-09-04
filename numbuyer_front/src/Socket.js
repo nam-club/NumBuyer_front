@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch} from 'react-redux';
 import { setPlayersAction, setPlayerAction } from './redux/players/actions';
+import { setStateAction } from './redux/game/actions';
 
 export const CTX = React.createContext();
 
@@ -28,10 +29,16 @@ export default function Socket(props) {
 
     socket.on('game/join', function(msg) {
         console.log(msg);
-        msg = '{"playerId":1,"playerName":"QUICK","roomName":"ITO","money":100,"cards":["1","+"],"ownFlg":true}';
+        msg = '{"playerId":1,"playerName":"ITO","roomName":"ITO","coin":100,"cards":["1","+"],"ownFlg":true}';
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setPlayerAction(resObj));
+    })
+
+    socket.on('game/update_state', function(msg) {
+        console.log(msg);
+        resObj = JSON.parse(msg);
+        dispatch(setStateAction(resObj));
     })
 
     return (

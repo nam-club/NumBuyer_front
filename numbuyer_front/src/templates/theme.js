@@ -128,6 +128,8 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 100,
     padding: 10,
     background: grey[300],
+    position: 'relative',
+    top: 0,
   },
   naviMessage: {
     color: grey[700],
@@ -144,7 +146,7 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '4em',
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
-  moneyField: {
+  coinField: {
     color: grey[600],
     width: 300,
   },
@@ -163,6 +165,13 @@ export const useStyles = makeStyles((theme) => ({
         background: grey[500],
      },
   },
+  calcButton: {
+    background: blue[200],
+    marginTop: 30,
+    '&:hover': {
+        background: blue[100],
+     },
+  },
   player: {
     background: grey[200],
     marginTop: 5,
@@ -174,7 +183,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 175,
     marginRight: 100,
     position: 'relative',
-    top: -150,
+    top: 50,
   },
   handMessage: {
     color: grey[700],
@@ -193,7 +202,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 175,
     marginRight: 100,
     position: 'relative',
-    top: -150,
+    top: 50,
   },
   calcMessage: {
     color: grey[700],

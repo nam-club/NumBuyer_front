@@ -3,7 +3,7 @@ import initialState from '../store/initialState';
 
 export const GameReducer = (state = initialState.game, action) => {
     switch(action.type) {
-        case Actions.SET_STATUS:
+        case Actions.SET_STATE:
             return {
                 ...state,
                 ...action.payload
