@@ -13,7 +13,10 @@ const initialState = {
         message: '　',
         time: 0,
         answerCard: '　',
-        AuctionCard: '　'
+        auctionCard: '　',
+        playerName: '',
+        coin: 0,
+        skipFlg: false,
     }
 };
 

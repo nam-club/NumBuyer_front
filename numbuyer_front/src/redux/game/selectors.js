@@ -26,3 +26,18 @@ export const getAuctionCard = createSelector(
     [gameSelector],
     state => state.auctionCard
 )
+
+export const getPlayerName = createSelector(
+    [gameSelector],
+    state => state.playerName
+)
+
+export const getCoin = createSelector(
+    [gameSelector],
+    state => state.coin
+)
+
+export const getSkipFlg = createSelector(
+    [gameSelector],
+    state => state.skipFlg
+)

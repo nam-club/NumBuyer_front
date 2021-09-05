@@ -46,7 +46,8 @@ const CalcComponent = (props) => {
                                 <tr>
                                     {hands.map((value, index) => (
                                         <td key={index}>
-                                            <Button className={classes.card} onClick={() => selectHands(index, value)}>
+                                            <Button className={classes.card} onClick={() => selectHands(index, value)}
+                                            disabled={!(selector.game.state == Constants.CALCULATE_ST)}>
                                                 <h1 className={classes.message}>{value}</h1>
                                             </Button>
                                         </td>
@@ -68,7 +69,8 @@ const CalcComponent = (props) => {
                                         <tr>
                                             {calcs.map((value, index) => (
                                                 <td key={index}>
-                                                    <Button className={classes.card} onClick={() => selectCalcs(index, value)}>
+                                                    <Button className={classes.card} onClick={() => selectCalcs(index, value)}
+                                                    disabled={!(selector.game.state == Constants.CALCULATE_ST)}>
                                                         <h1 className={classes.message} >{value}</h1>
                                                     </Button>
                                                 </td>

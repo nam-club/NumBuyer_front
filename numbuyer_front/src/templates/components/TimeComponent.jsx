@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setMessageAction, setStateAction, setTimeAction } from '../../redux/game/actions';
+import { setMessageAction, setStateAction, setTimeAction, setSkipAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -18,8 +18,7 @@ const TimeComponent = (props) => {
     const [gameData, setGameData] = usePersist("gameData", null);
 
     const [time, setTime] = React.useState(selector.game.time);
-    const [state, setState] = React.useState(selector.game.state);
-    const [flag, setFlag] = React.useState(false);
+    const [showFlg, setShowFlg] = React.useState(false);
 
     let ansCard = '22';
     let aucCard = '9';
@@ -32,12 +31,14 @@ const TimeComponent = (props) => {
             setTime(t => {
                 if(t<=0) {
                     return 0;
+                }else if(selector.game.skipFlg) {
+                    return 0;
                 }
                 return t-1;
             });
         }, 1000);
         return () => clearInterval(interval);
-    }, []);
+    }, [time]);
 
     React.useEffect(() => {
         if(time==0) {
@@ -67,15 +68,20 @@ const TimeComponent = (props) => {
                     dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.aucCard + Constants.AUCTION_MSG2)}));
                     dispatch(setTimeAction({time: Constants.AUCTION_TIME}));
                     setTime(Constants.AUCTION_TIME);
-                    setFlag(true);
+                    setShowFlg(true);
                     break;
                 case Constants.AUCTION_ST:
                     dispatch(setStateAction({state: Constants.AUC_RESULT_ST}));
-                    dispatch(setMessageAction({message: (player + Constants.AUC_RESULT_MSG1 + aucCard +
-                     Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3)}));
+                    if(selector.game.skipFlg) {
+                        dispatch(setMessageAction({message: Constants.AUC_RESULT_MSG0}));
+                        dispatch(setSkipAction({skipFlg: false}));
+                    }else {
+                        dispatch(setMessageAction({message: (player + Constants.AUC_RESULT_MSG1 + aucCard +
+                        Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3)}));
+                    }
                     dispatch(setTimeAction({time: Constants.AUC_RESULT_TIME}));
                     setTime(Constants.AUC_RESULT_TIME);
-                    setFlag(false);
+                    setShowFlg(false);
                     props.setAucCard('　');
                     break;
                 case Constants.AUC_RESULT_ST:
@@ -83,7 +89,7 @@ const TimeComponent = (props) => {
                     dispatch(setMessageAction({message: (Constants.CALCULATE_MSG1 + ansCard + Constants.CALCULATE_MSG2)}));
                     dispatch(setTimeAction({time: Constants.CALCULATE_TIME}));
                     setTime(Constants.CALCULATE_TIME);
-                    setFlag(true);
+                    setShowFlg(true);
                     break;
                 default:
                     break;
@@ -94,7 +100,7 @@ const TimeComponent = (props) => {
     return (
         <Card className={classes.time}>
             <h3 className={classes.tag}>Time</h3>
-            <h1 className={classes.message}>{flag ? time : "　"}</h1>
+            <h1 className={classes.message}>{showFlg ? time : "　"}</h1>
         </Card>
     )
 }

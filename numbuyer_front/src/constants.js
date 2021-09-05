@@ -12,7 +12,7 @@ export const CALCULATE_ST = '31';
 export const CAL_RESULT_ST = '32';
 
 // 時間設定
-export const GIVE_CARD_TIME = 5;
+export const GIVE_CARD_TIME = 3;
 export const SHOW_ANS_TIME = 5;
 export const SHOW_AUC_TIME = 5;
 export const AUCTION_TIME = 30;
@@ -33,6 +33,7 @@ export const AUCTION_MSG1 = 'Please enter the bid amount and select whether to b
 export const AUCTION_MSG2 = '" or pass.';
 export const AUCTION_MSG3 = ' bid for ';
 export const AUCTION_MSG4 = ' coin.';
+export const AUC_RESULT_MSG0 = 'No one bid.';
 export const AUC_RESULT_MSG1 = ' made a successful bid for "';
 export const AUC_RESULT_MSG2 = '" with ';
 export const AUC_RESULT_MSG3 = ' coin! ';

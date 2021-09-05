@@ -51,3 +51,26 @@ export const setAuctionAction = (auctionState) => {
         }
     }
 }
+
+export const SET_BID = "SET_BID";
+
+export const setBidAction = (bidState) => {
+    return {
+        type: "SET_BID",
+        payload: {
+            playerName: bidState.playerName,
+            coin: bidState.coin
+        }
+    }
+}
+
+export const SET_SKIP = "SET_SKIP";
+
+export const setSkipAction = (skipState) => {
+    return {
+        type: "SET_SKIP",
+        payload: {
+            skipFlg: skipState.skipFlg
+        }
+    }
+}

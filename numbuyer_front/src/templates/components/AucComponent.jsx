@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setStateAction, setTimeAction } from '../../redux/game/actions';
+import { setMessageAction, setStateAction, setTimeAction, setSkipAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -16,6 +16,7 @@ import Button from '@material-ui/core/Button';
 
 const AucComponent = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     const [fee, setFee] = React.useState('');
@@ -23,12 +24,14 @@ const AucComponent = (props) => {
 
     const buyAucCard = () => {
         console.log("buy:" + fee);
-        buyToServer({playerId: selector.players.find(props.isOwn).playerId, CompositionEvent: Number(fee)});
+        buyToServer({playerId: selector.players.find(props.isOwn).playerId, coin: Number(fee)});
     }
 
     const passAucCard = () => {
         console.log("pass");
         buyToServer({playerId: selector.players.find(props.isOwn).playerId, coin: null});
+        // mock
+        dispatch(setSkipAction({skipFlg: true}));
     }
 
     return (
@@ -47,7 +50,7 @@ const AucComponent = (props) => {
                     <Button size="large" className={classes.buyButton}
                     onClick={buyAucCard} disabled={!(selector.game.state == Constants.AUCTION_ST)}>BUY</Button>
                     <Button size="large" className={classes.passButton}
-                     disabled={!(selector.game.state == Constants.AUCTION_ST)}>PASS</Button>
+                    onClick={passAucCard} disabled={!(selector.game.state == Constants.AUCTION_ST)}>PASS</Button>
                 </Grid>
             </Grid>
         </Card>
