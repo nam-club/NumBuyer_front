@@ -18,6 +18,23 @@ const CalcComponent = (props) => {
     const classes = useStyles();
     const selector = useSelector(state => state);
 
+    const [hands, setHands] = React.useState(selector.players.find(props.isOwn).cards);
+    const [calcs, setCalcs] = React.useState([]);
+
+    const selectHands = (index, value) => {
+        const newHands = [...hands];
+        newHands.splice(index, 1);
+        setHands(newHands);
+        setCalcs([...calcs, value]);
+    }
+
+    const selectCalcs = (index, value) => {
+        const newCalcs = [...calcs];
+        newCalcs.splice(index, 1);
+        setCalcs(newCalcs);
+        setHands([...hands, value]);
+    }
+
     return (
         <div>
             <Grid container>
@@ -27,11 +44,11 @@ const CalcComponent = (props) => {
                         <table>
                             <tbody>
                                 <tr>
-                                    {selector.players.find(props.isOwn).cards.map((value) => (
-                                        <td>
-                                            <Card className={classes.card}>
+                                    {hands.map((value, index) => (
+                                        <td key={index}>
+                                            <Button className={classes.card} onClick={() => selectHands(index, value)}>
                                                 <h1 className={classes.message}>{value}</h1>
-                                            </Card>
+                                            </Button>
                                         </td>
                                     ))}
                                 </tr>
@@ -45,18 +62,21 @@ const CalcComponent = (props) => {
                     <Card className={classes.calc}>
                         <h3 className={classes.calcMessage} align="left">Calculate Field</h3>
                         <Grid item xs={1}>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            {calcs &&
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            {calcs.map((value, index) => (
+                                                <td key={index}>
+                                                    <Button className={classes.card} onClick={() => selectCalcs(index, value)}>
+                                                        <h1 className={classes.message} >{value}</h1>
+                                                    </Button>
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            }
                         </Grid>
                         <Button size="large" className={classes.calcButton}
                         disabled={!(selector.game.state == Constants.CALCULATE_ST)}>OK</Button>
