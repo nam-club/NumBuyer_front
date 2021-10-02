@@ -24,13 +24,13 @@ const Game = () => {
 
     const [gameData, setGameData] = usePersist("gameData", null);
 
-    const [ansCard, setAnsCard] = React.useState(gameData.game.ansCard);
+    const [targetCard, setTargetCard] = React.useState(gameData.game.targetCard);
     const [aucCard, setAucCard] = React.useState(gameData.game.aucCard);
     //const [players, setPlayers] = React.useState(gameData.players.players);
 
     React.useEffect(() => {
         setGameData(selector);
-    }, [ansCard, aucCard]);
+    }, [targetCard, aucCard]);
 
     const isOwn = (player) => {
         return player.ownFlg == true;
@@ -47,16 +47,16 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={3}>
-                        <TimeComponent ansCard={ansCard} setAnsCard={setAnsCard}
+                        <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard}
                          aucCard={aucCard} setAucCard={setAucCard} />
                     </Grid>
                 </Grid>
                 <Grid container>
                     <Grid item xs={1} />
                     <Grid item xs={2}>
-                        <Card className={classes.answer}>
-                            <h3 className={classes.tag}>Answer</h3>
-                            <h1 className={classes.message}>{ansCard}</h1>
+                        <Card className={classes.target}>
+                            <h3 className={classes.tag}>Target</h3>
+                            <h1 className={classes.message}>{targetCard}</h1>
                         </Card>
                     </Grid>
                     <Grid item xs={7}>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch} from 'react-redux';
 import { setPlayersAction, setPlayerAction } from './redux/players/actions';
-import { setStateAction, setBidAction } from './redux/game/actions';
+import { setPhaseAction, setBidAction, setSkipAction, setMessageAction } from './redux/game/actions';
 
+import * as Constants from './constants';
 export const CTX = React.createContext();
 
 const io = require("socket.io-client");
@@ -19,8 +20,12 @@ export const joinFriendMatch = function(value) {
     socket.emit('join/quick_match', JSON.stringify(value));
 }
 
-export const buyToServer = function(value) {
-    socket.emit('game/buy_to_server', value);
+export const bid = function(value) {
+    socket.emit('game/bid', value);
+}
+
+export const calculate = function(value) {
+    socket.emit('game/calculate', value);
 }
 
 export default function Socket(props) {
@@ -38,17 +43,34 @@ export default function Socket(props) {
     socket.on('game/update_state', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
-        dispatch(setStateAction(resObj));
+        dispatch(setPhaseAction(resObj));
+        dispatch(setSkipAction({skipFlg: true}));
     })
 
-    socket.on('game/buy_to_client', function(msg) {
+    socket.on('game/buy', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setBidAction(resObj));
     })
 
+    socket.on('game/calculate_result', function(msg) {
+        console.log(msg);
+        resObj = JSON.parse(msg);
+        if(resObj.isCorrectAnswer) {
+            // 返されたカードをセット
+
+            // 正解メッセージを表示
+            dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG1}));
+        }else {
+            // 返されたカードをセット
+
+            // 不正解メッセージを表示
+            dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG0}));
+        }
+    })
+
     return (
-        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, buyToServer}}>
+        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, bid, calculate}}>
             {props.children}
         </CTX.Provider>
     )

@@ -114,7 +114,7 @@ export const useStyles = makeStyles((theme) => ({
       marginLeft: 50,
       marginRight: 10,
   },
-  answer: {
+  target: {
     background: pink[200],
     marginLeft: 50,
     marginRight: 10,
@@ -150,7 +150,7 @@ export const useStyles = makeStyles((theme) => ({
     color: grey[600],
     width: 300,
   },
-  buyButton: {
+  bidButton: {
     background: green[200],
     marginTop: 30,
     '&:hover': {

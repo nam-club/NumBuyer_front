@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setStateAction, setTimeAction, setSkipAction } from '../../redux/game/actions';
+import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -20,16 +20,16 @@ const AucComponent = (props) => {
     const selector = useSelector(state => state);
 
     const [fee, setFee] = React.useState('');
-    const {buyToServer} = React.useContext(CTX);
+    const {bid} = React.useContext(CTX);
 
-    const buyAucCard = () => {
-        console.log("buy:" + fee);
-        buyToServer({playerId: selector.players.find(props.isOwn).playerId, coin: Number(fee)});
+    const bidAucCard = () => {
+        console.log("bid:" + fee);
+        bid({playerId: selector.players.find(props.isOwn).playerId, coin: Number(fee), action: 'bid'});
     }
 
     const passAucCard = () => {
         console.log("pass");
-        buyToServer({playerId: selector.players.find(props.isOwn).playerId, coin: null});
+        bid({playerId: selector.players.find(props.isOwn).playerId, coin: null, action: 'pass'});
         // mock
         dispatch(setSkipAction({skipFlg: true}));
     }
@@ -47,10 +47,10 @@ const AucComponent = (props) => {
                     <TextField inputProps={{className: classes.coinField}} InputLabelProps={{className: classes.coinField}}
                     id="standard-basic" label="Please enter the bid amount" value={fee} 
                     onChange={e => setFee(e.target.value)} />
-                    <Button size="large" className={classes.buyButton}
-                    onClick={buyAucCard} disabled={!(selector.game.state == Constants.AUCTION_ST)}>BUY</Button>
+                    <Button size="large" className={classes.bidButton}
+                    onClick={bidAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>BID</Button>
                     <Button size="large" className={classes.passButton}
-                    onClick={passAucCard} disabled={!(selector.game.state == Constants.AUCTION_ST)}>PASS</Button>
+                    onClick={passAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>PASS</Button>
                 </Grid>
             </Grid>
         </Card>

@@ -2,9 +2,9 @@ import { createSelector } from 'reselect';
 
 const gameSelector = (state) => state.game;
 
-export const getState = createSelector(
+export const getPhase = createSelector(
     [gameSelector],
-    state => state.state
+    state => state.phase
 )
 
 export const getMessage = createSelector(

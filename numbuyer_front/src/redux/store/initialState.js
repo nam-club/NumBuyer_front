@@ -9,7 +9,7 @@ const initialState = {
         name: ''
     },
     game: {
-        state: '',
+        phase: '',
         message: '　',
         time: 0,
         answerCard: '　',

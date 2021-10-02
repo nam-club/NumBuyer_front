@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import { setMessageAction, setStateAction, setTimeAction } from '../redux/game/actions';
+import { setMessageAction, setPhaseAction, setTimeAction } from '../redux/game/actions';
 
 import { useStyles } from './theme';
 import * as Constants from '../constants';
@@ -31,7 +31,7 @@ const Lobby = () => {
                         <div style={{ flexGrow: 1 }}></div>
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
-                            dispatch(setStateAction({state: Constants.GIVE_CARD_ST}));
+                            dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
                             dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
                             dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
                             dispatch(push('/Game'));
