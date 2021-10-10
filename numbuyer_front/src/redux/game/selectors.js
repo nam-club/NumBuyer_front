@@ -41,3 +41,8 @@ export const getSkipFlg = createSelector(
     [gameSelector],
     state => state.skipFlg
 )
+
+export const getPassFlg = createSelector(
+    [gameSelector],
+    state => state.passFlg
+)

@@ -72,7 +72,7 @@ const Game = () => {
                         ))}
                     </Grid>
                 </Grid>
-                <CalcComponent isOwn={isOwn} />
+                <CalcComponent isOwn={isOwn} cards={selector.players.find(isOwn).cards} />
             </div>
         </Typography>
     )

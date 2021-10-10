@@ -74,3 +74,14 @@ export const setSkipAction = (skipState) => {
         }
     }
 }
+
+export const SET_PASS = "SET_PASS";
+
+export const setPassAction = (passState) => {
+    return {
+        type: "SET_PASS",
+        payload: {
+            passFlg: passState.passFlg
+        }
+    }
+}

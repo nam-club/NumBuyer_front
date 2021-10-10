@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction } from '../../redux/game/actions';
+import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -72,7 +72,8 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.AUCTION_PH:
                     dispatch(setPhaseAction({phase: Constants.AUC_RESULT_PH}));
-                    if(selector.game.skipFlg) {
+                    // フェーズがスキップされた　かつ　全員がパスしたとき
+                    if(selector.game.skipFlg && selector.game.passFlg) {
                         dispatch(setMessageAction({message: Constants.AUC_RESULT_MSG0}));
                         dispatch(setSkipAction({skipFlg: false}));
                     }else {
@@ -80,6 +81,7 @@ const TimeComponent = (props) => {
                         Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3)}));
                     }
                     dispatch(setTimeAction({time: Constants.AUC_RESULT_TIME}));
+                    dispatch(setPassAction({passFlg: true}));
                     setTime(Constants.AUC_RESULT_TIME);
                     setShowFlg(false);
                     props.setAucCard('　');

@@ -24,3 +24,27 @@ export const setPlayersAction = (playersState) => {
         }
     }
 }
+
+export const SET_CARDS = "SET_CARDS";
+
+export const setCardsAction = (playerState) => {
+    return {
+        type: "SET_CARDS",
+        payload: {
+            playerId: playerState.playerId,
+            cards: playerState.cards
+        }
+    }
+}
+
+export const SET_COIN = "SET_COIN";
+
+export const setCoinAction = (playerState) => {
+    return {
+        type: "SET_COIN",
+        payload: {
+            playerId: playerState.playerId,
+            coin: playerState.coin
+        }
+    }
+}

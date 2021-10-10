@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction } from '../../redux/game/actions';
+import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction } from '../../redux/game/actions';
+import { setCardsAction, setCoinAction } from '../../redux/players/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -25,6 +26,15 @@ const AucComponent = (props) => {
     const bidAucCard = () => {
         console.log("bid:" + fee);
         bid({playerId: selector.players.find(props.isOwn).playerId, coin: Number(fee), action: 'bid'});
+        // mock
+        let coin = selector.players.find(props.isOwn).coin - fee;
+        let msg = '{"playerId":1,"coin":' + coin + ',"cards":["1", "+", "2", "-", "3", "9"]}';
+        let resObj = JSON.parse(msg);
+        dispatch(setCardsAction(resObj));
+        dispatch(setCoinAction(resObj));
+        // 全員がパスしたわけじゃないよ
+        dispatch(setPassAction({passFlg: false}));
+        dispatch(setSkipAction({skipFlg: true}));
     }
 
     const passAucCard = () => {

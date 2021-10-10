@@ -17,6 +17,7 @@ const initialState = {
         playerName: '',
         coin: 0,
         skipFlg: false,
+        passFlg: true, // 全員パスしたフラグ
     }
 };
 

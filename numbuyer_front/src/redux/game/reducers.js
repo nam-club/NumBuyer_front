@@ -38,6 +38,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_PASS:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }

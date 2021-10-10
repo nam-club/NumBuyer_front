@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import { setMessageAction, setPhaseAction, setTimeAction } from '../../redux/game/actions';
+import { setCardsAction } from '../../redux/players/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -19,10 +20,14 @@ const CalcComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
-    const [hands, setHands] = React.useState(selector.players.find(props.isOwn).cards);
+    const [hands, setHands] = React.useState(props.cards);
     const [calcs, setCalcs] = React.useState([]);
     const [disableFlg, setDisableFlg] = React.useState(false);
     const {calculate} = React.useContext(CTX);
+
+    React.useEffect(() => {
+        setHands(props.cards);
+    }, [props.cards]);
 
     const selectHands = (index, value) => {
         const newHands = [...hands];
@@ -48,8 +53,22 @@ const CalcComponent = (props) => {
             dispatch(setMessageAction({message: Constants.CALC_ERR_MSG}));
             setDisableFlg(false);
         }else {
-            calculate({playerId: selector.players.find(props.isOwn).playerId, calculateCards: calcs, action: 'answer'});
-        }   
+            let calculateCards = calcs.slice();
+            calcs.length = 0;
+            calculate({playerId: selector.players.find(props.isOwn).playerId, calculateCards: calculateCards, action: 'answer'});
+        }
+        // mock
+        let msg = '{"isCorrectAnswer":true,"playerId":1,"cards":["2", "-", "3"]}';
+        let resObj = JSON.parse(msg);
+        if(resObj.isCorrectAnswer) {
+            // 正解メッセージを表示
+            dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG1}));
+        }else {
+            // 不正解メッセージを表示
+            dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG0}));
+        }
+        // 返されたカードをセット
+        dispatch(setCardsAction(resObj)); 
     }
 
     const passCalc = () => {

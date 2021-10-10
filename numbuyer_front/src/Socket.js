@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch} from 'react-redux';
-import { setPlayersAction, setPlayerAction } from './redux/players/actions';
-import { setPhaseAction, setBidAction, setSkipAction, setMessageAction } from './redux/game/actions';
+import { setPlayersAction, setPlayerAction, setCardsAction, setCoinAction } from './redux/players/actions';
+import { setPhaseAction, setBidAction, setSkipAction, setMessageAction, setPassAction } from './redux/game/actions';
 
 import * as Constants from './constants';
 export const CTX = React.createContext();
@@ -47,26 +47,35 @@ export default function Socket(props) {
         dispatch(setSkipAction({skipFlg: true}));
     })
 
-    socket.on('game/buy', function(msg) {
+    // 落札したプレイヤーのコインとカード情報を更新する
+    socket.on('game/buy_update', function(msg) {
+        console.log(msg);
+        resObj = JSON.parse(msg);
+        dispatch(setCoinAction(resObj));
+        dispatch(setCardsAction(resObj));
+    })
+
+    // 誰が何円で落札したか表示するために使用
+    socket.on('game/buy_notify', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setBidAction(resObj));
+        // 全員がパスしたわけじゃないよ
+        dispatch(setPassAction({passFlg: false}));
     })
 
     socket.on('game/calculate_result', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         if(resObj.isCorrectAnswer) {
-            // 返されたカードをセット
-
             // 正解メッセージを表示
             dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG1}));
         }else {
-            // 返されたカードをセット
-
             // 不正解メッセージを表示
             dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG0}));
         }
+        // 返されたカードをセット
+        dispatch(setCardsAction(resObj));
     })
 
     return (
