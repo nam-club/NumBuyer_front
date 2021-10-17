@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setBidAction, setSkipAction, setMessageAction, setPassAction,
  setAnsPlayersAction } from './redux/game/actions';
@@ -22,8 +22,14 @@ export const joinFriendMatch = function(value) {
     socket.emit('join/quick_match', JSON.stringify(value));
 }
 
-export const start = function(value) {
-    socket.emit('game/start', JSON.stringify(value));
+export const playersInfo = function(value) {
+    console.log(value);
+    socket.emit('game/players_info', JSON.stringify(value));
+}
+
+export const nextTurn = function(value) {
+    console.log(value);
+    socket.emit('game/next_turn', JSON.stringify(value));
 }
 
 export const bid = function(value) {
@@ -39,14 +45,23 @@ export default function Socket(props) {
     console.log(socket);
 
     socket.on('game/join', function(msg) {
-        msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
-                '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}], "roomId":"JUN"}';
+        msg = '{"playerId":"1","roomId":"JUN"}';
         resObj = JSON.parse(msg);
-        dispatch(setPlayersAction(resObj.players));
+        // プレイヤーIDをセット
+        dispatch(setPlayerIdAction(resObj.playerId));
         // ルームIDをセット
         dispatch(setRoomAction(resObj.roomId));
+        playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
     })
 
+    socket.on('game/players_info', function(msg) {
+        msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
+                '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}],"roomId":"JUN"}';
+        resObj = JSON.parse(msg);
+        dispatch(setPlayersAction(resObj.players));
+    })
+
+    // 
     socket.on('game/next_turn', function(msg) {
         msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
         resObj = JSON.parse(msg);
@@ -103,7 +118,7 @@ export default function Socket(props) {
     })
 
     return (
-        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, start, bid, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, nextTurn, bid, calculate}}>
             {props.children}
         </CTX.Provider>
     )
