@@ -18,8 +18,7 @@ import Button from '@material-ui/core/Button';
 const AucComponent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const selector = useSelector(state => state);
-    const {start} = React.useContext(CTX);
+    const { nextTurn } = React.useContext(CTX);
 
     return (
         <Card className={classes.root}>
@@ -33,7 +32,7 @@ const AucComponent = (props) => {
                     dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
                     dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
                     dispatch(push('/Game'));
-                    start({roomId: props.roomId});
+                    nextTurn({roomId: props.roomId, playerId: props.playerId});
                 }}>Start</Button>
             </CardActions>
         </Card>
