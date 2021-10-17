@@ -1,7 +1,11 @@
 import { createSelector } from 'reselect';
 
-const playersSelector = (state) => state;
-const playerSelector = (state) => state.players;
+const playersSelector = (state) => state.players;
+
+export const getPlayer = createSelector(
+    [playersSelector],
+    state => state.player
+)
 
 export const getPlayers = createSelector(
     [playersSelector],
@@ -9,11 +13,6 @@ export const getPlayers = createSelector(
 )
 
 export const getId = createSelector(
-    [playerSelector],
-    state => state.playerId
-)
-
-export const getName = createSelector(
-    [playerSelector],
-    state => state.playerName
+    [playersSelector],
+    state => state.player.playerId
 )

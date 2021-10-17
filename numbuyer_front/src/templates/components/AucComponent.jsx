@@ -25,9 +25,9 @@ const AucComponent = (props) => {
 
     const bidAucCard = () => {
         console.log("bid:" + fee);
-        bid({playerId: selector.players.find(props.isOwn).playerId, coin: Number(fee), action: 'bid'});
+        bid({playerId: selector.player.playerId, coin: Number(fee), action: 'bid'});
         // mock
-        let coin = selector.players.find(props.isOwn).coin - fee;
+        let coin = selector.player.coin - fee;
         let msg = '{"playerId":1,"coin":' + coin + ',"cards":["1", "+", "2", "-", "3", "9"]}';
         let resObj = JSON.parse(msg);
         dispatch(setCardsAction(resObj));
@@ -39,7 +39,7 @@ const AucComponent = (props) => {
 
     const passAucCard = () => {
         console.log("pass");
-        bid({playerId: selector.players.find(props.isOwn).playerId, coin: null, action: 'pass'});
+        bid({playerId: selector.player.playerId, coin: null, action: 'pass'});
         // mock
         dispatch(setSkipAction({skipFlg: true}));
     }
@@ -50,7 +50,7 @@ const AucComponent = (props) => {
                 <Grid item xs={5}>
                     <Card className={classes.auction}>
                         <h3 className={classes.tag}>Auction</h3>
-                        <h1 className={classes.message}>{props.aucCard}</h1>
+                        <h1 className={classes.message}>{props.auctionCard}</h1>
                     </Card>
                 </Grid>
                 <Grid item xs={6}>

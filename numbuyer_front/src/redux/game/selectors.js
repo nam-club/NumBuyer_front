@@ -17,9 +17,9 @@ export const getTime = createSelector(
     state => state.time
 )
 
-export const getAnswerCard = createSelector(
+export const getTargetCard = createSelector(
     [gameSelector],
-    state => state.answerCard
+    state => state.targetCard
 )
 
 export const getAuctionCard = createSelector(
@@ -45,4 +45,9 @@ export const getSkipFlg = createSelector(
 export const getPassFlg = createSelector(
     [gameSelector],
     state => state.passFlg
+)
+
+export const getAnsPlayers = createSelector(
+    [gameSelector],
+    state => state.ansPlayers
 )

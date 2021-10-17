@@ -55,7 +55,7 @@ const CalcComponent = (props) => {
         }else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
-            calculate({playerId: selector.players.find(props.isOwn).playerId, calculateCards: calculateCards, action: 'answer'});
+            calculate({playerId: selector.player.playerId, calculateCards: calculateCards, action: 'answer'});
         }
         // mock
         let msg = '{"isCorrectAnswer":true,"playerId":1,"cards":["2", "-", "3"]}';
@@ -75,7 +75,7 @@ const CalcComponent = (props) => {
         // ボタン連打防止
         setDisableFlg(true);
 
-        calculate({playerId: selector.players.find(props.isOwn).playerId, calculateCards: null, action: 'pass'});
+        calculate({playerId: selector.player.playerId, calculateCards: null, action: 'pass'});
     }
 
     return (

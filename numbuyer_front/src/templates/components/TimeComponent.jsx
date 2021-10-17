@@ -18,10 +18,10 @@ const TimeComponent = (props) => {
     const [gameData, setGameData] = usePersist("gameData", null);
 
     const [time, setTime] = React.useState(selector.game.time);
+    const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
+    const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
     const [showFlg, setShowFlg] = React.useState(false);
 
-    let targetCard = '22';
-    let aucCard = '9';
     let aucCoin = 100;
     let player = 'Player1';
 
@@ -58,14 +58,14 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.SHOW_ANS_PH:
                     dispatch(setPhaseAction({phase: Constants.SHOW_AUC_PH}));
-                    dispatch(setMessageAction({message: ('"' + aucCard + '"' + Constants.SHOW_AUC_MSG)}));
+                    dispatch(setMessageAction({message: ('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG)}));
                     dispatch(setTimeAction({time: Constants.SHOW_AUC_TIME}));
                     setTime(Constants.SHOW_AUC_TIME);
-                    props.setAucCard(aucCard);
+                    props.setAuctionCard(auctionCard);
                     break;
                 case Constants.SHOW_AUC_PH:
                     dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
-                    dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.aucCard + Constants.AUCTION_MSG2)}));
+                    dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2)}));
                     dispatch(setTimeAction({time: Constants.AUCTION_TIME}));
                     setTime(Constants.AUCTION_TIME);
                     setShowFlg(true);
@@ -77,14 +77,14 @@ const TimeComponent = (props) => {
                         dispatch(setMessageAction({message: Constants.AUC_RESULT_MSG0}));
                         dispatch(setSkipAction({skipFlg: false}));
                     }else {
-                        dispatch(setMessageAction({message: (player + Constants.AUC_RESULT_MSG1 + aucCard +
+                        dispatch(setMessageAction({message: (player + Constants.AUC_RESULT_MSG1 + auctionCard +
                         Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3)}));
                     }
                     dispatch(setTimeAction({time: Constants.AUC_RESULT_TIME}));
                     dispatch(setPassAction({passFlg: true}));
                     setTime(Constants.AUC_RESULT_TIME);
                     setShowFlg(false);
-                    props.setAucCard('　');
+                    props.setAuctionCard('　');
                     break;
                 case Constants.AUC_RESULT_PH:
                     dispatch(setPhaseAction({phase: Constants.CALCULATE_PH}));
@@ -93,10 +93,30 @@ const TimeComponent = (props) => {
                     setTime(Constants.CALCULATE_TIME);
                     setShowFlg(true);
                     break;
-                /*case Constants.CALCULATE_PH:
-                    dispatch(setPhaseAction({phase: Constants.CAL_RESULT_PH}));
+                case Constants.CALCULATE_PH:
+                    dispatch(setPhaseAction({phase: Constants.CALC_RESULT_PH}));
+                    if(selector.game.ansPlayers.length == 0) {
+                        dispatch(setMessageAction({message: Constants.CALC_FINISH_MSG0}));
+                    }else {
+                        let ansMessage = Constants.CALC_FINISH_MSG1;
+                        let loopNum = 1;
 
-                    break;*/
+                        for(let ansPlayer of selector.game.asnPlayers) {
+                            if(loopNum != selector.game.ansPlayers.length) {
+                                ansMessage += ansPlayer + ', ';
+                            }else {
+                                ansMessage += ansPlayer;
+                            }
+                            loopNum++
+                        }
+
+                        ansMessage += Constants.CALC_FINISH_MSG2;
+                        ansMessage += targetCard + Constants.CALC_FINISH_MSG3;
+                        dispatch(setMessageAction({message: ansMessage}));
+                    }
+                    dispatch(setTimeAction({time: Constants.CALC_RESULT_TIME}));
+                    setTime(Constants.CALC_RESULT_TIME);
+                    break;
                 default:
                     break;
             }

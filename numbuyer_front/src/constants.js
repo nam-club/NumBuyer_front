@@ -9,7 +9,7 @@ export const SHOW_AUC_PH = '12';
 export const AUCTION_PH = '21';
 export const AUC_RESULT_PH = '22';
 export const CALCULATE_PH = '31';
-export const CAL_RESULT_PH = '32';
+export const CALC_RESULT_PH = '32';
 export const FINISHED_PH = '99';
 
 // 時間設定
@@ -19,6 +19,7 @@ export const SHOW_AUC_TIME = 5;
 export const AUCTION_TIME = 30;
 export const AUC_RESULT_TIME = 5;
 export const CALCULATE_TIME = 20;
+export const CALC_RESULT_TIME = 5;
 
 export const NAME_EXP = "[¥$=<>+*]+";
 
@@ -42,4 +43,8 @@ export const CALCULATE_MSG1 = 'Select from your hand so that the calculation res
 export const CALCULATE_MSG2 = '" and press "ANSWER".';
 export const CALC_ERR_MSG = 'Please select your Cards!';
 export const CALC_RESULT_MSG0 = 'Incorrect...! Calc again or pass.'
-export const CALC_RESULT_MSG1 = 'Correct!! Please wait for other players...'
+export const CALC_RESULT_MSG1 = 'Correct!! Please wait for other players...';
+export const CALC_FINISH_MSG0 = 'There was no one giving correct answer...';
+export const CALC_FINISH_MSG1 = 'It was ';
+export const CALC_FINISH_MSG2 = ' who gave the correct answer! ';
+export const CALC_FINISH_MSG3 = ' points will be given to the person giving correct answer!';

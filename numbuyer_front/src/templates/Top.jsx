@@ -30,7 +30,7 @@ const Top = () => {
     const selector = useSelector(state => state);
     const {joinQuickMatch, joinFriendMatch} = React.useContext(CTX);
 
-    const [code, setCode] = React.useState('');
+    const [roomId, setRoomId] = React.useState('');
     const [open, setOpen] = React.useState(false);
 
     const doChange = (e) => {
@@ -123,11 +123,11 @@ const Top = () => {
                         <Fade in={open}>
                         <div className={classes.paper}>
                             <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                            id="standard-basic" label="Room Name" value={code} 
-                            onChange={e => setCode(e.target.value)} />
+                            id="standard-basic" label="Room Name" value={roomId} 
+                            onChange={e => setRoomId(e.target.value)} />
                             <Button size="large" className={classes.actionButton + " " + classes.friendButton} 
                             onClick={() => {
-                                dispatch(setRoomAction({code: code}));
+                                dispatch(setRoomAction({roomId: roomId}));
                                 //joinFriendMatch(player);
                                 dispatch(push('/'));
                             }}>Create or Join</Button>

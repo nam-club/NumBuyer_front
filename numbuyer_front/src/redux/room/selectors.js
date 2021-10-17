@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const roomSelector = (state) => state.room;
 
-export const getCode = createSelector(
+export const getRoomId = createSelector(
     [roomSelector],
-    state => state.code
+    state => state.roomId
 )

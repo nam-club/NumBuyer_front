@@ -4,7 +4,7 @@ export const setRoomAction = (roomState) => {
     return {
         type: "SET_ROOM",
         payload: {
-            code: roomState.code
+            roomId: roomState
         }
     }
 };

@@ -1,7 +1,12 @@
 const initialState = {
+    player: {
+        playerId: '',
+        cards: [],
+        coin: 0
+    },
     players: [],
     room: {
-        code: ''
+        roomId: ''
     },
     top: {
         validFlg: false,
@@ -12,12 +17,13 @@ const initialState = {
         phase: '',
         message: '　',
         time: 0,
-        answerCard: '　',
+        targetCard: '　',
         auctionCard: '　',
         playerName: '',
         coin: 0,
-        skipFlg: false,
+        skipFlg: false, // 時間をスキップするフラグ
         passFlg: true, // 全員パスしたフラグ
+        ansPlayers: [], // 正解者配列
     }
 };
 

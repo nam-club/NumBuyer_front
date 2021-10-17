@@ -25,16 +25,12 @@ const Game = () => {
     const [gameData, setGameData] = usePersist("gameData", null);
 
     const [targetCard, setTargetCard] = React.useState(gameData.game.targetCard);
-    const [aucCard, setAucCard] = React.useState(gameData.game.aucCard);
-    //const [players, setPlayers] = React.useState(gameData.players.players);
+    const [auctionCard, setAuctionCard] = React.useState(gameData.game.auctionCard);
+    const [player, setPlayer] = React.useState(gameData.players.player);
 
     React.useEffect(() => {
         setGameData(selector);
-    }, [targetCard, aucCard]);
-
-    const isOwn = (player) => {
-        return player.ownFlg == true;
-    }
+    }, [selector]);
 
     return (
         <Typography component="div" align="center">
@@ -48,7 +44,7 @@ const Game = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard}
-                         aucCard={aucCard} setAucCard={setAucCard} />
+                         auctionCard={auctionCard} setAuctionCard={setAuctionCard} />
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -60,19 +56,19 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={7}>
-                        <AucComponent isOwn={isOwn} aucCard={aucCard}/>
+                        <AucComponent auctionCard={auctionCard}/>
                     </Grid>
                     <Grid item xs={2}>
-                        {selector.players.map((value) => (
+                        {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag}>{value.playerName}</h3>
-                                <h4 className={classes.tag}>×{value.cards.length}</h4>
+                                <h4 className={classes.tag}>×{value.cardNum}</h4>
                                 <h4 className={classes.tag}>{value.coin}</h4>
                             </Card>
                         ))}
                     </Grid>
                 </Grid>
-                <CalcComponent isOwn={isOwn} cards={selector.players.find(isOwn).cards} />
+                <CalcComponent cards={player.cards} />
             </div>
         </Typography>
     )

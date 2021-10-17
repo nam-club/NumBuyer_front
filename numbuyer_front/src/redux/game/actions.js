@@ -30,13 +30,13 @@ export const setTimeAction = (timeState) => {
     }
 }
 
-export const SET_ANSWER = "SET_ANSWER";
+export const SET_TARGET = "SET_TARGET";
 
-export const setAnswerAction = (answerState) => {
+export const setTargetAction = (targetState) => {
     return {
-        type: "SET_ANSWER",
+        type: "SET_TARGET",
         payload: {
-            answerCard: answerState.answerCard
+            targetCard: targetState.targetCard
         }
     }
 }
@@ -82,6 +82,17 @@ export const setPassAction = (passState) => {
         type: "SET_PASS",
         payload: {
             passFlg: passState.passFlg
+        }
+    }
+}
+
+export const SET_ANS_PLAYERS = "SET_ANS_PLAYERS";
+
+export const setAnsPlayersAction = (ansPlayersState) => {
+    return {
+        type: "SET_ANS_PLAYERS",
+        payload: {
+            ansPlayers: ansPlayersState.ansPlayers
         }
     }
 }

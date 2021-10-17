@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch} from 'react-redux';
-import { setPlayersAction, setPlayerAction, setCardsAction, setCoinAction } from './redux/players/actions';
-import { setPhaseAction, setBidAction, setSkipAction, setMessageAction, setPassAction } from './redux/game/actions';
+import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction } from './redux/players/actions';
+import { setPhaseAction, setTargetAction, setAuctionAction, setBidAction, setSkipAction, setMessageAction, setPassAction,
+ setAnsPlayersAction } from './redux/game/actions';
 
 import * as Constants from './constants';
+import { setRoomAction } from './redux/room/actions';
 export const CTX = React.createContext();
 
 const io = require("socket.io-client");
@@ -20,6 +22,10 @@ export const joinFriendMatch = function(value) {
     socket.emit('join/quick_match', JSON.stringify(value));
 }
 
+export const start = function(value) {
+    socket.emit('game/start', JSON.stringify(value));
+}
+
 export const bid = function(value) {
     socket.emit('game/bid', value);
 }
@@ -33,11 +39,22 @@ export default function Socket(props) {
     console.log(socket);
 
     socket.on('game/join', function(msg) {
-        console.log(msg);
-        msg = '{"playerId":1,"playerName":"ITO","roomName":"ITO","coin":100,"cards":["1","+","2","-","3"],"ownFlg":true}';
-        console.log(msg);
+        msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
+                '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}], "roomId":"JUN"}';
         resObj = JSON.parse(msg);
-        dispatch(setPlayerAction(resObj));
+        dispatch(setPlayersAction(resObj.players));
+        // ルームIDをセット
+        dispatch(setRoomAction(resObj.roomId));
+    })
+
+    socket.on('game/next_turn', function(msg) {
+        msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
+        resObj = JSON.parse(msg);
+        dispatch(setPlayerIdAction(resObj.playerId));
+        dispatch(setCardsAction(resObj.cards));
+        dispatch(setCoinAction(resObj.coin));
+        dispatch(setTargetAction(resObj.targetCard));
+        dispatch(setAuctionAction(resObj.auctionCard));
     })
 
     socket.on('game/update_state', function(msg) {
@@ -78,8 +95,15 @@ export default function Socket(props) {
         dispatch(setCardsAction(resObj));
     })
 
+    socket.on('game/correct_players', function(msg) {
+        console.log(msg);
+        resObj = JSON.parse(msg);
+        // 返された正解者をセット
+        dispatch(setAnsPlayersAction(resObj));
+    })
+
     return (
-        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, bid, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, start, bid, calculate}}>
             {props.children}
         </CTX.Provider>
     )
