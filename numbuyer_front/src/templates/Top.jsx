@@ -28,7 +28,7 @@ const Top = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const {joinQuickMatch, joinFriendMatch} = React.useContext(CTX);
+    const {joinQuickMatch, joinFriendMatch, playersInfo} = React.useContext(CTX);
 
     const [roomId, setRoomId] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -68,12 +68,8 @@ const Top = () => {
 
     const clickQuick = () => {
         if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
-            /*dispatch(setPlayerAction({id: "001", name: selector.top.name, coin: Constants.COIN, cards: []}));
-            dispatch(setPlayerAction({id: "002", name: "aoki", coin: Constants.COIN, cards: []}));
-            dispatch(setPlayerAction({id: "003", name: "maeda", coin: Constants.COIN, cards: []}));
-            dispatch(setPlayerAction({id: "004", name: "nagasawa", coin: Constants.COIN, cards: []}));*/
             joinQuickMatch({name: selector.top.name});
-            dispatch(push('/Lobby'));
+            //dispatch(push('/Lobby'));
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(selector.top.name !== '') {

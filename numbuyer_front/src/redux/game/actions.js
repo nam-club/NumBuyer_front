@@ -36,7 +36,7 @@ export const setTargetAction = (targetState) => {
     return {
         type: "SET_TARGET",
         payload: {
-            targetCard: targetState.targetCard
+            targetCard: targetState
         }
     }
 }
@@ -47,7 +47,7 @@ export const setAuctionAction = (auctionState) => {
     return {
         type: "SET_AUCTION",
         payload: {
-            auctionCard: auctionState.auctionCard
+            auctionCard: auctionState
         }
     }
 }

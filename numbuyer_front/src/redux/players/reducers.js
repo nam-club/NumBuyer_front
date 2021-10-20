@@ -8,7 +8,6 @@ export const PlayersReducer = (state = initialState, action) => {
             return state;
         case Actions.SET_PLAYER_ID:
             state.player.playerId = action.payload.playerId;
-            console.log(state);
             return state;
         case Actions.SET_CARDS:
             state.player.cards = action.payload.cards;

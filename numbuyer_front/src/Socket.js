@@ -1,8 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setBidAction, setSkipAction, setMessageAction, setPassAction,
  setAnsPlayersAction } from './redux/game/actions';
+
+ import { push } from 'connected-react-router';
 
 import * as Constants from './constants';
 import { setRoomAction } from './redux/room/actions';
@@ -19,7 +21,7 @@ export const joinQuickMatch = function(value) {
 }
 
 export const joinFriendMatch = function(value) {
-    socket.emit('join/quick_match', JSON.stringify(value));
+    socket.emit('join/friend_match', JSON.stringify(value));
 }
 
 export const playersInfo = function(value) {
@@ -42,6 +44,7 @@ export const calculate = function(value) {
 
 export default function Socket(props) {
     const dispatch = useDispatch();
+    const selector = useSelector(state => state);
     console.log(socket);
 
     socket.on('game/join', function(msg) {
@@ -55,10 +58,12 @@ export default function Socket(props) {
     })
 
     socket.on('game/players_info', function(msg) {
+        console.log(msg);
         msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
                 '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}],"roomId":"JUN"}';
         resObj = JSON.parse(msg);
         dispatch(setPlayersAction(resObj.players));
+        dispatch(push('/Lobby'));
     })
 
     // 
@@ -118,7 +123,7 @@ export default function Socket(props) {
     })
 
     return (
-        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, nextTurn, bid, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, playersInfo, nextTurn, bid, calculate}}>
             {props.children}
         </CTX.Provider>
     )

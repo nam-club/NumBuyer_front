@@ -31,8 +31,9 @@ const AucComponent = (props) => {
                     dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
                     dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
                     dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
-                    dispatch(push('/Game'));
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
+                    //dispatch(push('/Game'));
+                    setTimeout(function() {dispatch(push('/Game'))}, 3000);
                 }}>Start</Button>
             </CardActions>
         </Card>

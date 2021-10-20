@@ -2,8 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import { CTX } from '../Socket';
-
 import { useStyles } from './theme';
 import usePersist from '../Persist';
 import * as Constants from '../constants';
@@ -30,7 +28,16 @@ const Game = () => {
 
     React.useEffect(() => {
         setGameData(selector);
+        console.log(selector);
     }, [selector]);
+
+    const checkPhase = () => {
+        if(selector.game.phase !== Constants.GIVE_CARD_PH) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     return (
         <Typography component="div" align="center">
@@ -52,7 +59,7 @@ const Game = () => {
                     <Grid item xs={2}>
                         <Card className={classes.target}>
                             <h3 className={classes.tag}>Target</h3>
-                            <h1 className={classes.message}>{targetCard}</h1>
+                            <h1 className={classes.message}>{checkPhase() ? targetCard : "　"}</h1>
                         </Card>
                     </Grid>
                     <Grid item xs={7}>

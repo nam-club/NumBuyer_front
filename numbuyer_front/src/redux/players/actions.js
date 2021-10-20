@@ -12,11 +12,10 @@ export const setPlayersAction = (playersState) => {
 export const SET_PLAYER_ID = "SET_PLAYER_ID";
 
 export const setPlayerIdAction = (playerState) => {
-    console.log(playerState);
     return {
         type: "SET_PLAYER_ID",
         payload: {
-            playerId: playerState.playerId
+            playerId: playerState
         }
     }
 }
@@ -27,7 +26,7 @@ export const setCardsAction = (playerState) => {
     return {
         type: "SET_CARDS",
         payload: {
-            cards: playerState.cards
+            cards: playerState
         }
     }
 }
@@ -38,7 +37,7 @@ export const setCoinAction = (playerState) => {
     return {
         type: "SET_COIN",
         payload: {
-            coin: playerState.coin
+            coin: playerState
         }
     }
 }

@@ -44,13 +44,21 @@ const AucComponent = (props) => {
         dispatch(setSkipAction({skipFlg: true}));
     }
 
+    const checkPhase = () => {
+        if(selector.game.phase !== Constants.GIVE_CARD_PH && selector.game.phase !== Constants.SHOW_ANS_PH) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     return (
         <Card className={classes.auction_root}>
             <Grid container>
                 <Grid item xs={5}>
                     <Card className={classes.auction}>
                         <h3 className={classes.tag}>Auction</h3>
-                        <h1 className={classes.message}>{props.auctionCard}</h1>
+                        <h1 className={classes.message}>{checkPhase() ? props.auctionCard : "　"}</h1>
                     </Card>
                 </Grid>
                 <Grid item xs={6}>
