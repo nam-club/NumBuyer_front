@@ -52,6 +52,17 @@ export const setAuctionAction = (auctionState) => {
     }
 }
 
+export const SET_HIGHEST = "SET_HIGHEST";
+
+export const setHighestAction = (highestState) => {
+    return {
+        type: "SET_HIGHEST",
+        payload: {
+            highestBid: highestState.coin
+        }
+    }
+}
+
 export const SET_BID = "SET_BID";
 
 export const setBidAction = (bidState) => {

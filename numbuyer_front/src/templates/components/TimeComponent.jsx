@@ -113,6 +113,9 @@ const TimeComponent = (props) => {
                         ansMessage += Constants.CALC_FINISH_MSG2;
                         ansMessage += targetCard + Constants.CALC_FINISH_MSG3;
                         dispatch(setMessageAction({message: ansMessage}));
+
+                        // ターゲットカードを消す
+                        props.setTargetCard(" ");
                     }
                     dispatch(setTimeAction({time: Constants.CALC_RESULT_TIME}));
                     setTime(Constants.CALC_RESULT_TIME);

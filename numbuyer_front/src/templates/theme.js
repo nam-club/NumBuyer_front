@@ -89,6 +89,21 @@ export const useStyles = makeStyles((theme) => ({
           background: green[100],
        },
   },
+  createButton: {
+    width: '100%',
+    background: blue[200],
+    '&:hover': {
+        background: blue[100],
+     },
+  },
+  joinButton: {
+      top: '50%',
+      width: '100%',
+      background: green[200],
+      '&:hover': {
+          background: green[100],
+      },
+  },
   startButton: {
     margin: 10,
     fontSize: 30,

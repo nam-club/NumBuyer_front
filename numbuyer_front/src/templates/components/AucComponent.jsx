@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction } from '../../redux/game/actions';
+import { setMessageAction, setPhaseAction, setTimeAction, setBidAction, setHighestAction, setSkipAction, setPassAction } from '../../redux/game/actions';
 import { setCardsAction, setCoinAction } from '../../redux/players/actions';
 
 import * as Constants from '../../constants';
@@ -25,13 +25,17 @@ const AucComponent = (props) => {
 
     const bidAucCard = () => {
         console.log("bid:" + fee);
-        bid({playerId: selector.player.playerId, coin: Number(fee), action: 'bid'});
+        bid({playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
         // mock
-        let coin = selector.player.coin - fee;
+        let coin = selector.players.player.coin - fee;
         let msg = '{"playerId":1,"coin":' + coin + ',"cards":["1", "+", "2", "-", "3", "9"]}';
         let resObj = JSON.parse(msg);
         dispatch(setCardsAction(resObj));
         dispatch(setCoinAction(resObj));
+        msg = '{"playerName":"ITO","coin":' + fee + '}';
+        resObj = JSON.parse(msg);
+        dispatch(setBidAction(resObj));
+        dispatch(setHighestAction(resObj));
         // 全員がパスしたわけじゃないよ
         dispatch(setPassAction({passFlg: false}));
         dispatch(setSkipAction({skipFlg: true}));
@@ -39,7 +43,7 @@ const AucComponent = (props) => {
 
     const passAucCard = () => {
         console.log("pass");
-        bid({playerId: selector.player.playerId, coin: null, action: 'pass'});
+        bid({playerId: selector.players.player.playerId, coin: null, action: 'pass'});
         // mock
         dispatch(setSkipAction({skipFlg: true}));
     }
@@ -69,8 +73,13 @@ const AucComponent = (props) => {
                     onClick={bidAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>BID</Button>
                     <Button size="large" className={classes.passButton}
                     onClick={passAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>PASS</Button>
-                </Grid>
+                    {selector.game.highestBid !== 0 &&
+                        <h3 className={classes.tag}>
+                            {Constants.AUC_BID_MSG1 + selector.game.highestBid + Constants.AUC_BID_MSG2 + selector.game.playerName + Constants.AUC_BID_MSG3}
+                        </h3>
+                    }  
             </Grid>
+                </Grid>
         </Card>
     )
 }

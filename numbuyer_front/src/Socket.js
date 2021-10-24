@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction } from './redux/players/actions';
+import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setBidAction, setSkipAction, setMessageAction, setPassAction,
- setAnsPlayersAction } from './redux/game/actions';
+ setAnsPlayersAction, 
+ setHighestAction} from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -18,6 +19,10 @@ let resObj = "";
 export const joinQuickMatch = function(value) {
     console.log(value);
     socket.emit('join/quick_match', JSON.stringify(value));
+}
+
+export const createMatch = function(value) {
+    socket.emit('create/match', JSON.stringify(value));
 }
 
 export const joinFriendMatch = function(value) {
@@ -45,22 +50,24 @@ export const calculate = function(value) {
 export default function Socket(props) {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    console.log(socket);
+    //console.log(socket);
 
     socket.on('game/join', function(msg) {
-        msg = '{"playerId":"1","roomId":"JUN"}';
+        console.log(msg)
         resObj = JSON.parse(msg);
         // プレイヤーIDをセット
         dispatch(setPlayerIdAction(resObj.playerId));
         // ルームIDをセット
         dispatch(setRoomAction(resObj.roomId));
+        // オーナーフラグをセット
+        dispatch(setOwnerAction(resObj.isOwner));
         playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
     })
 
     socket.on('game/players_info', function(msg) {
         console.log(msg);
-        msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
-                '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}],"roomId":"JUN"}';
+        /*msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
+                '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}],"roomId":"JUN"}';*/
         resObj = JSON.parse(msg);
         dispatch(setPlayersAction(resObj.players));
         dispatch(push('/Lobby'));
@@ -84,6 +91,14 @@ export default function Socket(props) {
         dispatch(setSkipAction({skipFlg: true}));
     })
 
+    // 誰がいくら入札したかをメッセージに表示する
+    socket.on('game/bid', function(msg) {
+        console.log(msg);
+        resObj = JSON.parse(msg);
+        dispatch(setBidAction(resObj));
+        dispatch(setHighestAction(resObj.coin));
+    })
+
     // 落札したプレイヤーのコインとカード情報を更新する
     socket.on('game/buy_update', function(msg) {
         console.log(msg);
@@ -97,6 +112,8 @@ export default function Socket(props) {
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setBidAction(resObj));
+        // 最高入札額をリセット
+        dispatch(setHighestAction(0));
         // 全員がパスしたわけじゃないよ
         dispatch(setPassAction({passFlg: false}));
     })
@@ -123,7 +140,7 @@ export default function Socket(props) {
     })
 
     return (
-        <CTX.Provider value={{joinQuickMatch, joinFriendMatch, playersInfo, nextTurn, bid, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, nextTurn, bid, calculate}}>
             {props.children}
         </CTX.Provider>
     )

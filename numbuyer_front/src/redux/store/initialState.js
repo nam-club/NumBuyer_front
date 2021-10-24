@@ -2,7 +2,8 @@ const initialState = {
     player: {
         playerId: '',
         cards: [],
-        coin: 0
+        coin: 0,
+        isOwner: false,
     },
     players: [],
     room: {
@@ -24,6 +25,7 @@ const initialState = {
         skipFlg: false, // 時間をスキップするフラグ
         passFlg: true, // 全員パスしたフラグ
         ansPlayers: [], // 正解者配列
+        highestBid: 0, // 現在の最高入札額
     }
 };
 

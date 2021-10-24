@@ -18,6 +18,7 @@ import Button from '@material-ui/core/Button';
 const AucComponent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const selector = useSelector(state => state);
     const { nextTurn } = React.useContext(CTX);
 
     return (
@@ -26,15 +27,17 @@ const AucComponent = (props) => {
             {props.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
-                <Button size="large" className={classes.startButton + " " + classes.quickButton}
-                onClick={() => {
-                    dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
-                    dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
-                    dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
-                    nextTurn({roomId: props.roomId, playerId: props.playerId});
-                    //dispatch(push('/Game'));
-                    setTimeout(function() {dispatch(push('/Game'))}, 3000);
-                }}>Start</Button>
+                {selector.players.player.isOwner &&
+                    <Button size="large" className={classes.startButton + " " + classes.quickButton}
+                    onClick={() => {
+                        dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
+                        dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
+                        dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+                        nextTurn({roomId: props.roomId, playerId: props.playerId});
+                        //dispatch(push('/Game'));
+                        setTimeout(function() {dispatch(push('/Game'))}, 3000);
+                    }}>Start</Button>
+                }  
             </CardActions>
         </Card>
     )

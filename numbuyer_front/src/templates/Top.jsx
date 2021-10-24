@@ -8,7 +8,6 @@ import { CTX } from '../Socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import { setPlayerAction, setPlayersAction } from '../redux/players/actions';
 import { setRoomAction } from '../redux/room/actions';
 import { setValidAction, setErrMsgAction, setNameAction } from '../redux/top/actions';
 
@@ -28,7 +27,7 @@ const Top = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const {joinQuickMatch, joinFriendMatch, playersInfo} = React.useContext(CTX);
+    const {joinQuickMatch, createMatch, joinFriendMatch, playersInfo} = React.useContext(CTX);
 
     const [roomId, setRoomId] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -68,7 +67,7 @@ const Top = () => {
 
     const clickQuick = () => {
         if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
-            joinQuickMatch({name: selector.top.name});
+            joinQuickMatch({playerName: selector.top.name});
             //dispatch(push('/Lobby'));
         }else {
             dispatch(setValidAction({validFlg: true}));
@@ -118,15 +117,37 @@ const Top = () => {
                     >
                         <Fade in={open}>
                         <div className={classes.paper}>
-                            <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                            id="standard-basic" label="Room Name" value={roomId} 
-                            onChange={e => setRoomId(e.target.value)} />
-                            <Button size="large" className={classes.actionButton + " " + classes.friendButton} 
-                            onClick={() => {
-                                dispatch(setRoomAction({roomId: roomId}));
-                                //joinFriendMatch(player);
-                                dispatch(push('/'));
-                            }}>Create or Join</Button>
+                            <Grid container>
+                                <Grid item xs={3}>
+                                </Grid>
+                                <Grid item xs={7}>
+                                    <Button size="large" className={classes.createButton} 
+                                    onClick={() => {
+                                        dispatch(setRoomAction({roomId: roomId}));
+                                        createMatch({playerName: selector.top.name, roomId: roomId});
+                                        //dispatch(push('/'));
+                                    }}>Create</Button>
+                                </Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={1}>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
+                                    id="standard-basic" label="Room Name" value={roomId} 
+                                    onChange={e => setRoomId(e.target.value)} />
+                                </Grid>
+                                <Grid item xs={1}>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Button size="large" className={classes.joinButton} 
+                                    onClick={() => {
+                                        dispatch(setRoomAction({roomId: roomId}));
+                                        joinFriendMatch({playerName: selector.top.name, roomId: roomId});
+                                        //dispatch(push('/'));
+                                    }}>Join</Button>
+                                </Grid>
+                            </Grid>
                         </div>
                         </Fade>
                     </Modal>

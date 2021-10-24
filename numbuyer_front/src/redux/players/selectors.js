@@ -16,3 +16,8 @@ export const getId = createSelector(
     [playersSelector],
     state => state.player.playerId
 )
+
+export const getIsOwner = createSelector(
+    [playersSelector],
+    state => state.player.isOwner
+)

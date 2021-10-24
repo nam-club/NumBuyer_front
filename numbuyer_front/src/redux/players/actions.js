@@ -41,3 +41,14 @@ export const setCoinAction = (playerState) => {
         }
     }
 }
+
+export const SET_OWNER = "SET_OWNER";
+
+export const setOwnerAction = (playerState) => {
+    return {
+        type: "SET_OWNER",
+        payload: {
+            isOwner: playerState
+        }
+    }
+}
