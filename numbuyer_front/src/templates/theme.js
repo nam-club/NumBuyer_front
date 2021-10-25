@@ -67,6 +67,7 @@ export const useStyles = makeStyles((theme) => ({
       color: grey[600],
       paddingTop: 80,
       marginTop: -50,
+      zIndex: 1,
   },
   errorField: {
     color: red[600],
@@ -91,6 +92,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   createButton: {
     width: '100%',
+    zIndex: 2,
     background: blue[200],
     '&:hover': {
         background: blue[100],

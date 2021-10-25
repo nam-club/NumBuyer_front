@@ -12,7 +12,7 @@ import { setRoomAction } from './redux/room/actions';
 export const CTX = React.createContext();
 
 const io = require("socket.io-client");
-let socket = io("http://localhost:8000/");
+let socket;
 
 let resObj = ""; 
 
@@ -51,6 +51,10 @@ export default function Socket(props) {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     //console.log(socket);
+
+    if(!socket) {
+      socket = io("http://localhost:8000/");
+    }
 
     socket.on('game/join', function(msg) {
         console.log(msg)

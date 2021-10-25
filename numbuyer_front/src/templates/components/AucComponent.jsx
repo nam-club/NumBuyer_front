@@ -73,7 +73,7 @@ const AucComponent = (props) => {
                     onClick={bidAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>BID</Button>
                     <Button size="large" className={classes.passButton}
                     onClick={passAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>PASS</Button>
-                    {selector.game.highestBid !== 0 &&
+                    {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
                             {Constants.AUC_BID_MSG1 + selector.game.highestBid + Constants.AUC_BID_MSG2 + selector.game.playerName + Constants.AUC_BID_MSG3}
                         </h3>

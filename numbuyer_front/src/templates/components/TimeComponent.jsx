@@ -75,12 +75,12 @@ const TimeComponent = (props) => {
                     // フェーズがスキップされた　かつ　全員がパスしたとき
                     if(selector.game.skipFlg && selector.game.passFlg) {
                         dispatch(setMessageAction({message: Constants.AUC_RESULT_MSG0}));
-                        dispatch(setSkipAction({skipFlg: false}));
                     }else {
                         dispatch(setMessageAction({message: (player + Constants.AUC_RESULT_MSG1 + auctionCard +
                         Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3)}));
                     }
                     dispatch(setTimeAction({time: Constants.AUC_RESULT_TIME}));
+                    dispatch(setSkipAction({skipFlg: false}));
                     dispatch(setPassAction({passFlg: true}));
                     setTime(Constants.AUC_RESULT_TIME);
                     setShowFlg(false);

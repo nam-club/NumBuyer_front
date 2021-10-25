@@ -39,6 +39,9 @@ const AucComponent = (props) => {
                     }}>Start</Button>
                 }  
             </CardActions>
+            <h3 className={classes.tag}>
+                {'Room ID : ' + selector.room.roomId}
+            </h3>
         </Card>
     )
 }

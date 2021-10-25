@@ -134,7 +134,7 @@ const Top = () => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                                    id="standard-basic" label="Room Name" value={roomId} 
+                                    id="standard-basic" label="Room ID" value={roomId} 
                                     onChange={e => setRoomId(e.target.value)} />
                                 </Grid>
                                 <Grid item xs={1}>
