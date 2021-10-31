@@ -29,20 +29,59 @@ const CalcComponent = (props) => {
         setHands(props.cards);
     }, [props.cards]);
 
+    // 手札から計算エリアに出すカードを選択
     const selectHands = (index, value) => {
-        const newHands = [...hands];
-        newHands.splice(index, 1);
-        setHands(newHands);
-        setCalcs([...calcs, value]);
-        console.log(calcs);
+        let errFlg = false;
+        // 符号の時、calcsの末尾が符号または空だったら選択できないようにする。
+        if(value === '+' || value === '-' || value === '×' || value === '÷') {
+            if(calcs.length === 0) {
+                errFlg = true;
+            }else {
+                let endCalc = calcs[calcs.length-1];
+                if(endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷') {
+                    errFlg = true;
+                }
+            }
+        // 数字の時、calcsの末尾が数字だったら選択できないようにする。
+        }else {
+            if(calcs.length !== 0) {
+                let endCalc = calcs[calcs.length-1];
+                if(!(endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
+                    errFlg = true;
+                }
+            }else {
+                errFlg = false;
+            }
+        }
+        if(!errFlg) {
+            const newHands = [...hands];
+            newHands.splice(index, 1);
+            setHands(newHands);
+            setCalcs([...calcs, value]);
+            console.log(calcs);
+        }
     }
 
+    // 計算エリアから手札に戻すカードを選択
     const selectCalcs = (index, value) => {
+        let firstCalc; // 計算エリアの最後の一つのカード
+        let appendHands = []; // 手札に追加するカード配列
         const newCalcs = [...calcs];
+
         newCalcs.splice(index, 1);
+        appendHands.push(value);
+
+        // 計算エリアが符号だけになるようだったら符号も手札に戻す
+        if(newCalcs.length === 1) {
+            firstCalc =  newCalcs[0];
+            if(firstCalc === '+' || firstCalc === '-' || firstCalc === '×' || firstCalc === '÷') {
+                newCalcs.length = 0;
+                appendHands.push(firstCalc)
+            }
+        }
+
         setCalcs(newCalcs);
-        setHands([...hands, value]);
-        console.log(hands);
+        setHands([...hands, ...appendHands]);
     }
 
     const ansCalc = () => {
