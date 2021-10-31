@@ -56,3 +56,13 @@ export const getAnsPlayers = createSelector(
     [gameSelector],
     state => state.ansPlayers
 )
+
+export const getFinishFlg = createSelector(
+    [gameSelector],
+    state => state.finishFlg
+)
+
+export const getWinPlayer = createSelector(
+    [gameSelector],
+    state => state.winPlayerName
+)

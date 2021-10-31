@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setBidAction, setSkipAction, setMessageAction, setPassAction,
- setAnsPlayersAction, 
- setHighestAction} from './redux/game/actions';
+ setAnsPlayersAction, setHighestAction, setTimeAction, setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -34,6 +33,11 @@ export const playersInfo = function(value) {
     socket.emit('game/players_info', JSON.stringify(value));
 }
 
+export const start = function(value) {
+    console.log(value);
+    socket.emit('game/start', JSON.stringify(value));
+}
+
 export const nextTurn = function(value) {
     console.log(value);
     socket.emit('game/next_turn', JSON.stringify(value));
@@ -56,7 +60,7 @@ export default function Socket(props) {
       socket = io("http://localhost:8000/");
     }
 
-    socket.on('game/join', function(msg) {
+    socket.once('game/join', function(msg) {
         console.log(msg)
         resObj = JSON.parse(msg);
         // プレイヤーIDをセット
@@ -68,7 +72,7 @@ export default function Socket(props) {
         playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
     })
 
-    socket.on('game/players_info', function(msg) {
+    socket.once('game/players_info', function(msg) {
         console.log(msg);
         /*msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
                 '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}],"roomId":"JUN"}';*/
@@ -77,8 +81,13 @@ export default function Socket(props) {
         dispatch(push('/Lobby'));
     })
 
+    socket.once('game/start', function(msg) {
+        console.log(msg);
+        nextTurn({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
+    })
+
     // 
-    socket.on('game/next_turn', function(msg) {
+    socket.once('game/next_turn', function(msg) {
         msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
         resObj = JSON.parse(msg);
         dispatch(setPlayerIdAction(resObj.playerId));
@@ -86,17 +95,22 @@ export default function Socket(props) {
         dispatch(setCoinAction(resObj.coin));
         dispatch(setTargetAction(resObj.targetCard));
         dispatch(setAuctionAction(resObj.auctionCard));
+        dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
+        dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
+        dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+        dispatch(push('/Game'));
     })
 
-    socket.on('game/update_state', function(msg) {
+    socket.once('game/update_state', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
-        dispatch(setPhaseAction(resObj));
+        dispatch(setPlayersAction(resObj.players));
+        dispatch(setPhaseAction(resObj.phase));
         dispatch(setSkipAction({skipFlg: true}));
     })
 
     // 誰がいくら入札したかをメッセージに表示する
-    socket.on('game/bid', function(msg) {
+    socket.once('game/bid', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setBidAction(resObj));
@@ -104,7 +118,7 @@ export default function Socket(props) {
     })
 
     // 落札したプレイヤーのコインとカード情報を更新する
-    socket.on('game/buy_update', function(msg) {
+    socket.once('game/buy_update', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setCoinAction(resObj));
@@ -112,7 +126,7 @@ export default function Socket(props) {
     })
 
     // 誰が何円で落札したか表示するために使用
-    socket.on('game/buy_notify', function(msg) {
+    socket.once('game/buy_notify', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setBidAction(resObj));
@@ -122,7 +136,7 @@ export default function Socket(props) {
         dispatch(setPassAction({passFlg: false}));
     })
 
-    socket.on('game/calculate_result', function(msg) {
+    socket.once('game/calculate_result', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         if(resObj.isCorrectAnswer) {
@@ -132,15 +146,24 @@ export default function Socket(props) {
             // 不正解メッセージを表示
             dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG0}));
         }
+        // 返されたコインをセット
+        dispatch(setCoinAction(resObj.coin));
         // 返されたカードをセット
-        dispatch(setCardsAction(resObj));
+        dispatch(setCardsAction(resObj.cards));
     })
 
-    socket.on('game/correct_players', function(msg) {
+    socket.once('game/correct_players', function(msg) {
         console.log(msg);
         resObj = JSON.parse(msg);
         // 返された正解者をセット
         dispatch(setAnsPlayersAction(resObj));
+    })
+
+    socket.once('game/finish_game', function(msg) {
+        console.log(msg);
+        resObj = JSON.parse(msg);
+        dispatch(setWinPlayerAction(resObj.playerName));
+        dispatch(setFinishGameAction(true));
     })
 
     return (

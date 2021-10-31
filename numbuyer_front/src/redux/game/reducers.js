@@ -53,6 +53,16 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_FINISH_GAME:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case Actions.SET_WIN_PLAYER:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }

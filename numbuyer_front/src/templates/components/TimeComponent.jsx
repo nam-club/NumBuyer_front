@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { CTX } from '../../Socket';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction } from '../../redux/game/actions';
+import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction,
+setFinishGameAction, setWinPlayerAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -14,6 +16,7 @@ const TimeComponent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
+    const { nextTurn } = React.useContext(CTX);
 
     const [gameData, setGameData] = usePersist("gameData", null);
 
@@ -41,7 +44,8 @@ const TimeComponent = (props) => {
     }, [time]);
 
     React.useEffect(() => {
-        if(time==0) {
+        if(time === 0) {
+            console.log(selector.game.phase);
             switch(selector.game.phase) {
                 case Constants.READY_PH:
                     dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
@@ -119,6 +123,13 @@ const TimeComponent = (props) => {
                     }
                     dispatch(setTimeAction({time: Constants.CALC_RESULT_TIME}));
                     setTime(Constants.CALC_RESULT_TIME);
+                    break;
+                case Constants.CALC_RESULT_PH:
+                    dispatch(setPhaseAction({phase: Constants.READY_PH}));
+                    nextTurn({roomId: props.roomId, playerId: props.playerId});
+                    // mock
+                    dispatch(setWinPlayerAction('aoki'));
+                    dispatch(setFinishGameAction(true));
                     break;
                 default:
                     break;

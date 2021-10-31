@@ -26,6 +26,8 @@ const initialState = {
         passFlg: true, // 全員パスしたフラグ
         ansPlayers: [], // 正解者配列
         highestBid: 0, // 現在の最高入札額
+        finishFlg: false, // ゲーム終了フラグ
+        winPlayerName: '', // 勝利プレイヤー名
     }
 };
 

@@ -1,17 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { push } from 'connected-react-router';
 
 import { useStyles } from './theme';
 import usePersist from '../Persist';
+import { push } from 'connected-react-router';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
+import Fade from '@material-ui/core/Fade';
+import Button from '@material-ui/core/Button';
 import AucComponent from './components/AucComponent';
 import CalcComponent from './components/CalcComponent';
 
@@ -25,11 +27,14 @@ const Game = () => {
     const [targetCard, setTargetCard] = React.useState(gameData.game.targetCard);
     const [auctionCard, setAuctionCard] = React.useState(gameData.game.auctionCard);
     const [player, setPlayer] = React.useState(gameData.players.player);
+    const [roomId, setRoomId] = React.useState(gameData.room.roomId);
+    const [finishFlg, setFinishFlg] = React.useState(gameData.game.finishFlg);
+    const [winPlayerName, setWinPlayerName] = React.useState(gameData.game.winPlayerName);
 
     React.useEffect(() => {
         setGameData(selector);
         console.log(selector);
-    }, [selector]);
+    }, [selector.players.player, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard, selector.game.finishFlg]);
 
     const checkPhase = () => {
         if(selector.game.phase !== Constants.GIVE_CARD_PH) {
@@ -51,7 +56,8 @@ const Game = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard}
-                         auctionCard={auctionCard} setAuctionCard={setAuctionCard} />
+                         auctionCard={auctionCard} setAuctionCard={setAuctionCard} 
+                         roomId={roomId} playerId={player.playerId}/>
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -77,6 +83,25 @@ const Game = () => {
                 </Grid>
                 <CalcComponent cards={player.cards} />
             </div>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={finishFlg}
+            >
+                <Fade in={finishFlg}>
+                <div className={classes.paper}>
+                    <h1 className={classes.title}>WINNER</h1>
+                    <h2 className={classes.win_name}>player1</h2>
+                    <Button size="large" className={classes.startButton + " " + classes.friendButton}
+                    onClick={() => {
+                        dispatch(push('/'));
+                    }}>Finish Game</Button>
+                    <Button size="large" className={classes.startButton + " " + classes.quickButton}
+                    >Try Again</Button>
+                </div>
+                </Fade>
+            </Modal>
         </Typography>
     )
 }

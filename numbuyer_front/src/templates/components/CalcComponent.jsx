@@ -49,7 +49,7 @@ const CalcComponent = (props) => {
         // ボタン連打防止
         setDisableFlg(true);
 
-        if(calcs.length == 0) {
+        if(calcs.length === 0) {
             dispatch(setMessageAction({message: Constants.CALC_ERR_MSG}));
             setDisableFlg(false);
         }else {

@@ -6,7 +6,6 @@ import * as Constants from '../constants';
 import { CTX } from '../Socket';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { push } from 'connected-react-router';
 
 import { setRoomAction } from '../redux/room/actions';
 import { setValidAction, setErrMsgAction, setNameAction } from '../redux/top/actions';

@@ -107,3 +107,25 @@ export const setAnsPlayersAction = (ansPlayersState) => {
         }
     }
 }
+
+export const SET_FINISH_GAME = "SET_FINISH_GAME";
+
+export const setFinishGameAction = (finishGameState) => {
+    return {
+        type: "SET_FINISH_GAME",
+        payload: {
+            finishFlg: finishGameState
+        }
+    }
+}
+
+export const SET_WIN_PLAYER = "SET_WIN_PLAYER";
+
+export const setWinPlayerAction = (winPlayerState) => {
+    return {
+        type: "SET_WIN_PLAYER",
+        payload: {
+            winPlayerName: winPlayerState
+        }
+    }
+}

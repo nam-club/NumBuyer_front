@@ -51,6 +51,11 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1em',
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
+  win_name: {
+    color: orange[300],
+    fontSize: '3em',
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+  },
   root: {
       marginRight: 300,
       marginLeft: 300,
