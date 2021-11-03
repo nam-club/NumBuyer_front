@@ -67,7 +67,6 @@ const Top = () => {
     const clickQuick = () => {
         if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
             joinQuickMatch({playerName: selector.top.name});
-            //dispatch(push('/Lobby'));
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(selector.top.name !== '') {
@@ -124,7 +123,6 @@ const Top = () => {
                                     onClick={() => {
                                         dispatch(setRoomAction({roomId: roomId}));
                                         createMatch({playerName: selector.top.name, roomId: roomId});
-                                        //dispatch(push('/'));
                                     }}>Create</Button>
                                 </Grid>
                             </Grid>
@@ -143,7 +141,6 @@ const Top = () => {
                                     onClick={() => {
                                         dispatch(setRoomAction({roomId: roomId}));
                                         joinFriendMatch({playerName: selector.top.name, roomId: roomId});
-                                        //dispatch(push('/'));
                                     }}>Join</Button>
                                 </Grid>
                             </Grid>

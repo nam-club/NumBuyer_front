@@ -16,15 +16,20 @@ let socket;
 let resObj = ""; 
 
 export const joinQuickMatch = function(value) {
+    console.log("quickMatch:")
     console.log(value);
     socket.emit('join/quick_match', JSON.stringify(value));
 }
 
 export const createMatch = function(value) {
+    console.log("createMatch:")
+    console.log(value);
     socket.emit('create/match', JSON.stringify(value));
 }
 
 export const joinFriendMatch = function(value) {
+    console.log("joinFriendMatch:")
+    console.log(value);
     socket.emit('join/friend_match', JSON.stringify(value));
 }
 
@@ -61,6 +66,7 @@ export default function Socket(props) {
     }
 
     socket.once('game/join', function(msg) {
+        console.log("game/join:")
         console.log(msg)
         resObj = JSON.parse(msg);
         // プレイヤーIDをセット
@@ -69,44 +75,66 @@ export default function Socket(props) {
         dispatch(setRoomAction(resObj.roomId));
         // オーナーフラグをセット
         dispatch(setOwnerAction(resObj.isOwner));
+        console.log("roomIdは" + resObj.roomId);
+        console.log("playerIdは" + resObj.playerId);
         playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
     })
 
+    const setPlayers = (value) => {
+        return new Promise((resolve, reject)=>{
+            dispatch(setPlayersAction(value));
+            resolve();
+        })
+    }
+
     socket.once('game/players_info', function(msg) {
+        console.log("game/playersInfo:")
         console.log(msg);
-        /*msg = '{"players":[{"playerId":"1","playerName":"ITO","roomName":"ITO","coin":100,"cardNum":5},' +
-                '{"playerId":"2","playerName":"AOKI","roomName":"ITO","coin":100,"cardNum":5}],"roomId":"JUN"}';*/
         resObj = JSON.parse(msg);
-        dispatch(setPlayersAction(resObj.players));
-        dispatch(push('/Lobby'));
+        console.log("まだ移動しないよ");
+        setPlayers(resObj.players).then(()=>{
+            console.log(selector.players.players);
+            dispatch(push('/Lobby'));
+        });
     })
 
     socket.once('game/start', function(msg) {
+        console.log("game/start:")
         console.log(msg);
         nextTurn({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
     })
 
-    // 
-    socket.once('game/next_turn', function(msg) {
-        msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
-        resObj = JSON.parse(msg);
-        dispatch(setPlayerIdAction(resObj.playerId));
-        dispatch(setCardsAction(resObj.cards));
-        dispatch(setCoinAction(resObj.coin));
-        dispatch(setTargetAction(resObj.targetCard));
-        dispatch(setAuctionAction(resObj.auctionCard));
+    const setGame = (object, callback) => {
+        dispatch(setPlayerIdAction(object.playerId));
+        dispatch(setCardsAction(object.cards));
+        dispatch(setCoinAction(object.coin));
+        dispatch(setTargetAction(object.targetCard));
+        dispatch(setAuctionAction(object.auctionCard));
         dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
         dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
         dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+        callback();
+    }
+
+    const moveGame = () => {
         dispatch(push('/Game'));
+    }
+    
+    socket.once('game/next_turn', function(msg) {
+        console.log("game/next_turn:")
+        console.log(msg);
+        //msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
+        resObj = JSON.parse(msg);
+        setGame(resObj, moveGame);
     })
 
     socket.once('game/update_state', function(msg) {
+        console.log("game/update_state:")
         console.log(msg);
         resObj = JSON.parse(msg);
         dispatch(setPlayersAction(resObj.players));
         dispatch(setPhaseAction(resObj.phase));
-        dispatch(setSkipAction({skipFlg: true}));
+        //dispatch(setSkipAction({skipFlg: true}));
     })
 
     // 誰がいくら入札したかをメッセージに表示する
@@ -167,7 +195,7 @@ export default function Socket(props) {
     })
 
     return (
-        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, nextTurn, bid, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, start, nextTurn, bid, calculate}}>
             {props.children}
         </CTX.Provider>
     )

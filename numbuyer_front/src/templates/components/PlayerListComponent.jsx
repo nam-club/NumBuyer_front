@@ -40,8 +40,8 @@ const AucComponent = (props) => {
                     {selector.players.player.isOwner &&
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
-                            nextTurn({roomId: props.roomId, playerId: props.playerId});
-                            //start({roomId: props.roomId,})
+                            //nextTurn({roomId: props.roomId, playerId: props.playerId});
+                            start({roomId: props.roomId,})
                             //dispatch(push('/Game'));
                             //setTimeout(function() {dispatch(push('/Game'))}, 3000);
                         }}>START</Button>

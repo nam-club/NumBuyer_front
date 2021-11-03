@@ -25,6 +25,8 @@ const TimeComponent = (props) => {
     const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
     const [showFlg, setShowFlg] = React.useState(false);
 
+    let [prePhase, setPrePhase] = React.useState(Constants.READY_PH);
+
     let aucCoin = 100;
     let player = 'Player1';
 
@@ -34,9 +36,9 @@ const TimeComponent = (props) => {
             setTime(t => {
                 if(t<=0) {
                     return 0;
-                }else if(selector.game.skipFlg) {
+                }/*else if(selector.game.skipFlg) {
                     return 0;
-                }
+                }*/
                 return t-1;
             });
         }, 1000);
@@ -44,8 +46,10 @@ const TimeComponent = (props) => {
     }, [time]);
 
     React.useEffect(() => {
-        if(time === 0) {
-            console.log(selector.game.phase);
+        console.log("prePhase:" + prePhase);
+        console.log("phase:" + selector.game.phase);
+        if(selector.game.phase !== prePhase) {
+            setPrePhase(selector.game.phase);
             switch(selector.game.phase) {
                 case Constants.READY_PH:
                     dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
@@ -68,14 +72,14 @@ const TimeComponent = (props) => {
                     props.setAuctionCard(auctionCard);
                     break;
                 case Constants.SHOW_AUC_PH:
-                    dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
+                    //dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
                     dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2)}));
                     dispatch(setTimeAction({time: Constants.AUCTION_TIME}));
                     setTime(Constants.AUCTION_TIME);
                     setShowFlg(true);
                     break;
                 case Constants.AUCTION_PH:
-                    dispatch(setPhaseAction({phase: Constants.AUC_RESULT_PH}));
+                    //dispatch(setPhaseAction({phase: Constants.AUC_RESULT_PH}));
                     // フェーズがスキップされた　かつ　全員がパスしたとき
                     if(selector.game.skipFlg && selector.game.passFlg) {
                         dispatch(setMessageAction({message: Constants.AUC_RESULT_MSG0}));
@@ -91,14 +95,14 @@ const TimeComponent = (props) => {
                     props.setAuctionCard('　');
                     break;
                 case Constants.AUC_RESULT_PH:
-                    dispatch(setPhaseAction({phase: Constants.CALCULATE_PH}));
+                    //dispatch(setPhaseAction({phase: Constants.CALCULATE_PH}));
                     dispatch(setMessageAction({message: (Constants.CALCULATE_MSG1 + targetCard + Constants.CALCULATE_MSG2)}));
                     dispatch(setTimeAction({time: Constants.CALCULATE_TIME}));
                     setTime(Constants.CALCULATE_TIME);
                     setShowFlg(true);
                     break;
                 case Constants.CALCULATE_PH:
-                    dispatch(setPhaseAction({phase: Constants.CALC_RESULT_PH}));
+                    //dispatch(setPhaseAction({phase: Constants.CALC_RESULT_PH}));
                     if(selector.game.ansPlayers.length == 0) {
                         dispatch(setMessageAction({message: Constants.CALC_FINISH_MSG0}));
                     }else {
@@ -125,7 +129,7 @@ const TimeComponent = (props) => {
                     setTime(Constants.CALC_RESULT_TIME);
                     break;
                 case Constants.CALC_RESULT_PH:
-                    dispatch(setPhaseAction({phase: Constants.READY_PH}));
+                    //dispatch(setPhaseAction({phase: Constants.READY_PH}));
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
                     // mock
                     dispatch(setWinPlayerAction('aoki'));
@@ -135,7 +139,7 @@ const TimeComponent = (props) => {
                     break;
             }
         }
-    }, [time]);
+    }, [selector.game.phase]);
 
     return (
         <Card className={classes.time}>
