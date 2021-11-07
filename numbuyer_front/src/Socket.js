@@ -12,7 +12,6 @@ export const CTX = React.createContext();
 
 const io = require("socket.io-client");
 let socket;
-let count = 0;
 
 let resObj = ""; 
 
@@ -64,10 +63,8 @@ export default function Socket(props) {
 
     if(!socket) {
       socket = io("http://localhost:8000/");
-    /*if(count === 0) {
-        count++;*/
 
-        socket.once('game/join', function(msg) {
+        socket.on('game/join', function(msg) {
             console.log("game/join:")
             console.log(msg)
             resObj = JSON.parse(msg);
@@ -89,7 +86,7 @@ export default function Socket(props) {
             })
         }
 
-        socket.once('game/players_info', function(msg) {
+        socket.on('game/players_info', function(msg) {
             console.log("game/playersInfo:")
             console.log(msg);
             resObj = JSON.parse(msg);
@@ -98,11 +95,11 @@ export default function Socket(props) {
             });
         })
 
-        socket.once('game/start', function(msg) {
+        socket.on('game/start', function(msg) {
             console.log("game/start:")
             console.log(msg);
-            console.log('roomId:' + selector.room.roomId);
-            nextTurn({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
+            resObj = JSON.parse(msg);
+            nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});
         })
 
         const setGame = (object, callback) => {
@@ -129,7 +126,7 @@ export default function Socket(props) {
             dispatch(push('/Game'));
         }
         
-        socket.once('game/next_turn', function(msg) {
+        socket.on('game/next_turn', function(msg) {
             console.log("game/next_turn:")
             console.log(msg);
             //msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
@@ -137,7 +134,7 @@ export default function Socket(props) {
             setGame(resObj, moveGame);
         })
 
-        socket.once('game/update_state', function(msg) {
+        socket.on('game/update_state', function(msg) {
             console.log("game/update_state:")
             console.log(msg);
             resObj = JSON.parse(msg);
@@ -147,7 +144,7 @@ export default function Socket(props) {
         })
 
         // 誰がいくら入札したかをメッセージに表示する
-        socket.once('game/bid', function(msg) {
+        socket.on('game/bid', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setBidAction(resObj));
@@ -155,7 +152,7 @@ export default function Socket(props) {
         })
 
         // 落札したプレイヤーのコインとカード情報を更新する
-        socket.once('game/buy_update', function(msg) {
+        socket.on('game/buy_update', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setCoinAction(resObj));
@@ -163,7 +160,7 @@ export default function Socket(props) {
         })
 
         // 誰が何円で落札したか表示するために使用
-        socket.once('game/buy_notify', function(msg) {
+        socket.on('game/buy_notify', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setBidAction(resObj));
@@ -173,7 +170,7 @@ export default function Socket(props) {
             dispatch(setPassAction({passFlg: false}));
         })
 
-        socket.once('game/calculate_result', function(msg) {
+        socket.on('game/calculate_result', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             if(resObj.isCorrectAnswer) {
@@ -189,21 +186,19 @@ export default function Socket(props) {
             dispatch(setCardsAction(resObj.cards));
         })
 
-        socket.once('game/correct_players', function(msg) {
+        socket.on('game/correct_players', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 返された正解者をセット
             dispatch(setAnsPlayersAction(resObj));
         })
 
-        socket.once('game/finish_game', function(msg) {
+        socket.on('game/finish_game', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setWinPlayerAction(resObj.playerName));
             dispatch(setFinishGameAction(true));
         })
-
-    //}
     }
 
 
