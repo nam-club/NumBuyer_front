@@ -21,11 +21,11 @@ const PlayerListComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { nextTurn, start } = React.useContext(CTX);
-    const [players, setPlayers] = React.useState([{playerId: 'default1', playerName: ''}]);
+    const [players, setPlayers] = React.useState(props.players);
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         setPlayers(props.players);
-    }, [selector]);
+    }, [selector]);*/
 
     return (
         <Card className={classes.root}>

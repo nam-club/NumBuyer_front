@@ -60,7 +60,7 @@ export const calculate = function(value) {
 export default function Socket(props) {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    console.log(socket);
+    //console.log(socket);
 
     if(!socket) {
       socket = io("http://localhost:8000/");
