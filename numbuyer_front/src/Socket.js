@@ -64,8 +64,6 @@ export default function Socket(props) {
 
     if(!socket) {
       socket = io("http://localhost:8000/");
-    }
-
     /*if(count === 0) {
         count++;*/
 
@@ -206,6 +204,8 @@ export default function Socket(props) {
         })
 
     //}
+    }
+
 
     return (
         <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, start, nextTurn, bid, calculate}}>
