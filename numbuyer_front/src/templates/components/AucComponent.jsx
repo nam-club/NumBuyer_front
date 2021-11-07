@@ -27,7 +27,7 @@ const AucComponent = (props) => {
         console.log("bid:" + fee);
         bid({playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
         // mock
-        let coin = selector.players.player.coin - fee;
+        /*let coin = selector.players.player.coin - fee;
         let msg = '{"playerId":1,"coin":' + coin + ',"cards":["1", "+", "2", "-", "3", "9"]}';
         let resObj = JSON.parse(msg);
         dispatch(setCardsAction(resObj));
@@ -38,14 +38,14 @@ const AucComponent = (props) => {
         dispatch(setHighestAction(resObj));
         // 全員がパスしたわけじゃないよ
         dispatch(setPassAction({passFlg: false}));
-        dispatch(setSkipAction({skipFlg: true}));
+        dispatch(setSkipAction({skipFlg: true}));*/
     }
 
     const passAucCard = () => {
         console.log("pass");
         bid({playerId: selector.players.player.playerId, coin: null, action: 'pass'});
         // mock
-        dispatch(setSkipAction({skipFlg: true}));
+        //dispatch(setSkipAction({skipFlg: true}));
     }
 
     const checkPhase = () => {
@@ -70,9 +70,9 @@ const AucComponent = (props) => {
                     id="standard-basic" label="Please enter the bid amount" value={fee} 
                     onChange={e => setFee(e.target.value)} />
                     <Button size="large" className={classes.bidButton}
-                    onClick={bidAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>BID</Button>
+                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>BID</Button>
                     <Button size="large" className={classes.passButton}
-                    onClick={passAucCard} disabled={!(selector.game.phase == Constants.AUCTION_PH)}>PASS</Button>
+                    onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
                             {Constants.AUC_BID_MSG1 + selector.game.highestBid + Constants.AUC_BID_MSG2 + selector.game.playerName + Constants.AUC_BID_MSG3}

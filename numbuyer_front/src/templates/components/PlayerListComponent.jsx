@@ -16,16 +16,21 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
-const AucComponent = (props) => {
+const PlayerListComponent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { nextTurn, start } = React.useContext(CTX);
+    const [players, setPlayers] = React.useState([{playerId: 'default1', playerName: ''}]);
+
+    React.useEffect(() => {
+        setPlayers(props.players);
+    }, [selector]);
 
     return (
         <Card className={classes.root}>
             <h2 className={classes.menu}>Lobby</h2>
-            {props.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
+            {players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
@@ -40,10 +45,7 @@ const AucComponent = (props) => {
                     {selector.players.player.isOwner &&
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
-                            //nextTurn({roomId: props.roomId, playerId: props.playerId});
-                            start({roomId: props.roomId,})
-                            //dispatch(push('/Game'));
-                            //setTimeout(function() {dispatch(push('/Game'))}, 3000);
+                            start({roomId: props.roomId, playerId: props.playerId})
                         }}>START</Button>
                     }  
                     </Grid>
@@ -56,4 +58,4 @@ const AucComponent = (props) => {
     )
 }
 
-export default AucComponent;
+export default PlayerListComponent;

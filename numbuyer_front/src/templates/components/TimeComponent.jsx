@@ -25,8 +25,6 @@ const TimeComponent = (props) => {
     const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
     const [showFlg, setShowFlg] = React.useState(false);
 
-    let [prePhase, setPrePhase] = React.useState(Constants.READY_PH);
-
     let aucCoin = 100;
     let player = 'Player1';
 
@@ -46,37 +44,45 @@ const TimeComponent = (props) => {
     }, [time]);
 
     React.useEffect(() => {
-        console.log("prePhase:" + prePhase);
         console.log("phase:" + selector.game.phase);
-        if(selector.game.phase !== prePhase) {
-            setPrePhase(selector.game.phase);
+        console.log("time:" + time);
+        /*if(selector.game.phase !== prePhase) {*/
             switch(selector.game.phase) {
                 case Constants.READY_PH:
-                    dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
-                    dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
-                    dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
-                    setTime(Constants.GIVE_CARD_TIME);
+                    if(time === 0) {
+                        dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
+                        dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
+                        dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+                        setTime(Constants.GIVE_CARD_TIME);
+                    }
                     break;
                 case Constants.GIVE_CARD_PH:
-                    dispatch(setPhaseAction({phase: Constants.SHOW_ANS_PH}));
-                    dispatch(setMessageAction({message: (Constants.SHOW_ANS_MSG + '"' + targetCard + '"')}));
-                    dispatch(setTimeAction({time: Constants.SHOW_ANS_TIME}));
-                    setTime(Constants.SHOW_ANS_TIME);
-                    props.setTargetCard(targetCard);
+                    if(time === 0) {
+                        dispatch(setPhaseAction({phase: Constants.SHOW_ANS_PH}));
+                        dispatch(setMessageAction({message: (Constants.SHOW_ANS_MSG + '"' + targetCard + '"')}));
+                        dispatch(setTimeAction({time: Constants.SHOW_ANS_TIME}));
+                        setTime(Constants.SHOW_ANS_TIME);
+                        props.setTargetCard(targetCard);
+                    }
                     break;
                 case Constants.SHOW_ANS_PH:
-                    dispatch(setPhaseAction({phase: Constants.SHOW_AUC_PH}));
-                    dispatch(setMessageAction({message: ('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG)}));
-                    dispatch(setTimeAction({time: Constants.SHOW_AUC_TIME}));
-                    setTime(Constants.SHOW_AUC_TIME);
-                    props.setAuctionCard(auctionCard);
+                    if(time === 0) {
+                        dispatch(setPhaseAction({phase: Constants.SHOW_AUC_PH}));
+                        dispatch(setMessageAction({message: ('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG)}));
+                        dispatch(setTimeAction({time: Constants.SHOW_AUC_TIME}));
+                        setTime(Constants.SHOW_AUC_TIME);
+                        props.setAuctionCard(auctionCard);
+                    }
                     break;
                 case Constants.SHOW_AUC_PH:
                     //dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
-                    dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2)}));
-                    dispatch(setTimeAction({time: Constants.AUCTION_TIME}));
-                    setTime(Constants.AUCTION_TIME);
-                    setShowFlg(true);
+                    if(time === 0) {
+                        dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
+                        dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2)}));
+                        dispatch(setTimeAction({time: Constants.AUCTION_TIME}));
+                        setTime(Constants.AUCTION_TIME);
+                        setShowFlg(true);
+                    }
                     break;
                 case Constants.AUCTION_PH:
                     //dispatch(setPhaseAction({phase: Constants.AUC_RESULT_PH}));
@@ -138,8 +144,8 @@ const TimeComponent = (props) => {
                 default:
                     break;
             }
-        }
-    }, [selector.game.phase]);
+        //}
+    }, [selector.game.phase, time]);
 
     return (
         <Card className={classes.time}>
