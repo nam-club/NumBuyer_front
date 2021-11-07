@@ -66,9 +66,9 @@ export default function Socket(props) {
       socket = io("http://localhost:8000/");
     }
 
-    if(count === 0) {
-        count++;
-        
+    /*if(count === 0) {
+        count++;*/
+
         socket.once('game/join', function(msg) {
             console.log("game/join:")
             console.log(msg)
@@ -108,18 +108,18 @@ export default function Socket(props) {
         })
 
         const setGame = (object, callback) => {
-            /*dispatch(setPlayerIdAction(object.playerId));
+            dispatch(setPlayerIdAction(object.playerId));
             dispatch(setCardsAction(object.cards));
             dispatch(setCoinAction(object.coin));
             dispatch(setTargetAction(object.targetCard));
-            dispatch(setAuctionAction(object.auctionCard));*/
+            dispatch(setAuctionAction(object.auctionCard));
 
             // mock
-            dispatch(setPlayerIdAction(selector.players.player.playerId));
+            /*dispatch(setPlayerIdAction(selector.players.player.playerId));
             dispatch(setCardsAction(["1","+","2","-","3"]));
             dispatch(setCoinAction(100));
             dispatch(setTargetAction("21"));
-            dispatch(setAuctionAction("9"));
+            dispatch(setAuctionAction("9"));*/
 
             dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
             dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
@@ -205,7 +205,7 @@ export default function Socket(props) {
             dispatch(setFinishGameAction(true));
         })
 
-    }
+    //}
 
     return (
         <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, start, nextTurn, bid, calculate}}>
