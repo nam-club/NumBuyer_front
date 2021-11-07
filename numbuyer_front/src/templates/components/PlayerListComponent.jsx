@@ -21,7 +21,7 @@ const PlayerListComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { nextTurn, start } = React.useContext(CTX);
-    const [players, setPlayers] = React.useState(props.players);
+    //const [players, setPlayers] = React.useState(props.players);
 
     /*React.useEffect(() => {
         setPlayers(props.players);
@@ -30,7 +30,7 @@ const PlayerListComponent = (props) => {
     return (
         <Card className={classes.root}>
             <h2 className={classes.menu}>Lobby</h2>
-            {players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
+            {selector.players.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
@@ -45,7 +45,7 @@ const PlayerListComponent = (props) => {
                     {selector.players.player.isOwner &&
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
-                            start({roomId: props.roomId, playerId: props.playerId})
+                            start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
                         }}>START</Button>
                     }  
                     </Grid>

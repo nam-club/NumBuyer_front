@@ -14,21 +14,21 @@ const Lobby = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const [gameData, setGameData] = usePersist("gameData", null);
+    /*const [gameData, setGameData] = usePersist("gameData", null);
     const [players, setPlayers] = React.useState(gameData.players.players);
     const [roomId, setRoomId] = React.useState(gameData.room.roomId);
     const [playerId, setPlayerId] = React.useState(gameData.players.player.playerId);
 
     React.useEffect(() => {
         setGameData(selector);
-    }, [selector]);
+    }, [selector]);*/
 
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
             <div className={classes.back}>
                 <h1 className={classes.title}>NumBuyer</h1>
-                <PlayerListComponent players={players} roomId={roomId} playerId={playerId}/>
+                <PlayerListComponent/>
             </div>
         </Typography>
     )
