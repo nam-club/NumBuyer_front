@@ -4,7 +4,7 @@ export const setPhaseAction = (phaseState) => {
     return {
         type: "SET_PHASE",
         payload: {
-            phase: phaseState.phase
+            phase: phaseState
         }
     }
 }
@@ -14,7 +14,7 @@ export const setMessageAction = (messageState) => {
     return {
         type: "SET_MESSAGE",
         payload: {
-            message: messageState.message
+            message: messageState
         }
     }
 }
@@ -25,7 +25,7 @@ export const setTimeAction = (timeState) => {
     return {
         type: "SET_TIME",
         payload: {
-            time: timeState.time
+            time: timeState
         }
     }
 }

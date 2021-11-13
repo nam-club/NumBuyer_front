@@ -29,8 +29,6 @@ const Game = () => {
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
     const [winPlayerName, setWinPlayerName] = React.useState(selector.game.winPlayerName);
 
-    console.log(player);
-
     React.useEffect(() => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);

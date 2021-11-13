@@ -2,11 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setBidAction, setHighestAction, setSkipAction, setPassAction } from '../../redux/game/actions';
-import { setCardsAction, setCoinAction } from '../../redux/players/actions';
-
 import * as Constants from '../../constants';
-import usePersist from '../../Persist';
 
 import { useStyles } from '../theme';
 
@@ -17,7 +13,6 @@ import Button from '@material-ui/core/Button';
 
 const AucComponent = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     const [fee, setFee] = React.useState('');
@@ -49,7 +44,7 @@ const AucComponent = (props) => {
     }
 
     const checkPhase = () => {
-        if(selector.game.phase !== Constants.GIVE_CARD_PH && selector.game.phase !== Constants.SHOW_ANS_PH) {
+        if(selector.game.phase !== Constants.GIVE_CARD_PH && selector.game.phase !== Constants.SHOW_TAR_PH) {
             return true;
         }else {
             return false;

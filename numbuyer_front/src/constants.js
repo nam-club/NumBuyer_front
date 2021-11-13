@@ -2,19 +2,19 @@
 export const COIN = 100;
 
 // フェーズ
-export const READY_PH = '00';
-export const GIVE_CARD_PH = '01';
-export const SHOW_ANS_PH = '11';
-export const SHOW_AUC_PH = '12';
-export const AUCTION_PH = '21';
-export const AUC_RESULT_PH = '22';
-export const CALCULATE_PH = '31';
-export const CALC_RESULT_PH = '32';
-export const FINISHED_PH = '99';
+export const READY_PH = 'READY';
+export const GIVE_CARD_PH = 'GIVE_CARDS';
+export const SHOW_TAR_PH = 'SHOW_TARGET';
+export const SHOW_AUC_PH = 'SHOW_AUCTION';
+export const AUCTION_PH = 'AUCTION';
+export const AUC_RESULT_PH = 'AUCTION_RESULT';
+export const CALCULATE_PH = 'CALCULATE';
+export const CALC_RESULT_PH = 'CALCULATE_RESULT';
+export const FINISHED_PH = 'FINISHED';
 
 // 時間設定
 export const GIVE_CARD_TIME = 3;
-export const SHOW_ANS_TIME = 5;
+export const SHOW_TAR_TIME = 5;
 export const SHOW_AUC_TIME = 5;
 export const AUCTION_TIME = 30;
 export const AUC_RESULT_TIME = 5;
@@ -29,7 +29,7 @@ export const SYMBOL_ERR = 'Please enter your name.';
 
 // ナビゲーションメッセージ
 export const GIVE_CARD_MSG = 'Distributing cards to players...';
-export const SHOW_ANS_MSG = 'The goal is to get a result of ';
+export const SHOW_TAR_MSG = 'The goal is to get a result of ';
 export const SHOW_AUC_MSG = ' was exhibited';
 export const AUCTION_MSG1 = 'Please enter the bid amount and select whether to bid "';
 export const AUCTION_MSG2 = '" or pass.';

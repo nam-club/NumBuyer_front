@@ -89,7 +89,7 @@ const CalcComponent = (props) => {
         setDisableFlg(true);
 
         if(calcs.length === 0) {
-            dispatch(setMessageAction({message: Constants.CALC_ERR_MSG}));
+            dispatch(setMessageAction(Constants.CALC_ERR_MSG));
             setDisableFlg(false);
         }else {
             let calculateCards = calcs.slice();
@@ -101,10 +101,10 @@ const CalcComponent = (props) => {
         let resObj = JSON.parse(msg);
         if(resObj.isCorrectAnswer) {
             // 正解メッセージを表示
-            dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG1}));
+            dispatch(setMessageAction(Constants.CALC_RESULT_MSG1));
         }else {
             // 不正解メッセージを表示
-            dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG0}));
+            dispatch(setMessageAction(Constants.CALC_RESULT_MSG0));
         }
         // 返されたカードをセット
         dispatch(setCardsAction(resObj)); 

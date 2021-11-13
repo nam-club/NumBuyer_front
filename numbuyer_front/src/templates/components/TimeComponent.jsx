@@ -6,7 +6,6 @@ import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPass
 setFinishGameAction, setWinPlayerAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
-import usePersist from '../../Persist';
 
 import { useStyles } from '../theme';
 
@@ -18,8 +17,6 @@ const TimeComponent = (props) => {
     const selector = useSelector(state => state);
     const { nextTurn } = React.useContext(CTX);
 
-    const [gameData, setGameData] = usePersist("gameData", null);
-
     const [time, setTime] = React.useState(selector.game.time);
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
     const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
@@ -28,9 +25,9 @@ const TimeComponent = (props) => {
     let aucCoin = 100;
     let player = 'Player1';
 
+    // 画面表示用タイマー
     React.useEffect(() => {
         const interval = setInterval(() => {
-            setGameData(selector);
             setTime(t => {
                 if(t<=0) {
                     return 0;
@@ -43,74 +40,89 @@ const TimeComponent = (props) => {
         return () => clearInterval(interval);
     }, [time]);
 
+    // 手札配布〜オークションカードオープンまでのフェーズ遷移アクション
     React.useEffect(() => {
         console.log("phase:" + selector.game.phase);
         console.log("time:" + time);
-        /*if(selector.game.phase !== prePhase) {*/
             switch(selector.game.phase) {
                 case Constants.READY_PH:
                     if(time === 0) {
-                        dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
-                        dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
-                        dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+                        dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
+                        dispatch(setMessageAction(Constants.GIVE_CARD_MSG));
+                        dispatch(setTimeAction(Constants.GIVE_CARD_TIME));
                         setTime(Constants.GIVE_CARD_TIME);
                     }
                     break;
                 case Constants.GIVE_CARD_PH:
                     if(time === 0) {
-                        dispatch(setPhaseAction({phase: Constants.SHOW_ANS_PH}));
-                        dispatch(setMessageAction({message: (Constants.SHOW_ANS_MSG + '"' + targetCard + '"')}));
-                        dispatch(setTimeAction({time: Constants.SHOW_ANS_TIME}));
-                        setTime(Constants.SHOW_ANS_TIME);
+                        dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
+                        dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + targetCard + '"'));
+                        dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
+                        setTime(Constants.SHOW_TAR_TIME);
                         props.setTargetCard(targetCard);
                     }
                     break;
-                case Constants.SHOW_ANS_PH:
+                case Constants.SHOW_TAR_PH:
                     if(time === 0) {
-                        dispatch(setPhaseAction({phase: Constants.SHOW_AUC_PH}));
-                        dispatch(setMessageAction({message: ('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG)}));
-                        dispatch(setTimeAction({time: Constants.SHOW_AUC_TIME}));
+                        dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
+                        dispatch(setMessageAction('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                        dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
                         setTime(Constants.SHOW_AUC_TIME);
                         props.setAuctionCard(auctionCard);
                     }
                     break;
-                case Constants.SHOW_AUC_PH:
-                    //dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
+                /*case Constants.SHOW_AUC_PH:
+                    dispatch(setPhaseAction(Constants.AUCTION_PH));
                     if(time === 0) {
-                        dispatch(setPhaseAction({phase: Constants.AUCTION_PH}));
-                        dispatch(setMessageAction({message: (Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2)}));
-                        dispatch(setTimeAction({time: Constants.AUCTION_TIME}));
+                        dispatch(setPhaseAction(Constants.AUCTION_PH));
+                        dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
+                        dispatch(setTimeAction(Constants.AUCTION_TIME));
                         setTime(Constants.AUCTION_TIME);
                         setShowFlg(true);
                     }
+                    break;*/
+                default:
                     break;
+            }
+        }, [time]);
+
+        // オークション〜ゲーム終了まで（back側に基づく遷移）のフェーズ遷移アクション
+        React.useEffect(() => {
+            console.log("phase:" + selector.game.phase);
+            console.log("time:" + time);
+                switch(selector.game.phase) {
                 case Constants.AUCTION_PH:
-                    //dispatch(setPhaseAction({phase: Constants.AUC_RESULT_PH}));
+                    dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
+                    dispatch(setTimeAction(Constants.AUCTION_TIME));
+                    setTime(Constants.AUCTION_TIME);
+                    setShowFlg(true);
+
+                    //dispatch(setPhaseAction(Constants.AUC_RESULT_PH));
                     // フェーズがスキップされた　かつ　全員がパスしたとき
-                    if(selector.game.skipFlg && selector.game.passFlg) {
-                        dispatch(setMessageAction({message: Constants.AUC_RESULT_MSG0}));
+                    /*if(selector.game.skipFlg && selector.game.passFlg) {
+                        dispatch(setMessageAction(Constants.AUC_RESULT_MSG0));
                     }else {
-                        dispatch(setMessageAction({message: (player + Constants.AUC_RESULT_MSG1 + auctionCard +
-                        Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3)}));
+                        dispatch(setMessageAction(player + Constants.AUC_RESULT_MSG1 + auctionCard +
+                        Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3));
                     }
-                    dispatch(setTimeAction({time: Constants.AUC_RESULT_TIME}));
+                    dispatch(setTimeAction(Constants.AUC_RESULT_TIME));
                     dispatch(setSkipAction({skipFlg: false}));
                     dispatch(setPassAction({passFlg: true}));
                     setTime(Constants.AUC_RESULT_TIME);
                     setShowFlg(false);
-                    props.setAuctionCard('　');
+                    props.setAuctionCard('　');*/
                     break;
                 case Constants.AUC_RESULT_PH:
-                    //dispatch(setPhaseAction({phase: Constants.CALCULATE_PH}));
-                    dispatch(setMessageAction({message: (Constants.CALCULATE_MSG1 + targetCard + Constants.CALCULATE_MSG2)}));
-                    dispatch(setTimeAction({time: Constants.CALCULATE_TIME}));
+                    //dispatch(setPhaseAction(Constants.CALCULATE_PH));
+                    dispatch(setMessageAction(Constants.CALCULATE_MSG1 + targetCard + Constants.CALCULATE_MSG2));
+                    dispatch(setTimeAction(Constants.CALCULATE_TIME));
                     setTime(Constants.CALCULATE_TIME);
                     setShowFlg(true);
                     break;
                 case Constants.CALCULATE_PH:
-                    //dispatch(setPhaseAction({phase: Constants.CALC_RESULT_PH}));
+                    //dispatch(setPhaseAction(Constants.CALC_RESULT_PH));
                     if(selector.game.ansPlayers.length == 0) {
-                        dispatch(setMessageAction({message: Constants.CALC_FINISH_MSG0}));
+                        dispatch(setMessageAction(Constants.CALC_FINISH_MSG0));
                     }else {
                         let ansMessage = Constants.CALC_FINISH_MSG1;
                         let loopNum = 1;
@@ -126,16 +138,16 @@ const TimeComponent = (props) => {
 
                         ansMessage += Constants.CALC_FINISH_MSG2;
                         ansMessage += targetCard + Constants.CALC_FINISH_MSG3;
-                        dispatch(setMessageAction({message: ansMessage}));
+                        dispatch(setMessageAction(ansMessage));
 
                         // ターゲットカードを消す
                         props.setTargetCard(" ");
                     }
-                    dispatch(setTimeAction({time: Constants.CALC_RESULT_TIME}));
+                    dispatch(setTimeAction(Constants.CALC_RESULT_TIME));
                     setTime(Constants.CALC_RESULT_TIME);
                     break;
                 case Constants.CALC_RESULT_PH:
-                    //dispatch(setPhaseAction({phase: Constants.READY_PH}));
+                    //dispatch(setPhaseAction(Constants.READY_PH));
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
                     // mock
                     dispatch(setWinPlayerAction('aoki'));
@@ -144,8 +156,7 @@ const TimeComponent = (props) => {
                 default:
                     break;
             }
-        //}
-    }, [selector.game.phase, time]);
+    }, [selector.game.phase]);
 
     return (
         <Card className={classes.time}>

@@ -49,6 +49,7 @@ export const nextTurn = function(value) {
 }
 
 export const bid = function(value) {
+    console.log(value);
     socket.emit('game/bid', value);
 }
 
@@ -104,15 +105,13 @@ export default function Socket(props) {
 
         const setGame = (object, callback) => {
             dispatch(setPlayerIdAction(object.playerId));
-            //mock
-            object.cards = ["1","+","2","-","3"];
             dispatch(setCardsAction(object.cards));
             dispatch(setCoinAction(object.coin));
             dispatch(setTargetAction(object.targetCard));
             dispatch(setAuctionAction(object.auctionCard));
-            dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
-            dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
-            dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
+            dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
+            dispatch(setMessageAction(Constants.GIVE_CARD_MSG));
+            dispatch(setTimeAction(Constants.GIVE_CARD_TIME));
             callback();
         }
 
@@ -124,6 +123,10 @@ export default function Socket(props) {
             console.log("game/next_turn:")
             console.log(msg);
             resObj = JSON.parse(msg);
+            // mock
+            resObj.cards = ["1","+","2","-","3"];
+            resObj.targetCard = "21";
+            resObj.auctionCard = "9";
             setGame(resObj, moveGame);
         })
 
@@ -132,7 +135,10 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setPlayersAction(resObj.players));
-            dispatch(setPhaseAction(resObj.phase));
+            console.log(resObj.phase);
+            if(resObj.phase !== 'BEFORE_AUCTION') {
+                dispatch(setPhaseAction(resObj.phase));
+            }
             //dispatch(setSkipAction({skipFlg: true}));
         })
 
@@ -168,10 +174,10 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
             if(resObj.isCorrectAnswer) {
                 // 正解メッセージを表示
-                dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG1}));
+                dispatch(setMessageAction(Constants.CALC_RESULT_MSG1));
             }else {
                 // 不正解メッセージを表示
-                dispatch(setMessageAction({message: Constants.CALC_RESULT_MSG0}));
+                dispatch(setMessageAction(Constants.CALC_RESULT_MSG0));
             }
             // 返されたコインをセット
             dispatch(setCoinAction(resObj.coin));

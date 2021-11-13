@@ -3,12 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 import { push } from 'connected-react-router';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction } from '../../redux/game/actions';
-import { setCardsAction, setCoinAction } from '../../redux/players/actions';
-
-import * as Constants from '../../constants';
-import usePersist from '../../Persist';
-
 import { useStyles } from '../theme';
 
 import Grid from '@material-ui/core/Grid';
