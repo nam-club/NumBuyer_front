@@ -123,20 +123,22 @@ const CalcComponent = (props) => {
                 <Grid item xs={10}>
                     <Card className={classes.hand}>
                         <h3 className={classes.handMessage} align="left">My Cards</h3>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    {hands.map((value, index) => (
-                                        <td key={index}>
-                                            <Button className={classes.card} onClick={() => selectHands(index, value)}
-                                            disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
-                                                <h1 className={classes.message}>{value}</h1>
-                                            </Button>
-                                        </td>
-                                    ))}
-                                </tr>
-                            </tbody>
-                        </table>
+                        {hands &&
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        {hands.map((value, index) => (
+                                            <td key={index}>
+                                                <Button className={classes.card} onClick={() => selectHands(index, value)}
+                                                disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
+                                                    <h1 className={classes.message}>{value}</h1>
+                                                </Button>
+                                            </td>
+                                        ))}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
                     </Card>
                 </Grid>
             </Grid>

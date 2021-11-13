@@ -19,7 +19,7 @@ const PlayerListComponent = (props) => {
     return (
         <Card className={classes.root}>
             <h2 className={classes.menu}>Lobby</h2>
-            {selector.players.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
+            {selector.players.players && selector.players.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
@@ -31,7 +31,7 @@ const PlayerListComponent = (props) => {
                     </Grid>
                     <Grid item xs={8}></Grid>
                     <Grid item xs={2}>
-                    {selector.players.player.isOwner &&
+                    {(selector.players.player && selector.players.player.isOwner) &&
                         <Button size="large" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
                             start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
