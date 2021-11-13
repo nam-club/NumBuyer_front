@@ -22,18 +22,22 @@ const Game = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
-    const [gameData, setGameData] = usePersist("gameData", null);
+    const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
+    const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
+    const [player, setPlayer] = React.useState(selector.players.player);
+    const [roomId, setRoomId] = React.useState(selector.room.roomId);
+    const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
+    const [winPlayerName, setWinPlayerName] = React.useState(selector.game.winPlayerName);
 
-    const [targetCard, setTargetCard] = React.useState(gameData.game.targetCard);
-    const [auctionCard, setAuctionCard] = React.useState(gameData.game.auctionCard);
-    const [player, setPlayer] = React.useState(gameData.players.player);
-    const [roomId, setRoomId] = React.useState(gameData.room.roomId);
-    const [finishFlg, setFinishFlg] = React.useState(gameData.game.finishFlg);
-    const [winPlayerName, setWinPlayerName] = React.useState(gameData.game.winPlayerName);
+    console.log(player);
 
     React.useEffect(() => {
-        setGameData(selector);
-        console.log(selector);
+        setPlayer(selector.players.player);
+        setRoomId(selector.room.roomId);
+        setTargetCard(selector.game.targetCard);
+        setAuctionCard(selector.game.auctionCard);
+        setFinishFlg(selector.game.finishFlg);
+        setWinPlayerName(selector.game.winPlayerName);
     }, [selector.players.player, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard, selector.game.finishFlg]);
 
     const checkPhase = () => {
@@ -92,7 +96,7 @@ const Game = () => {
                 <Fade in={finishFlg}>
                 <div className={classes.paper}>
                     <h1 className={classes.title}>WINNER</h1>
-                    <h2 className={classes.win_name}>player1</h2>
+                    <h2 className={classes.win_name}>{winPlayerName}</h2>
                     <Button size="large" className={classes.startButton + " " + classes.friendButton}
                     onClick={() => {
                         dispatch(push('/'));

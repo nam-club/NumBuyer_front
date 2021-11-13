@@ -104,18 +104,12 @@ export default function Socket(props) {
 
         const setGame = (object, callback) => {
             dispatch(setPlayerIdAction(object.playerId));
+            //mock
+            object.cards = ["1","+","2","-","3"];
             dispatch(setCardsAction(object.cards));
             dispatch(setCoinAction(object.coin));
             dispatch(setTargetAction(object.targetCard));
             dispatch(setAuctionAction(object.auctionCard));
-
-            // mock
-            /*dispatch(setPlayerIdAction(selector.players.player.playerId));
-            dispatch(setCardsAction(["1","+","2","-","3"]));
-            dispatch(setCoinAction(100));
-            dispatch(setTargetAction("21"));
-            dispatch(setAuctionAction("9"));*/
-
             dispatch(setPhaseAction({phase: Constants.GIVE_CARD_PH}));
             dispatch(setMessageAction({message: Constants.GIVE_CARD_MSG}));
             dispatch(setTimeAction({time: Constants.GIVE_CARD_TIME}));
@@ -129,7 +123,6 @@ export default function Socket(props) {
         socket.on('game/next_turn', function(msg) {
             console.log("game/next_turn:")
             console.log(msg);
-            //msg = '{"playerId":"1","cards":["1","+","2","-","3"],"coin":100,"targetCard":"21","auctionCard":"9"}';
             resObj = JSON.parse(msg);
             setGame(resObj, moveGame);
         })
