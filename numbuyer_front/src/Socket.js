@@ -50,11 +50,11 @@ export const nextTurn = function(value) {
 
 export const bid = function(value) {
     console.log(value);
-    socket.emit('game/bid', value);
+    socket.emit('game/bid', JSON.stringify(value));
 }
 
 export const calculate = function(value) {
-    socket.emit('game/calculate', value);
+    socket.emit('game/calculate', JSON.stringify(value));
 }
 
 export default function Socket(props) {
@@ -124,9 +124,9 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // mock
-            resObj.cards = ["1","+","2","-","3"];
+            /*resObj.cards = ["1","+","2","-","3"];
             resObj.targetCard = "21";
-            resObj.auctionCard = "9";
+            resObj.auctionCard = "9";*/
 
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {

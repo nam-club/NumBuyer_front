@@ -30,7 +30,7 @@ const AucComponent = (props) => {
     }
 
     React.useEffect(() => {
-        if(selector.game.phase !== Constants.GIVE_CARD_PH && selector.game.phase !== Constants.SHOW_TAR_PH) {
+        if((selector.game.phase !== Constants.GIVE_CARD_PH) && (selector.game.phase !== Constants.SHOW_TAR_PH)) {
             setFade(false);
             setFade(true);
         }
