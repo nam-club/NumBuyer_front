@@ -105,20 +105,8 @@ const CalcComponent = (props) => {
         }else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
-            calculate({playerId: selector.players.player.playerId, calculateCards: calculateCards, action: 'answer'});
+            calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: calculateCards, action: 'answer'});
         }
-        // mock
-        let msg = '{"isCorrectAnswer":true,"playerId":1,"cards":["2", "-", "3"]}';
-        let resObj = JSON.parse(msg);
-        if(resObj.isCorrectAnswer) {
-            // 正解メッセージを表示
-            dispatch(setMessageAction(Constants.CALC_RESULT_MSG1));
-        }else {
-            // 不正解メッセージを表示
-            dispatch(setMessageAction(Constants.CALC_RESULT_MSG0));
-        }
-        // 返されたカードをセット
-        dispatch(setCardsAction(resObj)); 
     }
 
     const passCalc = () => {

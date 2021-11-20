@@ -11,6 +11,7 @@ export const PlayersReducer = (state = initialState, action) => {
             return state;
         case Actions.SET_CARDS:
             state.player.cards = action.payload.cards;
+            console.log(state.player);
             return state;
         case Actions.SET_COIN:
             state.player.coin = action.payload.coin;

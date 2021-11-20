@@ -36,6 +36,22 @@ const AucComponent = (props) => {
         }
     }, [selector.game.phase]);
 
+    /*const doChange = (e) => {
+        if(e.target.value > selector.game.highestBid) {
+            setFee(e.target.value);
+        }
+        if(e.target.value !== '' && !e.target.value.match(Constants.NAME_EXP)) {
+            dispatch(setValidAction({validFlg: false}));
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            if(e.target.value !== '') {
+                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+            }else {
+                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+            }
+        }
+    }*/
+
     const bidAucCard = () => {
         console.log("bid:" + fee);
         // 現在の最高入札額以上でないと入札できない
@@ -46,26 +62,11 @@ const AucComponent = (props) => {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: Constants.BID_ERR}));
         }
-        // mock
-        /*let coin = selector.players.player.coin - fee;
-        let msg = '{"playerId":1,"coin":' + coin + ',"cards":["1", "+", "2", "-", "3", "9"]}';
-        let resObj = JSON.parse(msg);
-        dispatch(setCardsAction(resObj));
-        dispatch(setCoinAction(resObj));
-        msg = '{"playerName":"ITO","coin":' + fee + '}';
-        resObj = JSON.parse(msg);
-        dispatch(setBidAction(resObj));
-        dispatch(setHighestAction(resObj));
-        // 全員がパスしたわけじゃないよ
-        dispatch(setPassAction({passFlg: false}));
-        dispatch(setSkipAction({skipFlg: true}));*/
     }
 
     const passAucCard = () => {
         console.log("pass");
         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
-        // mock
-        //dispatch(setSkipAction({skipFlg: true}));
     }
 
     return (

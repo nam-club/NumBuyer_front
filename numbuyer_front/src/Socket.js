@@ -15,6 +15,35 @@ let socket;
 
 let resObj = ""; 
 
+/* ====== 通常関数 ====== */
+
+// 符号を表示用 or 計算用に変換する
+export const changeCode = (cards, type) => {
+    switch(type) {
+        case 'display':
+            cards.forEach((card, index) => {
+                if(card === '*') {
+                    cards[index] = '×';
+                }else if(card === '/') {
+                    cards[index] = '÷';
+                }
+            })
+            break;
+        case 'calculate':
+            cards.forEach((card, index) => {
+                if(card === '×') {
+                    cards[index] = '*';
+                }else if(card === '÷') {
+                    cards[index] = '/';
+                }
+            })
+            break;
+    }
+}
+
+
+/* ====== リクエストAPI ====== */
+
 export const joinQuickMatch = function(value) {
     console.log("quickMatch:")
     console.log(value);
@@ -54,8 +83,12 @@ export const bid = function(value) {
 }
 
 export const calculate = function(value) {
+    changeCode(value.calculateCards, 'calculate');
     socket.emit('game/calculate', JSON.stringify(value));
 }
+
+
+/* ====== レスポンスAPI ====== */
 
 export default function Socket(props) {
     const dispatch = useDispatch();
@@ -103,6 +136,7 @@ export default function Socket(props) {
             nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});
         })
 
+        // ゲームに必要な情報をセット
         const setGame = (object, callback) => {
             dispatch(setPlayerIdAction(object.playerId));
             dispatch(setCardsAction(object.cards));
@@ -115,6 +149,7 @@ export default function Socket(props) {
             callback();
         }
 
+        // ゲーム画面に遷移
         const moveGame = () => {
             dispatch(push('/Game'));
         }
@@ -123,14 +158,16 @@ export default function Socket(props) {
             console.log("game/next_turn:")
             console.log(msg);
             resObj = JSON.parse(msg);
-            // mock
-            /*resObj.cards = ["1","+","2","-","3"];
-            resObj.targetCard = "21";
-            resObj.auctionCard = "9";*/
-
+            changeCode(resObj.cards, 'display');
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {
                 setGame(resObj, moveGame);
+            // ゲーム中の場合は必要情報をセットのみ
+            }else {
+                dispatch(setCardsAction(resObj.cards));
+                dispatch(setCoinAction(resObj.coin));
+                dispatch(setTargetAction(resObj.targetCard));
+                dispatch(setAuctionAction(resObj.auctionCard));
             }
         })
 
