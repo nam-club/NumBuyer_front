@@ -5,6 +5,7 @@ import { CTX } from '../../Socket';
 import * as Constants from '../../constants';
 
 import { useStyles } from '../theme';
+import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +14,7 @@ import Button from '@material-ui/core/Button';
 
 const AucComponent = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     const [fee, setFee] = React.useState('');
@@ -20,7 +22,14 @@ const AucComponent = (props) => {
 
     const bidAucCard = () => {
         console.log("bid:" + fee);
-        bid({playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+        // 現在の最高入札額以上でないと入札できない
+        if(fee > selector.game.highestBid) {
+            dispatch(setValidAction({validFlg: false}));
+            bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: Constants.BID_ERR}));
+        }
         // mock
         /*let coin = selector.players.player.coin - fee;
         let msg = '{"playerId":1,"coin":' + coin + ',"cards":["1", "+", "2", "-", "3", "9"]}';
@@ -38,7 +47,7 @@ const AucComponent = (props) => {
 
     const passAucCard = () => {
         console.log("pass");
-        bid({playerId: selector.players.player.playerId, coin: null, action: 'pass'});
+        bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
         // mock
         //dispatch(setSkipAction({skipFlg: true}));
     }
@@ -64,13 +73,16 @@ const AucComponent = (props) => {
                     <TextField inputProps={{className: classes.coinField}} InputLabelProps={{className: classes.coinField}}
                     id="standard-basic" label="Please enter the bid amount" value={fee} 
                     onChange={e => setFee(e.target.value)} />
+                    {selector.msg.validFlg &&
+                        <p className={classes.errorField}>{selector.msg.errMsg}</p>
+                    }
                     <Button size="large" className={classes.bidButton}
                     onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>BID</Button>
                     <Button size="large" className={classes.passButton}
                     onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
-                            {Constants.AUC_BID_MSG1 + selector.game.highestBid + Constants.AUC_BID_MSG2 + selector.game.playerName + Constants.AUC_BID_MSG3}
+                            {Constants.AUC_BID_MSG1 + selector.game.highestBid + Constants.AUC_BID_MSG2 + selector.game.highestName + Constants.AUC_BID_MSG3}
                         </h3>
                     }  
             </Grid>

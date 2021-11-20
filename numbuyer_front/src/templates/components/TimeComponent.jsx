@@ -149,6 +149,8 @@ const TimeComponent = (props) => {
                 case Constants.CALC_RESULT_PH:
                     //dispatch(setPhaseAction(Constants.READY_PH));
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
+                    break;
+                case Constants.FINISHED_PH:
                     // mock
                     dispatch(setWinPlayerAction('aoki'));
                     dispatch(setFinishGameAction(true));

@@ -24,8 +24,9 @@ export const CALC_RESULT_TIME = 5;
 export const NAME_EXP = "[¥$=<>+*]+";
 
 // エラーメッセージ
-export const NULL_NAME_ERR = 'Please enter your name.';
-export const SYMBOL_ERR = 'Please enter your name.';
+export const NULL_NAME_ERR = 'Please enter your name.'; // 名前が未入力
+export const SYMBOL_ERR = 'You cannot enter that character.'; // 禁止文字が入力されている
+export const BID_ERR = 'Please enter an amount higher than the highest bid.'; // 最高入札額以下の金額が入力されている
 
 // ナビゲーションメッセージ
 export const GIVE_CARD_MSG = 'Distributing cards to players...';

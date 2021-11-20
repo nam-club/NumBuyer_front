@@ -1,18 +1,13 @@
 import { createSelector } from 'reselect';
 
-const topSelector = (state) => state.top;
+const msgSelector = (state) => state.msg;
 
 export const getValidFlg = createSelector(
-    [topSelector],
+    [msgSelector],
     state => state.validFlg
 )
 
 export const getErrMsg = createSelector(
-    [topSelector],
+    [msgSelector],
     state => state.errMsg
-)
-
-export const getName = createSelector(
-    [topSelector],
-    state => state.name
 )

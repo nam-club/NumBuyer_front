@@ -9,10 +9,9 @@ const initialState = {
     room: {
         roomId: ''
     },
-    top: {
-        validFlg: false,
-        errMsg: '',
-        name: ''
+    msg: {
+        validFlg: false, // バリデーションフラグ
+        errMsg: '', // エラーメッセージ
     },
     game: {
         phase: '',
@@ -26,6 +25,7 @@ const initialState = {
         passFlg: true, // 全員パスしたフラグ
         ansPlayers: [], // 正解者配列
         highestBid: 0, // 現在の最高入札額
+        highestName: '', // 現在の最高入札額のプレイヤー名
         finishFlg: false, // ゲーム終了フラグ
         winPlayerName: '', // 勝利プレイヤー名
     }

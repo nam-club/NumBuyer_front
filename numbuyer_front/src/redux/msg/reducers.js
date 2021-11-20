@@ -1,7 +1,7 @@
 import * as Actions from './actions';
 import initialState from '../store/initialState';
 
-export const TopReducer = (state = initialState.top, action) => {
+export const MsgReducer = (state = initialState.msg, action) => {
     switch(action.type) {
         case Actions.SET_VALID:
             return {
@@ -9,11 +9,6 @@ export const TopReducer = (state = initialState.top, action) => {
                 ...action.payload
             }
         case Actions.SET_ERR_MSG:
-            return {
-                ...state,
-                ...action.payload
-            }
-        case Actions.SET_NAME:
             return {
                 ...state,
                 ...action.payload

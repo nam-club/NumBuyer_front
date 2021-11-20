@@ -58,6 +58,7 @@ export const setHighestAction = (highestState) => {
     return {
         type: "SET_HIGHEST",
         payload: {
+            highestName: highestState.playerName,
             highestBid: highestState.coin
         }
     }

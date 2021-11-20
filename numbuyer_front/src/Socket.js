@@ -140,29 +140,20 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
             dispatch(setPlayersAction(resObj.players));
             console.log(resObj.phase);
-            if(resObj.phase !== 'BEFORE_AUCTION') {
-                dispatch(setPhaseAction(resObj.phase));
-            }
-            //dispatch(setSkipAction({skipFlg: true}));
+            dispatch(setPhaseAction(resObj.phase));
         })
 
         // 誰がいくら入札したかをメッセージに表示する
         socket.on('game/bid', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
+            // 誰がいくら入札したかをセット
             dispatch(setBidAction(resObj));
-            dispatch(setHighestAction(resObj.coin));
+            // 最高入札額と入札者を更新
+            dispatch(setHighestAction(resObj));
         })
 
-        // 落札したプレイヤーのコインとカード情報を更新する
-        socket.on('game/buy_update', function(msg) {
-            console.log(msg);
-            resObj = JSON.parse(msg);
-            dispatch(setCoinAction(resObj));
-            dispatch(setCardsAction(resObj));
-        })
-
-        // 誰が何円で落札したか表示するために使用
+        // 誰が何円で落札したか
         socket.on('game/buy_notify', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
@@ -171,6 +162,14 @@ export default function Socket(props) {
             dispatch(setHighestAction(0));
             // 全員がパスしたわけじゃないよ
             dispatch(setPassAction({passFlg: false}));
+        })
+
+        // 落札したプレイヤーのコインとカード情報を更新する
+        socket.on('game/buy_update', function(msg) {
+            console.log(msg);
+            resObj = JSON.parse(msg);
+            dispatch(setCoinAction(resObj));
+            dispatch(setCardsAction(resObj));
         })
 
         socket.on('game/calculate_result', function(msg) {

@@ -8,7 +8,7 @@ import { CTX } from '../Socket';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setRoomAction } from '../redux/room/actions';
-import { setValidAction, setErrMsgAction, setNameAction } from '../redux/top/actions';
+import { setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
@@ -26,14 +26,15 @@ const Top = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const {joinQuickMatch, createMatch, joinFriendMatch, playersInfo} = React.useContext(CTX);
+    const {joinQuickMatch, createMatch, joinFriendMatch} = React.useContext(CTX);
 
+    const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
     const [open, setOpen] = React.useState(false);
 
     const doChange = (e) => {
         if(!e.target.value.match(Constants.NAME_EXP)) {
-            dispatch(setNameAction({name: e.target.value}));
+            setName(e.target.value);
         }
         if(e.target.value !== '' && !e.target.value.match(Constants.NAME_EXP)) {
             dispatch(setValidAction({validFlg: false}));
@@ -48,11 +49,11 @@ const Top = () => {
     }
 
     const handleOpen = () => {
-        if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
+        if(name !== '' && !name.match(Constants.NAME_EXP)) {
             setOpen(true);
         }else {
             dispatch(setValidAction({validFlg: true}));
-            if(selector.top.name !== '') {
+            if(name !== '') {
                 dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
             }else {
                 dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
@@ -65,11 +66,11 @@ const Top = () => {
     };
 
     const clickQuick = () => {
-        if(selector.top.name !== '' && !selector.top.name.match(Constants.NAME_EXP)) {
-            joinQuickMatch({playerName: selector.top.name});
+        if(name !== '' && !name.match(Constants.NAME_EXP)) {
+            joinQuickMatch({playerName: name});
         }else {
             dispatch(setValidAction({validFlg: true}));
-            if(selector.top.name !== '') {
+            if(name !== '') {
                 dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
             }else {
                 dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
@@ -85,10 +86,10 @@ const Top = () => {
                 <Card className={classes.root}>
                     <CardContent>
                         <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                        id="standard-basic" label="Player Name" value={selector.top.name} 
+                        id="standard-basic" label="Player Name" value={name} 
                         onChange={doChange}/>
-                        {selector.top.validFlg &&
-                            <p className={classes.errorField}>{selector.top.errMsg}</p>
+                        {selector.msg.validFlg &&
+                            <p className={classes.errorField}>{selector.msg.errMsg}</p>
                         }
                     </CardContent>
                     <CardActions>
@@ -122,7 +123,7 @@ const Top = () => {
                                     <Button size="large" className={classes.createButton} 
                                     onClick={() => {
                                         dispatch(setRoomAction({roomId: roomId}));
-                                        createMatch({playerName: selector.top.name, roomId: roomId});
+                                        createMatch({playerName: name, roomId: roomId});
                                     }}>Create</Button>
                                 </Grid>
                             </Grid>
@@ -140,7 +141,7 @@ const Top = () => {
                                     <Button size="large" className={classes.joinButton} 
                                     onClick={() => {
                                         dispatch(setRoomAction({roomId: roomId}));
-                                        joinFriendMatch({playerName: selector.top.name, roomId: roomId});
+                                        joinFriendMatch({playerName: name, roomId: roomId});
                                     }}>Join</Button>
                                 </Grid>
                             </Grid>

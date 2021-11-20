@@ -42,6 +42,11 @@ export const getHighest = createSelector(
     state => state.highestBid
 )
 
+export const getHighestName = createSelector(
+    [gameSelector],
+    state => state.highestName
+)
+
 export const getSkipFlg = createSelector(
     [gameSelector],
     state => state.skipFlg
