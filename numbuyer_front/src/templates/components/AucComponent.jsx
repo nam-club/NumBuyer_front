@@ -1,4 +1,5 @@
 import React from 'react';
+import { Transition } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
@@ -17,8 +18,23 @@ const AucComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
+    const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [fee, setFee] = React.useState('');
     const {bid} = React.useContext(CTX);
+
+    const transitionStyles = {
+        entering: { opacity: 1, transition: 'all 1s ease' },
+        entered: { opacity: 1 },
+        exiting: { opacity: 0, transition: 'all 1s ease' },
+        exited: { opacity: 0 },
+    }
+
+    React.useEffect(() => {
+        if(selector.game.phase !== Constants.GIVE_CARD_PH && selector.game.phase !== Constants.SHOW_TAR_PH) {
+            setFade(false);
+            setFade(true);
+        }
+    }, [selector.game.phase]);
 
     const bidAucCard = () => {
         console.log("bid:" + fee);
@@ -52,22 +68,18 @@ const AucComponent = (props) => {
         //dispatch(setSkipAction({skipFlg: true}));
     }
 
-    const checkPhase = () => {
-        if(selector.game.phase !== Constants.GIVE_CARD_PH && selector.game.phase !== Constants.SHOW_TAR_PH) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-
     return (
         <Card className={classes.auction_root}>
             <Grid container>
                 <Grid item xs={5}>
-                    <Card className={classes.auction}>
-                        <h3 className={classes.tag}>Auction</h3>
-                        <h1 className={classes.message}>{checkPhase() ? props.auctionCard : "　"}</h1>
-                    </Card>
+                    <Transition in={fade} timeout={1500}>
+                        {(state) => (
+                            <Card className={classes.auction} style={transitionStyles[state]}>
+                                <h3 className={classes.tag}>Auction</h3>
+                                <h1 className={classes.message}>{props.auctionCard}</h1>
+                            </Card>
+                        )}
+                    </Transition> 
                 </Grid>
                 <Grid item xs={6}>
                     <TextField inputProps={{className: classes.coinField}} InputLabelProps={{className: classes.coinField}}

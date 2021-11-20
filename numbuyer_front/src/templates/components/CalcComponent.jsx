@@ -1,4 +1,5 @@
 import React from 'react';
+import { Transition } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
@@ -20,13 +21,23 @@ const CalcComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
+    const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [hands, setHands] = React.useState(props.cards);
     const [calcs, setCalcs] = React.useState([]);
     const [disableFlg, setDisableFlg] = React.useState(false);
     const {calculate} = React.useContext(CTX);
 
+    const transitionStyles = {
+        entering: { opacity: 1, transition: 'all 1s ease' },
+        entered: { opacity: 1 },
+        exiting: { opacity: 0, transition: 'all 1s ease' },
+        exited: { opacity: 0 },
+    }
+
     React.useEffect(() => {
         setHands(props.cards);
+        setFade(false);
+        setFade(true);
     }, [props.cards]);
 
     // 手札から計算エリアに出すカードを選択
@@ -129,10 +140,15 @@ const CalcComponent = (props) => {
                                     <tr>
                                         {hands.map((value, index) => (
                                             <td key={index}>
-                                                <Button className={classes.card} onClick={() => selectHands(index, value)}
-                                                disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
-                                                    <h1 className={classes.message}>{value}</h1>
-                                                </Button>
+                                                <Transition in={fade} timeout={1500}>
+                                                    {(state) => (
+                                                        <Button className={classes.card} onClick={() => selectHands(index, value)}
+                                                        disabled={!(selector.game.phase == Constants.CALCULATE_PH)}
+                                                        style={transitionStyles[state]}>
+                                                            <h1 className={classes.message}>{value}</h1>
+                                                        </Button>
+                                                    )}
+                                                </Transition>
                                             </td>
                                         ))}
                                     </tr>
