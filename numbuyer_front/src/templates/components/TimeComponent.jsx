@@ -15,11 +15,9 @@ const TimeComponent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const { nextTurn } = React.useContext(CTX);
+    const { nextTurn, buy } = React.useContext(CTX);
 
     const [time, setTime] = React.useState(selector.game.time);
-    const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
-    const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
     const [showFlg, setShowFlg] = React.useState(false);
 
     let aucCoin = 100;
@@ -54,7 +52,7 @@ const TimeComponent = (props) => {
                 case Constants.GIVE_CARD_PH:
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-                        dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + targetCard + '"'));
+                        dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
                         dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
                         setTime(Constants.SHOW_TAR_TIME);
                     }
@@ -62,7 +60,7 @@ const TimeComponent = (props) => {
                 case Constants.SHOW_TAR_PH:
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                        dispatch(setMessageAction('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                        dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
                         dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
                         setTime(Constants.SHOW_AUC_TIME);
                     }
@@ -94,12 +92,14 @@ const TimeComponent = (props) => {
                     dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
                     break;
                 case Constants.AUC_RESULT_PH:
+                    // コインとカード情報の更新
+                    buy({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
                     break;
                 case Constants.CALCULATE_PH:
                     dispatch(setTimeAction(Constants.CALCULATE_TIME));
                     setTime(Constants.CALCULATE_TIME);
                     setShowFlg(true);
-                    dispatch(setMessageAction(Constants.CALCULATE_MSG1 + targetCard + Constants.CALCULATE_MSG2));
+                    dispatch(setMessageAction(Constants.CALCULATE_MSG1 + props.targetCard + Constants.CALCULATE_MSG2));
                     break;
                 case Constants.CALC_RESULT_PH:
                     dispatch(setTimeAction(Constants.CALC_RESULT_TIME));
@@ -121,7 +121,7 @@ const TimeComponent = (props) => {
                         }
 
                         ansMessage += Constants.CALC_FINISH_MSG2;
-                        ansMessage += targetCard + Constants.CALC_FINISH_MSG3;
+                        ansMessage += props.targetCard + Constants.CALC_FINISH_MSG3;
                         dispatch(setMessageAction(ansMessage));
 
                         // ターゲットカードを消す
@@ -130,6 +130,7 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.NEXT_TURN_PH:
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
+                    setTime(Constants.READY_TIME);
                     break;
                 case Constants.END_PH:
                     // mock

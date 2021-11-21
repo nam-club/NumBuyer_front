@@ -92,6 +92,11 @@ export const bid = function(value) {
     socket.emit('game/bid', JSON.stringify(value));
 }
 
+export const buy = function(value) {
+    console.log(value);
+    socket.emit('game/buy', JSON.stringify(value));
+}
+
 export const calculate = function(value) {
     changeCode(value.calculateCards, 'calculate');
     socket.emit('game/calculate', JSON.stringify(value));
@@ -229,9 +234,9 @@ export default function Socket(props) {
             changeCode(resObj.cards, 'display');
 
             // 返された所持コインをセット
-            dispatch(setCoinAction(resObj));
+            dispatch(setCoinAction(resObj.coin));
             // 返された手札をセット
-            dispatch(setCardsAction(resObj));
+            dispatch(setCardsAction(resObj.cards));
         })
 
         socket.on('game/calculate_result', function(msg) {
@@ -270,7 +275,7 @@ export default function Socket(props) {
 
 
     return (
-        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, start, nextTurn, bid, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, start, nextTurn, bid, buy, calculate}}>
             {props.children}
         </CTX.Provider>
     )

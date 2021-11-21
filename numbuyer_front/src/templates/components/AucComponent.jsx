@@ -6,6 +6,7 @@ import { CTX } from '../../Socket';
 import * as Constants from '../../constants';
 
 import { useStyles } from '../theme';
+import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
 import Card from '@material-ui/core/Card';
@@ -67,6 +68,7 @@ const AucComponent = (props) => {
     const passAucCard = () => {
         console.log("pass");
         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
+        dispatch(setAucBtnAction(false));
     }
 
     return (
@@ -90,9 +92,9 @@ const AucComponent = (props) => {
                         <p className={classes.errorField}>{selector.msg.errMsg}</p>
                     }
                     <Button size="large" className={classes.bidButton}
-                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>BID</Button>
+                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) && props.aucBtnFlg}>BID</Button>
                     <Button size="large" className={classes.passButton}
-                    onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>PASS</Button>
+                    onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) && props.aucBtnFlg}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
                             {Constants.AUC_HIGHEST_MSG1 + selector.game.highestBid + Constants.AUC_HIGHEST_MSG2 + selector.game.highestName + Constants.AUC_HIGHEST_MSG3}

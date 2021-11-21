@@ -14,7 +14,7 @@ export const NEXT_TURN_PH = 'NEXT_TURN';
 export const END_PH = 'END';
 
 // 時間設定
-export const READY_TIME = 0;
+export const READY_TIME = 2;
 export const GIVE_CARD_TIME = 3;
 export const SHOW_TAR_TIME = 5;
 export const SHOW_AUC_TIME = 5;

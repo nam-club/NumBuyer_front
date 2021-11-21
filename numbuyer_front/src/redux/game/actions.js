@@ -41,6 +41,17 @@ export const setTargetAction = (targetState) => {
     }
 }
 
+export const SET_AUC_BTN = "SET_AUC_BTN";
+
+export const setAucBtnAction = (aucBtnState) => {
+    return {
+        type: "SET_AUC_BTN",
+        payload: {
+            aucBtnFlg: aucBtnState
+        }
+    }
+}
+
 export const SET_AUCTION = "SET_AUCTION";
 
 export const setAuctionAction = (auctionState) => {
@@ -60,6 +71,17 @@ export const setHighestAction = (highestState) => {
         payload: {
             highestName: highestState.playerName,
             highestBid: highestState.coin
+        }
+    }
+}
+
+export const SET_CALC_BTN = "SET_CALC_BTN";
+
+export const setCalcBtnAction = (calcBtnState) => {
+    return {
+        type: "SET_CALC_BTN",
+        payload: {
+            calcBtnFlg: calcBtnState
         }
     }
 }

@@ -28,7 +28,17 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_AUC_BTN:
+            return {
+                ...state,
+                ...action.payload
+            }
         case Actions.SET_HIGHEST:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case Actions.SET_CALC_BTN:
             return {
                 ...state,
                 ...action.payload

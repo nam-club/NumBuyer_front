@@ -24,6 +24,7 @@ const Game = () => {
 
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
     const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
+    const [aucBtnFlg, setAucBtnFlg] = React.useState(selector.game.aucBtnFlg);
     const [player, setPlayer] = React.useState(selector.players.player);
     const [roomId, setRoomId] = React.useState(selector.room.roomId);
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
@@ -34,9 +35,11 @@ const Game = () => {
         setRoomId(selector.room.roomId);
         setTargetCard(selector.game.targetCard);
         setAuctionCard(selector.game.auctionCard);
+        setAucBtnFlg(selector.game.aucBtnFlg);
         setFinishFlg(selector.game.finishFlg);
         setWinPlayerName(selector.game.winPlayerName);
-    }, [selector.players.player, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard, selector.game.finishFlg]);
+    }, [selector.players.player, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard,
+         selector.game.aucBtnFlg, selector.game.finishFlg]);
 
     const checkPhase = () => {
         if(selector.game.phase !== Constants.GIVE_CARD_PH) {
@@ -70,7 +73,7 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={7}>
-                        <AucComponent auctionCard={auctionCard}/>
+                        <AucComponent auctionCard={auctionCard} aucBtnFlg={aucBtnFlg}/>
                     </Grid>
                     <Grid item xs={2}>
                         {selector.players.players.map((value) => (

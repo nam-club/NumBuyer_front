@@ -24,6 +24,8 @@ const initialState = {
         highestName: '', // 現在の最高入札額のプレイヤー名
         finishFlg: false, // ゲーム終了フラグ
         winPlayerName: '', // 勝利プレイヤー名
+        aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
+        calcBtnFlg: true, // 計算関連ボタン押下可能フラグ
     }
 };
 
