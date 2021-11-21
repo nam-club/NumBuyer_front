@@ -33,21 +33,6 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
-        case Actions.SET_BID:
-            return {
-                ...state,
-                ...action.payload
-            }
-        case Actions.SET_SKIP:
-            return {
-                ...state,
-                ...action.payload
-            }
-        case Actions.SET_PASS:
-            return {
-                ...state,
-                ...action.payload
-            }
         case Actions.SET_ANS_PLAYERS:
             return {
                 ...state,

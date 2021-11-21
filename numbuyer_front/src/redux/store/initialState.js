@@ -1,28 +1,24 @@
 const initialState = {
     player: {
-        playerId: '',
-        cards: [],
-        coin: 0,
-        isOwner: false,
+        playerId: '', // 自分のプレイヤーID
+        cards: [], // 自分の手札
+        coin: 0, // 自分の所持コイン
+        isOwner: false, // ルームオーナー権限
     },
     players: [],
     room: {
-        roomId: ''
+        roomId: '' // ルームID
     },
     msg: {
         validFlg: false, // バリデーションフラグ
         errMsg: '', // エラーメッセージ
     },
     game: {
-        phase: '',
-        message: '　',
-        time: 0,
-        targetCard: '　',
-        auctionCard: '　',
-        playerName: '',
-        coin: 0,
-        skipFlg: false, // 時間をスキップするフラグ
-        passFlg: true, // 全員パスしたフラグ
+        phase: '', // フェーズ
+        message: '　', // ナビゲーション用メッセージ
+        time: 0, // 画面表示用タイマー
+        targetCard: '　', // ターゲットカード
+        auctionCard: '　', // オークションカード
         ansPlayers: [], // 正解者配列
         highestBid: 0, // 現在の最高入札額
         highestName: '', // 現在の最高入札額のプレイヤー名

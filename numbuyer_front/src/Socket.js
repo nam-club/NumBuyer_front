@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction } from './redux/players/actions';
-import { setPhaseAction, setTargetAction, setAuctionAction, setBidAction, setSkipAction, setMessageAction, setPassAction,
+import { setPhaseAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setTimeAction, setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
@@ -19,25 +19,35 @@ let resObj = "";
 
 // 符号を表示用 or 計算用に変換する
 export const changeCode = (cards, type) => {
-    switch(type) {
-        case 'display':
-            cards.forEach((card, index) => {
-                if(card === '*') {
-                    cards[index] = '×';
-                }else if(card === '/') {
-                    cards[index] = '÷';
+    console.log(cards);
+    if(cards) {
+        switch(type) {
+            case 'display':
+                cards.forEach((card, index) => {
+                    if(card === '*') {
+                        cards[index] = '×';
+                    }else if(card === '/') {
+                        cards[index] = '÷';
+                    }
+                })
+                break;
+            case 'auction':
+                if(cards === '*') {
+                    cards= '×';
+                }else if(cards === '/') {
+                    cards = '÷';
                 }
-            })
-            break;
-        case 'calculate':
-            cards.forEach((card, index) => {
-                if(card === '×') {
-                    cards[index] = '*';
-                }else if(card === '÷') {
-                    cards[index] = '/';
-                }
-            })
-            break;
+                break;
+            case 'calculate':
+                cards.forEach((card, index) => {
+                    if(card === '×') {
+                        cards[index] = '*';
+                    }else if(card === '÷') {
+                        cards[index] = '/';
+                    }
+                })
+                break;
+        }
     }
 }
 
@@ -143,9 +153,8 @@ export default function Socket(props) {
             dispatch(setCoinAction(object.coin));
             dispatch(setTargetAction(object.targetCard));
             dispatch(setAuctionAction(object.auctionCard));
-            dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
-            dispatch(setMessageAction(Constants.GIVE_CARD_MSG));
-            dispatch(setTimeAction(Constants.GIVE_CARD_TIME));
+            dispatch(setPhaseAction(Constants.READY_PH));
+            dispatch(setTimeAction(Constants.READY_TIME));
             callback();
         }
 
@@ -158,7 +167,10 @@ export default function Socket(props) {
             console.log("game/next_turn:")
             console.log(msg);
             resObj = JSON.parse(msg);
+
+            // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
+            changeCode(resObj.auctionCard, 'auction');
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {
                 setGame(resObj, moveGame);
@@ -168,6 +180,7 @@ export default function Socket(props) {
                 dispatch(setCoinAction(resObj.coin));
                 dispatch(setTargetAction(resObj.targetCard));
                 dispatch(setAuctionAction(resObj.auctionCard));
+                dispatch(setTimeAction(Constants.READY_TIME));
             }
         })
 
@@ -184,8 +197,8 @@ export default function Socket(props) {
         socket.on('game/bid', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            // 誰がいくら入札したかをセット
-            dispatch(setBidAction(resObj));
+            // 誰がいくら入札したかを表示
+            dispatch(setMessageAction(resObj.playerName + Constants.AUC_BID_MSG1 + resObj.coin + Constants.AUC_BID_MSG2));
             // 最高入札額と入札者を更新
             dispatch(setHighestAction(resObj));
         })
@@ -194,18 +207,30 @@ export default function Socket(props) {
         socket.on('game/buy_notify', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            dispatch(setBidAction(resObj));
-            // 最高入札額をリセット
-            dispatch(setHighestAction(0));
-            // 全員がパスしたわけじゃないよ
-            dispatch(setPassAction({passFlg: false}));
+
+            // 全員がパスをした場合
+            if(resObj.isPassAll) {
+                // 誰も入札しなかったと表示
+                dispatch(setMessageAction(Constants.AUC_RESULT_MSG0));
+            }else {
+                // 誰がいくらで落札したかを表示
+                dispatch(setMessageAction(resObj.playerName + Constants.AUC_RESULT_MSG1 + selector.game.auctionCard
+                     + Constants.AUC_RESULT_MSG2 + resObj.coin + Constants.AUC_RESULT_MSG3));
+                // 最高入札額をリセット
+                dispatch(setHighestAction({playerName: '', coin: 0}));
+            }
         })
 
         // 落札したプレイヤーのコインとカード情報を更新する
         socket.on('game/buy_update', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
+            // 画面表示用に掛け算と割り算を変換
+            changeCode(resObj.cards, 'display');
+
+            // 返された所持コインをセット
             dispatch(setCoinAction(resObj));
+            // 返された手札をセット
             dispatch(setCardsAction(resObj));
         })
 
@@ -219,9 +244,12 @@ export default function Socket(props) {
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(Constants.CALC_RESULT_MSG0));
             }
-            // 返されたコインをセット
+            // 画面表示用に掛け算と割り算を変換
+            changeCode(resObj.cards, 'display');
+
+            // 返された所持コインをセット
             dispatch(setCoinAction(resObj.coin));
-            // 返されたカードをセット
+            // 返された手札をセット
             dispatch(setCardsAction(resObj.cards));
         })
 

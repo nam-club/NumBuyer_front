@@ -64,40 +64,6 @@ export const setHighestAction = (highestState) => {
     }
 }
 
-export const SET_BID = "SET_BID";
-
-export const setBidAction = (bidState) => {
-    return {
-        type: "SET_BID",
-        payload: {
-            playerName: bidState.playerName,
-            coin: bidState.coin
-        }
-    }
-}
-
-export const SET_SKIP = "SET_SKIP";
-
-export const setSkipAction = (skipState) => {
-    return {
-        type: "SET_SKIP",
-        payload: {
-            skipFlg: skipState.skipFlg
-        }
-    }
-}
-
-export const SET_PASS = "SET_PASS";
-
-export const setPassAction = (passState) => {
-    return {
-        type: "SET_PASS",
-        payload: {
-            passFlg: passState.passFlg
-        }
-    }
-}
-
 export const SET_ANS_PLAYERS = "SET_ANS_PLAYERS";
 
 export const setAnsPlayersAction = (ansPlayersState) => {

@@ -27,16 +27,6 @@ export const getAuctionCard = createSelector(
     state => state.auctionCard
 )
 
-export const getPlayerName = createSelector(
-    [gameSelector],
-    state => state.playerName
-)
-
-export const getCoin = createSelector(
-    [gameSelector],
-    state => state.coin
-)
-
 export const getHighest = createSelector(
     [gameSelector],
     state => state.highestBid
@@ -45,16 +35,6 @@ export const getHighest = createSelector(
 export const getHighestName = createSelector(
     [gameSelector],
     state => state.highestName
-)
-
-export const getSkipFlg = createSelector(
-    [gameSelector],
-    state => state.skipFlg
-)
-
-export const getPassFlg = createSelector(
-    [gameSelector],
-    state => state.passFlg
 )
 
 export const getAnsPlayers = createSelector(

@@ -113,7 +113,7 @@ const CalcComponent = (props) => {
         // ボタン連打防止
         setDisableFlg(true);
 
-        calculate({playerId: selector.player.playerId, calculateCards: null, action: 'pass'});
+        calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
     }
 
     return (

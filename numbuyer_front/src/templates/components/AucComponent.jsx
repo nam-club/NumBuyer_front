@@ -95,7 +95,7 @@ const AucComponent = (props) => {
                     onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH)}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
-                            {Constants.AUC_BID_MSG1 + selector.game.highestBid + Constants.AUC_BID_MSG2 + selector.game.highestName + Constants.AUC_BID_MSG3}
+                            {Constants.AUC_HIGHEST_MSG1 + selector.game.highestBid + Constants.AUC_HIGHEST_MSG2 + selector.game.highestName + Constants.AUC_HIGHEST_MSG3}
                         </h3>
                     }  
             </Grid>

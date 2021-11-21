@@ -31,9 +31,7 @@ const TimeComponent = (props) => {
             setTime(t => {
                 if(t<=0) {
                     return 0;
-                }/*else if(selector.game.skipFlg) {
-                    return 0;
-                }*/
+                }
                 return t-1;
             });
         }, 1000);
@@ -59,7 +57,6 @@ const TimeComponent = (props) => {
                         dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + targetCard + '"'));
                         dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
                         setTime(Constants.SHOW_TAR_TIME);
-                        props.setTargetCard(targetCard);
                     }
                     break;
                 case Constants.SHOW_TAR_PH:
@@ -68,7 +65,6 @@ const TimeComponent = (props) => {
                         dispatch(setMessageAction('"' + auctionCard + '"' + Constants.SHOW_AUC_MSG));
                         dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
                         setTime(Constants.SHOW_AUC_TIME);
-                        props.setAuctionCard(auctionCard);
                     }
                     break;
                 /*case Constants.SHOW_AUC_PH:
@@ -92,36 +88,24 @@ const TimeComponent = (props) => {
             console.log("time:" + time);
                 switch(selector.game.phase) {
                 case Constants.AUCTION_PH:
-                    dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
                     dispatch(setTimeAction(Constants.AUCTION_TIME));
                     setTime(Constants.AUCTION_TIME);
                     setShowFlg(true);
-
-                    //dispatch(setPhaseAction(Constants.AUC_RESULT_PH));
-                    // フェーズがスキップされた　かつ　全員がパスしたとき
-                    /*if(selector.game.skipFlg && selector.game.passFlg) {
-                        dispatch(setMessageAction(Constants.AUC_RESULT_MSG0));
-                    }else {
-                        dispatch(setMessageAction(player + Constants.AUC_RESULT_MSG1 + auctionCard +
-                        Constants.AUC_RESULT_MSG2 + aucCoin + Constants.AUC_RESULT_MSG3));
-                    }
-                    dispatch(setTimeAction(Constants.AUC_RESULT_TIME));
-                    dispatch(setSkipAction({skipFlg: false}));
-                    dispatch(setPassAction({passFlg: true}));
-                    setTime(Constants.AUC_RESULT_TIME);
-                    setShowFlg(false);
-                    props.setAuctionCard('　');*/
+                    dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
                     break;
                 case Constants.AUC_RESULT_PH:
-                    //dispatch(setPhaseAction(Constants.CALCULATE_PH));
-                    dispatch(setMessageAction(Constants.CALCULATE_MSG1 + targetCard + Constants.CALCULATE_MSG2));
+                    break;
+                case Constants.CALCULATE_PH:
                     dispatch(setTimeAction(Constants.CALCULATE_TIME));
                     setTime(Constants.CALCULATE_TIME);
                     setShowFlg(true);
+                    dispatch(setMessageAction(Constants.CALCULATE_MSG1 + targetCard + Constants.CALCULATE_MSG2));
                     break;
-                case Constants.CALCULATE_PH:
-                    //dispatch(setPhaseAction(Constants.CALC_RESULT_PH));
-                    if(selector.game.ansPlayers.length == 0) {
+                case Constants.CALC_RESULT_PH:
+                    dispatch(setTimeAction(Constants.CALC_RESULT_TIME));
+                    setTime(Constants.CALC_RESULT_TIME);
+                    setShowFlg(false);
+                    if(!selector.game.ansPlayers || selector.game.ansPlayers.length == 0) {
                         dispatch(setMessageAction(Constants.CALC_FINISH_MSG0));
                     }else {
                         let ansMessage = Constants.CALC_FINISH_MSG1;
@@ -143,14 +127,11 @@ const TimeComponent = (props) => {
                         // ターゲットカードを消す
                         props.setTargetCard(" ");
                     }
-                    dispatch(setTimeAction(Constants.CALC_RESULT_TIME));
-                    setTime(Constants.CALC_RESULT_TIME);
                     break;
-                case Constants.CALC_RESULT_PH:
-                    //dispatch(setPhaseAction(Constants.READY_PH));
+                case Constants.NEXT_TURN_PH:
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
                     break;
-                case Constants.FINISHED_PH:
+                case Constants.END_PH:
                     // mock
                     dispatch(setWinPlayerAction('aoki'));
                     dispatch(setFinishGameAction(true));
