@@ -33,9 +33,11 @@ export const changeCode = (cards, type) => {
                 break;
             case 'auction':
                 if(cards === '*') {
-                    cards= '×';
+                    return '×';
                 }else if(cards === '/') {
-                    cards = '÷';
+                    return '÷';
+                }else {
+                    return cards;
                 }
                 break;
             case 'calculate':
@@ -99,6 +101,7 @@ export const buy = function(value) {
 
 export const calculate = function(value) {
     changeCode(value.calculateCards, 'calculate');
+    console.log(value);
     socket.emit('game/calculate', JSON.stringify(value));
 }
 
@@ -175,7 +178,7 @@ export default function Socket(props) {
 
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
-            changeCode(resObj.auctionCard, 'auction');
+            resObj.auctionCard = changeCode(resObj.auctionCard, 'auction');
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {
                 setGame(resObj, moveGame);
