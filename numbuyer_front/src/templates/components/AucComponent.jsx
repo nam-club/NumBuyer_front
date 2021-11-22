@@ -68,6 +68,8 @@ const AucComponent = (props) => {
     const passAucCard = () => {
         console.log("pass");
         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
+        
+        // ボタン押せないようにする（パス押したらもう回答できない）
         dispatch(setAucBtnAction(false));
     }
 
@@ -75,14 +77,16 @@ const AucComponent = (props) => {
         <Card className={classes.auction_root}>
             <Grid container>
                 <Grid item xs={5}>
-                    <Transition in={fade} timeout={1500}>
-                        {(state) => (
-                            <Card className={classes.auction} style={transitionStyles[state]}>
-                                <h3 className={classes.tag}>Auction</h3>
-                                <h1 className={classes.message}>{props.auctionCard}</h1>
-                            </Card>
-                        )}
-                    </Transition> 
+                    {props.auctionCard !== '　' &&
+                        <Transition in={fade} timeout={1500}>
+                            {(state) => (
+                                <Card className={classes.auction} style={transitionStyles[state]}>
+                                    <h3 className={classes.tag}>Auction</h3>
+                                    <h1 className={classes.message}>{props.auctionCard}</h1>
+                                </Card>
+                            )}
+                        </Transition> 
+                    }
                 </Grid>
                 <Grid item xs={6}>
                     <TextField inputProps={{className: classes.coinField}} InputLabelProps={{className: classes.coinField}}
@@ -92,9 +96,9 @@ const AucComponent = (props) => {
                         <p className={classes.errorField}>{selector.msg.errMsg}</p>
                     }
                     <Button size="large" className={classes.bidButton}
-                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) && props.aucBtnFlg}>BID</Button>
+                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>BID</Button>
                     <Button size="large" className={classes.passButton}
-                    onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) && props.aucBtnFlg}>PASS</Button>
+                    onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
                             {Constants.AUC_HIGHEST_MSG1 + selector.game.highestBid + Constants.AUC_HIGHEST_MSG2 + selector.game.highestName + Constants.AUC_HIGHEST_MSG3}

@@ -111,7 +111,7 @@ const TimeComponent = (props) => {
                         let ansMessage = Constants.CALC_FINISH_MSG1;
                         let loopNum = 1;
 
-                        for(let ansPlayer of selector.game.asnPlayers) {
+                        for(let ansPlayer of selector.game.ansPlayers) {
                             if(loopNum != selector.game.ansPlayers.length) {
                                 ansMessage += ansPlayer + ', ';
                             }else {

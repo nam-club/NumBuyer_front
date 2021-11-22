@@ -3,8 +3,7 @@ import { Transition } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setPhaseAction, setTimeAction } from '../../redux/game/actions';
-import { setCardsAction } from '../../redux/players/actions';
+import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
@@ -24,7 +23,6 @@ const CalcComponent = (props) => {
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [hands, setHands] = React.useState(props.cards);
     const [calcs, setCalcs] = React.useState([]);
-    const [disableFlg, setDisableFlg] = React.useState(false);
     const {calculate} = React.useContext(CTX);
 
     const transitionStyles = {
@@ -96,12 +94,9 @@ const CalcComponent = (props) => {
     }
 
     const ansCalc = () => {
-        // ボタン連打防止
-        setDisableFlg(true);
 
         if(calcs.length === 0) {
             dispatch(setMessageAction(Constants.CALC_ERR_MSG));
-            setDisableFlg(false);
         }else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
@@ -110,10 +105,10 @@ const CalcComponent = (props) => {
     }
 
     const passCalc = () => {
-        // ボタン連打防止
-        setDisableFlg(true);
-
         calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
+
+        // ボタン押せないようにする（パス押したらもう回答できない）
+        dispatch(setCalcBtnAction(false));
     }
 
     return (
@@ -169,9 +164,9 @@ const CalcComponent = (props) => {
                             }
                         </Grid>
                         <Button size="large" className={classes.calcButton} onClick={() => ansCalc()}
-                        disabled={!(selector.game.phase == Constants.CALCULATE_PH) || disableFlg}>ANSWER</Button>
+                        disabled={!(selector.game.phase == Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
                         <Button size="large" className={classes.passButton} onClick={() => passCalc()}
-                        disabled={!(selector.game.phase == Constants.CALCULATE_PH) || disableFlg}>PASS</Button>
+                        disabled={!(selector.game.phase == Constants.CALCULATE_PH) || !props.calcBtnFlg}>PASS</Button>
                     </Card>
                 </Grid>
             </Grid>

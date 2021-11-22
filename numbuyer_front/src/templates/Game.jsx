@@ -25,6 +25,7 @@ const Game = () => {
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
     const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
     const [aucBtnFlg, setAucBtnFlg] = React.useState(selector.game.aucBtnFlg);
+    const [calcBtnFlg, setCalcBtnFlg] = React.useState(selector.game.calcBtnFlg);
     const [player, setPlayer] = React.useState(selector.players.player);
     const [roomId, setRoomId] = React.useState(selector.room.roomId);
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
@@ -36,10 +37,11 @@ const Game = () => {
         setTargetCard(selector.game.targetCard);
         setAuctionCard(selector.game.auctionCard);
         setAucBtnFlg(selector.game.aucBtnFlg);
+        setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
         setWinPlayerName(selector.game.winPlayerName);
     }, [selector.players.player, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard,
-         selector.game.aucBtnFlg, selector.game.finishFlg]);
+         selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     const checkPhase = () => {
         if(selector.game.phase !== Constants.GIVE_CARD_PH) {
@@ -85,7 +87,7 @@ const Game = () => {
                         ))}
                     </Grid>
                 </Grid>
-                <CalcComponent cards={player.cards} />
+                <CalcComponent cards={player.cards} calcBtnFlg={calcBtnFlg}/>
             </div>
             <Modal
                 aria-labelledby="transition-modal-title"

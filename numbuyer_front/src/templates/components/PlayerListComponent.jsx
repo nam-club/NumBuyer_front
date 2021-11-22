@@ -10,7 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
-const PlayerListComponent = (props) => {
+const PlayerListComponent = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
@@ -19,7 +19,7 @@ const PlayerListComponent = (props) => {
     return (
         <Card className={classes.root}>
             <h2 className={classes.menu}>Lobby</h2>
-            {selector.players.players && selector.players.players.map((value) => (<h3 key={value.playerId} className={classes.name}>{value.playerName}</h3>))}
+            {selector.players.players && selector.players.players.map((value) => (<h3 key={value.playerName} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>

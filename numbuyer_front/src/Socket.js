@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setMessageAction,
- setAnsPlayersAction, setHighestAction, setTimeAction, setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
+ setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -237,6 +237,10 @@ export default function Socket(props) {
             dispatch(setCoinAction(resObj.coin));
             // 返された手札をセット
             dispatch(setCardsAction(resObj.cards));
+            // オークションカードを非公開にする
+            dispatch(setAuctionAction('　'));
+            // BIDボタン、PASSボタンを押せるように戻す（パスを押した時用）
+            dispatch(setAucBtnAction(true));
         })
 
         socket.on('game/calculate_result', function(msg) {
@@ -263,6 +267,8 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
             // 返された正解者をセット
             dispatch(setAnsPlayersAction(resObj));
+            // ANSWERボタン、PASSボタンを押せるように戻す（パスを押した時用）
+            dispatch(setCalcBtnAction(true));
         })
 
         socket.on('game/finish_game', function(msg) {
