@@ -37,28 +37,45 @@ const AucComponent = (props) => {
         }
     }, [selector.game.phase]);
 
-    /*const doChange = (e) => {
-        if(e.target.value > selector.game.highestBid) {
+    const doChange = (e) => {
+        console.log(e.target.value);
+        // 金額が未入力
+        if(e.target.value === '') {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: Constants.NULL_BID_ERR}));
+        // 数字以外が入力
+        }else if(!e.target.value.match(Constants.BID_EXP)) {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: Constants.NUM_ERR}));
+        }else if(e.target.value.match(Constants.BID_EXP)) {
+            dispatch(setValidAction({validFlg: false}));
             setFee(e.target.value);
         }
-        if(e.target.value !== '' && !e.target.value.match(Constants.NAME_EXP)) {
-            dispatch(setValidAction({validFlg: false}));
-        }else {
-            dispatch(setValidAction({validFlg: true}));
-            if(e.target.value !== '') {
-                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
-            }else {
-                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
-            }
-        }
-    }*/
+    }
 
     const bidAucCard = () => {
-        console.log("bid:" + fee);
-        // 現在の最高入札額以上でないと入札できない
-        if(fee > selector.game.highestBid) {
-            dispatch(setValidAction({validFlg: false}));
-            bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+        console.log("playerCoin:" + selector.players.player.coin);
+        // 金額が未入力
+        if(fee === '') {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: Constants.NULL_BID_ERR}));
+        // 数字以外が入力
+        }else if(!fee.match(Constants.BID_EXP)) {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: Constants.NUM_ERR}));
+        }else if(fee.match(Constants.BID_EXP)) {
+            if(fee <= selector.players.player.coin) {
+                dispatch(setValidAction({validFlg: false}));
+                // 現在の最高入札額以上でないと入札できない
+                if(fee > selector.game.highestBid) {
+                    dispatch(setValidAction({validFlg: false}));
+                    bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+                }
+            // 所持金が足りない
+            }else {
+                dispatch(setValidAction({validFlg: true}));
+                dispatch(setErrMsgAction({errMsg: Constants.LACK_ERR}));
+            }
         }else {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: Constants.BID_ERR}));
@@ -68,7 +85,7 @@ const AucComponent = (props) => {
     const passAucCard = () => {
         console.log("pass");
         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
-        
+
         // ボタン押せないようにする（パス押したらもう回答できない）
         dispatch(setAucBtnAction(false));
     }
@@ -91,7 +108,7 @@ const AucComponent = (props) => {
                 <Grid item xs={6}>
                     <TextField inputProps={{className: classes.coinField}} InputLabelProps={{className: classes.coinField}}
                     id="standard-basic" label="Please enter the bid amount" value={fee} 
-                    onChange={e => setFee(e.target.value)} />
+                    onChange={doChange} />
                     {selector.msg.validFlg &&
                         <p className={classes.errorField}>{selector.msg.errMsg}</p>
                     }

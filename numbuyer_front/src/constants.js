@@ -25,11 +25,15 @@ export const CALC_RESULT_TIME = 5;
 export const NEXT_TURN_TIME = 2;
 
 export const NAME_EXP = "[¥$=<>+*]+";
+export const BID_EXP = "[0-9]+";
 
 // エラーメッセージ
 export const NULL_NAME_ERR = 'Please enter your name.'; // 名前が未入力
 export const SYMBOL_ERR = 'You cannot enter that character.'; // 禁止文字が入力されている
+export const NULL_BID_ERR = 'Please enter the amount.'; // 金額が未入力
+export const NUM_ERR = 'You can only enter numbers.'; // 数字以外が入力されている
 export const BID_ERR = 'Please enter an amount higher than the highest bid.'; // 最高入札額以下の金額が入力されている
+export const LACK_ERR = "you don't have enough money"; // 所持金が足りない
 
 // ナビゲーションメッセージ
 export const GIVE_CARD_MSG = 'Distributing cards to players...';
