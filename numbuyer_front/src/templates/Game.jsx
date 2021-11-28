@@ -62,7 +62,7 @@ const Game = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={3}>
-                        <TimeComponent targetCard={targetCard} auctionCard={auctionCard}
+                        <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCard={auctionCard}
                          roomId={roomId} playerId={player.playerId}/>
                     </Grid>
                 </Grid>
