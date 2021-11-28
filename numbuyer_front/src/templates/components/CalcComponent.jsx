@@ -33,10 +33,13 @@ const CalcComponent = (props) => {
     }
 
     React.useEffect(() => {
-        setHands(props.cards);
+        setHands(selector.players.player.cards);
         setFade(false);
         setFade(true);
-    }, [props.cards]);
+        if(!(selector.game.phase === Constants.CALCULATE_PH)) {
+            calcs.length = 0;
+        }
+    }, [selector.players.player.cards]);
 
     // 手札から計算エリアに出すカードを選択
     const selectHands = (index, value) => {
@@ -77,8 +80,15 @@ const CalcComponent = (props) => {
         let appendHands = []; // 手札に追加するカード配列
         const newCalcs = [...calcs];
 
-        newCalcs.splice(index, 1);
-        appendHands.push(value);
+        // 符号カードを戻す場合、一つ右の数字カードも戻す
+        if(value === '+' || value === '-' || value === '×' || value === '÷') {
+            appendHands.push(value);
+            appendHands.push(calcs[index+1]);
+            newCalcs.splice(index, 2);
+        }else {
+            appendHands.push(value);
+            newCalcs.splice(index, 1);
+        }
 
         // 計算エリアが符号だけになるようだったら符号も手札に戻す
         if(newCalcs.length === 1) {
@@ -88,6 +98,7 @@ const CalcComponent = (props) => {
                 appendHands.push(firstCalc)
             }
         }
+        
 
         setCalcs(newCalcs);
         setHands([...hands, ...appendHands]);
@@ -105,6 +116,7 @@ const CalcComponent = (props) => {
     }
 
     const passCalc = () => {
+        calcs.length = 0;
         calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
 
         // ボタン押せないようにする（パス押したらもう回答できない）
@@ -153,7 +165,7 @@ const CalcComponent = (props) => {
                                             {calcs.map((value, index) => (
                                                 <td key={index}>
                                                     <Button className={classes.card} onClick={() => selectCalcs(index, value)}
-                                                    disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
+                                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                                         <h1 className={classes.message} >{value}</h1>
                                                     </Button>
                                                 </td>
@@ -164,9 +176,9 @@ const CalcComponent = (props) => {
                             }
                         </Grid>
                         <Button size="large" className={classes.calcButton} onClick={() => ansCalc()}
-                        disabled={!(selector.game.phase == Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
+                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
                         <Button size="large" className={classes.passButton} onClick={() => passCalc()}
-                        disabled={!(selector.game.phase == Constants.CALCULATE_PH) || !props.calcBtnFlg}>PASS</Button>
+                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>PASS</Button>
                     </Card>
                 </Grid>
             </Grid>

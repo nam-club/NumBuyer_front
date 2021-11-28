@@ -32,6 +32,7 @@ const Game = () => {
     const [winPlayerName, setWinPlayerName] = React.useState(selector.game.winPlayerName);
 
     React.useEffect(() => {
+        console.log("更新");
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setTargetCard(selector.game.targetCard);
@@ -40,7 +41,7 @@ const Game = () => {
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
         setWinPlayerName(selector.game.winPlayerName);
-    }, [selector.players.player, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard,
+    }, [selector.players.player, selector.players.player.cards, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard,
          selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     const checkPhase = () => {
@@ -87,7 +88,7 @@ const Game = () => {
                         ))}
                     </Grid>
                 </Grid>
-                <CalcComponent cards={player.cards} calcBtnFlg={calcBtnFlg}/>
+                <CalcComponent calcBtnFlg={calcBtnFlg}/>
             </div>
             <Modal
                 aria-labelledby="transition-modal-title"

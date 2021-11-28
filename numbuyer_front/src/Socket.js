@@ -252,9 +252,14 @@ export default function Socket(props) {
             if(resObj.isCorrectAnswer) {
                 // 正解メッセージを表示
                 dispatch(setMessageAction(Constants.CALC_RESULT_MSG1));
+                // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
+                dispatch(setCalcBtnAction(false));
             }else {
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(Constants.CALC_RESULT_MSG0));
+                // 画面更新調整用
+                dispatch(setCalcBtnAction(false));
+                dispatch(setCalcBtnAction(true));
             }
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
