@@ -66,19 +66,19 @@ const AucComponent = (props) => {
         }else if(fee.match(Constants.BID_EXP)) {
             if(fee <= selector.players.player.coin) {
                 dispatch(setValidAction({validFlg: false}));
-                // 現在の最高入札額以上でないと入札できない
                 if(fee > selector.game.highestBid) {
                     dispatch(setValidAction({validFlg: false}));
                     bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+                // 現在の最高入札額以下では入札できない
+                }else {
+                    dispatch(setValidAction({validFlg: true}));
+                    dispatch(setErrMsgAction({errMsg: Constants.BID_ERR}));
                 }
             // 所持金が足りない
             }else {
                 dispatch(setValidAction({validFlg: true}));
                 dispatch(setErrMsgAction({errMsg: Constants.LACK_ERR}));
             }
-        }else {
-            dispatch(setValidAction({validFlg: true}));
-            dispatch(setErrMsgAction({errMsg: Constants.BID_ERR}));
         }
     }
 
