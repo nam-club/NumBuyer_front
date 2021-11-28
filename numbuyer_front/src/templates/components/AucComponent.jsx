@@ -31,7 +31,8 @@ const AucComponent = (props) => {
     }
 
     React.useEffect(() => {
-        if((selector.game.phase !== Constants.GIVE_CARD_PH) && (selector.game.phase !== Constants.SHOW_TAR_PH)) {
+        console.log(selector.game.phase + "フェーズ");
+        if(selector.game.phase === Constants.SHOW_AUC_PH) {
             setFade(false);
             setFade(true);
         }
@@ -94,7 +95,11 @@ const AucComponent = (props) => {
         <Card className={classes.auction_root}>
             <Grid container>
                 <Grid item xs={5}>
-                    {props.auctionCard !== '　' &&
+                    {(props.auctionCard !== '　' && 
+                        !((selector.game.phase === Constants.READY_PH)
+                            || (selector.game.phase === Constants.GIVE_CARD_PH)
+                            || (selector.game.phase === Constants.SHOW_TAR_PH)))
+                     &&
                         <Transition in={fade} timeout={1500}>
                             {(state) => (
                                 <Card className={classes.auction} style={transitionStyles[state]}>

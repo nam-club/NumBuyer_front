@@ -33,9 +33,14 @@ const CalcComponent = (props) => {
     }
 
     React.useEffect(() => {
+        if(selector.game.phase === Constants.GIVE_CARD_PH) {
+            setFade(false);
+            setFade(true);
+        }
+    }, [selector.game.phase]);
+
+    React.useEffect(() => {
         setHands(selector.players.player.cards);
-        setFade(false);
-        setFade(true);
         if(!(selector.game.phase === Constants.CALCULATE_PH)) {
             calcs.length = 0;
         }
@@ -129,7 +134,7 @@ const CalcComponent = (props) => {
                 <Grid item xs={10}>
                     <Card className={classes.hand}>
                         <h3 className={classes.handMessage} align="left">My Cards</h3>
-                        {hands &&
+                        {(hands && !(selector.game.phase === Constants.READY_PH)) &&
                             <table>
                                 <tbody>
                                     <tr>

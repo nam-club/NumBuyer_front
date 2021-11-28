@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Transition } from 'react-transition-group';
 
 import { useStyles } from './theme';
 import usePersist from '../Persist';
@@ -22,6 +23,7 @@ const Game = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
+    const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
     const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
     const [aucBtnFlg, setAucBtnFlg] = React.useState(selector.game.aucBtnFlg);
@@ -30,6 +32,13 @@ const Game = () => {
     const [roomId, setRoomId] = React.useState(selector.room.roomId);
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
     const [winPlayerName, setWinPlayerName] = React.useState(selector.game.winPlayerName);
+
+    const transitionStyles = {
+        entering: { opacity: 1, transition: 'all 1s ease' },
+        entered: { opacity: 1 },
+        exiting: { opacity: 0, transition: 'all 1s ease' },
+        exited: { opacity: 0 },
+    }
 
     React.useEffect(() => {
         console.log("更新");
@@ -43,6 +52,13 @@ const Game = () => {
         setWinPlayerName(selector.game.winPlayerName);
     }, [selector.players.player, selector.players.player.cards, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard,
          selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
+
+    React.useEffect(() => {
+        if(selector.game.phase === Constants.SHOW_TAR_PH) {
+            setFade(false);
+            setFade(true);
+        }
+    }, [selector.game.phase]);
 
     const checkPhase = () => {
         if(selector.game.phase !== Constants.GIVE_CARD_PH) {
@@ -70,10 +86,19 @@ const Game = () => {
                 <Grid container>
                     <Grid item xs={1} />
                     <Grid item xs={2}>
-                        <Card className={classes.target}>
-                            <h3 className={classes.tag}>Target</h3>
-                            <h1 className={classes.message}>{checkPhase() ? targetCard : "　"}</h1>
-                        </Card>
+                        {(targetCard !== '　' && 
+                            !((selector.game.phase === Constants.READY_PH)
+                                || (selector.game.phase === Constants.GIVE_CARD_PH)))
+                        &&
+                            <Transition in={fade} timeout={1500}>
+                                {(state) => (
+                                    <Card className={classes.target} style={transitionStyles[state]}>
+                                        <h3 className={classes.tag}>Target</h3>
+                                        <h1 className={classes.message}>{checkPhase() ? targetCard : "　"}</h1>
+                                    </Card>
+                                )}
+                            </Transition> 
+                        }
                     </Grid>
                     <Grid item xs={7}>
                         <AucComponent auctionCard={auctionCard} aucBtnFlg={aucBtnFlg}/>
