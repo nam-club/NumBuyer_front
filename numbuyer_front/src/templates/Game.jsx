@@ -100,10 +100,15 @@ const Game = () => {
                             </Transition> 
                         }
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <AucComponent auctionCard={auctionCard} aucBtnFlg={aucBtnFlg}/>
+                        <CalcComponent calcBtnFlg={calcBtnFlg}/>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
+                        <Card className={classes.goal}>
+                            <h4 className={classes.tag}>Win conditions</h4>
+                            <h2 className={classes.tag}>Have {selector.game.goalCoin} coin</h2>
+                        </Card>
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag}>{value.playerName}</h3>
@@ -113,7 +118,6 @@ const Game = () => {
                         ))}
                     </Grid>
                 </Grid>
-                <CalcComponent calcBtnFlg={calcBtnFlg}/>
             </div>
             <Modal
                 aria-labelledby="transition-modal-title"

@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setMessageAction,
- setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
+ setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
+  setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -151,6 +152,10 @@ export default function Socket(props) {
             console.log("game/start:")
             console.log(msg);
             resObj = JSON.parse(msg);
+            console.log(resObj);
+            console.log(resObj.roomId);
+            console.log(resObj.goalCoin);
+            dispatch(setGoalAction(resObj.goalCoin));
             nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});
         })
 

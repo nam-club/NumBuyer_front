@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { positions } from '@material-ui/system';
 import grey from '@material-ui/core/colors/grey';
 import yellow from '@material-ui/core/colors/yellow';
+import amber from '@material-ui/core/colors/amber';
 import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
@@ -147,7 +148,6 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 50,
   },
   auction_root: {
-    marginRight: 100,
     padding: 10,
     background: grey[300],
     position: 'relative',
@@ -194,16 +194,21 @@ export const useStyles = makeStyles((theme) => ({
         background: blue[100],
      },
   },
+  goal: {
+    background: amber[200],
+    marginTop: 5,
+    marginRight: 10,
+    marginLeft: 50,
+  },
   player: {
     background: grey[200],
     marginTop: 5,
     marginRight: 10,
+    marginLeft: 100,
   },
   hand: {
     background: grey[200],
-    marginTop: 5,
-    marginLeft: 175,
-    marginRight: 100,
+    marginLeft: -250,
     position: 'relative',
     top: 50,
   },
@@ -212,17 +217,10 @@ export const useStyles = makeStyles((theme) => ({
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
     marginLeft: 10,
   },
-  card: {
-    background: yellow[400],
-    marginLeft: 10,
-    marginBottom: 10,
-    width: 80
-  },
   calc: {
     background: grey[200],
     marginTop: 5,
-    marginLeft: 175,
-    marginRight: 100,
+    marginLeft: -250,
     position: 'relative',
     top: 50,
   },
@@ -230,5 +228,16 @@ export const useStyles = makeStyles((theme) => ({
     color: grey[700],
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
     marginLeft: 10,
+  },
+  card: {
+    background: yellow[400],
+    marginLeft: 10,
+    marginBottom: 10,
+    width: 80,
+    height: 80
+  },
+  card_display: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 }));

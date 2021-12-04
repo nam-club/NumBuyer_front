@@ -18,6 +18,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_GOAL:
+            return {
+                ...state,
+                ...action.payload
+            }
         case Actions.SET_TARGET:
             return {
                 ...state,

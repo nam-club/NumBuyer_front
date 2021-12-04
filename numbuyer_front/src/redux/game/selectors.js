@@ -17,6 +17,11 @@ export const getTime = createSelector(
     state => state.time
 )
 
+export const getGoalCoin = createSelector(
+    [gameSelector],
+    state => state.goalCoin
+)
+
 export const getTargetCard = createSelector(
     [gameSelector],
     state => state.targetCard

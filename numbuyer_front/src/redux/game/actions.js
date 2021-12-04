@@ -30,6 +30,17 @@ export const setTimeAction = (timeState) => {
     }
 }
 
+export const SET_GOAL = "SET_GOAL";
+
+export const setGoalAction = (goalState) => {
+    return {
+        type: "SET_GOAL",
+        payload: {
+            goalCoin: goalState
+        }
+    }
+}
+
 export const SET_TARGET = "SET_TARGET";
 
 export const setTargetAction = (targetState) => {

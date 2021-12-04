@@ -17,6 +17,7 @@ const initialState = {
         phase: '', // フェーズ
         message: '　', // ナビゲーション用メッセージ
         time: 0, // 画面表示用タイマー
+        goalCoin: 0, // 目標コイン
         targetCard: '　', // ターゲットカード
         auctionCard: '　', // オークションカード
         ansPlayers: [], // 正解者配列

@@ -21,7 +21,7 @@ const CalcComponent = (props) => {
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
-    const [hands, setHands] = React.useState(props.cards);
+    const [hands, setHands] = React.useState([]);
     const [calcs, setCalcs] = React.useState([]);
     const {calculate} = React.useContext(CTX);
 
@@ -81,7 +81,7 @@ const CalcComponent = (props) => {
 
     // 計算エリアから手札に戻すカードを選択
     const selectCalcs = (index, value) => {
-        let firstCalc; // 計算エリアの最後の一つのカード
+        let firstCalc; // 計算エリアの先頭のカード
         let appendHands = []; // 手札に追加するカード配列
         const newCalcs = [...calcs];
 
@@ -95,16 +95,16 @@ const CalcComponent = (props) => {
             newCalcs.splice(index, 1);
         }
 
-        // 計算エリアが符号だけになるようだったら符号も手札に戻す
-        if(newCalcs.length === 1) {
-            firstCalc =  newCalcs[0];
+        firstCalc = newCalcs[0];
+
+        // 計算エリアの先頭が符号になるようだったら符号も手札に戻す
+        if(newCalcs.length >= 1) {
             if(firstCalc === '+' || firstCalc === '-' || firstCalc === '×' || firstCalc === '÷') {
-                newCalcs.length = 0;
+                newCalcs.splice(0, 1);
                 appendHands.push(firstCalc)
             }
         }
         
-
         setCalcs(newCalcs);
         setHands([...hands, ...appendHands]);
     }
@@ -131,35 +131,29 @@ const CalcComponent = (props) => {
     return (
         <div>
             <Grid container>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                     <Card className={classes.hand}>
                         <h3 className={classes.handMessage} align="left">My Cards</h3>
                         {(hands && !(selector.game.phase === Constants.READY_PH)) &&
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        {hands.map((value, index) => (
-                                            <td key={index}>
-                                                <Transition in={fade} timeout={1500}>
-                                                    {(state) => (
-                                                        <Button className={classes.card} onClick={() => selectHands(index, value)}
-                                                        disabled={!(selector.game.phase == Constants.CALCULATE_PH)}
-                                                        style={transitionStyles[state]}>
-                                                            <h1 className={classes.message}>{value}</h1>
-                                                        </Button>
-                                                    )}
-                                                </Transition>
-                                            </td>
-                                        ))}
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div className={classes.card_display}>
+                                {hands.map((value, index) => (
+                                    <Transition in={fade} timeout={1500}>
+                                        {(state) => (
+                                            <Button className={classes.card} key={index} onClick={() => selectHands(index, value)}
+                                            disabled={!(selector.game.phase == Constants.CALCULATE_PH)}
+                                            style={transitionStyles[state]}>
+                                                <h1 className={classes.message}>{value}</h1>
+                                            </Button>
+                                        )}
+                                    </Transition>
+                                ))}
+                            </div>
                         }
                     </Card>
                 </Grid>
             </Grid>
             <Grid container>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                     <Card className={classes.calc}>
                         <h3 className={classes.calcMessage} align="left">Calculate Field</h3>
                         <Grid item xs={1}>
