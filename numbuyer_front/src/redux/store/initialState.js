@@ -1,11 +1,14 @@
 const initialState = {
-    player: {
-        playerId: '', // 自分のプレイヤーID
-        cards: [], // 自分の手札
-        coin: 0, // 自分の所持コイン
-        isOwner: false, // ルームオーナー権限
+    players: {
+        player: {
+            playerId: '', // 自分のプレイヤーID
+            cards: [], // 自分の手札
+            coin: 0, // 自分の所持コイン
+            isOwner: false, // ルームオーナー権限
+        },
+        players: [], // プレイヤー一覧
+        ranking: [], // ランキング
     },
-    players: [],
     room: {
         roomId: '' // ルームID
     },

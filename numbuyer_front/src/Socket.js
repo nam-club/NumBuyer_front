@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction } from './redux/players/actions';
+import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
+     setRankingAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
   setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
@@ -227,7 +228,7 @@ export default function Socket(props) {
                 dispatch(setMessageAction(Constants.AUC_RESULT_MSG0));
             }else {
                 // 誰がいくらで落札したかを表示
-                dispatch(setMessageAction(resObj.playerName + Constants.AUC_RESULT_MSG1 + selector.game.auctionCard
+                dispatch(setMessageAction(resObj.playerName + Constants.AUC_RESULT_MSG1 + resObj.auctionCard
                      + Constants.AUC_RESULT_MSG2 + resObj.coin + Constants.AUC_RESULT_MSG3));
                 // 最高入札額をリセット
                 dispatch(setHighestAction({playerName: '', coin: 0}));
@@ -287,7 +288,8 @@ export default function Socket(props) {
         socket.on('game/finish_game', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            dispatch(setWinPlayerAction(resObj.playerName));
+            //dispatch(setWinPlayerAction(resObj.playerName));
+            dispatch(setRankingAction(resObj.players));
             dispatch(setFinishGameAction(true));
         })
     }

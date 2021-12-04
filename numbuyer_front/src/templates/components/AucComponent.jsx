@@ -39,7 +39,6 @@ const AucComponent = (props) => {
     }, [selector.game.phase]);
 
     const doChange = (e) => {
-        console.log(e.target.value);
         // 金額が未入力
         if(e.target.value === '') {
             dispatch(setValidAction({validFlg: true}));
@@ -55,7 +54,6 @@ const AucComponent = (props) => {
     }
 
     const bidAucCard = () => {
-        console.log("playerCoin:" + selector.players.player.coin);
         // 金額が未入力
         if(fee === '') {
             dispatch(setValidAction({validFlg: true}));
@@ -67,9 +65,11 @@ const AucComponent = (props) => {
         }else if(fee.match(Constants.BID_EXP)) {
             if(fee <= selector.players.player.coin) {
                 dispatch(setValidAction({validFlg: false}));
+                // 問題なし
                 if(fee > selector.game.highestBid) {
                     dispatch(setValidAction({validFlg: false}));
                     bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+                    setFee('');
                 // 現在の最高入札額以下では入札できない
                 }else {
                     dispatch(setValidAction({validFlg: true}));
@@ -84,7 +84,7 @@ const AucComponent = (props) => {
     }
 
     const passAucCard = () => {
-        console.log("pass");
+        setFee('');
         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
 
         // ボタン押せないようにする（パス押したらもう回答できない）

@@ -106,8 +106,8 @@ const Game = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Card className={classes.goal}>
-                            <h4 className={classes.tag}>Win conditions</h4>
-                            <h2 className={classes.tag}>Have {selector.game.goalCoin} coin</h2>
+                            <h4 className={classes.goal_tag}>Win conditions</h4>
+                            <h2 className={classes.goal_tag}>Have {selector.game.goalCoin} coin</h2>
                         </Card>
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
@@ -127,7 +127,10 @@ const Game = () => {
             >
                 <Fade in={finishFlg}>
                 <div className={classes.paper}>
-                    <h1 className={classes.title}>WINNER</h1>
+                    <h1 className={classes.title}>RANKING</h1>
+                    {selector.players.ranking && selector.players.ranking.map((value) => (
+                        <h3 className={classes.tag} key={value.rank}>{value.rank}:{value.playerName}</h3>
+                    ))}
                     <h2 className={classes.win_name}>{winPlayerName}</h2>
                     <Button size="large" className={classes.startButton + " " + classes.friendButton}
                     onClick={() => {

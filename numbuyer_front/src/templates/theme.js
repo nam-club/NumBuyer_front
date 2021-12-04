@@ -130,10 +130,11 @@ export const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4, 8, 6),
   },
   box: {
+    background: grey[900],
     marginLeft: 300,
   },
   time: {
-      background: orange[200],
+      background: grey[900],
       marginLeft: 50,
       marginRight: 10,
   },
@@ -154,8 +155,19 @@ export const useStyles = makeStyles((theme) => ({
     top: 0,
   },
   naviMessage: {
-    color: grey[700],
+    color: grey[50],
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+  },
+  bg_tag: {
+    color: grey[50],
+    margin:0,
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+  },
+  bg_message: {
+      color: grey[50],
+      margin: 0,
+      fontSize: '4em',
+      fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   tag: {
       color: grey[700],
@@ -195,16 +207,21 @@ export const useStyles = makeStyles((theme) => ({
      },
   },
   goal: {
-    background: amber[200],
+    background: grey[900],
     marginTop: 5,
     marginRight: 10,
     marginLeft: 50,
   },
+  goal_tag: {
+    color: yellow[200],
+    margin:0,
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+  },
   player: {
-    background: grey[200],
+    background: grey[50],
     marginTop: 5,
-    marginRight: 10,
-    marginLeft: 100,
+    marginRight: 25,
+    marginLeft: 75,
   },
   hand: {
     background: grey[200],

@@ -58,4 +58,4 @@ export const CALC_RESULT_MSG1 = 'Correct!! Please wait for other players...';
 export const CALC_FINISH_MSG0 = 'There was no one giving correct answer...';
 export const CALC_FINISH_MSG1 = 'It was ';
 export const CALC_FINISH_MSG2 = ' who gave the correct answer! ';
-export const CALC_FINISH_MSG3 = ' points will be given to the person giving correct answer!';
+export const CALC_FINISH_MSG3 = ' coin will be given to the person giving correct answer!';

@@ -156,24 +156,16 @@ const CalcComponent = (props) => {
                 <Grid item xs={12}>
                     <Card className={classes.calc}>
                         <h3 className={classes.calcMessage} align="left">Calculate Field</h3>
-                        <Grid item xs={1}>
                             {calcs &&
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            {calcs.map((value, index) => (
-                                                <td key={index}>
-                                                    <Button className={classes.card} onClick={() => selectCalcs(index, value)}
-                                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                                        <h1 className={classes.message} >{value}</h1>
-                                                    </Button>
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div className={classes.card_display}>
+                                    {calcs.map((value, index) => (
+                                        <Button className={classes.card} key={index} onClick={() => selectCalcs(index, value)}
+                                        disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                            <h1 className={classes.message} >{value}</h1>
+                                        </Button>
+                                    ))}
+                                </div>
                             }
-                        </Grid>
                         <Button size="large" className={classes.calcButton} onClick={() => ansCalc()}
                         disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
                         <Button size="large" className={classes.passButton} onClick={() => passCalc()}

@@ -65,16 +65,6 @@ const TimeComponent = (props) => {
                         setTime(Constants.SHOW_AUC_TIME);
                     }
                     break;
-                /*case Constants.SHOW_AUC_PH:
-                    dispatch(setPhaseAction(Constants.AUCTION_PH));
-                    if(time === 0) {
-                        dispatch(setPhaseAction(Constants.AUCTION_PH));
-                        dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
-                        dispatch(setTimeAction(Constants.AUCTION_TIME));
-                        setTime(Constants.AUCTION_TIME);
-                        setShowFlg(true);
-                    }
-                    break;*/
                 default:
                     break;
             }
@@ -132,11 +122,6 @@ const TimeComponent = (props) => {
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
                     setTime(Constants.READY_TIME);
                     break;
-                case Constants.END_PH:
-                    // mock
-                    dispatch(setWinPlayerAction('aoki'));
-                    dispatch(setFinishGameAction(true));
-                    break;
                 default:
                     break;
             }
@@ -144,8 +129,8 @@ const TimeComponent = (props) => {
 
     return (
         <Card className={classes.time}>
-            <h3 className={classes.tag}>Time</h3>
-            <h1 className={classes.message}>{showFlg ? time : "　"}</h1>
+            <h3 className={classes.bg_tag}>Time</h3>
+            <h1 className={classes.bg_message}>{showFlg ? time : "　"}</h1>
         </Card>
     )
 }

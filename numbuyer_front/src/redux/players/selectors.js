@@ -21,3 +21,8 @@ export const getIsOwner = createSelector(
     [playersSelector],
     state => state.player.isOwner
 )
+
+export const getRanking = createSelector(
+    [playersSelector],
+    state => state.ranking
+)
