@@ -139,7 +139,8 @@ const CalcComponent = (props) => {
                                 {hands.map((value, index) => (
                                     <Transition in={fade} timeout={1500}>
                                         {(state) => (
-                                            <Button className={classes.card} key={index} onClick={() => selectHands(index, value)}
+                                            <Button variant="contained" className={classes.card} key={index}
+                                            onClick={() => selectHands(index, value)}
                                             disabled={!(selector.game.phase == Constants.CALCULATE_PH)}
                                             style={transitionStyles[state]}>
                                                 <h1 className={classes.message}>{value}</h1>
@@ -159,16 +160,17 @@ const CalcComponent = (props) => {
                             {calcs &&
                                 <div className={classes.card_display}>
                                     {calcs.map((value, index) => (
-                                        <Button className={classes.card} key={index} onClick={() => selectCalcs(index, value)}
+                                        <Button variant="contained" className={classes.card} key={index}
+                                        onClick={() => selectCalcs(index, value)}
                                         disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                             <h1 className={classes.message} >{value}</h1>
                                         </Button>
                                     ))}
                                 </div>
                             }
-                        <Button size="large" className={classes.calcButton} onClick={() => ansCalc()}
+                        <Button size="large" variant="contained" className={classes.calcButton} onClick={() => ansCalc()}
                         disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
-                        <Button size="large" className={classes.passButton} onClick={() => passCalc()}
+                        <Button size="large" variant="contained" className={classes.passButton} onClick={() => passCalc()}
                         disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>PASS</Button>
                     </Card>
                 </Grid>

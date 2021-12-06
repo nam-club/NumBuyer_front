@@ -94,11 +94,11 @@ const Top = () => {
                     </CardContent>
                     <CardActions>
                         <Grid item xs={6}>
-                            <Button size="large" className={classes.actionButton + " " + classes.quickButton}
+                            <Button size="large" variant="contained" className={classes.actionButton + " " + classes.quickButton}
                             onClick={clickQuick}>Quick Match</Button>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button size="large" className={classes.actionButton + " " + classes.friendButton}
+                            <Button size="large" variant="contained" className={classes.actionButton + " " + classes.friendButton}
                             onClick={handleOpen}>Play with Friend</Button>
                         </Grid>
                     </CardActions>
@@ -120,7 +120,7 @@ const Top = () => {
                                 <Grid item xs={3}>
                                 </Grid>
                                 <Grid item xs={7}>
-                                    <Button size="large" className={classes.createButton} 
+                                    <Button size="large" variant="contained" className={classes.createButton} 
                                     onClick={() => {
                                         dispatch(setRoomAction({roomId: roomId}));
                                         createMatch({playerName: name, roomId: roomId});
@@ -138,7 +138,7 @@ const Top = () => {
                                 <Grid item xs={1}>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <Button size="large" className={classes.joinButton} 
+                                    <Button size="large" variant="contained" className={classes.joinButton} 
                                     onClick={() => {
                                         dispatch(setRoomAction({roomId: roomId}));
                                         joinFriendMatch({playerName: name, roomId: roomId});

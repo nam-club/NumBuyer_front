@@ -132,11 +132,11 @@ const Game = () => {
                         <h3 className={classes.tag} key={value.rank}>{value.rank}:{value.playerName}</h3>
                     ))}
                     <h2 className={classes.win_name}>{winPlayerName}</h2>
-                    <Button size="large" className={classes.startButton + " " + classes.friendButton}
+                    <Button size="large" variant="contained" className={classes.startButton + " " + classes.friendButton}
                     onClick={() => {
                         dispatch(push('/'));
                     }}>Finish Game</Button>
-                    <Button size="large" className={classes.startButton + " " + classes.quickButton}
+                    <Button size="large" variant="contained" className={classes.startButton + " " + classes.quickButton}
                     >Try Again</Button>
                 </div>
                 </Fade>

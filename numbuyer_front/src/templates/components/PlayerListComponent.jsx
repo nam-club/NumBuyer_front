@@ -24,7 +24,7 @@ const PlayerListComponent = () => {
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
                     <Grid item xs={2}>
-                        <Button size="large" className={classes.startButton + " " + classes.friendButton}
+                        <Button size="large" variant="contained" className={classes.startButton + " " + classes.friendButton}
                         onClick={() => {
                             dispatch(push('/'));
                         }}>BACK</Button>
@@ -32,7 +32,7 @@ const PlayerListComponent = () => {
                     <Grid item xs={8}></Grid>
                     <Grid item xs={2}>
                     {(selector.players.player && selector.players.player.isOwner) &&
-                        <Button size="large" className={classes.startButton + " " + classes.quickButton}
+                        <Button size="large" variant="contained" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
                             start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
                         }}>START</Button>

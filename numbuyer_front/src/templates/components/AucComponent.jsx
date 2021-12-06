@@ -117,9 +117,9 @@ const AucComponent = (props) => {
                     {selector.msg.validFlg &&
                         <p className={classes.errorField}>{selector.msg.errMsg}</p>
                     }
-                    <Button size="large" className={classes.bidButton}
+                    <Button size="large" variant="contained" className={classes.bidButton}
                     onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>BID</Button>
-                    <Button size="large" className={classes.passButton}
+                    <Button size="large" variant="contained" className={classes.passButton}
                     onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>

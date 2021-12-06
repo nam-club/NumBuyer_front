@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { positions } from '@material-ui/system';
 import grey from '@material-ui/core/colors/grey';
 import yellow from '@material-ui/core/colors/yellow';
-import amber from '@material-ui/core/colors/amber';
 import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
@@ -28,9 +27,9 @@ export const theme = createMuiTheme({
 
 export const useStyles = makeStyles((theme) => ({
   back: {
-      background: grey[900],
-      paddingTop: 200,
-      paddingBottom: 300,
+    background: grey[900],
+    paddingTop: 200,
+    paddingBottom: 300,
   },
   game_back: {
     background: grey[900],
@@ -38,9 +37,9 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 300,
   },
   title: {
-      color: yellow[300],
-      fontSize: '4em',
-      fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+    color: yellow[300],
+    fontSize: '4em',
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   menu: {
     color: green[300],
@@ -58,22 +57,20 @@ export const useStyles = makeStyles((theme) => ({
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   root: {
-      marginRight: 300,
-      marginLeft: 300,
-      background: grey[300],
+    marginRight: 300,
+    marginLeft: 300,
   },
   game_root: {
     marginTop: 10,
     marginRight: 300,
     marginLeft: 300,
-    background: grey[300],
   },
   nameField: {
-      fontSize: '3em',
-      color: grey[600],
-      paddingTop: 80,
-      marginTop: -50,
-      zIndex: 1,
+    fontSize: '3em',
+    color: grey[600],
+    paddingTop: 80,
+    marginTop: -50,
+    zIndex: 1,
   },
   errorField: {
     color: red[600],
@@ -86,6 +83,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   quickButton: {
       background: blue[200],
+      border: 1,
       '&:hover': {
           background: blue[100],
        },
@@ -251,7 +249,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     marginBottom: 10,
     width: 80,
-    height: 80
+    height: 80,
   },
   card_display: {
     display: 'flex',
