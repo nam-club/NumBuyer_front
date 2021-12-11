@@ -12,6 +12,7 @@ import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Slide from '@material-ui/core/Slide';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
@@ -60,14 +61,6 @@ const Game = () => {
         }
     }, [selector.game.phase]);
 
-    const checkPhase = () => {
-        if(selector.game.phase !== Constants.GIVE_CARD_PH) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
@@ -90,14 +83,12 @@ const Game = () => {
                             !((selector.game.phase === Constants.READY_PH)
                                 || (selector.game.phase === Constants.GIVE_CARD_PH)))
                         &&
-                            <Transition in={fade} timeout={1500}>
-                                {(state) => (
-                                    <Card className={classes.target} style={transitionStyles[state]}>
-                                        <h3 className={classes.tag}>Target</h3>
-                                        <h1 className={classes.message}>{checkPhase() ? targetCard : "　"}</h1>
-                                    </Card>
-                                )}
-                            </Transition> 
+                            <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
+                                <Card className={classes.target}>
+                                    <h3 className={classes.tag}>Target</h3>
+                                    <h1 className={classes.message}>{targetCard}</h1>
+                                </Card>
+                            </Slide>
                         }
                     </Grid>
                     <Grid item xs={6}>
@@ -113,7 +104,7 @@ const Game = () => {
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag}>{value.playerName}</h3>
                                 <h4 className={classes.tag}>×{value.cardNum}</h4>
-                                <h4 className={classes.tag}>{value.coin}</h4>
+                                <h4 className={classes.tag}>{value.coin} coin</h4>
                             </Card>
                         ))}
                     </Grid>

@@ -11,6 +11,7 @@ import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 
@@ -100,14 +101,12 @@ const AucComponent = (props) => {
                             || (selector.game.phase === Constants.GIVE_CARD_PH)
                             || (selector.game.phase === Constants.SHOW_TAR_PH)))
                      &&
-                        <Transition in={fade} timeout={1500}>
-                            {(state) => (
-                                <Card className={classes.auction} style={transitionStyles[state]}>
-                                    <h3 className={classes.tag}>Auction</h3>
-                                    <h1 className={classes.message}>{props.auctionCard}</h1>
-                                </Card>
-                            )}
-                        </Transition> 
+                        <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
+                            <Card className={classes.auction}>
+                                <h3 className={classes.tag}>Auction</h3>
+                                <h1 className={classes.message}>{props.auctionCard}</h1>
+                            </Card>
+                        </Slide>
                     }
                 </Grid>
                 <Grid item xs={6}>

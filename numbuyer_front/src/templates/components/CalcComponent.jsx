@@ -12,6 +12,7 @@ import { useStyles } from '../theme';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Grow from '@material-ui/core/Grow';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 
@@ -137,16 +138,13 @@ const CalcComponent = (props) => {
                         {(hands && !(selector.game.phase === Constants.READY_PH)) &&
                             <div className={classes.card_display}>
                                 {hands.map((value, index) => (
-                                    <Transition in={fade} timeout={1500}>
-                                        {(state) => (
-                                            <Button variant="contained" className={classes.card} key={index}
-                                            onClick={() => selectHands(index, value)}
-                                            disabled={!(selector.game.phase == Constants.CALCULATE_PH)}
-                                            style={transitionStyles[state]}>
-                                                <h1 className={classes.message}>{value}</h1>
-                                            </Button>
-                                        )}
-                                    </Transition>
+                                    <Grow in={fade} timeout={index*1000}>
+                                        <Button variant="contained" className={classes.card} key={index}
+                                        onClick={() => selectHands(index, value)}
+                                        disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
+                                            <h1 className={classes.message}>{value}</h1>
+                                        </Button>
+                                    </Grow>
                                 ))}
                             </div>
                         }
