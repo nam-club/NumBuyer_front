@@ -230,8 +230,6 @@ export default function Socket(props) {
                 // 誰がいくらで落札したかを表示
                 dispatch(setMessageAction(resObj.playerName + Constants.AUC_RESULT_MSG1 + resObj.auctionCard
                      + Constants.AUC_RESULT_MSG2 + resObj.coin + Constants.AUC_RESULT_MSG3));
-                // 最高入札額をリセット
-                dispatch(setHighestAction({playerName: '', coin: 0}));
             }
         })
 
@@ -242,6 +240,8 @@ export default function Socket(props) {
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
 
+            // 最高入札額をリセット
+            dispatch(setHighestAction({playerName: '', coin: 0}));
             // 返された所持コインをセット
             dispatch(setCoinAction(resObj.coin));
             // 返された手札をセット
@@ -289,6 +289,7 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             //dispatch(setWinPlayerAction(resObj.playerName));
+            console.log(resObj.players);
             dispatch(setRankingAction(resObj.players));
             dispatch(setFinishGameAction(true));
         })

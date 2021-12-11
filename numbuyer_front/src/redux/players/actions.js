@@ -56,10 +56,11 @@ export const setOwnerAction = (playerState) => {
 export const SET_RANKING = "SET_RANKING";
 
 export const setRankingAction = (rankingState) => {
+    console.log(rankingState);
     return {
         type: "SET_RANKING",
         payload: {
-            players: rankingState
+            ranking: rankingState
         }
     }
 }
