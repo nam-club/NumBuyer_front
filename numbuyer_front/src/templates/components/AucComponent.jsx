@@ -40,17 +40,20 @@ const AucComponent = (props) => {
     }, [selector.game.phase]);
 
     const doChange = (e) => {
-        // 金額が未入力
-        if(e.target.value === '') {
-            dispatch(setValidAction({validFlg: true}));
-            dispatch(setErrMsgAction({errMsg: Constants.NULL_BID_ERR}));
-        // 数字以外が入力
-        }else if(!e.target.value.match(Constants.BID_EXP)) {
-            dispatch(setValidAction({validFlg: true}));
-            dispatch(setErrMsgAction({errMsg: Constants.NUM_ERR}));
-        }else if(e.target.value.match(Constants.BID_EXP)) {
-            dispatch(setValidAction({validFlg: false}));
+        if(e.target.value === '' || e.target.value.match(Constants.BID_EXP)) {
             setFee(e.target.value);
+        }
+        if(e.target.value !== '' && e.target.value.match(Constants.BID_EXP)) {
+            dispatch(setValidAction({validFlg: false}));
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            // 数字以外が入力
+            if(e.target.value !== '') {
+                dispatch(setErrMsgAction({errMsg: Constants.NUM_ERR}));
+            // 金額が未入力
+            }else {
+                dispatch(setErrMsgAction({errMsg: Constants.NULL_BID_ERR}));
+            }
         }
     }
 
@@ -110,7 +113,8 @@ const AucComponent = (props) => {
                     }
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField inputProps={{className: classes.coinField}} InputLabelProps={{className: classes.coinField}}
+                    <TextField InputProps={{className: classes.coinField, inputProps: {min: 1}}}
+                    type="number" InputLabelProps={{className: classes.coinField}}
                     id="standard-basic" label="Please enter the bid amount" value={fee} 
                     onChange={doChange} />
                     {selector.msg.validFlg &&
