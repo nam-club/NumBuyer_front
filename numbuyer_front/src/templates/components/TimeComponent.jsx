@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import { setMessageAction, setPhaseAction, setTimeAction, setSkipAction, setPassAction,
-setFinishGameAction, setWinPlayerAction } from '../../redux/game/actions';
+setFinishGameAction, setWinPlayerAction, setFirstTurnAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 
@@ -36,6 +36,14 @@ const TimeComponent = (props) => {
         return () => clearInterval(interval);
     }, [time]);
 
+    // ターゲットカード公開フェーズロジック
+    const showTarget = () => {
+        dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
+        dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+        dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
+        setTime(Constants.SHOW_TAR_TIME);
+    }
+
     // 手札配布〜オークションカードオープンまでのフェーズ遷移アクション
     React.useEffect(() => {
         console.log("phase:" + selector.game.phase);
@@ -51,10 +59,32 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.GIVE_CARD_PH:
                     if(time === 0) {
-                        dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-                        dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
-                        dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
-                        setTime(Constants.SHOW_TAR_TIME);
+                        console.log(selector.game.ansPlayers)
+                        if(selector.game.firstTurnFlg) {
+                            console.log("い");
+                            showTarget();
+                            dispatch(setFirstTurnAction(false));
+                        }else {
+                            if(selector.game.ansPlayers) {
+                                console.log("と");
+                                if(selector.game.ansPlayers.length <= 0) {
+                                    dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
+                                    dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                                    dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
+                                    setTime(Constants.SHOW_AUC_TIME);
+                                    showTarget();
+                                }else {
+                                    console.log("じゅ");
+                                    showTarget();
+                                }
+                            }else {
+                                console.log("ん");
+                                dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
+                                dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                                dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
+                                setTime(Constants.SHOW_AUC_TIME);
+                            }
+                        }
                     }
                     break;
                 case Constants.SHOW_TAR_PH:

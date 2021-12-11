@@ -79,9 +79,13 @@ const Game = () => {
                 <Grid container>
                     <Grid item xs={1} />
                     <Grid item xs={2}>
-                        {(targetCard !== '　' && 
-                            !((selector.game.phase === Constants.READY_PH)
-                                || (selector.game.phase === Constants.GIVE_CARD_PH)))
+                        {(targetCard !== '　'
+                            && (
+                                !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                || (!selector.game.firstTurnFlg && !selector.game.ansPlayers && 
+                                    ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH)))
+                            )
+                        )
                         &&
                             <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                                 <Card className={classes.target}>

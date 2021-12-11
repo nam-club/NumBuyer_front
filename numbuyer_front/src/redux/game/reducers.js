@@ -63,6 +63,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_FIRST_TURN:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }

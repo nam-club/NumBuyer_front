@@ -129,3 +129,14 @@ export const setWinPlayerAction = (winPlayerState) => {
         }
     }
 }
+
+export const SET_FIRST_TURN = "SET_FIRST_TURN";
+
+export const setFirstTurnAction = (firstTurnState) => {
+    return {
+        type: "SET_FIRST_TURN",
+        payload: {
+            firstTurnFlg: firstTurnState
+        }
+    }
+}

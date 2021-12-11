@@ -23,13 +23,14 @@ const initialState = {
         goalCoin: 0, // 目標コイン
         targetCard: '　', // ターゲットカード
         auctionCard: '　', // オークションカード
-        ansPlayers: [], // 正解者配列
+        ansPlayers: null, // 正解者配列
         highestBid: 0, // 現在の最高入札額
         highestName: '', // 現在の最高入札額のプレイヤー名
         finishFlg: false, // ゲーム終了フラグ
         winPlayerName: '', // 勝利プレイヤー名
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ
+        firstTurnFlg: true, // 初回ターンフラグ
     }
 };
 
