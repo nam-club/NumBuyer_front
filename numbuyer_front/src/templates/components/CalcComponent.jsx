@@ -135,7 +135,8 @@ const CalcComponent = (props) => {
                 <Grid item xs={12}>
                     <Card className={classes.hand}>
                         <h3 className={classes.handMessage} align="left">My Cards</h3>
-                        {(hands && !(selector.game.phase === Constants.READY_PH)) &&
+                        {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
+                        ) &&
                             <div className={classes.card_display}>
                                 {hands.map((value, index) => (
                                     <Grow in={fade} timeout={index*1000}>
