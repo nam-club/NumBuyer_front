@@ -21,6 +21,7 @@ export const PlayersReducer = (state = initialState.players, action) => {
             return state;
         case Actions.SET_RANKING:
             state.ranking = action.payload.ranking;
+            console.log(state.ranking);
             return state;
         default:
             return state;
