@@ -107,7 +107,7 @@ const AucComponent = (props) => {
                         <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                             <Card className={classes.auction}>
                                 <h3 className={classes.tag}>Auction</h3>
-                                <h1 className={classes.message}>{props.auctionCard}</h1>
+                                <h1 className={classes.value}>{props.auctionCard}</h1>
                             </Card>
                         </Slide>
                     }

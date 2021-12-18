@@ -113,7 +113,7 @@ const Game = () => {
                             <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                                 <Card className={classes.target}>
                                     <h3 className={classes.tag}>Target</h3>
-                                    <h1 className={classes.message}>{targetCard}</h1>
+                                    <h1 className={classes.value}>{targetCard}</h1>
                                 </Card>
                             </Slide>
                         }
@@ -149,8 +149,8 @@ const Game = () => {
                     {selector.players.ranking && selector.players.ranking.map((value) => (
                         <div key={value.rank}>
                         {value.rank === 1 ?
-                            <h2 className={classes.winner}>{value.rank} : {value.playerName}</h2> :
-                            <h2 className={classes.tag}>{value.rank} : {value.playerName}</h2>
+                            <h2 className={classes.winner}>{value.rank} : {value.playerName} ({value.coin} coin)</h2> :
+                            <h2 className={classes.tag}>{value.rank} : {value.playerName} ({value.coin} coin)</h2>
                         }    
                         </div>
                     ))}

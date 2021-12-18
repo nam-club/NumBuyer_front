@@ -158,19 +158,17 @@ export const useStyles = makeStyles((theme) => ({
     margin:0,
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
-  bg_message: {
+  bg_value: {
       color: grey[50],
       margin: 0,
       fontSize: '4em',
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   tag: {
-      color: grey[700],
       margin:0,
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
-  message: {
-      color: grey[700],
+  value: {
       margin: 0,
       fontSize: '4em',
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
@@ -258,7 +256,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   loser: {
     color: blue[600],
-    fontSize: '2em',
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   }
 }));

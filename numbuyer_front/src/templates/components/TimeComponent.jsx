@@ -147,7 +147,7 @@ const TimeComponent = (props) => {
     return (
         <Card className={classes.time}>
             <h3 className={classes.bg_tag}>Time</h3>
-            <h1 className={classes.bg_message}>{showFlg ? time : "　"}</h1>
+            <h1 className={classes.bg_value}>{showFlg ? time : "　"}</h1>
         </Card>
     )
 }

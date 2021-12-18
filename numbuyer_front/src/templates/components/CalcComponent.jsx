@@ -143,7 +143,7 @@ const CalcComponent = (props) => {
                                         <Button variant="contained" className={classes.card} key={index}
                                         onClick={() => selectHands(index, value)}
                                         disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
-                                            <h1 className={classes.message}>{value}</h1>
+                                            <h1 className={classes.value}>{value}</h1>
                                         </Button>
                                     </Grow>
                                 ))}
@@ -163,7 +163,7 @@ const CalcComponent = (props) => {
                                             <Button variant="contained" className={classes.card} key={index}
                                             onClick={() => selectCalcs(index, value)}
                                             disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                                <h1 className={classes.message} >{value}</h1>
+                                                <h1 className={classes.value} >{value}</h1>
                                             </Button>
                                         </Grow>
                                     ))}
