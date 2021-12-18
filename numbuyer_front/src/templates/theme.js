@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { positions } from '@material-ui/system';
 import grey from '@material-ui/core/colors/grey';
 import yellow from '@material-ui/core/colors/yellow';
+import amber from '@material-ui/core/colors/amber';
 import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
@@ -256,4 +257,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  winner: {
+    color: amber[500],
+    margin:0,
+    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+  }
 }));

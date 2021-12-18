@@ -140,3 +140,14 @@ export const setFirstTurnAction = (firstTurnState) => {
         }
     }
 }
+
+export const SET_TARGET_SKIP = "SET_TARGET_SKIP";
+
+export const setTargetSkipAction = (targetSkipState) => {
+    return {
+        type: "SET_TARGET_SKIP",
+        payload: {
+            targetSkipFlg: targetSkipState
+        }
+    }
+}

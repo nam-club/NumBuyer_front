@@ -4,7 +4,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
      setRankingAction } from './redux/players/actions';
 import { setPhaseAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
-  setFinishGameAction, setWinPlayerAction } from './redux/game/actions';
+  setFinishGameAction, setWinPlayerAction, setTargetSkipAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -283,12 +283,17 @@ export default function Socket(props) {
             dispatch(setAnsPlayersAction(resObj));
             // ANSWERボタン、PASSボタンを押せるように戻す（パスを押した時用）
             dispatch(setCalcBtnAction(true));
+            // 正解者がいない場合はターゲットスキップフラグを立てる
+            if(!resObj.isCorrect) {
+                dispatch(setTargetSkipAction(true));
+            }else {
+                dispatch(setTargetSkipAction(false));
+            }
         })
 
         socket.on('game/finish_game', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            //dispatch(setWinPlayerAction(resObj.playerName));
             console.log(resObj.players);
             dispatch(setRankingAction(resObj.players));
             dispatch(setFinishGameAction(true));

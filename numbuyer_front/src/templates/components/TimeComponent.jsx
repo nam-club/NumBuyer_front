@@ -20,9 +20,6 @@ const TimeComponent = (props) => {
     const [time, setTime] = React.useState(selector.game.time);
     const [showFlg, setShowFlg] = React.useState(false);
 
-    let aucCoin = 100;
-    let player = 'Player1';
-
     // 画面表示用タイマー
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -61,12 +58,10 @@ const TimeComponent = (props) => {
                     if(time === 0) {
                         console.log(selector.game.ansPlayers)
                         if(selector.game.firstTurnFlg) {
-                            console.log("い");
                             showTarget();
                             dispatch(setFirstTurnAction(false));
                         }else {
                             if(selector.game.ansPlayers) {
-                                console.log("と");
                                 if(selector.game.ansPlayers.length <= 0) {
                                     dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                                     dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
@@ -74,17 +69,27 @@ const TimeComponent = (props) => {
                                     setTime(Constants.SHOW_AUC_TIME);
                                     showTarget();
                                 }else {
-                                    console.log("じゅ");
                                     showTarget();
                                 }
                             }else {
-                                console.log("ん");
                                 dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                                 dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
                                 dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
                                 setTime(Constants.SHOW_AUC_TIME);
                             }
                         }
+                        // 正解者がいない場合はターゲットカード表示フェーズをスキップ
+                        /*if(selector.game.targetSkipFlg) {
+                            dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
+                            dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                            dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
+                            setTime(Constants.SHOW_AUC_TIME);
+                        }else {
+                            dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
+                            dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+                            dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
+                            setTime(Constants.SHOW_TAR_TIME);
+                        }*/
                     }
                     break;
                 case Constants.SHOW_TAR_PH:

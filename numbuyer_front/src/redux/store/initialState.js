@@ -31,6 +31,7 @@ const initialState = {
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ
         firstTurnFlg: true, // 初回ターンフラグ
+        targetSkipFlg: false, // ターゲットフェーズスキップフラグ
     }
 };
 

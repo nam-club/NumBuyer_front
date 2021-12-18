@@ -68,6 +68,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_TARGET_SKIP:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }

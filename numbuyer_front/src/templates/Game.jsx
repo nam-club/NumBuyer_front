@@ -19,10 +19,15 @@ import Button from '@material-ui/core/Button';
 import AucComponent from './components/AucComponent';
 import CalcComponent from './components/CalcComponent';
 
+import { CTX } from '../Socket';
+import { setRankingAction } from '../redux/players/actions';
+import { setFinishGameAction, setMessageAction } from '../redux/game/actions';
+
 const Game = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
+    const { start } = React.useContext(CTX);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
@@ -60,6 +65,22 @@ const Game = () => {
             setFade(true);
         }
     }, [selector.game.phase]);
+
+    const finishGame = (mode) => {
+        dispatch(setRankingAction([]));
+        dispatch(setFinishGameAction(false));
+        dispatch(setMessageAction(''));
+        switch(mode) {
+            case 'finish':
+                dispatch(push('/'));
+                break;
+            case 'try':
+                start({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
+                break;
+            default:
+                break;
+        }
+    } 
 
     return (
         <Typography component="div" align="center">
@@ -124,15 +145,17 @@ const Game = () => {
                 <div className={classes.paper}>
                     <h1 className={classes.title}>RANKING</h1>
                     {selector.players.ranking && selector.players.ranking.map((value) => (
-                        <h3 className={classes.tag} key={value.rank}>{value.rank}:{value.playerName}</h3>
+                        <div key={value.rank}>
+                        {value.rank === 1 ?
+                            <h2 className={classes.winner}>{value.rank} : {value.playerName}</h2> :
+                            <h3 className={classes.tag}>{value.rank} : {value.playerName}</h3>
+                        }    
+                        </div>
                     ))}
-                    <h2 className={classes.win_name}>{winPlayerName}</h2>
                     <Button size="large" variant="contained" className={classes.startButton + " " + classes.friendButton}
-                    onClick={() => {
-                        dispatch(push('/'));
-                    }}>Finish Game</Button>
+                    onClick={() => finishGame('finish')}>Finish Game</Button>
                     <Button size="large" variant="contained" className={classes.startButton + " " + classes.quickButton}
-                    >Try Again</Button>
+                    onClick={() => finishGame('try')}>Try Again</Button>
                 </div>
                 </Fade>
             </Modal>

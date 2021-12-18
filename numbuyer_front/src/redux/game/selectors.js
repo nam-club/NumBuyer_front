@@ -71,3 +71,8 @@ export const getFirstTurnFlg = createSelector(
     [gameSelector],
     state => state.firstTurnFlg
 )
+
+export const getTargetSkipFlg = createSelector(
+    [gameSelector],
+    state => state.targetSkipFlg
+)
