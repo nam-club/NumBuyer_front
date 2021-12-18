@@ -103,8 +103,10 @@ const Game = () => {
                         {(targetCard !== '　'
                             && (
                                 !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
-                                || (!selector.game.firstTurnFlg && !selector.game.ansPlayers && 
-                                    ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH)))
+                                ||
+                                (selector.game.targetSkipFlg && 
+                                    ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                )
                             )
                         )
                         &&
@@ -148,7 +150,7 @@ const Game = () => {
                         <div key={value.rank}>
                         {value.rank === 1 ?
                             <h2 className={classes.winner}>{value.rank} : {value.playerName}</h2> :
-                            <h3 className={classes.tag}>{value.rank} : {value.playerName}</h3>
+                            <h2 className={classes.tag}>{value.rank} : {value.playerName}</h2>
                         }    
                         </div>
                     ))}

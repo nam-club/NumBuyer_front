@@ -56,30 +56,12 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.GIVE_CARD_PH:
                     if(time === 0) {
-                        console.log(selector.game.ansPlayers)
+                        // 初回ターンフラグを解除（2ターン目以降のアニメーション用）
                         if(selector.game.firstTurnFlg) {
-                            showTarget();
                             dispatch(setFirstTurnAction(false));
-                        }else {
-                            if(selector.game.ansPlayers) {
-                                if(selector.game.ansPlayers.length <= 0) {
-                                    dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                                    dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
-                                    dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
-                                    setTime(Constants.SHOW_AUC_TIME);
-                                    showTarget();
-                                }else {
-                                    showTarget();
-                                }
-                            }else {
-                                dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                                dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
-                                dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
-                                setTime(Constants.SHOW_AUC_TIME);
-                            }
                         }
                         // 正解者がいない場合はターゲットカード表示フェーズをスキップ
-                        /*if(selector.game.targetSkipFlg) {
+                        if(selector.game.targetSkipFlg) {
                             dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                             dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
                             dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
@@ -89,7 +71,7 @@ const TimeComponent = (props) => {
                             dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
                             dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
                             setTime(Constants.SHOW_TAR_TIME);
-                        }*/
+                        }
                     }
                     break;
                 case Constants.SHOW_TAR_PH:

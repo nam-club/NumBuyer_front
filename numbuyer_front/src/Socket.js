@@ -284,7 +284,7 @@ export default function Socket(props) {
             // ANSWERボタン、PASSボタンを押せるように戻す（パスを押した時用）
             dispatch(setCalcBtnAction(true));
             // 正解者がいない場合はターゲットスキップフラグを立てる
-            if(!resObj.isCorrect) {
+            if(!resObj.existsCorrect) {
                 dispatch(setTargetSkipAction(true));
             }else {
                 dispatch(setTargetSkipAction(false));
