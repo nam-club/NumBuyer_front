@@ -19,6 +19,9 @@ import Button from '@material-ui/core/Button';
 import AucComponent from './components/AucComponent';
 import CalcComponent from './components/CalcComponent';
 
+import coin from '../assets/coin.png';
+import card from '../assets/card.png';
+
 import { CTX } from '../Socket';
 import { setRankingAction } from '../redux/players/actions';
 import { setFinishGameAction, setMessageAction } from '../redux/game/actions';
@@ -129,9 +132,9 @@ const Game = () => {
                         </Card>
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
-                                <h3 className={classes.tag}>{value.playerName}</h3>
-                                <h4 className={classes.tag}>×{value.cardNum}</h4>
-                                <h4 className={classes.tag}>{value.coin} coin</h4>
+                                <h3 className={classes.tag + ' ' + classes.player_tag}><b>{value.playerName}</b></h3>
+                                <img src={card} alt="card" /><span className={classes.tag + ' ' + classes.player_tag}>×{value.cardNum}　</span>
+                                <img src={coin} alt="coin" /> <span className={classes.tag + ' ' + classes.player_tag}>{value.coin} coin</span>
                             </Card>
                         ))}
                     </Grid>
@@ -149,8 +152,22 @@ const Game = () => {
                     {selector.players.ranking && selector.players.ranking.map((value) => (
                         <div key={value.rank}>
                         {value.rank === 1 ?
-                            <h2 className={classes.winner}>{value.rank} : {value.playerName} ({value.coin} coin)</h2> :
-                            <h2 className={classes.tag}>{value.rank} : {value.playerName} ({value.coin} coin)</h2>
+                            <Grid container>
+                                <Grid item xs={4}>
+                                    <span className={classes.winner + ' ' + classes.player_tag}><b>{value.rank} : {value.playerName} </b></span>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <span className={classes.winner + ' ' + classes.player_tag}><b> {value.coin} coin</b></span>
+                                </Grid>
+                            </Grid> :
+                            <Grid container>
+                                <Grid item xs={4}>
+                                    <span className={classes.tag + ' ' + classes.player_tag}>{value.rank} : {value.playerName} </span>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <span className={classes.tag + ' ' + classes.player_tag}> {value.coin} coin</span>
+                                </Grid>
+                            </Grid>
                         }    
                         </div>
                     ))}

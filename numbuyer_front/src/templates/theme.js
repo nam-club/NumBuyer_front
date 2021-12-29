@@ -168,6 +168,10 @@ export const useStyles = makeStyles((theme) => ({
       margin:0,
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
+  player_tag: {
+    fontSize: 25,
+    fontWeight: 100,
+  },
   value: {
       margin: 0,
       fontSize: '4em',
@@ -252,6 +256,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   winner: {
     color: amber[500],
+    fontWeight: 500,
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   loser: {
