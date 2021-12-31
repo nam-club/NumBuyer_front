@@ -135,11 +135,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   target: {
     background: pink[200],
+    color: grey[700],
     marginLeft: 50,
     marginRight: 10,
   },
   auction: {
     background: yellow[200],
+    color: grey[700],
     marginLeft: 50,
     marginRight: 50,
   },
@@ -165,6 +167,7 @@ export const useStyles = makeStyles((theme) => ({
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   tag: {
+      color: grey[700],
       margin:0,
       fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
@@ -216,6 +219,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   player: {
     background: grey[50],
+    color: grey[700],
     marginTop: 5,
     marginRight: 25,
     marginLeft: 75,
@@ -250,6 +254,13 @@ export const useStyles = makeStyles((theme) => ({
     width: 80,
     height: 80,
   },
+
+  // 計算フェーズの時のみ文字色をつける（非活性の時に文字色を消すために）
+  card_valid: {
+    color: grey[700],
+  },
+
+  // カード折り返し表示用
   card_display: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -262,5 +273,8 @@ export const useStyles = makeStyles((theme) => ({
   loser: {
     color: blue[600],
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
+  },
+  image: {
+    width: '8%',
   }
 }));

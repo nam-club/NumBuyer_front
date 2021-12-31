@@ -140,7 +140,9 @@ const CalcComponent = (props) => {
                             <div className={classes.card_display}>
                                 {hands.map((value, index) => (
                                     <Grow in={fade} timeout={1000}>
-                                        <Button variant="contained" className={classes.card} key={index}
+                                        <Button variant="contained" 
+                                        className={classes.card + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.card_valid : '')} 
+                                        key={index}
                                         onClick={() => selectHands(index, value)}
                                         disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
                                             <h1 className={classes.value}>{value}</h1>
@@ -160,7 +162,9 @@ const CalcComponent = (props) => {
                                 <div className={classes.card_display}>
                                     {calcs.map((value, index) => (
                                         <Grow in={fade} timeout={1000}>
-                                            <Button variant="contained" className={classes.card} key={index}
+                                            <Button variant="contained" 
+                                            className={classes.card + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.card_valid : '')} 
+                                            key={index}
                                             onClick={() => selectCalcs(index, value)}
                                             disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                                 <h1 className={classes.value} >{value}</h1>

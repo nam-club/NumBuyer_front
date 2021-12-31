@@ -133,8 +133,8 @@ const Game = () => {
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag + ' ' + classes.player_tag}><b>{value.playerName}</b></h3>
-                                <img src={card} alt="card" /><span className={classes.tag + ' ' + classes.player_tag}>×{value.cardNum}　</span>
-                                <img src={coin} alt="coin" /> <span className={classes.tag + ' ' + classes.player_tag}>{value.coin} coin</span>
+                                <img src={card} className={classes.image} /><span className={classes.tag + ' ' + classes.player_tag}>×{value.cardNum}　</span>
+                                <img src={coin} className={classes.image} /> <span className={classes.tag + ' ' + classes.player_tag}>{value.coin} coin</span>
                             </Card>
                         ))}
                     </Grid>
@@ -157,6 +157,7 @@ const Game = () => {
                                     <span className={classes.winner + ' ' + classes.player_tag}><b>{value.rank} : {value.playerName} </b></span>
                                 </Grid>
                                 <Grid item xs={6}>
+                                    <img src={coin} className={classes.image} />
                                     <span className={classes.winner + ' ' + classes.player_tag}><b> {value.coin} coin</b></span>
                                 </Grid>
                             </Grid> :
@@ -165,6 +166,7 @@ const Game = () => {
                                     <span className={classes.tag + ' ' + classes.player_tag}>{value.rank} : {value.playerName} </span>
                                 </Grid>
                                 <Grid item xs={6}>
+                                    <img src={coin} className={classes.image} />
                                     <span className={classes.tag + ' ' + classes.player_tag}> {value.coin} coin</span>
                                 </Grid>
                             </Grid>
