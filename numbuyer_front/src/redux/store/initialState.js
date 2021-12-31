@@ -1,3 +1,5 @@
+import * as ConstantsMsg from '../../constantsMsg';
+
 const initialState = {
     players: {
         player: {
@@ -13,6 +15,7 @@ const initialState = {
         roomId: '' // ルームID
     },
     msg: {
+        lang: ConstantsMsg.English, // 言語
         validFlg: false, // バリデーションフラグ
         errMsg: '', // エラーメッセージ
     },

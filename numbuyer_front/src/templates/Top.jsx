@@ -2,13 +2,14 @@ import React from 'react';
 
 import { useStyles } from './theme';
 import * as Constants from '../constants';
+import * as ConstantsMsg from '../constantsMsg';
 
 import { CTX } from '../Socket';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setRoomAction } from '../redux/room/actions';
-import { setValidAction, setErrMsgAction } from '../redux/msg/actions';
+import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@material-ui/core/Typography';
@@ -20,6 +21,7 @@ import TextField from '@material-ui/core/TextField'
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 
 const Top = () => {
@@ -41,9 +43,9 @@ const Top = () => {
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(e.target.value !== '') {
-                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
             }else {
-                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
             }
         }
     }
@@ -54,9 +56,9 @@ const Top = () => {
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(name !== '') {
-                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
             }else {
-                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.langNULL_NAME_ERR}));
             }
         }
     };
@@ -67,13 +69,14 @@ const Top = () => {
 
     const clickQuick = () => {
         if(name !== '' && !name.match(Constants.NAME_EXP)) {
+            dispatch(setValidAction({validFlg: false}));
             joinQuickMatch({playerName: name});
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(name !== '') {
-                dispatch(setErrMsgAction({errMsg: Constants.SYMBOL_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
             }else {
-                dispatch(setErrMsgAction({errMsg: Constants.NULL_NAME_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
             }
         }
     }
@@ -82,6 +85,22 @@ const Top = () => {
         <Typography component="div" align="center">
             <GlobalStyle />
             <div className={classes.back}>
+                <Grid container>
+                    <Grid item xs={7}/>
+                    <Grid item xs={5}>
+                        <ButtonGroup variant="text" aria-label="text button group">
+                            <Button className={classes.bg_tag} onClick={() => {
+                                dispatch(setLangAction(ConstantsMsg.English));
+                            }}>English</Button>
+                            <Button className={classes.bg_tag} onClick={() => {
+                                dispatch(setLangAction(ConstantsMsg.Japanese));
+                            }}>Japanese</Button>
+                            <Button className={classes.bg_tag} onClick={() => {
+                                dispatch(setLangAction(ConstantsMsg.Chinese));
+                            }}>Chinese</Button>
+                        </ButtonGroup>
+                    </Grid>
+                </Grid>
                 <h1 className={classes.title}>NumBuyer</h1>
                 <Card className={classes.root}>
                     <CardContent>
@@ -122,6 +141,7 @@ const Top = () => {
                                 <Grid item xs={7}>
                                     <Button size="large" variant="contained" className={classes.createButton} 
                                     onClick={() => {
+                                        dispatch(setValidAction({validFlg: false}));
                                         dispatch(setRoomAction({roomId: roomId}));
                                         createMatch({playerName: name, roomId: roomId});
                                     }}>Create</Button>
@@ -140,6 +160,7 @@ const Top = () => {
                                 <Grid item xs={4}>
                                     <Button size="large" variant="contained" className={classes.joinButton} 
                                     onClick={() => {
+                                        dispatch(setValidAction({validFlg: false}));
                                         dispatch(setRoomAction({roomId: roomId}));
                                         joinFriendMatch({playerName: name, roomId: roomId});
                                     }}>Join</Button>

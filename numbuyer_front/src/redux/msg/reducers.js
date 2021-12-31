@@ -3,6 +3,10 @@ import initialState from '../store/initialState';
 
 export const MsgReducer = (state = initialState.msg, action) => {
     switch(action.type) {
+        case Actions.SET_LANG:
+            console.log(action.payload)
+            state.lang = action.payload.lang;
+            return state;
         case Actions.SET_VALID:
             return {
                 ...state,

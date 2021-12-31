@@ -36,7 +36,7 @@ const TimeComponent = (props) => {
     // ターゲットカード公開フェーズロジック
     const showTarget = () => {
         dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-        dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+        dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
         dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
         setTime(Constants.SHOW_TAR_TIME);
     }
@@ -49,7 +49,7 @@ const TimeComponent = (props) => {
                 case Constants.READY_PH:
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
-                        dispatch(setMessageAction(Constants.GIVE_CARD_MSG));
+                        dispatch(setMessageAction(selector.msg.lang.GIVE_CARD_MSG));
                         dispatch(setTimeAction(Constants.GIVE_CARD_TIME));
                         setTime(Constants.GIVE_CARD_TIME);
                     }
@@ -63,12 +63,12 @@ const TimeComponent = (props) => {
                         // 正解者がいない場合はターゲットカード表示フェーズをスキップ
                         if(selector.game.targetSkipFlg) {
                             dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                            dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                            dispatch(setMessageAction('"' + props.auctionCard + '"' + selector.msg.lang.SHOW_AUC_MSG));
                             dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
                             setTime(Constants.SHOW_AUC_TIME);
                         }else {
                             dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-                            dispatch(setMessageAction(Constants.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+                            dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
                             dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
                             setTime(Constants.SHOW_TAR_TIME);
                         }
@@ -77,7 +77,7 @@ const TimeComponent = (props) => {
                 case Constants.SHOW_TAR_PH:
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                        dispatch(setMessageAction('"' + props.auctionCard + '"' + Constants.SHOW_AUC_MSG));
+                        dispatch(setMessageAction('"' + props.auctionCard + '"' + selector.msg.lang.SHOW_AUC_MSG));
                         dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
                         setTime(Constants.SHOW_AUC_TIME);
                     }
@@ -96,7 +96,7 @@ const TimeComponent = (props) => {
                     dispatch(setTimeAction(Constants.AUCTION_TIME));
                     setTime(Constants.AUCTION_TIME);
                     setShowFlg(true);
-                    dispatch(setMessageAction(Constants.AUCTION_MSG1 + props.auctionCard + Constants.AUCTION_MSG2));
+                    dispatch(setMessageAction(selector.msg.lang.AUCTION_MSG1 + props.auctionCard + selector.msg.lang.AUCTION_MSG2));
                     break;
                 case Constants.AUC_RESULT_PH:
                     // コインとカード情報の更新
@@ -106,16 +106,16 @@ const TimeComponent = (props) => {
                     dispatch(setTimeAction(Constants.CALCULATE_TIME));
                     setTime(Constants.CALCULATE_TIME);
                     setShowFlg(true);
-                    dispatch(setMessageAction(Constants.CALCULATE_MSG1 + props.targetCard + Constants.CALCULATE_MSG2));
+                    dispatch(setMessageAction(selector.msg.lang.CALCULATE_MSG1 + props.targetCard + selector.msg.lang.CALCULATE_MSG2));
                     break;
                 case Constants.CALC_RESULT_PH:
                     dispatch(setTimeAction(Constants.CALC_RESULT_TIME));
                     setTime(Constants.CALC_RESULT_TIME);
                     setShowFlg(false);
                     if(!selector.game.ansPlayers || selector.game.ansPlayers.length == 0) {
-                        dispatch(setMessageAction(Constants.CALC_FINISH_MSG0));
+                        dispatch(setMessageAction(selector.msg.lang.CALC_FINISH_MSG0));
                     }else {
-                        let ansMessage = Constants.CALC_FINISH_MSG1;
+                        let ansMessage = selector.msg.lang.CALC_FINISH_MSG1;
                         let loopNum = 1;
 
                         for(let ansPlayer of selector.game.ansPlayers) {
@@ -127,8 +127,8 @@ const TimeComponent = (props) => {
                             loopNum++
                         }
 
-                        ansMessage += Constants.CALC_FINISH_MSG2;
-                        ansMessage += props.targetCard + Constants.CALC_FINISH_MSG3;
+                        ansMessage += selector.msg.lang.CALC_FINISH_MSG2;
+                        ansMessage += props.targetCard + selector.msg.lang.CALC_FINISH_MSG3;
                         dispatch(setMessageAction(ansMessage));
 
                         // ターゲットカードを消す

@@ -212,7 +212,7 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 誰がいくら入札したかを表示
-            dispatch(setMessageAction(resObj.playerName + Constants.AUC_BID_MSG1 + resObj.coin + Constants.AUC_BID_MSG2));
+            dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_BID_MSG1 + resObj.coin + selector.msg.lang.AUC_BID_MSG2));
             // 最高入札額と入札者を更新
             dispatch(setHighestAction(resObj));
         })
@@ -225,11 +225,11 @@ export default function Socket(props) {
             // 全員がパスをした場合
             if(resObj.isPassAll) {
                 // 誰も入札しなかったと表示
-                dispatch(setMessageAction(Constants.AUC_RESULT_MSG0));
+                dispatch(setMessageAction(selector.msg.lang.AUC_RESULT_MSG0));
             }else {
                 // 誰がいくらで落札したかを表示
-                dispatch(setMessageAction(resObj.playerName + Constants.AUC_RESULT_MSG1 + resObj.auctionCard
-                     + Constants.AUC_RESULT_MSG2 + resObj.coin + Constants.AUC_RESULT_MSG3));
+                dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.auctionCard
+                     + selector.msg.lang.AUC_RESULT_MSG2 + resObj.coin + selector.msg.lang.AUC_RESULT_MSG3));
             }
         })
 
@@ -257,12 +257,12 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
             if(resObj.isCorrectAnswer) {
                 // 正解メッセージを表示
-                dispatch(setMessageAction(Constants.CALC_RESULT_MSG1));
+                dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG1));
                 // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
                 dispatch(setCalcBtnAction(false));
             }else {
                 // 不正解メッセージを表示
-                dispatch(setMessageAction(Constants.CALC_RESULT_MSG0));
+                dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
                 // 画面更新調整用
                 dispatch(setCalcBtnAction(false));
                 dispatch(setCalcBtnAction(true));

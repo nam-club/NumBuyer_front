@@ -49,10 +49,10 @@ const AucComponent = (props) => {
             dispatch(setValidAction({validFlg: true}));
             // 数字以外が入力
             if(e.target.value !== '') {
-                dispatch(setErrMsgAction({errMsg: Constants.NUM_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
             // 金額が未入力
             }else {
-                dispatch(setErrMsgAction({errMsg: Constants.NULL_BID_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
             }
         }
     }
@@ -61,11 +61,11 @@ const AucComponent = (props) => {
         // 金額が未入力
         if(fee === '') {
             dispatch(setValidAction({validFlg: true}));
-            dispatch(setErrMsgAction({errMsg: Constants.NULL_BID_ERR}));
+            dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
         // 数字以外が入力
         }else if(!fee.match(Constants.BID_EXP)) {
             dispatch(setValidAction({validFlg: true}));
-            dispatch(setErrMsgAction({errMsg: Constants.NUM_ERR}));
+            dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
         }else if(fee.match(Constants.BID_EXP)) {
             if(fee <= selector.players.player.coin) {
                 dispatch(setValidAction({validFlg: false}));
@@ -77,12 +77,12 @@ const AucComponent = (props) => {
                 // 現在の最高入札額以下では入札できない
                 }else {
                     dispatch(setValidAction({validFlg: true}));
-                    dispatch(setErrMsgAction({errMsg: Constants.BID_ERR}));
+                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.BID_ERR}));
                 }
             // 所持金が足りない
             }else {
                 dispatch(setValidAction({validFlg: true}));
-                dispatch(setErrMsgAction({errMsg: Constants.LACK_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.LACK_ERR}));
             }
         }
     }
@@ -126,7 +126,7 @@ const AucComponent = (props) => {
                     onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>PASS</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
-                            {Constants.AUC_HIGHEST_MSG1 + selector.game.highestBid + Constants.AUC_HIGHEST_MSG2 + selector.game.highestName + Constants.AUC_HIGHEST_MSG3}
+                            {selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3}
                         </h3>
                     }  
             </Grid>

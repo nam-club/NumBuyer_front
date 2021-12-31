@@ -1,3 +1,14 @@
+export const SET_LANG = "SET_LANG";
+
+export const setLangAction = (langState) => {
+    return {
+        type: "SET_LANG",
+        payload: {
+            lang: langState
+        }
+    }
+}
+
 export const SET_VALID = "SET_VALID";
 
 export const setValidAction = (validState) => {

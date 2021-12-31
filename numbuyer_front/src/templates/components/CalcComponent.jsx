@@ -113,7 +113,7 @@ const CalcComponent = (props) => {
     const ansCalc = () => {
 
         if(calcs.length === 0) {
-            dispatch(setMessageAction(Constants.CALC_ERR_MSG));
+            dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG));
         }else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
