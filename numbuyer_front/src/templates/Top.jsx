@@ -105,7 +105,7 @@ const Top = () => {
                 <Card className={classes.root}>
                     <CardContent>
                         <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                        id="standard-basic" label="Player Name" value={name} 
+                        id="standard-basic" label={selector.msg.lang.PLAYER_NAME} value={name} 
                         onChange={doChange}/>
                         {selector.msg.validFlg &&
                             <p className={classes.errorField}>{selector.msg.errMsg}</p>
@@ -114,11 +114,11 @@ const Top = () => {
                     <CardActions>
                         <Grid item xs={6}>
                             <Button size="large" variant="contained" className={classes.actionButton + " " + classes.quickButton}
-                            onClick={clickQuick}>Quick Match</Button>
+                            onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</Button>
                         </Grid>
                         <Grid item xs={6}>
                             <Button size="large" variant="contained" className={classes.actionButton + " " + classes.friendButton}
-                            onClick={handleOpen}>Play with Friend</Button>
+                            onClick={handleOpen}>{selector.msg.lang.FRIEND_MATCH}</Button>
                         </Grid>
                     </CardActions>
                     <Modal

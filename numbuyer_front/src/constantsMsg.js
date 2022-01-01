@@ -1,5 +1,10 @@
 export const English = {
 
+    // ボタン・タグ
+    PLAYER_NAME: 'Player Name',
+    QUICK_MATCH: 'Quick Match',
+    FRIEND_MATCH: 'Play with Friend',
+
     // エラーメッセージ
     NULL_NAME_ERR: 'Please enter your name.', // 名前が未入力
     SYMBOL_ERR: 'You cannot enter that character.', // 禁止文字が入力されている
@@ -37,6 +42,11 @@ export const English = {
 
 export const Japanese = {
 
+    // ボタン・タグ
+    PLAYER_NAME: 'プレイヤー名',
+    QUICK_MATCH: '誰かと対戦する',
+    FRIEND_MATCH: '友達と対戦する',
+
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
@@ -73,6 +83,11 @@ export const Japanese = {
 }
 
 export const Chinese = {
+
+    // ボタン・タグ
+    PLAYER_NAME: '选手姓名',
+    QUICK_MATCH: '与某人比赛',
+    FRIEND_MATCH: '与朋友对战',
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力
