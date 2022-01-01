@@ -155,7 +155,9 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     top: 0,
     animation: '$kiran 0.5s linear 1',
-
+    '&:hover': {
+      'animation-play-state': 'paused',
+    },
   },
   auction_root_animation: {
     background: grey[50],
@@ -254,6 +256,9 @@ export const useStyles = makeStyles((theme) => ({
   hand_animation: {
     background: grey[50],
     animation: '$poyopoyo 3s ease-out infinite',
+    '&:hover': {
+      'animation-play-state': 'paused',
+    },
   },
   '@keyframes poyopoyo': {
     '0%, 40%, 60%, 80%': {
