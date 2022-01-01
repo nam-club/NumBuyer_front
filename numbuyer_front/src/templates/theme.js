@@ -139,18 +139,37 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 50,
     marginRight: 10,
   },
+
+  // オークションカード
   auction: {
     background: yellow[200],
     color: grey[700],
     marginLeft: 50,
     marginRight: 50,
   },
+
+  // オークションエリア
   auction_root: {
     padding: 10,
     background: grey[300],
     position: 'relative',
     top: 0,
+    animation: '$kiran 0.5s linear 1',
+
   },
+  auction_root_animation: {
+    background: grey[50],
+    animation: '$poyopoyo 3s ease-out infinite',
+  },
+  '@keyframes poyopoyo': {
+    '0%, 40%, 60%, 80%': {
+      transform: 'scale(1.0)',
+    },
+    '50%, 70%': {
+      transform: 'scale(0.98)',
+    },
+  },
+
   naviMessage: {
     color: grey[50],
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
@@ -224,12 +243,27 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 25,
     marginLeft: 75,
   },
+
+  // 手札エリア
   hand: {
     background: grey[200],
     marginLeft: -250,
     position: 'relative',
     top: 50,
   },
+  hand_animation: {
+    background: grey[50],
+    animation: '$poyopoyo 3s ease-out infinite',
+  },
+  '@keyframes poyopoyo': {
+    '0%, 40%, 60%, 80%': {
+      transform: 'scale(1.0)',
+    },
+    '50%, 70%': {
+      transform: 'scale(0.98)',
+    },
+  },
+
   handMessage: {
     color: grey[700],
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",

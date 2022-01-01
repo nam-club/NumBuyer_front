@@ -15,7 +15,7 @@ export const English = {
 
     // ナビゲーションメッセージ
     GIVE_CARD_MSG: 'Distributing cards to players...',
-    SHOW_TAR_MSG1: 'The target is ',
+    SHOW_TAR_MSG: 'The target is ',
     SHOW_AUC_MSG: ' was exhibited',
     AUCTION_MSG1: 'Please enter the bid amount and select whether to bid "',
     AUCTION_MSG2: '" or pass.',

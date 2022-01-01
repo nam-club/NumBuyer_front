@@ -96,7 +96,7 @@ const AucComponent = (props) => {
     }
 
     return (
-        <Card className={classes.auction_root}>
+        <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}>
             <Grid container>
                 <Grid item xs={5}>
                     {(props.auctionCard !== '　' && 

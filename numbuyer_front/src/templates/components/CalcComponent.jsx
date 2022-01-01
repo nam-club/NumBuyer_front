@@ -133,7 +133,7 @@ const CalcComponent = (props) => {
         <div>
             <Grid container>
                 <Grid item xs={12}>
-                    <Card className={classes.hand}>
+                    <Card className={classes.hand + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.hand_animation : '')}>
                         <h3 className={classes.handMessage} align="left">My Cards</h3>
                         {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                         ) &&
