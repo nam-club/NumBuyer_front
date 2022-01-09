@@ -68,7 +68,11 @@ const TimeComponent = (props) => {
                             setTime(Constants.SHOW_AUC_TIME);
                         }else {
                             dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-                            dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+                            if(selector.msg.lang.LANGUAGE === 'Japanese') {
+                                dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG1 + '"' + props.targetCard + '"' + selector.msg.lang.SHOW_TAR_MSG2));
+                            }else {
+                                dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+                            }
                             dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
                             setTime(Constants.SHOW_TAR_TIME);
                         }
@@ -146,7 +150,7 @@ const TimeComponent = (props) => {
 
     return (
         <Card className={classes.time}>
-            <h3 className={classes.bg_tag}>Time</h3>
+            <h3 className={classes.bg_tag}>{selector.msg.lang.TIME}</h3>
             <h1 className={classes.bg_value}>{showFlg ? time : "　"}</h1>
         </Card>
     )

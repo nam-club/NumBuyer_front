@@ -18,30 +18,30 @@ const PlayerListComponent = () => {
 
     return (
         <Card className={classes.root}>
-            <h2 className={classes.menu}>Lobby</h2>
+            <h2 className={classes.menu}>{selector.msg.lang.LOBBY}</h2>
             {selector.players.players && selector.players.players.map((value) => (<h3 key={value.playerName} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
-                    <Grid item xs={2}>
+                    <Grid item xs={4}>
                         <Button size="large" variant="contained" className={classes.startButton + " " + classes.friendButton}
                         onClick={() => {
                             dispatch(push('/'));
-                        }}>BACK</Button>
+                        }}>{selector.msg.lang.BACK_BTN}</Button>
                     </Grid>
-                    <Grid item xs={8}></Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={4}></Grid>
+                    <Grid item xs={4}>
                     {(selector.players.player && selector.players.player.isOwner) &&
                         <Button size="large" variant="contained" className={classes.startButton + " " + classes.quickButton}
                         onClick={() => {
                             start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
-                        }}>START</Button>
+                        }}>{selector.msg.lang.START_BTN}</Button>
                     }  
                     </Grid>
                 </Grid>
             </CardActions>
             <h3 className={classes.tag}>
-                {'Room ID : ' + selector.room.roomId}
+                {selector.msg.lang.ROOM_ID + ' : ' + selector.room.roomId}
             </h3>
         </Card>
     )

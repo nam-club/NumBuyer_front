@@ -228,8 +228,13 @@ export default function Socket(props) {
                 dispatch(setMessageAction(selector.msg.lang.AUC_RESULT_MSG0));
             }else {
                 // 誰がいくらで落札したかを表示
-                dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.auctionCard
-                     + selector.msg.lang.AUC_RESULT_MSG2 + resObj.coin + selector.msg.lang.AUC_RESULT_MSG3));
+                if(selector.msg.lang.LANGUAGE === 'Chinese') {
+                    dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.coin
+                        + selector.msg.lang.AUC_RESULT_MSG2 + resObj.auctionCard + selector.msg.lang.AUC_RESULT_MSG3));
+                }else {
+                    dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.auctionCard
+                        + selector.msg.lang.AUC_RESULT_MSG2 + resObj.coin + selector.msg.lang.AUC_RESULT_MSG3));
+                }
             }
         })
 

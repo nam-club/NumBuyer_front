@@ -58,7 +58,7 @@ const Top = () => {
             if(name !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
             }else {
-                dispatch(setErrMsgAction({errMsg: selector.msg.langNULL_NAME_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
             }
         }
     };
@@ -144,7 +144,7 @@ const Top = () => {
                                         dispatch(setValidAction({validFlg: false}));
                                         dispatch(setRoomAction({roomId: roomId}));
                                         createMatch({playerName: name, roomId: roomId});
-                                    }}>Create</Button>
+                                    }}>{selector.msg.lang.CREATE_BTN}</Button>
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -152,7 +152,7 @@ const Top = () => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                                    id="standard-basic" label="Room ID" value={roomId} 
+                                    id="standard-basic" label={selector.msg.lang.ROOM_ID} value={roomId} 
                                     onChange={e => setRoomId(e.target.value)} />
                                 </Grid>
                                 <Grid item xs={1}>
@@ -163,7 +163,7 @@ const Top = () => {
                                         dispatch(setValidAction({validFlg: false}));
                                         dispatch(setRoomAction({roomId: roomId}));
                                         joinFriendMatch({playerName: name, roomId: roomId});
-                                    }}>Join</Button>
+                                    }}>{selector.msg.lang.JOIN_BTN}</Button>
                                 </Grid>
                             </Grid>
                         </div>

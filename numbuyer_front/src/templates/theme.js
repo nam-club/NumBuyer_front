@@ -208,6 +208,7 @@ export const useStyles = makeStyles((theme) => ({
   bidButton: {
     background: green[200],
     marginTop: 30,
+    marginLeft: 50,
     '&:hover': {
         background: green[100],
      },
@@ -215,7 +216,6 @@ export const useStyles = makeStyles((theme) => ({
   passButton: {
     background: grey[500],
     marginTop: 30,
-    marginLeft: 50,
     '&:hover': {
         background: grey[500],
      },
@@ -223,6 +223,7 @@ export const useStyles = makeStyles((theme) => ({
   calcButton: {
     background: blue[200],
     marginTop: 30,
+    marginLeft: 50,
     '&:hover': {
         background: blue[100],
      },

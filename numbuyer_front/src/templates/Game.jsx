@@ -115,7 +115,7 @@ const Game = () => {
                         &&
                             <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                                 <Card className={classes.target}>
-                                    <h3 className={classes.tag}>Target</h3>
+                                    <h3 className={classes.tag}>{selector.msg.lang.TARGET}</h3>
                                     <h1 className={classes.value}>{targetCard}</h1>
                                 </Card>
                             </Slide>
@@ -127,14 +127,17 @@ const Game = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Card className={classes.goal}>
-                            <h4 className={classes.goal_tag}>Win conditions</h4>
-                            <h2 className={classes.goal_tag}>Have {selector.game.goalCoin} coin</h2>
+                            <h4 className={classes.goal_tag}>{selector.msg.lang.WIN_CONDITIONS}</h4>
+                            {selector.msg.lang.LANGUAGE === 'Japanese'
+                                ? <h2 className={classes.goal_tag}>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</h2>
+                                : <h2 className={classes.goal_tag}>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</h2>
+                            }
                         </Card>
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag + ' ' + classes.player_tag}><b>{value.playerName}</b></h3>
                                 <img src={card} className={classes.image} /><span className={classes.tag + ' ' + classes.player_tag}>×{value.cardNum}　</span>
-                                <img src={coin} className={classes.image} /> <span className={classes.tag + ' ' + classes.player_tag}>{value.coin} coin</span>
+                                <img src={coin} className={classes.image} /> <span className={classes.tag + ' ' + classes.player_tag}>{value.coin + ' ' + selector.msg.lang.COIN}</span>
                             </Card>
                         ))}
                     </Grid>

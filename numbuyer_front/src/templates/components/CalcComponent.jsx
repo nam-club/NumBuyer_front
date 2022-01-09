@@ -151,7 +151,7 @@ const CalcComponent = (props) => {
             <Grid container>
                 <Grid item xs={12}>
                     <Card className={classes.hand + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.hand_animation : '')}>
-                        <h3 className={classes.handMessage} align="left">My Cards</h3>
+                        <h3 className={classes.handMessage} align="left">{selector.msg.lang.YOUR_CARDS}</h3>
                         {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                         ) &&
                             <div className={classes.card_display}>
@@ -174,7 +174,7 @@ const CalcComponent = (props) => {
             <Grid container>
                 <Grid item xs={12}>
                     <Card className={classes.calc}>
-                        <h3 className={classes.calcMessage} align="left">Calculate Field</h3>
+                        <h3 className={classes.calcMessage} align="left">{selector.msg.lang.CALCULATE_FIELD}</h3>
                             {calcs &&
                                 <div className={classes.card_display}>
                                     {calcs.map((value, index) => (
@@ -190,25 +190,25 @@ const CalcComponent = (props) => {
                                     ))}
                                 </div>
                             }
-                        <Button size="large" variant="contained" className={classes.calcButton} onClick={ansCalc}
-                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
                         <Button size="large" variant="contained" className={classes.passButton} onClick={handleClickOpen}
-                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>PASS</Button>
+                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>{selector.msg.lang.PASS_BTN}</Button>
                         <Dialog
                             open={open}
                             onClose={handleClose}
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">{"Are you sure you want to pass?"}</DialogTitle>
+                            <DialogTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</DialogTitle>
                             <DialogContent>
-                                <DialogContentText id="alert-dialog-description">If you want to pass, press the OK button</DialogContentText>
+                                <DialogContentText id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose}>Canncel</Button>
-                                <Button onClick={passCalc} autoFocus>OK</Button>
+                                <Button onClick={handleClose}>{selector.msg.lang.NO_BTN}</Button>
+                                <Button onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</Button>
                             </DialogActions>
                         </Dialog>
+                        <Button size="large" variant="contained" className={classes.calcButton} onClick={ansCalc}
+                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>{selector.msg.lang.ANSWER_BTN}</Button>
                     </Card>
                 </Grid>
             </Grid>

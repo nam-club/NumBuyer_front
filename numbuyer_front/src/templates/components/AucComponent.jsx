@@ -123,7 +123,7 @@ const AucComponent = (props) => {
                      &&
                         <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                             <Card className={classes.auction}>
-                                <h3 className={classes.tag}>Auction</h3>
+                                <h3 className={classes.tag}>{selector.msg.lang.AUCTION}</h3>
                                 <h1 className={classes.value}>{props.auctionCard}</h1>
                             </Card>
                         </Slide>
@@ -132,35 +132,35 @@ const AucComponent = (props) => {
                 <Grid item xs={6}>
                     <TextField InputProps={{className: classes.coinField, inputProps: {min: 1}}}
                     type="number" InputLabelProps={{className: classes.coinField}}
-                    id="standard-basic" label="Please enter the bid amount" value={fee} 
+                    id="standard-basic" label={selector.msg.lang.BID_MSG} value={fee} 
                     onChange={doChange} />
                     {selector.msg.validFlg &&
                         <p className={classes.errorField}>{selector.msg.errMsg}</p>
                     }
-                    <Button size="large" variant="contained" className={classes.bidButton}
-                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>BID</Button>
                     <Button size="large" variant="contained" className={classes.passButton}
-                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>PASS</Button>
+                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</Button>
                     <Dialog
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"
                     >
-                        <DialogTitle id="alert-dialog-title">{"Are you sure you want to pass?"}</DialogTitle>
+                        <DialogTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</DialogTitle>
                         <DialogContent>
-                            <DialogContentText id="alert-dialog-description">If you want to pass, press the OK button</DialogContentText>
+                            <DialogContentText id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose}>Canncel</Button>
-                            <Button onClick={passAucCard} autoFocus>OK</Button>
+                            <Button onClick={handleClose}>{selector.msg.lang.NO_BTN}</Button>
+                            <Button onClick={passAucCard} autoFocus>{selector.msg.lang.YES_BTN}</Button>
                         </DialogActions>
                     </Dialog>
+                    <Button size="large" variant="contained" className={classes.bidButton}
+                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</Button>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
                             {selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3}
                         </h3>
-                    }  
+                    }
             </Grid>
                 </Grid>
         </Card>
