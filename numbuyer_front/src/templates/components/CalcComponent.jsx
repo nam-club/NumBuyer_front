@@ -15,6 +15,11 @@ import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const CalcComponent = (props) => {
     const classes = useStyles();
@@ -24,6 +29,7 @@ const CalcComponent = (props) => {
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [hands, setHands] = React.useState([]);
     const [calcs, setCalcs] = React.useState([]);
+    const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
     const {calculate} = React.useContext(CTX);
 
     const transitionStyles = {
@@ -122,12 +128,23 @@ const CalcComponent = (props) => {
     }
 
     const passCalc = () => {
+        handleClose();
         calcs.length = 0;
         calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
 
         // ボタン押せないようにする（パス押したらもう回答できない）
         dispatch(setCalcBtnAction(false));
     }
+
+    // ダイアログ表示
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    
+    // ダイアログ閉じる
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div>
@@ -173,10 +190,25 @@ const CalcComponent = (props) => {
                                     ))}
                                 </div>
                             }
-                        <Button size="large" variant="contained" className={classes.calcButton} onClick={() => ansCalc()}
+                        <Button size="large" variant="contained" className={classes.calcButton} onClick={ansCalc}
                         disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>ANSWER</Button>
-                        <Button size="large" variant="contained" className={classes.passButton} onClick={() => passCalc()}
+                        <Button size="large" variant="contained" className={classes.passButton} onClick={handleClickOpen}
                         disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>PASS</Button>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">{"Are you sure you want to pass?"}</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">If you want to pass, press the OK button</DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Canncel</Button>
+                                <Button onClick={passCalc} autoFocus>OK</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Card>
                 </Grid>
             </Grid>

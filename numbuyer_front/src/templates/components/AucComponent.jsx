@@ -14,6 +14,11 @@ import Grid from '@material-ui/core/Grid';
 import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const AucComponent = (props) => {
     const classes = useStyles();
@@ -23,6 +28,7 @@ const AucComponent = (props) => {
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [fee, setFee] = React.useState('');
     const {bid} = React.useContext(CTX);
+    const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
 
     const transitionStyles = {
         entering: { opacity: 1, transition: 'all 1s ease' },
@@ -88,12 +94,23 @@ const AucComponent = (props) => {
     }
 
     const passAucCard = () => {
+        handleClose();
         setFee('');
         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: null, action: 'pass'});
 
         // ボタン押せないようにする（パス押したらもう回答できない）
         dispatch(setAucBtnAction(false));
     }
+    
+    // ダイアログ表示
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    
+    // ダイアログ閉じる
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}>
@@ -123,7 +140,22 @@ const AucComponent = (props) => {
                     <Button size="large" variant="contained" className={classes.bidButton}
                     onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>BID</Button>
                     <Button size="large" variant="contained" className={classes.passButton}
-                    onClick={passAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>PASS</Button>
+                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>PASS</Button>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">{"Are you sure you want to pass?"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">If you want to pass, press the OK button</DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose}>Canncel</Button>
+                            <Button onClick={passAucCard} autoFocus>OK</Button>
+                        </DialogActions>
+                    </Dialog>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                         <h3 className={classes.tag}>
                             {selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3}
