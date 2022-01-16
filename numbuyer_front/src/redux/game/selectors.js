@@ -27,6 +27,11 @@ export const getRemainingTime = createSelector(
     state => state.remainingTime
 )
 
+export const getRemTimeFlg = createSelector(
+    [gameSelector],
+    state => state.remTimeFlg
+)
+
 export const getGoalCoin = createSelector(
     [gameSelector],
     state => state.goalCoin

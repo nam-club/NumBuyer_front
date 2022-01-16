@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import { setMessageAction, setPhaseAction, setTimeAction, setRemainingTimeAction, setSkipAction, setPassAction,
-setFinishGameAction, setWinPlayerAction, setFirstTurnAction } from '../../redux/game/actions';
+setFinishGameAction, setWinPlayerAction, setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 
@@ -35,9 +35,12 @@ const TimeComponent = (props) => {
 
     // 残り時間追加
     React.useEffect(() => {
-        setTime(time + selector.game.remainingTime);
-        dispatch(setRemainingTimeAction(0));
-    }, [selector.game.remainingTime]);
+        console.log(selector.game.remainingTime)
+        if(selector.game.remTimeFlg) {
+            setTime(selector.game.remainingTime);
+            dispatch(setRemTimeFlgAction(false));
+        }
+    }, [selector.game.remTimeFlg]);
 
     // ターゲットカード公開フェーズロジック
     const showTarget = () => {

@@ -26,6 +26,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_REM_TIME_FLG:
+            return {
+                ...state,
+                ...action.payload
+            }
         case Actions.SET_GOAL:
             return {
                 ...state,

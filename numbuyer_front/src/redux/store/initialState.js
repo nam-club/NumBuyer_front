@@ -34,7 +34,8 @@ const initialState = {
         },
         message: '　', // ナビゲーション用メッセージ
         time: 0, // 画面表示用タイマー
-        remainingTime: 0, // 追加時間
+        remainingTime: 0, // オークション用残り時間
+        remTimeFlg: false, // 残り時間追加フラグ
         goalCoin: 0, // 目標コイン
         targetCard: '　', // ターゲットカード
         auctionCard: '　', // オークションカード

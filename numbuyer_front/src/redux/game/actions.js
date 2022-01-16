@@ -53,6 +53,17 @@ export const setRemainingTimeAction = (remainingTimeState) => {
     }
 }
 
+export const SET_REM_TIME_FLG = "SET_REM_TIME_FLG";
+
+export const setRemTimeFlgAction = (remTimeFlgState) => {
+    return {
+        type: "SET_REM_TIME_FLG",
+        payload: {
+            remTimeFlg: remTimeFlgState
+        }
+    }
+}
+
 export const SET_GOAL = "SET_GOAL";
 
 export const setGoalAction = (goalState) => {
