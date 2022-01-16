@@ -42,6 +42,17 @@ export const setTimeAction = (timeState) => {
     }
 }
 
+export const SET_REMAINING_TIME = "SET_REMAINING_TIME";
+
+export const setRemainingTimeAction = (remainingTimeState) => {
+    return {
+        type: "SET_REMAINING_TIME",
+        payload: {
+            remainingTime: remainingTimeState
+        }
+    }
+}
+
 export const SET_GOAL = "SET_GOAL";
 
 export const setGoalAction = (goalState) => {

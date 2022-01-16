@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
      setRankingAction } from './redux/players/actions';
-import { setPhaseAction, setPhaseTimesAction, setTargetAction, setAuctionAction, setMessageAction,
+import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
   setFinishGameAction, setWinPlayerAction, setTargetSkipAction } from './redux/game/actions';
 
@@ -210,6 +210,8 @@ export default function Socket(props) {
         socket.on('game/bid', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
+            // 残り時間を追加
+            dispatch(setRemainingTimeAction(resObj.remainingTime));
             // 誰がいくら入札したかを表示
             dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_BID_MSG1 + resObj.coin + selector.msg.lang.AUC_BID_MSG2));
             // 最高入札額と入札者を更新

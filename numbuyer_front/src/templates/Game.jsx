@@ -50,7 +50,6 @@ const Game = () => {
     }
 
     React.useEffect(() => {
-        console.log("更新");
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setTargetCard(selector.game.targetCard);
