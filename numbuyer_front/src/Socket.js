@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
      setRankingAction } from './redux/players/actions';
-import { setPhaseAction, setTargetAction, setAuctionAction, setMessageAction,
+import { setPhaseAction, setPhaseTimesAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
   setFinishGameAction, setWinPlayerAction, setTargetSkipAction } from './redux/game/actions';
 
@@ -154,8 +154,7 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             console.log(resObj);
-            console.log(resObj.roomId);
-            console.log(resObj.goalCoin);
+            dispatch(setPhaseTimesAction(resObj.phaseTimes));
             dispatch(setGoalAction(resObj.goalCoin));
             nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});
         })
@@ -168,7 +167,7 @@ export default function Socket(props) {
             dispatch(setTargetAction(object.targetCard));
             dispatch(setAuctionAction(object.auctionCard));
             dispatch(setPhaseAction(Constants.READY_PH));
-            dispatch(setTimeAction(Constants.READY_TIME));
+            dispatch(setTimeAction(selector.game.phaseTimes.ready));
             callback();
         }
 
@@ -194,7 +193,7 @@ export default function Socket(props) {
                 dispatch(setCoinAction(resObj.coin));
                 dispatch(setTargetAction(resObj.targetCard));
                 dispatch(setAuctionAction(resObj.auctionCard));
-                dispatch(setTimeAction(Constants.READY_TIME));
+                dispatch(setTimeAction(selector.game.phaseTimes.ready));
             }
         })
 

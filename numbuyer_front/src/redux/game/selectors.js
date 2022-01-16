@@ -7,6 +7,11 @@ export const getPhase = createSelector(
     state => state.phase
 )
 
+export const getPhaseTimes = createSelector(
+    [gameSelector],
+    state => state.phaseTimes
+)
+
 export const getMessage = createSelector(
     [gameSelector],
     state => state.message

@@ -8,6 +8,10 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_PHASE_TIMES:
+            state.phaseTimes = action.payload.phaseTimes;
+            console.log(state.phaseTimes);
+            return state;
         case Actions.SET_MESSAGE:
             return {
                 ...state,

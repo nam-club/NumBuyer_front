@@ -8,6 +8,18 @@ export const setPhaseAction = (phaseState) => {
         }
     }
 }
+
+export const SET_PHASE_TIMES = "SET_PHASE_TIMES";
+
+export const setPhaseTimesAction = (phaseTimesState) => {
+    return {
+        type: "SET_PHASE_TIMES",
+        payload: {
+            phaseTimes: phaseTimesState
+        }
+    }
+}
+
 export const SET_MESSAGE = "SET_MESSAGE";
 
 export const setMessageAction = (messageState) => {

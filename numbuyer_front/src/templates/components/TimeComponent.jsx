@@ -37,8 +37,8 @@ const TimeComponent = (props) => {
     const showTarget = () => {
         dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
         dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
-        dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
-        setTime(Constants.SHOW_TAR_TIME);
+        dispatch(setTimeAction(selector.game.phaseTimes.showTarget));
+        setTime(selector.game.phaseTimes.showTarget);
     }
 
     // 手札配布〜オークションカードオープンまでのフェーズ遷移アクション
@@ -50,8 +50,8 @@ const TimeComponent = (props) => {
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
                         dispatch(setMessageAction(selector.msg.lang.GIVE_CARD_MSG));
-                        dispatch(setTimeAction(Constants.GIVE_CARD_TIME));
-                        setTime(Constants.GIVE_CARD_TIME);
+                        dispatch(setTimeAction(selector.game.phaseTimes.giveCards));
+                        setTime(selector.game.phaseTimes.giveCards);
                     }
                     break;
                 case Constants.GIVE_CARD_PH:
@@ -64,8 +64,8 @@ const TimeComponent = (props) => {
                         if(selector.game.targetSkipFlg) {
                             dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                             dispatch(setMessageAction('"' + props.auctionCard + '"' + selector.msg.lang.SHOW_AUC_MSG));
-                            dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
-                            setTime(Constants.SHOW_AUC_TIME);
+                            dispatch(setTimeAction(selector.game.phaseTimes.auction));
+                            setTime(selector.game.phaseTimes.showAuction);
                         }else {
                             dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
                             if(selector.msg.lang.LANGUAGE === 'Japanese') {
@@ -73,8 +73,8 @@ const TimeComponent = (props) => {
                             }else {
                                 dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
                             }
-                            dispatch(setTimeAction(Constants.SHOW_TAR_TIME));
-                            setTime(Constants.SHOW_TAR_TIME);
+                            dispatch(setTimeAction(selector.game.phaseTimes.showTarget));
+                            setTime(selector.game.phaseTimes.showTarget);
                         }
                     }
                     break;
@@ -82,8 +82,8 @@ const TimeComponent = (props) => {
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                         dispatch(setMessageAction('"' + props.auctionCard + '"' + selector.msg.lang.SHOW_AUC_MSG));
-                        dispatch(setTimeAction(Constants.SHOW_AUC_TIME));
-                        setTime(Constants.SHOW_AUC_TIME);
+                        dispatch(setTimeAction(selector.game.phaseTimes.showAuction));
+                        setTime(selector.game.phaseTimes.showAuction);
                     }
                     break;
                 default:
@@ -97,8 +97,8 @@ const TimeComponent = (props) => {
             console.log("time:" + time);
                 switch(selector.game.phase) {
                 case Constants.AUCTION_PH:
-                    dispatch(setTimeAction(Constants.AUCTION_TIME));
-                    setTime(Constants.AUCTION_TIME);
+                    dispatch(setTimeAction(selector.game.phaseTimes.auction));
+                    setTime(selector.game.phaseTimes.auction);
                     setShowFlg(true);
                     dispatch(setMessageAction(selector.msg.lang.AUCTION_MSG1 + props.auctionCard + selector.msg.lang.AUCTION_MSG2));
                     break;
@@ -107,14 +107,14 @@ const TimeComponent = (props) => {
                     buy({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
                     break;
                 case Constants.CALCULATE_PH:
-                    dispatch(setTimeAction(Constants.CALCULATE_TIME));
-                    setTime(Constants.CALCULATE_TIME);
+                    dispatch(setTimeAction(selector.game.phaseTimes.calculate));
+                    setTime(selector.game.phaseTimes.calculate);
                     setShowFlg(true);
                     dispatch(setMessageAction(selector.msg.lang.CALCULATE_MSG1 + props.targetCard + selector.msg.lang.CALCULATE_MSG2));
                     break;
                 case Constants.CALC_RESULT_PH:
-                    dispatch(setTimeAction(Constants.CALC_RESULT_TIME));
-                    setTime(Constants.CALC_RESULT_TIME);
+                    dispatch(setTimeAction(selector.game.phaseTimes.calculateResult));
+                    setTime(selector.game.phaseTimes.calculateResult);
                     setShowFlg(false);
                     if(!selector.game.ansPlayers || selector.game.ansPlayers.length == 0) {
                         dispatch(setMessageAction(selector.msg.lang.CALC_FINISH_MSG0));
@@ -141,7 +141,7 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.NEXT_TURN_PH:
                     nextTurn({roomId: props.roomId, playerId: props.playerId});
-                    setTime(Constants.READY_TIME);
+                    setTime(selector.game.phaseTimes.ready);
                     break;
                 default:
                     break;

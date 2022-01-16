@@ -13,16 +13,6 @@ export const CALC_RESULT_PH = 'CALCULATE_RESULT';
 export const NEXT_TURN_PH = 'NEXT_TURN';
 export const END_PH = 'END';
 
-// 時間設定
-export const READY_TIME = 2;
-export const GIVE_CARD_TIME = 3;
-export const SHOW_TAR_TIME = 3;
-export const SHOW_AUC_TIME = 3;
-export const AUCTION_TIME = 30;
-export const AUC_RESULT_TIME = 5;
-export const CALCULATE_TIME = 20;
-export const CALC_RESULT_TIME = 5;
-export const NEXT_TURN_TIME = 2;
-
+// 入力可能文字列 
 export const NAME_EXP = "[¥$=<>+*]+";
 export const BID_EXP = "[0-9]+";

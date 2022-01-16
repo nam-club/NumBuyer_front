@@ -21,6 +21,17 @@ const initialState = {
     },
     game: {
         phase: '', // フェーズ
+        phaseTimes: { // 各フェーズ時間
+            ready: 0,
+            giveCards: 0,
+            showTarget: 0,
+            showAuction: 0,
+            auction: 0,
+            auctionResult: 0,
+            calculate: 0,
+            calculateResult: 0,
+            nextTurn: 0
+        },
         message: '　', // ナビゲーション用メッセージ
         time: 0, // 画面表示用タイマー
         goalCoin: 0, // 目標コイン
