@@ -158,10 +158,10 @@ const TimeComponent = (props) => {
     }, [selector.game.phase]);
 
     return (
-        <Card className={classes.time}>
+        <div className={classes.time}>
             <h3 className={classes.bg_tag}>{selector.msg.lang.TIME}</h3>
             <h1 className={classes.bg_value}>{showFlg ? time : "　"}</h1>
-        </Card>
+        </div>
     )
 }
 

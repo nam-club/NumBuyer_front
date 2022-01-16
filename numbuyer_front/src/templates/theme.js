@@ -6,6 +6,8 @@ import yellow from '@material-ui/core/colors/yellow';
 import amber from '@material-ui/core/colors/amber';
 import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import indigo from '@material-ui/core/colors/indigo';
 import green from '@material-ui/core/colors/green';
 import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
@@ -29,16 +31,16 @@ export const theme = createMuiTheme({
 export const useStyles = makeStyles((theme) => ({
   
   back: {
-    background: grey[900],
+    background: blue[300],
     paddingTop: 200,
     paddingBottom: 300,
   },
   game_back: {
-    background: grey[900],
+    background: blue[200],
     paddingTop: 10,
     paddingBottom: 300,
   },
-  title: {
+  topic: {
     color: yellow[300],
     fontSize: '4em',
     fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
@@ -79,19 +81,22 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: 30,
   },
   quickButton: {
-      background: blue[200],
-      border: 1,
-      '&:hover': {
-          background: blue[100],
-       },
+    color: grey[700],
+    background: blue[200],
+    border: 1,
+    '&:hover': {
+        background: blue[100],
+      },
   },
   friendButton: {
-      background: green[200],
-      '&:hover': {
-          background: green[100],
-       },
+    color: grey[700],
+    background: indigo[200],
+    '&:hover': {
+        background: indigo[100],
+      },
   },
   createButton: {
+    color: grey[700],
     width: '100%',
     zIndex: 2,
     background: blue[200],
@@ -100,14 +105,16 @@ export const useStyles = makeStyles((theme) => ({
      },
   },
   joinButton: {
-      top: '50%',
-      width: '100%',
-      background: green[200],
-      '&:hover': {
-          background: green[100],
-      },
+    color: grey[700],
+    top: '50%',
+    width: '100%',
+    background: indigo[200],
+    '&:hover': {
+        background: indigo[100],
+    },
   },
   startButton: {
+    color: grey[700],
     margin: 10,
     fontSize: 30,
   },
@@ -125,11 +132,10 @@ export const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4, 8, 6),
   },
   box: {
-    background: grey[900],
+    background: blue[300],
     marginLeft: 300,
   },
   time: {
-      background: grey[900],
       marginLeft: 50,
       marginRight: 10,
   },
@@ -229,7 +235,6 @@ export const useStyles = makeStyles((theme) => ({
      },
   },
   goal: {
-    background: grey[900],
     marginTop: 5,
     marginRight: 10,
     marginLeft: 50,
@@ -316,5 +321,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   image: {
     width: '8%',
+  },
+  title: {
+    width: '40%',
+    marginLeft: 20,
+    marginBottom: 30,
+  },
+  logo: {
+    width: '9%',
   }
 }));

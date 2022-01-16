@@ -125,13 +125,13 @@ const Game = () => {
                         <CalcComponent calcBtnFlg={calcBtnFlg}/>
                     </Grid>
                     <Grid item xs={3}>
-                        <Card className={classes.goal}>
+                        <div className={classes.goal}>
                             <h4 className={classes.goal_tag}>{selector.msg.lang.WIN_CONDITIONS}</h4>
                             {selector.msg.lang.LANGUAGE === 'Japanese'
                                 ? <h2 className={classes.goal_tag}>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</h2>
                                 : <h2 className={classes.goal_tag}>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</h2>
                             }
-                        </Card>
+                        </div>
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag + ' ' + classes.player_tag}><b>{value.playerName}</b></h3>
@@ -150,7 +150,7 @@ const Game = () => {
             >
                 <Fade in={finishFlg}>
                 <div className={classes.paper}>
-                    <h1 className={classes.title}>RANKING</h1>
+                    <h1 className={classes.topic}>RANKING</h1>
                     {selector.players.ranking && selector.players.ranking.map((value) => (
                         <div key={value.rank}>
                         {value.rank === 1 ?

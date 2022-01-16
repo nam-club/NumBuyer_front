@@ -24,6 +24,9 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 
+import logo from '../assets/logo.png';
+import title from '../assets/title.png';
+
 const Top = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -101,7 +104,8 @@ const Top = () => {
                         </ButtonGroup>
                     </Grid>
                 </Grid>
-                <h1 className={classes.title}>NumBuyer</h1>
+                <img src={logo} className={classes.logo}/>
+                <img src={title} className={classes.title}/>
                 <Card className={classes.root}>
                     <CardContent>
                         <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
