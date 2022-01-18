@@ -1,16 +1,16 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles';
 import { positions } from '@material-ui/system';
+
 import grey from '@material-ui/core/colors/grey';
 import yellow from '@material-ui/core/colors/yellow';
 import amber from '@material-ui/core/colors/amber';
-import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import indigo from '@material-ui/core/colors/indigo';
-import green from '@material-ui/core/colors/green';
-import pink from '@material-ui/core/colors/pink';
+import teal from '@material-ui/core/colors/teal';
 import red from '@material-ui/core/colors/red';
+
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -24,7 +24,7 @@ import Grid from '@material-ui/core/Grid';
 
 export const theme = createMuiTheme({
   typography: {
-    "fontFamily": "\"Ubuntu Condensed\", \"sans-serif\"",
+    "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
   },
 })
 
@@ -43,17 +43,14 @@ export const useStyles = makeStyles((theme) => ({
   topic: {
     color: yellow[300],
     fontSize: '4em',
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   menu: {
-    color: green[300],
+    color: lightBlue[700],
     fontSize: '2em',
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   name: {
-    color: grey[900],
+    color: grey[700],
     fontSize: '1em',
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   root: {
     marginRight: 300,
@@ -132,7 +129,7 @@ export const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4, 8, 6),
   },
   box: {
-    background: blue[300],
+    background: indigo[200],
     marginLeft: 300,
   },
   time: {
@@ -140,7 +137,7 @@ export const useStyles = makeStyles((theme) => ({
       marginRight: 10,
   },
   target: {
-    background: pink[200],
+    background: teal['A100'],
     color: grey[700],
     marginLeft: 50,
     marginRight: 10,
@@ -148,7 +145,7 @@ export const useStyles = makeStyles((theme) => ({
 
   // オークションカード
   auction: {
-    background: yellow[200],
+    background: lightBlue[200],
     color: grey[700],
     marginLeft: 50,
     marginRight: 50,
@@ -180,23 +177,19 @@ export const useStyles = makeStyles((theme) => ({
 
   naviMessage: {
     color: grey[50],
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   bg_tag: {
     color: grey[50],
     margin:0,
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   bg_value: {
       color: grey[50],
       margin: 0,
       fontSize: '4em',
-      fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   tag: {
       color: grey[700],
       margin:0,
-      fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   player_tag: {
     fontSize: 25,
@@ -205,33 +198,35 @@ export const useStyles = makeStyles((theme) => ({
   value: {
       margin: 0,
       fontSize: '4em',
-      fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   coinField: {
     color: grey[600],
     width: 300,
   },
   bidButton: {
-    background: green[200],
+    background: lightBlue[200],
     marginTop: 30,
     marginLeft: 50,
+    marginBottom: 10,
     '&:hover': {
-        background: green[100],
+        background: lightBlue[100],
      },
   },
   passButton: {
     background: grey[500],
     marginTop: 30,
+    marginBottom: 10,
     '&:hover': {
         background: grey[500],
      },
   },
   calcButton: {
-    background: blue[200],
+    background: yellow[200],
     marginTop: 30,
     marginLeft: 50,
+    marginBottom: 10,
     '&:hover': {
-        background: blue[100],
+        background: yellow[100],
      },
   },
   goal: {
@@ -240,9 +235,8 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 50,
   },
   goal_tag: {
-    color: yellow[200],
+    color: grey[50],
     margin:0,
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   player: {
     background: grey[50],
@@ -277,7 +271,6 @@ export const useStyles = makeStyles((theme) => ({
 
   handMessage: {
     color: grey[700],
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
     marginLeft: 10,
   },
   calc: {
@@ -289,11 +282,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   calcMessage: {
     color: grey[700],
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
     marginLeft: 10,
   },
   card: {
-    background: yellow[400],
+    background: yellow[200],
     marginLeft: 10,
     marginBottom: 10,
     width: 80,
@@ -313,11 +305,9 @@ export const useStyles = makeStyles((theme) => ({
   winner: {
     color: amber[500],
     fontWeight: 500,
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   loser: {
     color: blue[600],
-    fontFamily: "\"Ubuntu Condensed\", \"sans-serif\"",
   },
   image: {
     width: '8%',

@@ -19,7 +19,8 @@ const PlayerListComponent = () => {
     return (
         <Card className={classes.root}>
             <h2 className={classes.menu}>{selector.msg.lang.LOBBY}</h2>
-            {selector.players.players && selector.players.players.map((value) => (<h3 key={value.playerName} className={classes.name}>{value.playerName}</h3>))}
+            {selector.players.players &&
+             selector.players.players.map((value) => (<h3 key={value.playerName} className={classes.name}>{value.playerName}</h3>))}
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
