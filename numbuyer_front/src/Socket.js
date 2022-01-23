@@ -4,7 +4,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
      setRankingAction } from './redux/players/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
-  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction } from './redux/game/actions';
+  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -269,6 +269,8 @@ export default function Socket(props) {
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG1));
                 // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
                 dispatch(setCalcBtnAction(false));
+                // 獲得コインをセット（メッセージ用）
+                dispatch(setAddedCoinAction(resObj.addedCoin));
             }else {
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));

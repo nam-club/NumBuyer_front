@@ -61,6 +61,9 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_ADDED_COIN:
+            state.addedCoin = action.payload.addedCoin;
+            return state;
         case Actions.SET_ANS_PLAYERS:
             return {
                 ...state,

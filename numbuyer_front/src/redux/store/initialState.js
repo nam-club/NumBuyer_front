@@ -42,6 +42,10 @@ const initialState = {
         ansPlayers: null, // 正解者配列
         highestBid: 0, // 現在の最高入札額
         highestName: '', // 現在の最高入札額のプレイヤー名
+        addedCoin: { // 獲得コイン
+            total: 0, // 獲得コインの合計
+            cardNumBonus: 0, // カード枚数ボーナスコイン
+        },
         finishFlg: false, // ゲーム終了フラグ
         winPlayerName: '', // 勝利プレイヤー名
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ

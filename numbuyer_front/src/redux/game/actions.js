@@ -131,6 +131,17 @@ export const setCalcBtnAction = (calcBtnState) => {
     }
 }
 
+export const SET_ADDED_COIN = "SET_ADDED_COIN";
+
+export const setAddedCoinAction = (addedCoinState) => {
+    return {
+        type: "SET_ADDED_COIN",
+        payload: {
+            addedCoin: addedCoinState
+        }
+    }
+}
+
 export const SET_ANS_PLAYERS = "SET_ANS_PLAYERS";
 
 export const setAnsPlayersAction = (ansPlayersState) => {

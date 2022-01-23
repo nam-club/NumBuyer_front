@@ -45,7 +45,7 @@ const TimeComponent = (props) => {
     // ターゲットカード公開フェーズロジック
     const showTarget = () => {
         dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-        dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+        dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG +  props.targetCard));
         dispatch(setTimeAction(selector.game.phaseTimes.showTarget));
         setTime(selector.game.phaseTimes.showTarget);
     }
@@ -72,15 +72,15 @@ const TimeComponent = (props) => {
                         // 正解者がいない場合はターゲットカード表示フェーズをスキップ
                         if(selector.game.targetSkipFlg) {
                             dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                            dispatch(setMessageAction('"' + props.auctionCard + '"' + selector.msg.lang.SHOW_AUC_MSG));
+                            dispatch(setMessageAction(props.auctionCard + selector.msg.lang.SHOW_AUC_MSG));
                             dispatch(setTimeAction(selector.game.phaseTimes.auction));
                             setTime(selector.game.phaseTimes.showAuction);
                         }else {
                             dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
                             if(selector.msg.lang.LANGUAGE === 'Japanese') {
-                                dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG1 + '"' + props.targetCard + '"' + selector.msg.lang.SHOW_TAR_MSG2));
+                                dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG1 + props.targetCard + selector.msg.lang.SHOW_TAR_MSG2));
                             }else {
-                                dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + '"' + props.targetCard + '"'));
+                                dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + props.targetCard));
                             }
                             dispatch(setTimeAction(selector.game.phaseTimes.showTarget));
                             setTime(selector.game.phaseTimes.showTarget);
@@ -90,7 +90,7 @@ const TimeComponent = (props) => {
                 case Constants.SHOW_TAR_PH:
                     if(time === 0) {
                         dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                        dispatch(setMessageAction('"' + props.auctionCard + '"' + selector.msg.lang.SHOW_AUC_MSG));
+                        dispatch(setMessageAction(props.auctionCard + selector.msg.lang.SHOW_AUC_MSG));
                         dispatch(setTimeAction(selector.game.phaseTimes.showAuction));
                         setTime(selector.game.phaseTimes.showAuction);
                     }
@@ -103,7 +103,6 @@ const TimeComponent = (props) => {
         // オークション〜ゲーム終了まで（back側に基づく遷移）のフェーズ遷移アクション
         React.useEffect(() => {
             console.log("phase:" + selector.game.phase);
-            console.log("time:" + time);
                 switch(selector.game.phase) {
                 case Constants.AUCTION_PH:
                     dispatch(setTimeAction(selector.game.phaseTimes.auction));
@@ -141,7 +140,8 @@ const TimeComponent = (props) => {
                         }
 
                         ansMessage += selector.msg.lang.CALC_FINISH_MSG2;
-                        ansMessage += props.targetCard + selector.msg.lang.CALC_FINISH_MSG3;
+                        ansMessage += selector.game.addedCoin.total + selector.msg.lang.CALC_FINISH_MSG3;
+                        ansMessage += selector.game.addedCoin.cardNumBonus + selector.msg.lang.CALC_FINISH_MSG4;
                         dispatch(setMessageAction(ansMessage));
 
                         // ターゲットカードを消す
