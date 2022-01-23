@@ -80,6 +80,8 @@ export const useStyles = makeStyles((theme) => ({
   quickButton: {
     color: grey[700],
     background: blue[200],
+    width: '75%',
+    'white-space': 'nowrap',
     border: 1,
     '&:hover': {
         background: blue[100],
@@ -88,13 +90,16 @@ export const useStyles = makeStyles((theme) => ({
   friendButton: {
     color: grey[700],
     background: indigo[200],
+    width: '75%',
+    'white-space': 'nowrap',
     '&:hover': {
         background: indigo[100],
       },
   },
   createButton: {
     color: grey[700],
-    width: '100%',
+    width: '75%',
+    'white-space': 'nowrap',
     zIndex: 2,
     background: blue[200],
     '&:hover': {
@@ -105,6 +110,7 @@ export const useStyles = makeStyles((theme) => ({
     color: grey[700],
     top: '50%',
     width: '100%',
+    'white-space': 'nowrap',
     background: indigo[200],
     '&:hover': {
         background: indigo[100],
@@ -114,6 +120,8 @@ export const useStyles = makeStyles((theme) => ({
     color: grey[700],
     margin: 10,
     fontSize: 30,
+    width: '75%',
+    'white-space': 'nowrap',
   },
   typography: {
       fontSize: '2rem',
@@ -208,6 +216,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 30,
     marginLeft: 50,
     marginBottom: 10,
+    width: '25%',
+    'white-space': 'nowrap',
     '&:hover': {
         background: lightBlue[100],
      },
@@ -216,6 +226,8 @@ export const useStyles = makeStyles((theme) => ({
     background: grey[500],
     marginTop: 30,
     marginBottom: 10,
+    width: '25%',
+    'white-space': 'nowrap',
     '&:hover': {
         background: grey[500],
      },
@@ -225,6 +237,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 30,
     marginLeft: 50,
     marginBottom: 10,
+    width: '25%',
+    'white-space': 'nowrap',
     '&:hover': {
         background: yellow[100],
      },

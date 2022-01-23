@@ -140,8 +140,7 @@ const Top = () => {
                         <Fade in={open}>
                         <div className={classes.paper}>
                             <Grid container>
-                                <Grid item xs={3}>
-                                </Grid>
+                                <Grid item xs={4}/>
                                 <Grid item xs={7}>
                                     <Button size="large" variant="contained" className={classes.createButton} 
                                     onClick={() => {
