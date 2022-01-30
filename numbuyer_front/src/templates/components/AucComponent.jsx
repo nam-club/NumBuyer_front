@@ -9,16 +9,16 @@ import { useStyles } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
-import Slide from '@material-ui/core/Slide';
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import Slide from '@mui/material/Slide';
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const AucComponent = (props) => {
     const classes = useStyles();

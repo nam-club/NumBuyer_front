@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { useStyles } from './theme';
+import { useStyles, Back, MenuCard, InputField, QuickButton,
+         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton } from './theme';
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -12,17 +13,20 @@ import { setRoomAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
 import GlobalStyle from "../globalStyles";
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Card from '@material-ui/core/Card';
-import TextField from '@material-ui/core/TextField'
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Grid from '@material-ui/core/Grid';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Grid from '@mui/material/Grid';
+import ListSubheader from '@mui/material/ListSubheader';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import { grey } from '@mui/material/colors';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
@@ -35,7 +39,9 @@ const Top = () => {
 
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
+    const [menuOpen, setMenuOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+    const [tutorialOpen, setTutorialOpen] = React.useState(false);
 
     const doChange = (e) => {
         if(!e.target.value.match(Constants.NAME_EXP)) {
@@ -53,6 +59,12 @@ const Top = () => {
         }
     }
 
+    // メニューリストを開く or 閉じる
+    const handleMenuClick = () => {
+        setMenuOpen(!menuOpen);
+      };
+
+    // フレンドマッチ用モーダルを開く
     const handleOpen = () => {
         if(name !== '' && !name.match(Constants.NAME_EXP)) {
             setOpen(true);
@@ -66,8 +78,19 @@ const Top = () => {
         }
     };
 
+    // フレンドマッチ用モーダルを閉じる
     const handleClose = () => {
         setOpen(false);
+    };
+
+    // チュートリアル用モーダルを開く
+    const tutoHandleOpen = () => {
+        setTutorialOpen(true);
+    };
+
+    // チュートリアル用モーダルを閉じる
+    const tutoHandleClose = () => {
+        setTutorialOpen(false);
     };
 
     const clickQuick = () => {
@@ -87,7 +110,7 @@ const Top = () => {
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
-            <div className={classes.back}>
+            <Back>
                 <Grid container>
                     <Grid item xs={7}/>
                     <Grid item xs={5}>
@@ -106,10 +129,11 @@ const Top = () => {
                 </Grid>
                 <img src={logo} className={classes.logo}/>
                 <img src={title} className={classes.title}/>
-                <Card className={classes.root}>
+                <MenuCard>
                     <CardContent>
-                        <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                        id="standard-basic" label={selector.msg.lang.PLAYER_NAME} value={name} 
+                        <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
+                        inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
+                        InputLabelProps={{ style: {fontSize: '3em'} }}
                         onChange={doChange}/>
                         {selector.msg.validFlg &&
                             <p className={classes.errorField}>{selector.msg.errMsg}</p>
@@ -117,63 +141,50 @@ const Top = () => {
                     </CardContent>
                     <CardActions>
                         <Grid item xs={6}>
-                            <Button size="large" variant="contained" className={classes.actionButton + " " + classes.quickButton}
-                            onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</Button>
+                            <QuickButton size="large" variant="contained"
+                            onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButton>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button size="large" variant="contained" className={classes.actionButton + " " + classes.friendButton}
-                            onClick={handleOpen}>{selector.msg.lang.FRIEND_MATCH}</Button>
+                            <FriendButton size="large" variant="contained"
+                            onClick={handleOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                         </Grid>
                     </CardActions>
-                    <Modal
+                    <FriendModal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
-                        className={classes.modal}
                         open={open}
                         onClose={handleClose}
                         closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                        timeout: 500,
-                        }}
                     >
                         <Fade in={open}>
-                        <div className={classes.paper}>
-                            <Grid container>
-                                <Grid item xs={4}/>
-                                <Grid item xs={7}>
-                                    <Button size="large" variant="contained" className={classes.createButton} 
-                                    onClick={() => {
-                                        dispatch(setValidAction({validFlg: false}));
-                                        dispatch(setRoomAction({roomId: roomId}));
-                                        createMatch({playerName: name, roomId: roomId});
-                                    }}>{selector.msg.lang.CREATE_BTN}</Button>
+                            <FriendMenu>
+                                <CreateButton size="large" variant="contained"
+                                onClick={() => {
+                                    dispatch(setValidAction({validFlg: false}));
+                                    dispatch(setRoomAction({roomId: roomId}));
+                                    createMatch({playerName: name, roomId: roomId});
+                                }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 
+                                        inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%'} } }
+                                        InputLabelProps={{ style: {fontSize: '3em'} }}
+                                        onChange={e => setRoomId(e.target.value)} />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <JoinButton size="large" variant="contained"
+                                        onClick={() => {
+                                            dispatch(setValidAction({validFlg: false}));
+                                            dispatch(setRoomAction({roomId: roomId}));
+                                            joinFriendMatch({playerName: name, roomId: roomId});
+                                        }}>{selector.msg.lang.JOIN_BTN}</JoinButton>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                            <Grid container>
-                                <Grid item xs={1}>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField inputProps={{className: classes.nameField}} InputLabelProps={{className: classes.nameField}}
-                                    id="standard-basic" label={selector.msg.lang.ROOM_ID} value={roomId} 
-                                    onChange={e => setRoomId(e.target.value)} />
-                                </Grid>
-                                <Grid item xs={1}>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <Button size="large" variant="contained" className={classes.joinButton} 
-                                    onClick={() => {
-                                        dispatch(setValidAction({validFlg: false}));
-                                        dispatch(setRoomAction({roomId: roomId}));
-                                        joinFriendMatch({playerName: name, roomId: roomId});
-                                    }}>{selector.msg.lang.JOIN_BTN}</Button>
-                                </Grid>
-                            </Grid>
-                        </div>
+                            </FriendMenu>
                         </Fade>
-                    </Modal>
-                </Card>
-            </div>
+                    </FriendModal>
+                </MenuCard>
+            </Back>
         </Typography>
     )
 }

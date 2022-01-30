@@ -9,7 +9,7 @@ import * as Constants from '../../constants';
 
 import { useStyles } from '../theme';
 
-import Card from '@material-ui/core/Card';
+import Card from '@mui/material/Card';
 
 const TimeComponent = (props) => {
     const classes = useStyles();
@@ -132,16 +132,21 @@ const TimeComponent = (props) => {
 
                         for(let ansPlayer of selector.game.ansPlayers) {
                             if(loopNum != selector.game.ansPlayers.length) {
-                                ansMessage += ansPlayer + ', ';
+                                ansMessage += ansPlayer.playerName + ', ';
                             }else {
-                                ansMessage += ansPlayer;
+                                ansMessage += ansPlayer.playerName;
                             }
                             loopNum++
                         }
 
                         ansMessage += selector.msg.lang.CALC_FINISH_MSG2;
-                        ansMessage += selector.game.addedCoin.total + selector.msg.lang.CALC_FINISH_MSG3;
-                        ansMessage += selector.game.addedCoin.cardNumBonus + selector.msg.lang.CALC_FINISH_MSG4;
+
+                        for(let ansPlayer of selector.game.ansPlayers) {
+                            ansMessage += ansPlayer.playerName + selector.msg.lang.CALC_FINISH_MSG3_1
+                             + ansPlayer.addedCoin.total + selector.msg.lang.CALC_FINISH_MSG3_2 
+                             + ansPlayer.addedCoin.cardNumBonus + selector.msg.lang.CALC_FINISH_MSG3_3;
+                        }
+
                         dispatch(setMessageAction(ansMessage));
 
                         // ターゲットカードを消す

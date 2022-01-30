@@ -2,20 +2,20 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
 
-import { useStyles } from './theme';
+import { useStyles, GameBack, MessageBox, NaviMessage, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage } from './theme';
 import usePersist from '../Persist';
 import { push } from 'connected-react-router';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
 
 import GlobalStyle from "../globalStyles";
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
-import Slide from '@material-ui/core/Slide';
-import Modal from '@material-ui/core/Modal';
-import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import Slide from '@mui/material/Slide';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
 import AucComponent from './components/AucComponent';
 import CalcComponent from './components/CalcComponent';
 
@@ -87,12 +87,12 @@ const Game = () => {
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
-            <div className={classes.game_back}>
+            <GameBack>
                 <Grid container>
                     <Grid item xs={9}>
-                        <Card className={classes.box}>
-                            <h3 className={classes.naviMessage}>{selector.game.message}</h3>
-                        </Card>
+                        <MessageBox>
+                            <NaviMessage>{selector.game.message}</NaviMessage>
+                        </MessageBox>
                     </Grid>
                     <Grid item xs={3}>
                         <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCard={auctionCard}
@@ -113,10 +113,10 @@ const Game = () => {
                         )
                         &&
                             <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                                <Card className={classes.target}>
-                                    <h3 className={classes.tag}>{selector.msg.lang.TARGET}</h3>
-                                    <h1 className={classes.value}>{targetCard}</h1>
-                                </Card>
+                                <TargetCard>
+                                    <CardTag>{selector.msg.lang.TARGET}</CardTag>
+                                    <CardValue>{targetCard}</CardValue>
+                                </TargetCard>
                             </Slide>
                         }
                     </Grid>
@@ -125,13 +125,13 @@ const Game = () => {
                         <CalcComponent calcBtnFlg={calcBtnFlg}/>
                     </Grid>
                     <Grid item xs={3}>
-                        <div className={classes.goal}>
-                            <h4 className={classes.goal_tag}>{selector.msg.lang.WIN_CONDITIONS}</h4>
+                        <GoalArea>
+                            <GoalTag>{selector.msg.lang.WIN_CONDITIONS}</GoalTag>
                             {selector.msg.lang.LANGUAGE === 'Japanese'
-                                ? <h2 className={classes.goal_tag}>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</h2>
-                                : <h2 className={classes.goal_tag}>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</h2>
+                                ? <GoalMessage>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessage>
+                                : <GoalMessage>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessage>
                             }
-                        </div>
+                        </GoalArea>
                         {selector.players.players.map((value) => (
                             <Card className={classes.player} key={value.playerId}>
                                 <h3 className={classes.tag + ' ' + classes.player_tag}><b>{value.playerName}</b></h3>
@@ -141,7 +141,7 @@ const Game = () => {
                         ))}
                     </Grid>
                 </Grid>
-            </div>
+            </GameBack>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

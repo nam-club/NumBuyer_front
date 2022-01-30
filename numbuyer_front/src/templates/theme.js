@@ -1,140 +1,252 @@
-import {createMuiTheme} from '@material-ui/core/styles'
-import { makeStyles } from '@material-ui/core/styles';
-import { positions } from '@material-ui/system';
+import { createTheme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
-import grey from '@material-ui/core/colors/grey';
-import yellow from '@material-ui/core/colors/yellow';
-import amber from '@material-ui/core/colors/amber';
-import blue from '@material-ui/core/colors/blue';
-import lightBlue from '@material-ui/core/colors/lightBlue';
-import indigo from '@material-ui/core/colors/indigo';
-import teal from '@material-ui/core/colors/teal';
-import red from '@material-ui/core/colors/red';
+import { grey, yellow, amber, blue, lightBlue, indigo, teal, red } from '@mui/material/colors';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import TextField from '@mui/material/TextField';
+import Modal from '@mui/material/Modal';
 
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Card from '@material-ui/core/Card';
-import TextField from '@material-ui/core/TextField'
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-
-export const theme = createMuiTheme({
+export const theme = createTheme({
   typography: {
     "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
   },
 })
 
+// トップ・ロビー画面の背景
+export const Back = styled('div')({
+  background: blue[300],
+  paddingTop: '10%',
+  paddingBottom: '15%',
+});
+
+// トップ・ロビー画面のメニュー
+export const MenuCard = styled(Card)({
+  marginRight: '20%',
+  marginLeft: '20%',
+});
+
+// 入力テキストボックス
+export const InputField = styled(TextField)({
+  zIndex: 1,
+});
+
+// クイックマッチボタン
+export const QuickButton = styled(Button)({
+  padding: '10%',
+  margin: '5%',
+  fontSize: '2em',
+  color: grey[700],
+  background: blue[200],
+  width: '75%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: blue[100],
+  },
+});
+
+// フレンドマッチボタン
+export const FriendButton = styled(Button)({
+  padding: '10%',
+  margin: '5%',
+  fontSize: '2em',
+  color: grey[700],
+  background: indigo[200],
+  width: '75%',
+  'white-space': 'nowrap',
+  '&:hover': {
+      background: indigo[100],
+    },
+});
+
+// フレンドマッチのモーダル
+export const FriendModal = styled(Modal)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+// フレンドマッチのメニュー
+export const FriendMenu = styled('div')({
+  background: grey[50],
+  boxShadow: 5,
+  padding: theme.spacing(4, 12, 4),
+});
+
+// 部屋作成ボタン
+export const CreateButton = styled(Button)({
+  color: grey[700],
+  width: '50%',
+  marginLeft: '25%',
+  marginBottom: '10%',
+  padding: '-20%',
+  'white-space': 'nowrap',
+  fontSize: '2em',
+  zIndex: 2,
+  background: blue[200],
+  '&:hover': {
+      background: blue[100],
+    },
+});
+
+// 部屋入室ボタン
+export const JoinButton = styled(Button)({
+  color: grey[700],
+  top: '50%',
+  width: '100%',
+  marginTop: '-10%',
+  marginLeft: '10%',
+  padding: '-20%',
+  fontSize: '2em',
+  'white-space': 'nowrap',
+  background: indigo[200],
+  '&:hover': {
+      background: indigo[100],
+  },
+});
+
+// ロビータイトル
+export const LobbyTitle = styled('p')({
+  color: lightBlue[700],
+  fontSize: '2em',
+  fontWeight: 'bold',
+});
+
+// 参加プレイヤー一覧
+export const ParticipantList = styled('p')({
+  color: grey[700],
+  fontSize: '1.5em',
+  fontWeight: 'bold',
+});
+
+// ルームコードタグ
+export const RoomCodeTag = styled('p')({
+  color: grey[700],
+  margin:0,
+  fontSize: '1.5em',
+  fontWeight: 'bold',
+});
+
+// ゲーム開始ボタン
+export const StartButton = styled(Button)({
+  color: grey[700],
+  background: blue[200],
+  fontSize: '2em',
+  width: '75%',
+  'white-space': 'nowrap',
+  '&:hover': {
+      background: blue[100],
+    },
+});
+
+// 戻るボタン
+export const BackButton = styled(Button)({
+  color: grey[700],
+  background: indigo[200],
+  fontSize: '2em',
+  width: '75%',
+  'white-space': 'nowrap',
+  '&:hover': {
+      background: indigo[100],
+    },
+});
+
+// ゲーム画面の背景
+export const GameBack = styled('div')({
+  background: blue[200],
+  paddingTop: '2%',
+  paddingBottom: '20%',
+});
+
+// メッセージボックス
+export const MessageBox = styled(Card)({
+  background: indigo[200],
+  marginLeft: '25%',
+});
+
+// メッセージ本体
+export const NaviMessage = styled('p')({
+  fontSize: '1.5em',
+  color: grey[50],
+});
+
+// 目標カード
+export const TargetCard = styled(Card)({
+  background: teal['A100'],
+  color: grey[700],
+  marginLeft: 50,
+  marginRight: 10,
+});
+
+// 目標タグ
+export const CardTag = styled('p')({
+  margin:0,
+  fontSize: '1.5em',
+});
+
+// 目標値
+export const CardValue = styled('p')({
+  margin: 0,
+  fontSize: '4em',
+  fontWeight: 'bold',
+});
+
+// 勝利条件エリア
+export const GoalArea = styled('div')({
+  marginTop: 5,
+  marginRight: 10,
+  marginLeft: 50,
+});
+
+// 勝利条件タグ
+export const GoalTag = styled('p')({
+  color: grey[50],
+  margin: 0,
+  padding: 0,
+  fontSize: '1.5em',
+});
+
+// 勝利条件メッセージ
+export const GoalMessage = styled('p')({
+  color: grey[50],
+  margin: 0,
+  padding: 0,
+  fontSize: '2em',
+  fontWeight: 'bold',
+});
+
 export const useStyles = makeStyles((theme) => ({
   
-  back: {
-    background: blue[300],
-    paddingTop: 200,
-    paddingBottom: 300,
-  },
-  game_back: {
-    background: blue[200],
-    paddingTop: 10,
-    paddingBottom: 300,
-  },
   topic: {
     color: yellow[300],
     fontSize: '4em',
   },
-  menu: {
-    color: lightBlue[700],
-    fontSize: '2em',
-  },
   name: {
     color: grey[700],
     fontSize: '1em',
-  },
-  root: {
-    marginRight: 300,
-    marginLeft: 300,
   },
   game_root: {
     marginTop: 10,
     marginRight: 300,
     marginLeft: 300,
   },
-  nameField: {
-    fontSize: '3em',
-    color: grey[600],
-    paddingTop: 80,
-    marginTop: -50,
-    zIndex: 1,
-  },
   errorField: {
     color: red[600],
     background: red[100],
   },
   actionButton: {
-      padding: 50,
-      margin: 10,
-      fontSize: 30,
-  },
-  quickButton: {
-    color: grey[700],
-    background: blue[200],
-    width: '75%',
-    'white-space': 'nowrap',
-    border: 1,
-    '&:hover': {
-        background: blue[100],
-      },
-  },
-  friendButton: {
-    color: grey[700],
-    background: indigo[200],
-    width: '75%',
-    'white-space': 'nowrap',
-    '&:hover': {
-        background: indigo[100],
-      },
-  },
-  createButton: {
-    color: grey[700],
-    width: '75%',
-    'white-space': 'nowrap',
-    zIndex: 2,
-    background: blue[200],
-    '&:hover': {
-        background: blue[100],
-     },
-  },
-  joinButton: {
-    color: grey[700],
-    top: '50%',
-    width: '100%',
-    'white-space': 'nowrap',
-    background: indigo[200],
-    '&:hover': {
-        background: indigo[100],
-    },
-  },
-  startButton: {
-    color: grey[700],
+    padding: 50,
     margin: 10,
     fontSize: 30,
-    width: '75%',
-    'white-space': 'nowrap',
   },
   typography: {
-      fontSize: '2rem',
+    fontSize: '2rem',
   },
   modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-  },
-  paper: {
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(4, 8, 6),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   box: {
     background: indigo[200],
@@ -143,12 +255,6 @@ export const useStyles = makeStyles((theme) => ({
   time: {
       marginLeft: 50,
       marginRight: 10,
-  },
-  target: {
-    background: teal['A100'],
-    color: grey[700],
-    marginLeft: 50,
-    marginRight: 10,
   },
 
   // オークションカード
@@ -183,9 +289,6 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
-  naviMessage: {
-    color: grey[50],
-  },
   bg_tag: {
     color: grey[50],
     margin:0,

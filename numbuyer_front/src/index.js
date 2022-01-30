@@ -9,19 +9,19 @@ import createStore from './redux/store/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
 import { theme } from "./templates/theme";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from '@mui/material/styles';
 
 const history = History.createBrowserHistory();
 export const store = createStore(history);
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
     </Provider>
-  </MuiThemeProvider>,
+  </ThemeProvider>,
   document.getElementById('root')
 );
 

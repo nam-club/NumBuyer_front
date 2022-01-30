@@ -1,10 +1,10 @@
 import React from 'react';
 import PlayerListComponent from './components/PlayerListComponent';
 
-import { useStyles } from './theme';
+import { useStyles, Back } from './theme';
 
 import GlobalStyle from "../globalStyles";
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
@@ -15,11 +15,11 @@ const Lobby = () => {
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
-            <div className={classes.back}>
+            <Back>
                 <img src={logo} className={classes.logo}/>
                 <img src={title} className={classes.title}/>
                 <PlayerListComponent/>
-            </div>
+            </Back>
         </Typography>
     )
 }
