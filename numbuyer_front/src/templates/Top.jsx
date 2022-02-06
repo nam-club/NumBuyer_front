@@ -9,6 +9,7 @@ import { CTX } from '../Socket';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { setPlayerNameAction } from '../redux/players/actions'
 import { setRoomAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
@@ -96,6 +97,7 @@ const Top = () => {
     const clickQuick = () => {
         if(name !== '' && !name.match(Constants.NAME_EXP)) {
             dispatch(setValidAction({validFlg: false}));
+            dispatch(setPlayerNameAction(name));
             joinQuickMatch({playerName: name});
         }else {
             dispatch(setValidAction({validFlg: true}));
@@ -163,6 +165,7 @@ const Top = () => {
                                     onClick={() => {
                                         dispatch(setValidAction({validFlg: false}));
                                         dispatch(setRoomAction({roomId: roomId}));
+                                        dispatch(setPlayerNameAction(name));
                                         createMatch({playerName: name, roomId: roomId});
                                     }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
                                 </div>
@@ -178,6 +181,7 @@ const Top = () => {
                                         onClick={() => {
                                             dispatch(setValidAction({validFlg: false}));
                                             dispatch(setRoomAction({roomId: roomId}));
+                                            dispatch(setPlayerNameAction(name));
                                             joinFriendMatch({playerName: name, roomId: roomId});
                                         }}>{selector.msg.lang.JOIN_BTN}</JoinButton>
                                     </Grid>

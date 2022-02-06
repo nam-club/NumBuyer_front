@@ -4,6 +4,7 @@ const initialState = {
     players: {
         player: {
             playerId: '', // 自分のプレイヤーID
+            playerName: '', // 自分のプレイヤー名
             cards: [], // 自分の手札
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限
@@ -39,7 +40,7 @@ const initialState = {
         goalCoin: 0, // 目標コイン
         targetCard: '　', // ターゲットカード
         auctionCard: '　', // オークションカード
-        ansPlayers: null, // 正解者配列
+        ansPlayers: null, // 正解者配列と獲得コイン
         highestBid: 0, // 現在の最高入札額
         highestName: '', // 現在の最高入札額のプレイヤー名
         addedCoin: { // 獲得コイン

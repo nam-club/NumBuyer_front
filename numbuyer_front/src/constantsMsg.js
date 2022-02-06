@@ -36,7 +36,8 @@ export const English = {
     NULL_BID_ERR: 'Please enter the amount.', // 金額が未入力
     NUM_ERR: 'You can only enter numbers.', // 数字以外が入力されている
     BID_ERR: 'Please enter an amount higher than the highest bid.', // 最高入札額以下の金額が入力されている
-    LACK_ERR: "you don't have enough money", // 所持金が足りない
+    LACK_ERR: "You don't have enough money.", // 所持金が足りない
+    DOUBLE_ERR: "You cannot bid twice in a row.", // ２回連続入札
 
     // ナビゲーションメッセージ
     GIVE_CARD_MSG: 'Distributing cards to players...',
@@ -108,6 +109,7 @@ export const Japanese = {
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
     BID_ERR: '最高入札額より高い金額を入力してください。', // 最高入札額以下の金額が入力されている
     LACK_ERR: "所持金が足りません。", // 所持金が足りない
+    DOUBLE_ERR: "２回続けて入札はできません。", // ２回連続入札
 
     // ナビゲーションメッセージ
     GIVE_CARD_MSG: 'カードを配布しています…',
@@ -180,6 +182,7 @@ export const Chinese = {
     NUM_ERR: '您只能输入数字。', // 数字以外が入力されている
     BID_ERR: '请输入高于最高出价的金额。', // 最高入札額以下の金額が入力されている
     LACK_ERR: "你没有足够的钱。", // 所持金が足りない
+    DOUBLE_ERR: "您不能连续出价两次。", // ２回連続入札
 
     // ナビゲーションメッセージ
     GIVE_CARD_MSG: '向玩家分发卡片…',

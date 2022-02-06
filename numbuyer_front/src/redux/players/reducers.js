@@ -9,6 +9,9 @@ export const PlayersReducer = (state = initialState.players, action) => {
         case Actions.SET_PLAYER_ID:
             state.player.playerId = action.payload.playerId;
             return state;
+        case Actions.SET_PLAYER_NAME:
+            state.player.playerName = action.payload.playerName;
+            return state;
         case Actions.SET_CARDS:
             state.player.cards = action.payload.cards;
             console.log(state.player);

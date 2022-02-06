@@ -20,6 +20,17 @@ export const setPlayerIdAction = (playerState) => {
     }
 }
 
+export const SET_PLAYER_NAME = "SET_PLAYER_NAME";
+
+export const setPlayerNameAction = (playerState) => {
+    return {
+        type: "SET_PLAYER_NAME",
+        payload: {
+            playerName: playerState
+        }
+    }
+}
+
 export const SET_CARDS = "SET_CARDS";
 
 export const setCardsAction = (playerState) => {

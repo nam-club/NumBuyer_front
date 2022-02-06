@@ -71,22 +71,30 @@ const AucComponent = (props) => {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
         }else if(fee.match(Constants.BID_EXP)) {
-            if(fee <= selector.players.player.coin) {
-                dispatch(setValidAction({validFlg: false}));
-                // 問題なし
-                if(fee > selector.game.highestBid) {
+            // 2回連続入札していないか
+            if((selector.game.highestName !== selector.players.player.playerName) || (selector.game.highestName === '')) {
+                // 所持金より高い金額を入力していないか
+                if(fee <= selector.players.player.coin) {
                     dispatch(setValidAction({validFlg: false}));
-                    bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
-                    setFee('');
-                // 現在の最高入札額以下では入札できない
+                    // 問題なし
+                    if(fee > selector.game.highestBid) {
+                        dispatch(setValidAction({validFlg: false}));
+                        bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
+                        setFee('');
+                    // 現在の最高入札額以下を入力していないか
+                    }else {
+                        dispatch(setValidAction({validFlg: true}));
+                        dispatch(setErrMsgAction({errMsg: selector.msg.lang.BID_ERR}));
+                    }
+                // 所持金が足りない
                 }else {
                     dispatch(setValidAction({validFlg: true}));
-                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.BID_ERR}));
+                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.LACK_ERR}));
                 }
-            // 所持金が足りない
+            // 2回連続入札
             }else {
                 dispatch(setValidAction({validFlg: true}));
-                dispatch(setErrMsgAction({errMsg: selector.msg.lang.LACK_ERR}));
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.DOUBLE_ERR}));
             }
         }
     }

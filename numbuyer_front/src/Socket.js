@@ -305,7 +305,7 @@ export default function Socket(props) {
         socket.on('game/finish_game', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            console.log(resObj.players);
+            dispatch(setMessageAction(''));
             dispatch(setRankingAction(resObj.players));
             dispatch(setFinishGameAction(true));
         })
