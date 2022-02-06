@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export const theme = createTheme({
   typography: {
@@ -33,6 +34,26 @@ export const Back = styled('div')({
   background: blue[300],
   paddingTop: '10%',
   paddingBottom: '15%',
+});
+
+// ハンバーガーメニューアイコン
+export const TopMenuIcon = styled(MenuIcon)({
+  color: grey[50],
+  fontSize: '3em',
+});
+
+// メニューモーダル
+export const MenuModal = styled(Modal)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+// 設定やチュートリアルのメニュー
+export const TopMenu = styled('div')({
+  background: grey[50],
+  boxShadow: 5,
+  padding: theme.spacing(4, 12, 4),
 });
 
 // トップ・ロビー画面のメニュー

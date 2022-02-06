@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
-         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage } from './theme';
+         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
+          TopMenuIcon, MenuModal, TopMenu } from './theme';
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -15,18 +16,15 @@ import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/act
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Grid from '@mui/material/Grid';
-import ListSubheader from '@mui/material/ListSubheader';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import { grey } from '@mui/material/colors';
 
 import logo from '../assets/logo.png';
@@ -42,7 +40,6 @@ const Top = () => {
     const [roomId, setRoomId] = React.useState('');
     const [menuOpen, setMenuOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
-    const [tutorialOpen, setTutorialOpen] = React.useState(false);
 
     const doChange = (e) => {
         if(!e.target.value.match(Constants.NAME_EXP)) {
@@ -61,9 +58,14 @@ const Top = () => {
     }
 
     // メニューリストを開く or 閉じる
-    const handleMenuClick = () => {
+    const handleMenuOpen = () => {
         setMenuOpen(!menuOpen);
-      };
+    };
+
+    // メニューリストを閉じる
+    const handleMenuClose = () => {
+        setMenuOpen(false);
+    };
 
     // フレンドマッチ用モーダルを開く
     const handleOpen = () => {
@@ -82,16 +84,6 @@ const Top = () => {
     // フレンドマッチ用モーダルを閉じる
     const handleClose = () => {
         setOpen(false);
-    };
-
-    // チュートリアル用モーダルを開く
-    const tutoHandleOpen = () => {
-        setTutorialOpen(true);
-    };
-
-    // チュートリアル用モーダルを閉じる
-    const tutoHandleClose = () => {
-        setTutorialOpen(false);
     };
 
     const clickQuick = () => {
@@ -114,7 +106,7 @@ const Top = () => {
             <GlobalStyle />
             <Back>
                 <Grid container>
-                    <Grid item xs={7}/>
+                    <Grid item xs={5}/>
                     <Grid item xs={5}>
                         <ButtonGroup variant="text" aria-label="text button group">
                             <Button onClick={() => {
@@ -128,7 +120,35 @@ const Top = () => {
                             }}>Chinese</Button>
                         </ButtonGroup>
                     </Grid>
+                    <Grid item xs={2}>
+                        <Button onClick={handleMenuOpen}>
+                            <TopMenuIcon/>
+                        </Button>
+                    </Grid>
                 </Grid>
+                <MenuModal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={menuOpen}
+                    onClose={handleMenuClose}
+                    closeAfterTransition
+                >
+                    <Fade in={menuOpen}>
+                        <TopMenu>
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Tabs
+                                    indicatorColor="secondary"
+                                    textColor="inherit"
+                                    variant="fullWidth"
+                                >
+                                    <Tab label="Setting" />
+                                    <Tab label="Tutorial" />
+                                    <Tab label="Trophy" />
+                                </Tabs>
+                            </Box>
+                        </TopMenu>
+                    </Fade>
+                </MenuModal>
                 <MainLogo src={logo}/>
                 <MainTitle src={title}/>
                 <MenuCard>
