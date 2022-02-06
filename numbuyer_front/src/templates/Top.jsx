@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useStyles, Back, MenuCard, InputField, QuickButton,
-         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton } from './theme';
+import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
+         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage } from './theme';
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -115,20 +115,20 @@ const Top = () => {
                     <Grid item xs={7}/>
                     <Grid item xs={5}>
                         <ButtonGroup variant="text" aria-label="text button group">
-                            <Button className={classes.bg_tag} onClick={() => {
+                            <Button onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.English));
                             }}>English</Button>
-                            <Button className={classes.bg_tag} onClick={() => {
+                            <Button onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.Japanese));
                             }}>Japanese</Button>
-                            <Button className={classes.bg_tag} onClick={() => {
+                            <Button onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.Chinese));
                             }}>Chinese</Button>
                         </ButtonGroup>
                     </Grid>
                 </Grid>
-                <img src={logo} className={classes.logo}/>
-                <img src={title} className={classes.title}/>
+                <MainLogo src={logo}/>
+                <MainTitle src={title}/>
                 <MenuCard>
                     <CardContent>
                         <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
@@ -136,7 +136,7 @@ const Top = () => {
                         InputLabelProps={{ style: {fontSize: '3em'} }}
                         onChange={doChange}/>
                         {selector.msg.validFlg &&
-                            <p className={classes.errorField}>{selector.msg.errMsg}</p>
+                            <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
                         }
                     </CardContent>
                     <CardActions>
@@ -158,12 +158,14 @@ const Top = () => {
                     >
                         <Fade in={open}>
                             <FriendMenu>
-                                <CreateButton size="large" variant="contained"
-                                onClick={() => {
-                                    dispatch(setValidAction({validFlg: false}));
-                                    dispatch(setRoomAction({roomId: roomId}));
-                                    createMatch({playerName: name, roomId: roomId});
-                                }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
+                                <div align="center">
+                                    <CreateButton size="large" variant="contained"
+                                    onClick={() => {
+                                        dispatch(setValidAction({validFlg: false}));
+                                        dispatch(setRoomAction({roomId: roomId}));
+                                        createMatch({playerName: name, roomId: roomId});
+                                    }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
+                                </div>
                                 <Grid container>
                                     <Grid item xs={6}>
                                         <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 

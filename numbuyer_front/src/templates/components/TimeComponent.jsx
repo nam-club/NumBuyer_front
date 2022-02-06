@@ -7,9 +7,10 @@ setFinishGameAction, setWinPlayerAction, setFirstTurnAction, setRemTimeFlgAction
 
 import * as Constants from '../../constants';
 
-import { useStyles } from '../theme';
+import { useStyles, TimeArea, TimeTag, TimeValue } from '../theme';
 
 import Card from '@mui/material/Card';
+import { setValidAction } from '../../redux/msg/actions';
 
 const TimeComponent = (props) => {
     const classes = useStyles();
@@ -113,6 +114,7 @@ const TimeComponent = (props) => {
                 case Constants.AUC_RESULT_PH:
                     // コインとカード情報の更新
                     buy({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
+                    dispatch(setValidAction(false));
                     break;
                 case Constants.CALCULATE_PH:
                     dispatch(setTimeAction(selector.game.phaseTimes.calculate));
@@ -163,10 +165,10 @@ const TimeComponent = (props) => {
     }, [selector.game.phase]);
 
     return (
-        <div className={classes.time}>
-            <h3 className={classes.bg_tag}>{selector.msg.lang.TIME}</h3>
-            <h1 className={classes.bg_value}>{showFlg ? time : "　"}</h1>
-        </div>
+        <TimeArea>
+            <TimeTag>{selector.msg.lang.TIME}</TimeTag>
+            <TimeValue>{showFlg ? time : "　"}</TimeValue>
+        </TimeArea>
     )
 }
 

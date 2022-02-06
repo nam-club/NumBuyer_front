@@ -2,7 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
 
-import { useStyles, GameBack, MessageBox, NaviMessage, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage } from './theme';
+import { useStyles, GameBack, MessageBox, NaviMessage, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage,
+         PlayerList, PlayerName, PlayerInfo, PlayerInfoIcon, FinishModal, FinishMenu, RankingTitle, 
+         Winner, WinnerInfoIcon, Loser, LoserInfoIcon, FinishButton, AgainButton } from './theme';
 import usePersist from '../Persist';
 import { push } from 'connected-react-router';
 import * as Constants from '../constants';
@@ -76,7 +78,7 @@ const Game = () => {
             case 'finish':
                 dispatch(push('/'));
                 break;
-            case 'try':
+            case 'again':
                 start({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
                 break;
             default:
@@ -133,55 +135,48 @@ const Game = () => {
                             }
                         </GoalArea>
                         {selector.players.players.map((value) => (
-                            <Card className={classes.player} key={value.playerId}>
-                                <h3 className={classes.tag + ' ' + classes.player_tag}><b>{value.playerName}</b></h3>
-                                <img src={card} className={classes.image} /><span className={classes.tag + ' ' + classes.player_tag}>×{value.cardNum}　</span>
-                                <img src={coin} className={classes.image} /> <span className={classes.tag + ' ' + classes.player_tag}>{value.coin + ' ' + selector.msg.lang.COIN}</span>
-                            </Card>
+                            <PlayerList key={value.playerId}>
+                                <PlayerName><b>{value.playerName}</b></PlayerName>
+                                <PlayerInfoIcon src={card} /><PlayerInfo>×{value.cardNum}　</PlayerInfo>
+                                <PlayerInfoIcon src={coin} /> <PlayerInfo>{value.coin + ' ' + selector.msg.lang.COIN}</PlayerInfo>
+                            </PlayerList>
                         ))}
                     </Grid>
                 </Grid>
-            </GameBack>
-            <Modal
+                <FinishModal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={classes.modal}
                 open={finishFlg}
-            >
-                <Fade in={finishFlg}>
-                <div className={classes.paper}>
-                    <h1 className={classes.topic}>RANKING</h1>
-                    {selector.players.ranking && selector.players.ranking.map((value) => (
-                        <div key={value.rank}>
-                        {value.rank === 1 ?
-                            <Grid container>
-                                <Grid item xs={4}>
-                                    <span className={classes.winner + ' ' + classes.player_tag}><b>{value.rank} : {value.playerName} </b></span>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <img src={coin} className={classes.image} />
-                                    <span className={classes.winner + ' ' + classes.player_tag}><b> {value.coin} coin</b></span>
-                                </Grid>
-                            </Grid> :
-                            <Grid container>
-                                <Grid item xs={4}>
-                                    <span className={classes.tag + ' ' + classes.player_tag}>{value.rank} : {value.playerName} </span>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <img src={coin} className={classes.image} />
-                                    <span className={classes.tag + ' ' + classes.player_tag}> {value.coin} coin</span>
-                                </Grid>
-                            </Grid>
-                        }    
-                        </div>
-                    ))}
-                    <Button size="large" variant="contained" className={classes.startButton + " " + classes.friendButton}
-                    onClick={() => finishGame('finish')}>Finish Game</Button>
-                    <Button size="large" variant="contained" className={classes.startButton + " " + classes.quickButton}
-                    onClick={() => finishGame('try')}>Try Again</Button>
-                </div>
-                </Fade>
-            </Modal>
+                >
+                    <Fade in={finishFlg}>
+                        <FinishMenu>
+                            <RankingTitle align="center" elevation={0}>{selector.msg.lang.RANKING}</RankingTitle>
+                            {selector.players.ranking && selector.players.ranking.map((value) => (
+                                <div key={value.rank} align="center">
+                                {value.rank === 1 ?
+                                    <div>
+                                        <Winner>{value.rank} : {value.playerName} </Winner>
+                                        <WinnerInfoIcon src={coin} />
+                                        <Winner>{value.coin + ' ' + selector.msg.lang.COIN}</Winner>
+                                    </div>:
+                                    <div>
+                                        <Loser>{value.rank} : {value.playerName} </Loser>
+                                        <LoserInfoIcon src={coin} />
+                                        <Loser> {value.coin + ' ' + selector.msg.lang.COIN}</Loser>
+                                    </div>
+                                }    
+                                </div>
+                            ))}
+                            <div align="center">
+                                <FinishButton size="large" variant="contained" 
+                                onClick={() => finishGame('finish')}>{selector.msg.lang.FINISH_BTN}</FinishButton>
+                                <AgainButton size="large" variant="contained" 
+                                onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
+                            </div>
+                        </FinishMenu>
+                    </Fade>
+                </FinishModal>
+            </GameBack>
         </Typography>
     )
 }

@@ -26,6 +26,9 @@ export const English = {
     WIN_CONDITIONS: 'Win conditions',
     WIN_MSG: 'Have',
     COIN: 'Coin',
+    RANKING: 'RANKING',
+    FINISH_BTN: 'Finish Game',
+    AGAIN_BTN: 'Play Again',
 
     // エラーメッセージ
     NULL_NAME_ERR: 'Please enter your name.', // 名前が未入力
@@ -94,6 +97,9 @@ export const Japanese = {
     WIN_CONDITIONS: '勝利条件',
     WIN_MSG: 'を集める',
     COIN: 'コイン',
+    RANKING: 'ランキング',
+    FINISH_BTN: 'ゲームをやめる',
+    AGAIN_BTN: 'もう一度プレイする',
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -163,6 +169,9 @@ export const Chinese = {
     WIN_CONDITIONS: '胜利条件',
     WIN_MSG: '有',
     COIN: '硬币',
+    RANKING: '排行',
+    FINISH_BTN: '退出游戏',
+    AGAIN_BTN: '再玩一遍',
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力

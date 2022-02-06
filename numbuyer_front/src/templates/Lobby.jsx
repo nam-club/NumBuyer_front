@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayerListComponent from './components/PlayerListComponent';
 
-import { useStyles, Back } from './theme';
+import { useStyles, MainLogo, MainTitle, Back } from './theme';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
@@ -16,8 +16,8 @@ const Lobby = () => {
         <Typography component="div" align="center">
             <GlobalStyle />
             <Back>
-                <img src={logo} className={classes.logo}/>
-                <img src={title} className={classes.title}/>
+                <MainLogo src={logo}/>
+                <MainTitle src={title}/>
                 <PlayerListComponent/>
             </Back>
         </Typography>

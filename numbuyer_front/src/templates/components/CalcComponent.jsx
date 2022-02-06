@@ -8,7 +8,7 @@ import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
 import * as Constants from '../../constants';
 import usePersist from '../../Persist';
 
-import { useStyles } from '../theme';
+import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -151,65 +151,65 @@ const CalcComponent = (props) => {
             <Grid container>
                 <Grid item xs={12}>
                     <Card className={classes.hand + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.hand_animation : '')}>
-                        <h3 className={classes.handMessage} align="left">{selector.msg.lang.YOUR_CARDS}</h3>
+                        <AreaTag align="left">{selector.msg.lang.YOUR_CARDS}</AreaTag>
                         {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                         ) &&
-                            <div className={classes.card_display}>
+                            <WrapDisplay>
                                 {hands.map((value, index) => (
                                     <Grow in={fade} timeout={1000}>
-                                        <Button variant="contained" 
-                                        className={classes.card + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.card_valid : '')} 
+                                        <TermCard variant="contained" 
                                         key={index}
                                         onClick={() => selectHands(index, value)}
                                         disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
-                                            <h1 className={classes.value}>{value}</h1>
-                                        </Button>
+                                            <CardValue>{value}</CardValue>
+                                        </TermCard>
                                     </Grow>
                                 ))}
-                            </div>
+                            </WrapDisplay>
                         }
                     </Card>
                 </Grid>
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <Card className={classes.calc}>
-                        <h3 className={classes.calcMessage} align="left">{selector.msg.lang.CALCULATE_FIELD}</h3>
+                    <CalcArea>
+                        <AreaTag align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTag>
                             {calcs &&
-                                <div className={classes.card_display}>
+                                <WrapDisplay>
                                     {calcs.map((value, index) => (
                                         <Grow in={fade} timeout={1000}>
-                                            <Button variant="contained" 
-                                            className={classes.card + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.card_valid : '')} 
+                                            <TermCard variant="contained" 
                                             key={index}
                                             onClick={() => selectCalcs(index, value)}
                                             disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                                <h1 className={classes.value} >{value}</h1>
-                                            </Button>
+                                                <CardValue>{value}</CardValue>
+                                            </TermCard>
                                         </Grow>
                                     ))}
-                                </div>
+                                </WrapDisplay>
                             }
-                        <Button size="large" variant="contained" className={classes.passButton} onClick={handleClickOpen}
-                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>{selector.msg.lang.PASS_BTN}</Button>
+                        <PassButton size="large" variant="contained" onClick={handleClickOpen}
+                            disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
+                            {selector.msg.lang.PASS_BTN}</PassButton>
                         <Dialog
                             open={open}
                             onClose={handleClose}
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</DialogTitle>
+                            <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
                             <DialogContent>
-                                <DialogContentText id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</DialogContentText>
+                                <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose}>{selector.msg.lang.NO_BTN}</Button>
-                                <Button onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</Button>
+                                <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                                <YesButton onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
                             </DialogActions>
                         </Dialog>
-                        <Button size="large" variant="contained" className={classes.calcButton} onClick={ansCalc}
-                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>{selector.msg.lang.ANSWER_BTN}</Button>
-                    </Card>
+                        <CalcButton size="large" variant="contained" onClick={ansCalc}
+                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
+                            {selector.msg.lang.ANSWER_BTN}</CalcButton>
+                    </CalcArea>
                 </Grid>
             </Grid>
         </div>

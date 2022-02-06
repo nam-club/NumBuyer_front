@@ -5,20 +5,18 @@ import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles } from '../theme';
+import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, BidButton, PassButton, YesButton, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
-import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { grey } from '@mui/material/colors';
 
 const AucComponent = (props) => {
     const classes = useStyles();
@@ -120,49 +118,55 @@ const AucComponent = (props) => {
                         !((selector.game.phase === Constants.READY_PH)
                             || (selector.game.phase === Constants.GIVE_CARD_PH)
                             || (selector.game.phase === Constants.SHOW_TAR_PH)))
-                     &&
+                    &&
                         <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                            <Card className={classes.auction}>
-                                <h3 className={classes.tag}>{selector.msg.lang.AUCTION}</h3>
-                                <h1 className={classes.value}>{props.auctionCard}</h1>
-                            </Card>
+                            <AuctionCard>
+                                <CardTag>{selector.msg.lang.AUCTION}</CardTag>
+                                <CardValue>{props.auctionCard}</CardValue>
+                            </AuctionCard>
                         </Slide>
                     }
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField InputProps={{className: classes.coinField, inputProps: {min: 1}}}
-                    type="number" InputLabelProps={{className: classes.coinField}}
-                    id="standard-basic" label={selector.msg.lang.BID_MSG} value={fee} 
-                    onChange={doChange} />
-                    {selector.msg.validFlg &&
-                        <p className={classes.errorField}>{selector.msg.errMsg}</p>
+                    {(selector.game.phase === Constants.AUCTION_PH) ?
+                        <div>
+                            <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
+                            <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
+                            type="number" 
+                            id="standard-basic" value={fee} 
+                            onChange={doChange} />
+                        </div>
+                    :   <AuctionArea></AuctionArea>
+                    }  
+                    {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&
+                        <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
                     }
-                    <Button size="large" variant="contained" className={classes.passButton}
-                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</Button>
+                    <PassButton size="large" variant="contained"
+                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</PassButton>
                     <Dialog
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"
                     >
-                        <DialogTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</DialogContentText>
+                        <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
+                        <DialogContent align="center">
+                            <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose}>{selector.msg.lang.NO_BTN}</Button>
-                            <Button onClick={passAucCard} autoFocus>{selector.msg.lang.YES_BTN}</Button>
+                            <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                            <YesButton onClick={passAucCard} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
                         </DialogActions>
                     </Dialog>
-                    <Button size="large" variant="contained" className={classes.bidButton}
-                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</Button>
+                    <BidButton size="large" variant="contained"
+                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</BidButton>
                     {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
-                        <h3 className={classes.tag}>
+                        <HighBidMessage>
                             {selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3}
-                        </h3>
+                        </HighBidMessage>
                     }
-            </Grid>
                 </Grid>
+            </Grid>
         </Card>
     )
 }

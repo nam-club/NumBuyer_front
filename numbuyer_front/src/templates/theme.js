@@ -7,12 +7,26 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
 
 export const theme = createTheme({
   typography: {
     "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
   },
 })
+
+// メインロゴ
+export const MainLogo = styled('img')({
+  width: '9%',
+});
+
+// メインタイトル
+export const MainTitle = styled('img')({
+  width: '40%',
+  marginLeft: 20,
+  marginBottom: 30,
+});
 
 // トップ・ロビー画面の背景
 export const Back = styled('div')({
@@ -30,6 +44,12 @@ export const MenuCard = styled(Card)({
 // 入力テキストボックス
 export const InputField = styled(TextField)({
   zIndex: 1,
+});
+
+// エラーメッセージ
+export const ErrorMessage = styled('p')({
+  color: red[600],
+  background: red[100],
 });
 
 // クイックマッチボタン
@@ -56,8 +76,8 @@ export const FriendButton = styled(Button)({
   width: '75%',
   'white-space': 'nowrap',
   '&:hover': {
-      background: indigo[100],
-    },
+    background: indigo[100],
+  },
 });
 
 // フレンドマッチのモーダル
@@ -78,7 +98,6 @@ export const FriendMenu = styled('div')({
 export const CreateButton = styled(Button)({
   color: grey[700],
   width: '50%',
-  marginLeft: '25%',
   marginBottom: '10%',
   padding: '-20%',
   'white-space': 'nowrap',
@@ -86,8 +105,8 @@ export const CreateButton = styled(Button)({
   zIndex: 2,
   background: blue[200],
   '&:hover': {
-      background: blue[100],
-    },
+    background: blue[100],
+  },
 });
 
 // 部屋入室ボタン
@@ -102,7 +121,7 @@ export const JoinButton = styled(Button)({
   'white-space': 'nowrap',
   background: indigo[200],
   '&:hover': {
-      background: indigo[100],
+    background: indigo[100],
   },
 });
 
@@ -136,8 +155,8 @@ export const StartButton = styled(Button)({
   width: '75%',
   'white-space': 'nowrap',
   '&:hover': {
-      background: blue[100],
-    },
+    background: blue[100],
+  },
 });
 
 // 戻るボタン
@@ -148,8 +167,8 @@ export const BackButton = styled(Button)({
   width: '75%',
   'white-space': 'nowrap',
   '&:hover': {
-      background: indigo[100],
-    },
+    background: indigo[100],
+  },
 });
 
 // ゲーム画面の背景
@@ -177,12 +196,14 @@ export const TargetCard = styled(Card)({
   color: grey[700],
   marginLeft: 50,
   marginRight: 10,
+  'white-space': 'nowrap',
 });
 
 // 目標タグ
 export const CardTag = styled('p')({
   margin:0,
-  fontSize: '1.5em',
+  color: grey[700],
+  fontSize: '1.2em',
 });
 
 // 目標値
@@ -192,8 +213,160 @@ export const CardValue = styled('p')({
   fontWeight: 'bold',
 });
 
+// オークションエリア
+export const AuctionArea = styled('div')({
+  padding: '10%',
+});
+
+// オークションカード
+export const AuctionCard = styled(Card)({
+  background: lightBlue[200],
+  color: grey[700],
+  marginLeft: 50,
+  marginRight: 50,
+  'white-space': 'nowrap',
+});
+
+// 入札金額を入力してくださいメッセージ
+export const BidMessage = styled('p')({
+  color: grey[600],
+  margin: 0,
+});
+
+// 入札金額入力ボックス
+export const CoinField = styled(TextField)({
+  color: grey[600],
+  width: '25%',
+  margin: 0,
+});
+
+// 入札ボタン
+export const BidButton = styled(Button)({
+  background: lightBlue[200],
+  color: grey[700],
+  width: '25%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: lightBlue[100],
+  },
+});
+
+// 最高入札額メッセージ
+export const HighBidMessage = styled('p')({
+  margin:0,
+  color: amber[500],
+  fontSize: '1.5em',
+});
+
+// エリアタグ
+export const AreaTag = styled('p')({
+  color: grey[700],
+  marginLeft: 10,
+  fontSize: '1.2em',
+});
+
+// 項カード
+export const TermCard = styled(Button)({
+  background: yellow[200],
+  color: grey[700],
+  marginLeft: '1%',
+  marginBottom: '1%',
+  width: '5vw',
+  height: '10vh',
+  '&:hover': {
+    background: yellow[100],
+  },
+});
+
+// 計算エリア
+export const CalcArea = styled(Card)({
+  background: grey[50],
+  marginTop: 5,
+  marginLeft: -250,
+  position: 'relative',
+  top: 50,
+});
+
+// 折り返し表示用
+export const WrapDisplay = styled('div')({
+  display: 'flex',
+  flexWrap: 'wrap',
+});
+
+// 解答ボタン
+export const CalcButton = styled(Button)({
+  background: yellow[200],
+  color: grey[700],
+  marginTop: 30,
+  marginLeft: 50,
+  marginBottom: 10,
+  width: '25%',
+  'white-space': 'nowrap',
+  '&:hover': {
+      background: yellow[100],
+    },
+});
+
+// パスボタン
+export const PassButton = styled(Button)({
+  background: grey[500],
+  color: grey[50],
+  width: '25%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: grey[500],
+  },
+});
+
+// 確認ダイアログタイトル
+export const ConfirmTitle = styled(DialogTitle)({
+  fontSize: '2em',
+  color: grey[700],
+});
+
+// 確認ダイアログメッセージ
+export const ConfirmMessage = styled(DialogContentText)({
+  fontSize: '1.2em',
+  color: grey[700],
+});
+
+// YESボタン
+export const YesButton = styled(Button)({
+  background: indigo[200],
+  color: grey[50],
+  width: '25%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: indigo[100],
+  },
+});
+
+// 残り時間表示エリア
+export const TimeArea = styled('div')({
+  color: grey[50],
+  marginLeft: '12%',
+  marginRight: '2%',
+});
+
+// 残り時間タグ
+export const TimeTag = styled('p')({
+  margin:0,
+  fontSize: '1.5em',
+});
+
+// 残り時間値
+export const TimeValue = styled('p')({
+  margin:0,
+  fontSize: '4.5em',
+  fontWeight: 'bold',
+});
+
 // 勝利条件エリア
 export const GoalArea = styled('div')({
+  color: grey[50],
   marginTop: 5,
   marginRight: 10,
   marginLeft: 50,
@@ -201,7 +374,6 @@ export const GoalArea = styled('div')({
 
 // 勝利条件タグ
 export const GoalTag = styled('p')({
-  color: grey[50],
   margin: 0,
   padding: 0,
   fontSize: '1.5em',
@@ -209,61 +381,123 @@ export const GoalTag = styled('p')({
 
 // 勝利条件メッセージ
 export const GoalMessage = styled('p')({
-  color: grey[50],
   margin: 0,
   padding: 0,
   fontSize: '2em',
   fontWeight: 'bold',
 });
 
-export const useStyles = makeStyles((theme) => ({
-  
-  topic: {
-    color: yellow[300],
-    fontSize: '4em',
-  },
-  name: {
-    color: grey[700],
-    fontSize: '1em',
-  },
-  game_root: {
-    marginTop: 10,
-    marginRight: 300,
-    marginLeft: 300,
-  },
-  errorField: {
-    color: red[600],
-    background: red[100],
-  },
-  actionButton: {
-    padding: 50,
-    margin: 10,
-    fontSize: 30,
-  },
-  typography: {
-    fontSize: '2rem',
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    background: indigo[200],
-    marginLeft: 300,
-  },
-  time: {
-      marginLeft: 50,
-      marginRight: 10,
-  },
+// プレイヤー一覧エリア
+export const PlayerList = styled(Card)({
+  background: grey[50],
+  color: grey[700],
+  marginTop: 5,
+  marginRight: 25,
+  marginLeft: 75,
+});
 
-  // オークションカード
-  auction: {
-    background: lightBlue[200],
-    color: grey[700],
-    marginLeft: 50,
-    marginRight: 50,
-  },
+// プレイヤー名
+export const PlayerName = styled('p')({
+  fontSize: '1.5em',
+  fontWeight: 100,
+  margin: 0,
+});
+
+// プレイヤー情報
+export const PlayerInfo = styled('span')({
+  margin: 0,
+  fontSize: 25,
+  fontWeight: 100,
+});
+
+// プレイヤー情報アイコン
+export const PlayerInfoIcon = styled('img')({
+  width: '8%',
+});
+
+// ゲーム終了のモーダル
+export const FinishModal = styled(Modal)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+// ゲーム終了のメニュー
+export const FinishMenu = styled('div')({
+  background: grey[50],
+  boxShadow: 5,
+  padding: theme.spacing(4, 12, 8),
+});
+
+// ランキングタイトル
+export const RankingTitle = styled(Card)({
+  "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
+  color: grey[50],
+  background: amber[400],
+  fontSize: '4em',
+  fontWeight: 500,
+  margin: '3%',
+  'white-space': 'nowrap',
+});
+
+// 優勝者
+export const Winner = styled('span')({
+  "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
+  color: amber[500],
+  fontSize: '1.5em',
+  fontWeight: 500,
+  margin: 0,
+  'white-space': 'nowrap',
+});
+
+// 優勝者情報アイコン
+export const WinnerInfoIcon = styled('img')({
+  marginLeft: '5%',
+  marginRight: '1%',
+});
+
+// 敗北者
+export const Loser = styled('span')({
+  "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
+  color: grey[700],
+  fontSize: '1.5em',
+  margin: 0,
+  'white-space': 'nowrap',
+});
+
+// 敗北者情報アイコン
+export const LoserInfoIcon = styled('img')({
+  marginLeft: '5%',
+  marginRight: '1%',
+});
+
+// ゲーム終了してTOP画面に戻るボタン
+export const FinishButton = styled(Button)({
+  color: grey[700],
+  background: indigo[200],
+  fontSize: '2em',
+  width: '75%',
+  marginTop: '5%',
+  'white-space': 'nowrap',
+  '&:hover': {
+      background: indigo[100],
+    },
+});
+
+// もう一度遊ぶボタン
+export const AgainButton = styled(Button)({
+  color: grey[700],
+  background: blue[200],
+  fontSize: '2em',
+  width: '75%',
+  marginTop: '3%',
+  'white-space': 'nowrap',
+  '&:hover': {
+      background: blue[100],
+    },
+});
+
+export const useStyles = makeStyles((theme) => ({
 
   // オークションエリア
   auction_root: {
@@ -289,80 +523,6 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
-  bg_tag: {
-    color: grey[50],
-    margin:0,
-  },
-  bg_value: {
-      color: grey[50],
-      margin: 0,
-      fontSize: '4em',
-  },
-  tag: {
-      color: grey[700],
-      margin:0,
-  },
-  player_tag: {
-    fontSize: 25,
-    fontWeight: 100,
-  },
-  value: {
-      margin: 0,
-      fontSize: '4em',
-  },
-  coinField: {
-    color: grey[600],
-    width: 300,
-  },
-  bidButton: {
-    background: lightBlue[200],
-    marginTop: 30,
-    marginLeft: 50,
-    marginBottom: 10,
-    width: '25%',
-    'white-space': 'nowrap',
-    '&:hover': {
-        background: lightBlue[100],
-     },
-  },
-  passButton: {
-    background: grey[500],
-    marginTop: 30,
-    marginBottom: 10,
-    width: '25%',
-    'white-space': 'nowrap',
-    '&:hover': {
-        background: grey[500],
-     },
-  },
-  calcButton: {
-    background: yellow[200],
-    marginTop: 30,
-    marginLeft: 50,
-    marginBottom: 10,
-    width: '25%',
-    'white-space': 'nowrap',
-    '&:hover': {
-        background: yellow[100],
-     },
-  },
-  goal: {
-    marginTop: 5,
-    marginRight: 10,
-    marginLeft: 50,
-  },
-  goal_tag: {
-    color: grey[50],
-    margin:0,
-  },
-  player: {
-    background: grey[50],
-    color: grey[700],
-    marginTop: 5,
-    marginRight: 25,
-    marginLeft: 75,
-  },
-
   // 手札エリア
   hand: {
     background: grey[200],
@@ -385,56 +545,4 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'scale(0.98)',
     },
   },
-
-  handMessage: {
-    color: grey[700],
-    marginLeft: 10,
-  },
-  calc: {
-    background: grey[200],
-    marginTop: 5,
-    marginLeft: -250,
-    position: 'relative',
-    top: 50,
-  },
-  calcMessage: {
-    color: grey[700],
-    marginLeft: 10,
-  },
-  card: {
-    background: yellow[200],
-    marginLeft: 10,
-    marginBottom: 10,
-    width: 80,
-    height: 80,
-  },
-
-  // 計算フェーズの時のみ文字色をつける（非活性の時に文字色を消すために）
-  card_valid: {
-    color: grey[700],
-  },
-
-  // カード折り返し表示用
-  card_display: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  winner: {
-    color: amber[500],
-    fontWeight: 500,
-  },
-  loser: {
-    color: blue[600],
-  },
-  image: {
-    width: '8%',
-  },
-  title: {
-    width: '40%',
-    marginLeft: 20,
-    marginBottom: 30,
-  },
-  logo: {
-    width: '9%',
-  }
 }));
