@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
          FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
-          TopMenuIcon, MenuModal, TopMenu } from './theme';
+          TutorialIcon, SettingIcon, MenuModal, TopMenu } from './theme';
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -14,6 +14,8 @@ import { setPlayerNameAction } from '../redux/players/actions'
 import { setRoomAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
+import TutorialComponent from './components/TutorialComponent';
+
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
 import Fade from '@mui/material/Fade';
@@ -22,9 +24,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import { grey } from '@mui/material/colors';
 
 import logo from '../assets/logo.png';
@@ -106,8 +105,7 @@ const Top = () => {
             <GlobalStyle />
             <Back>
                 <Grid container>
-                    <Grid item xs={5}/>
-                    <Grid item xs={5}>
+                    <Grid item xs={8}>
                         <ButtonGroup variant="text" aria-label="text button group">
                             <Button onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.English));
@@ -122,9 +120,13 @@ const Top = () => {
                     </Grid>
                     <Grid item xs={2}>
                         <Button onClick={handleMenuOpen}>
-                            <TopMenuIcon/>
+                            <SettingIcon/>
+                        </Button>
+                        <Button onClick={handleMenuOpen}>
+                            <TutorialIcon/>
                         </Button>
                     </Grid>
+                    <Grid item xs={2}/>
                 </Grid>
                 <MenuModal
                     aria-labelledby="transition-modal-title"
@@ -135,17 +137,7 @@ const Top = () => {
                 >
                     <Fade in={menuOpen}>
                         <TopMenu>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs
-                                    indicatorColor="secondary"
-                                    textColor="inherit"
-                                    variant="fullWidth"
-                                >
-                                    <Tab label="Setting" />
-                                    <Tab label="Tutorial" />
-                                    <Tab label="Trophy" />
-                                </Tabs>
-                            </Box>
+                            <TutorialComponent/>
                         </TopMenu>
                     </Fade>
                 </MenuModal>

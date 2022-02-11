@@ -7,9 +7,11 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
+import TimelineContent from '@mui/lab/TimelineContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const theme = createTheme({
   typography: {
@@ -36,10 +38,18 @@ export const Back = styled('div')({
   paddingBottom: '15%',
 });
 
-// ハンバーガーメニューアイコン
-export const TopMenuIcon = styled(MenuIcon)({
+// チュートリアルアイコン
+export const TutorialIcon = styled(MenuBookIcon)({
   color: grey[50],
   fontSize: '3em',
+  margin: 0,
+});
+
+// 設定アイコン
+export const SettingIcon = styled(SettingsIcon)({
+  color: grey[50],
+  fontSize: '3em',
+  margin: 0,
 });
 
 // メニューモーダル
@@ -54,6 +64,31 @@ export const TopMenu = styled('div')({
   background: grey[50],
   boxShadow: 5,
   padding: theme.spacing(4, 12, 4),
+});
+
+// モーダルタイトル
+export const ModalTitle = styled('p')({
+  color: grey[700],
+  fontSize: '3em',
+  fontWeight: 'bold',
+});
+
+// ページタイトル
+export const PageTitle = styled('p')({
+  color: grey[700],
+  fontSize: '1.5em',
+});
+
+// 見出し
+export const Caption = styled('p')({
+  color: grey[700],
+  fontSize: '1.2em',
+  margin: 0,
+});
+
+// 見出し
+export const TimeItemName = styled(TimelineContent)({
+  color: grey[700],
 });
 
 // トップ・ロビー画面のメニュー
