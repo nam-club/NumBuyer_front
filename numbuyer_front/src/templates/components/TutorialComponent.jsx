@@ -5,7 +5,6 @@ import { useStyles, ModalTitle, PageTitle, Caption, TimeItemName } from '../them
 
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';

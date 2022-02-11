@@ -38,6 +38,12 @@ export const Back = styled('div')({
   paddingBottom: '15%',
 });
 
+// 言語設定ボタン
+export const LangButton = styled(Button)({
+  fontSize: '1em',
+  color: grey[50],
+});
+
 // チュートリアルアイコン
 export const TutorialIcon = styled(MenuBookIcon)({
   color: grey[50],

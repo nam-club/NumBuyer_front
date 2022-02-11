@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
-         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
-          TutorialIcon, SettingIcon, MenuModal, TopMenu } from './theme';
+        FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
+        LangButton, TutorialIcon, MenuModal, TopMenu } from './theme';
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -14,6 +15,7 @@ import { setPlayerNameAction } from '../redux/players/actions'
 import { setRoomAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
+import SettingComponent from './components/SettingComponent';
 import TutorialComponent from './components/TutorialComponent';
 
 import GlobalStyle from "../globalStyles";
@@ -37,9 +39,48 @@ const Top = () => {
 
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
-    const [menuOpen, setMenuOpen] = React.useState(false);
-    const [open, setOpen] = React.useState(false);
+    const [tutorialOpen, setTutorialOpen] = React.useState(false); // チュートリアルのモーダル
+    const [friendOpen, setFriendOpen] = React.useState(false); // フレンドマッチのモーダル
 
+    /** 強制的に再レンダリングさせる */
+    const useForceUpdate = () => {
+        const [, forceUpdate] = React.useState(undefined);
+        return React.useCallback(() => {
+            forceUpdate((s) => !s);
+        }, []);
+    };
+    const forceUpdate = useForceUpdate();
+
+    // チュートリアルを開く or 閉じる
+    const handleTutorialOpen = () => {
+        setTutorialOpen(!tutorialOpen);
+    };
+
+    // チュートリアルを閉じる
+    const handleTutorialClose = () => {
+        setTutorialOpen(false);
+    };
+
+    // フレンドマッチ用モーダルを開く
+    const handleFriendOpen = () => {
+        if(name !== '' && !name.match(Constants.NAME_EXP)) {
+            setFriendOpen(true);
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            if(name !== '') {
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
+            }else {
+                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
+            }
+        }
+    };
+
+    // フレンドマッチ用モーダルを閉じる
+    const handleFriendClose = () => {
+        setFriendOpen(false);
+    };
+
+    // テキストボックス入力
     const doChange = (e) => {
         if(!e.target.value.match(Constants.NAME_EXP)) {
             setName(e.target.value);
@@ -56,35 +97,7 @@ const Top = () => {
         }
     }
 
-    // メニューリストを開く or 閉じる
-    const handleMenuOpen = () => {
-        setMenuOpen(!menuOpen);
-    };
-
-    // メニューリストを閉じる
-    const handleMenuClose = () => {
-        setMenuOpen(false);
-    };
-
-    // フレンドマッチ用モーダルを開く
-    const handleOpen = () => {
-        if(name !== '' && !name.match(Constants.NAME_EXP)) {
-            setOpen(true);
-        }else {
-            dispatch(setValidAction({validFlg: true}));
-            if(name !== '') {
-                dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
-            }else {
-                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
-            }
-        }
-    };
-
-    // フレンドマッチ用モーダルを閉じる
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+    // クイックマッチ
     const clickQuick = () => {
         if(name !== '' && !name.match(Constants.NAME_EXP)) {
             dispatch(setValidAction({validFlg: false}));
@@ -105,24 +118,25 @@ const Top = () => {
             <GlobalStyle />
             <Back>
                 <Grid container>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}/>
+                    <Grid item xs={2}>
                         <ButtonGroup variant="text" aria-label="text button group">
-                            <Button onClick={() => {
+                            <LangButton onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.English));
-                            }}>English</Button>
-                            <Button onClick={() => {
+                                forceUpdate();
+                            }}>{selector.msg.lang.LANG_EN}</LangButton>
+                            <LangButton onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.Japanese));
-                            }}>Japanese</Button>
-                            <Button onClick={() => {
+                                forceUpdate();
+                            }}>{selector.msg.lang.LANG_JP}</LangButton>
+                            <LangButton onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.Chinese));
-                            }}>Chinese</Button>
+                                forceUpdate();
+                            }}>{selector.msg.lang.LANG_CN}</LangButton>
                         </ButtonGroup>
                     </Grid>
-                    <Grid item xs={2}>
-                        <Button onClick={handleMenuOpen}>
-                            <SettingIcon/>
-                        </Button>
-                        <Button onClick={handleMenuOpen}>
+                    <Grid item xs={1}>
+                        <Button onClick={handleTutorialOpen}>
                             <TutorialIcon/>
                         </Button>
                     </Grid>
@@ -131,11 +145,11 @@ const Top = () => {
                 <MenuModal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
-                    open={menuOpen}
-                    onClose={handleMenuClose}
+                    open={tutorialOpen}
+                    onClose={handleTutorialClose}
                     closeAfterTransition
                 >
-                    <Fade in={menuOpen}>
+                    <Fade in={tutorialOpen}>
                         <TopMenu>
                             <TutorialComponent/>
                         </TopMenu>
@@ -160,17 +174,17 @@ const Top = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <FriendButton size="large" variant="contained"
-                            onClick={handleOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
+                            onClick={handleFriendOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                         </Grid>
                     </CardActions>
                     <FriendModal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
-                        open={open}
-                        onClose={handleClose}
+                        open={friendOpen}
+                        onClose={handleFriendClose}
                         closeAfterTransition
                     >
-                        <Fade in={open}>
+                        <Fade in={friendOpen}>
                             <FriendMenu>
                                 <div align="center">
                                     <CreateButton size="large" variant="contained"
