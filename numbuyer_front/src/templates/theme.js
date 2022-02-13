@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Typography } from '@mui/material';
 
 export const theme = createTheme({
   typography: {
@@ -46,13 +47,6 @@ export const LangButton = styled(Button)({
 
 // チュートリアルアイコン
 export const TutorialIcon = styled(MenuBookIcon)({
-  color: grey[50],
-  fontSize: '3em',
-  margin: 0,
-});
-
-// 設定アイコン
-export const SettingIcon = styled(SettingsIcon)({
   color: grey[50],
   fontSize: '3em',
   margin: 0,
@@ -186,6 +180,18 @@ export const JoinButton = styled(Button)({
     background: indigo[100],
   },
 });
+
+// 設定アイコン
+export const SettingIcon = styled(SettingsIcon)({
+  color: grey[50],
+  fontSize: '3em',
+  margin: 0,
+});
+
+export const SettingHeader = styled(Typography)({
+  marginTop: '10%',
+  marginBottom: 0,
+})
 
 // ロビータイトル
 export const LobbyTitle = styled('p')({
