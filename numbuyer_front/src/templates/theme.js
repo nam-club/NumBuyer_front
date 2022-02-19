@@ -74,7 +74,7 @@ export const ModalTitle = styled('p')({
 });
 
 // ページタイトル
-export const PageTitle = styled('p')({
+export const PageTitle = styled(Button)({
   color: grey[700],
   fontSize: '1.5em',
 });
@@ -86,9 +86,21 @@ export const Caption = styled('p')({
   margin: 0,
 });
 
-// 見出し
+// 見出し（タイムライン）
 export const TimeItemName = styled(TimelineContent)({
   color: grey[700],
+});
+
+// ボタン（タイムライン）
+export const TLButton = styled(Button)({
+  color: grey[700],
+  margin:0,
+  padding:0
+});
+
+// チュートリアルのイメージ画像
+export const TutorialImage = styled('img')({
+  width: '40%',
 });
 
 // トップ・ロビー画面のメニュー

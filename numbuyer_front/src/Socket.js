@@ -116,7 +116,7 @@ export default function Socket(props) {
     //console.log(socket);
 
     if(!socket) {
-      socket = io("http://localhost:8000/");
+      socket = io(process.env.SOCKET_URL);
 
         socket.on('game/join', function(msg) {
             console.log("game/join:")

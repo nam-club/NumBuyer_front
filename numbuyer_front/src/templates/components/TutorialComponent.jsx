@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useStyles, ModalTitle, PageTitle, Caption, TimeItemName } from '../theme';
+import { useStyles, ModalTitle, PageTitle, Caption, TimeItemName, TutorialImage, TLButton } from '../theme';
 
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Timeline from '@mui/lab/Timeline';
@@ -12,50 +13,60 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineDot from '@mui/lab/TimelineDot';
 
+import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
+
 const TutorialComponent = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
+    const [selectedButton, setSelectedButton] = React.useState('Introduction');
+    const [btnColor, setBtnColor] = React.useState();
+
+    const selectButton = (name) => {
+        setSelectedButton(name);
+    }
 
     return (
         <Typography component="div" align="center">
-            <ModalTitle>{selector.msg.lang.TUTORIAL}</ModalTitle>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex' }}>
                 <Box component="nav" sx={{ width: '20%', flexShrink: { sm: 0 } }} aria-label="mailbox folders">
                     <Divider />
-                        <PageTitle>{selector.msg.lang.INTRODUCTION}</PageTitle>
+                        <PageTitle onClick={() => {
+                            selectButton('Introduction');
+                        }}>{selector.msg.lang.INTRODUCTION}</PageTitle>
                         <Caption>{selector.msg.lang.CAPTION}</Caption>
                         <Timeline position="left" sx={{padding: 0, margin: 0}}>
                             <TimelineItem>
                                 <TimelineSeparator>
                                 <TimelineDot />
                                 </TimelineSeparator>
-                                <TimeItemName>Before Game</TimeItemName>
+                                <TimeItemName><TLButton>Before Game</TLButton></TimeItemName>
                             </TimelineItem>
                             <TimelineItem>
                                 <TimelineSeparator>
                                 <TimelineDot />
                                 <TimelineConnector />
                                 </TimelineSeparator>
-                                <TimeItemName>Distribution and publication</TimeItemName>
+                                <TimeItemName><TLButton>Distribution and publication</TLButton></TimeItemName>
                             </TimelineItem>
                             <TimelineItem>
                                 <TimelineSeparator>
                                 <TimelineDot />
                                 <TimelineConnector />
                                 </TimelineSeparator>
-                                <TimeItemName>Auction</TimeItemName>
+                                <TimeItemName><TLButton>Auction</TLButton></TimeItemName>
                             </TimelineItem>
                             <TimelineItem>
                                 <TimelineSeparator>
                                 <TimelineDot />
                                 </TimelineSeparator>
-                                <TimeItemName>Calculation</TimeItemName>
+                                <TimeItemName><TLButton>Calculation</TLButton></TimeItemName>
                             </TimelineItem>
                         </Timeline>
                     <Divider />
                 </Box>
                 <Box component="main" sx={{ flexGrow: 1, p: 3, width: '70%'}}>
+                    <TutorialImage src={whatIsNumBuyer}/>
                     <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
