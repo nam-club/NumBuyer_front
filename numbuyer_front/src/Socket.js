@@ -116,7 +116,8 @@ export default function Socket(props) {
     //console.log(socket);
 
     if(!socket) {
-      socket = io(process.env.SOCKET_URL);
+      socket = io(process.env.REACT_APP_SOCKET_URL);
+      console.log(process.env.REACT_APP_SOCKET_URL);
 
         socket.on('game/join', function(msg) {
             console.log("game/join:")

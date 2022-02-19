@@ -33,11 +33,11 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "SOCKET_URL='http://localhost:8000/' react-scripts start",
-    "netlify_build": "SOCKET_URL='35.72.7.204:80' react-scripts build",
-    "build": "SOCKET_URL='http://localhost:8000/' react-scripts build",
-    "test": "SOCKET_URL='http://localhost:8000/' react-scripts test",
-    "eject": "SOCKET_URL='http://localhost:8000/' react-scripts eject"
+    "start": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts start",
+    "netlify_build": "REACT_APP_SOCKET_URL='35.72.7.204:80' react-scripts build",
+    "build": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts build",
+    "test": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts test",
+    "eject": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
