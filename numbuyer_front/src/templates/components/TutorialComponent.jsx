@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useStyles, ModalTitle, PageTitle, Caption, TimeItemName, TutorialImage, TLButton } from '../theme';
 
+import { grey, blue } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -13,17 +14,75 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineDot from '@mui/lab/TimelineDot';
 
+
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
 
 const TutorialComponent = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const [selectedButton, setSelectedButton] = React.useState('Introduction');
-    const [btnColor, setBtnColor] = React.useState();
+ 
+    // ゲーム紹介項目
+    const [introduction, setIntroduction] = React.useState({name: selector.msg.lang.INTRODUCTION, color: blue[700]});
+
+    // タイムライン項目
+    const [timeLines, setTimeLines] = React.useState([
+        {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
+        {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
+        {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
+        {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+    ]);
 
     const selectButton = (name) => {
-        setSelectedButton(name);
+        switch(name) {
+            case selector.msg.lang.INTRODUCTION:
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: blue[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                ]);
+                break;
+            case selector.msg.lang.TIME_LINE1:
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: blue[700]},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                ]);
+                break;
+            case selector.msg.lang.TIME_LINE2:
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE2, color: blue[700]},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                ]);
+                break;
+            case selector.msg.lang.TIME_LINE3:
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE3, color: blue[700]},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                ]);
+                break;
+            case selector.msg.lang.TIME_LINE4:
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE4, color: blue[700]},
+                ]);
+                break;
+            default:
+                break;
+        }
     }
 
     return (
@@ -31,37 +90,23 @@ const TutorialComponent = () => {
             <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex' }}>
                 <Box component="nav" sx={{ width: '20%', flexShrink: { sm: 0 } }} aria-label="mailbox folders">
                     <Divider />
-                        <PageTitle onClick={() => {
-                            selectButton('Introduction');
-                        }}>{selector.msg.lang.INTRODUCTION}</PageTitle>
+                        <PageTitle onClick={()=>{selectButton(introduction.name)}} sx={{color: introduction.color}}>
+                            {introduction.name}
+                        </PageTitle>
                         <Caption>{selector.msg.lang.CAPTION}</Caption>
                         <Timeline position="left" sx={{padding: 0, margin: 0}}>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                <TimelineDot />
-                                </TimelineSeparator>
-                                <TimeItemName><TLButton>Before Game</TLButton></TimeItemName>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                <TimelineDot />
-                                <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimeItemName><TLButton>Distribution and publication</TLButton></TimeItemName>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                <TimelineDot />
-                                <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimeItemName><TLButton>Auction</TLButton></TimeItemName>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                <TimelineDot />
-                                </TimelineSeparator>
-                                <TimeItemName><TLButton>Calculation</TLButton></TimeItemName>
-                            </TimelineItem>
+                            {timeLines.map((value, index) => (
+                                <TimelineItem>
+                                    <TimelineSeparator>
+                                    <TimelineDot />
+                                    </TimelineSeparator>
+                                    <TimeItemName>
+                                        <TLButton onClick={()=>{selectButton(value.name)}} sx={{color: value.color}}>
+                                            {value.name}
+                                        </TLButton>
+                                    </TimeItemName>
+                                </TimelineItem>
+                            ))}
                         </Timeline>
                     <Divider />
                 </Box>
