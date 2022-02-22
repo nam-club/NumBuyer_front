@@ -44,6 +44,10 @@ export const English = {
     FINISH_BTN: 'Finish Game',
     AGAIN_BTN: 'Play Again',
 
+    // チュートリアルメッセージ
+    INTRODUCTION_MSG1: 'NumBuyer is a title born from the two words Number and Buyer, and as the name implies, it is a new type of card game that combines a calculation card game with an auction element.',
+    INTRODUCTION_MSG2: 'Game rules',
+
     // エラーメッセージ
     NULL_NAME_ERR: 'Please enter your name.', // 名前が未入力
     SYMBOL_ERR: 'You cannot enter that character.', // 禁止文字が入力されている
@@ -129,6 +133,19 @@ export const Japanese = {
     RANKING: 'ランキング',
     FINISH_BTN: 'ゲームをやめる',
     AGAIN_BTN: 'もう一度プレイする',
+
+    // チュートリアルメッセージ
+    INTRODUCTION_MSG1: 'NumBuyerとはNumber(数字)とBuyer(買い手)の二つの単語から生まれたタイトルであり、その名の通り計算カードゲームにオークション要素を組み合わせた新感覚のカードゲームです。',
+    INTRODUCTION_MSG2: 'ゲームのルール',
+    INTRODUCTION_MSG3: '最初に数字と演算子の2種類のカードがランダムに5枚配られます。',
+    INTRODUCTION_MSG4: 'その後、数字が書かれた「目標カード」が公開されます。手持ちのカードを組み合わせて「目標カード」の数字を作るとコインを獲得できます。',
+    INTRODUCTION_MSG5: '勝利条件として提示された額のコインを一番最初に集めた人がこのゲームの勝者です!',
+    INTRODUCTION_MSG6: '毎ターン1枚ずつカードは配られますが、それだけでは「目標カード」の数字を作るまでの道のりが程遠いでしょう。したがって「目標カード」の公開後に「オークションカード」が公開されます。',
+    INTRODUCTION_MSG7: 'この「オークションカード」は手持ちのコインを使ってオークション形式で入手することができます。',
+    INTRODUCTION_MSG8: '「オークションカード」をうまく活用して「目標カード」の数字を効率良く作りましょう!',
+    INTRODUCTION_MSG9: 'オークションフェーズの終了後、計算フェーズがやってきます。手持ちのカードで「目標カード」の数字が計算結果となるように計算式を作りましょう。(もちろん「目標カード」の数字と全く同じカードを1枚だけ使っても良いです)',
+    INTRODUCTION_MSG10: '「目標カード」の数字を見事作ることができれば「目標カード」の数字と同額のコインがもらえます！(使ったカードの枚数に応じて、ボーナスコインがもらえます!)',
+    INTRODUCTION_MSG11: '後はひたすらこの一連の流れを繰り返してコインを誰よりも早くたくさん集めましょう！',
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -216,6 +233,10 @@ export const Chinese = {
     RANKING: '排行',
     FINISH_BTN: '退出游戏',
     AGAIN_BTN: '再玩一遍',
+
+    // チュートリアルメッセージ
+    INTRODUCTION_MSG1: 'NumBuyer是一个由Number和Buyer两个字诞生的称号，顾名思义，它是一种将计算卡牌游戏与拍卖元素相结合的新型卡牌游戏。',
+    INTRODUCTION_MSG2: '游戏规则',
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力

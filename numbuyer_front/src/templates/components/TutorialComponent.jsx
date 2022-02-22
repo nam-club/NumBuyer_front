@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useStyles, ModalTitle, PageTitle, Caption, TimeItemName, TutorialImage, TLButton } from '../theme';
+import { useStyles, SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage, DetailMessage } from '../theme';
 
 import { grey, blue } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
@@ -87,18 +87,20 @@ const TutorialComponent = () => {
 
     return (
         <Typography component="div" align="center">
-            <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex' }}>
-                <Box component="nav" sx={{ width: '20%', flexShrink: { sm: 0 } }} aria-label="mailbox folders">
-                    <Divider />
+            <Box sx={{ display: 'flex' }}>
+                <SideBar component="nav">
                         <PageTitle onClick={()=>{selectButton(introduction.name)}} sx={{color: introduction.color}}>
                             {introduction.name}
                         </PageTitle>
                         <Caption>{selector.msg.lang.CAPTION}</Caption>
                         <Timeline position="left" sx={{padding: 0, margin: 0}}>
                             {timeLines.map((value, index) => (
-                                <TimelineItem>
+                                <TimelineItem key={index}>
                                     <TimelineSeparator>
-                                    <TimelineDot />
+                                        <TimelineDot />
+                                        {(index !== 0) && (index !== timeLines.length-1) && 
+                                            <TimelineConnector />
+                                        }
                                     </TimelineSeparator>
                                     <TimeItemName>
                                         <TLButton onClick={()=>{selectButton(value.name)}} sx={{color: value.color}}>
@@ -108,38 +110,22 @@ const TutorialComponent = () => {
                                 </TimelineItem>
                             ))}
                         </Timeline>
-                    <Divider />
-                </Box>
-                <Box component="main" sx={{ flexGrow: 1, p: 3, width: '70%'}}>
+                </SideBar>
+                <TutorialBody component="main">
                     <TutorialImage src={whatIsNumBuyer}/>
-                    <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                    enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                    imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                    Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                    Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                    nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                    leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                    feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                    consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                    sapien faucibus et molestie ac.
-                    </Typography>
-                    <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                    </Typography>
-                </Box>
+                    <EmphasisMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG1}</EmphasisMessage>
+                    <Divider />
+                    <EmphasisMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG2}</EmphasisMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG3}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG4}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG5}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG6}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG7}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG8}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG9}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG10}</DetailMessage>
+                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG11}</DetailMessage>
+                </TutorialBody>
             </Box>
         </Typography>
     );

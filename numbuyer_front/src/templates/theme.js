@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 import TimelineContent from '@mui/lab/TimelineContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -57,13 +58,15 @@ export const MenuModal = styled(Modal)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  marginLeft: '5%',
+  marginRight: '5%',
+  overflow: 'scroll',
 });
 
 // 設定やチュートリアルのメニュー
 export const TopMenu = styled('div')({
   background: grey[50],
   boxShadow: 5,
-  padding: theme.spacing(4, 12, 4),
 });
 
 // モーダルタイトル
@@ -71,6 +74,12 @@ export const ModalTitle = styled('p')({
   color: grey[700],
   fontSize: '3em',
   fontWeight: 'bold',
+});
+
+// サイドバー
+export const SideBar = styled(Box)({
+  width: '20%',
+  flexShrink: { sm: 0 }
 });
 
 // ページタイトル
@@ -98,9 +107,29 @@ export const TLButton = styled(Button)({
   padding:0
 });
 
+// チュートリアル本文
+export const TutorialBody = styled(Box)({
+  flexGrow: 1,
+  p: 3,
+  width: '70%',
+  color: grey[700]
+});
+
 // チュートリアルのイメージ画像
 export const TutorialImage = styled('img')({
   width: '40%',
+  marginTop: '5%',
+});
+
+// チュートリアルの強調部分の説明
+export const EmphasisMessage = styled(Typography)({
+  fontSize: '1.2em',
+  marginTop: '2%',
+});
+
+// チュートリアルの詳細説明
+export const DetailMessage = styled(Typography)({
+  fontSize: '1em',
 });
 
 // トップ・ロビー画面のメニュー
