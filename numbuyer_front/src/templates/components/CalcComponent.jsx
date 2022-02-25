@@ -117,9 +117,11 @@ const CalcComponent = (props) => {
     }
 
     const ansCalc = () => {
-
+        let endCalc = calcs[calcs.length-1];
         if(calcs.length === 0) {
-            dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG));
+            dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG1));
+        }else if((endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
+            dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG2));
         }else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
