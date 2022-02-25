@@ -407,9 +407,8 @@ export const WrapDisplay = styled('div')({
 export const CalcButton = styled(Button)({
   background: yellow[200],
   color: grey[700],
-  marginTop: 30,
-  marginLeft: 50,
-  marginBottom: 10,
+  marginLeft: '20%',
+  margin: '2%',
   width: '25%',
   'white-space': 'nowrap',
   '&:hover': {
