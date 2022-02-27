@@ -5,7 +5,8 @@ import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, BidButton, PassButton, YesButton, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
+import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, BidButton, PassButton, YesButton,
+         AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
@@ -122,17 +123,21 @@ const AucComponent = (props) => {
         <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}>
             <Grid container>
                 <Grid item xs={5}>
-                    {(props.auctionCard !== '　' && 
+                    <AreaTag align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.AUCTION}</AreaTag>
+                    {(props.auctionCards.length !== 0 && 
                         !((selector.game.phase === Constants.READY_PH)
                             || (selector.game.phase === Constants.GIVE_CARD_PH)
                             || (selector.game.phase === Constants.SHOW_TAR_PH)))
                     &&
-                        <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                            <AuctionCard>
-                                <CardTag>{selector.msg.lang.AUCTION}</CardTag>
-                                <CardValue>{props.auctionCard}</CardValue>
-                            </AuctionCard>
-                        </Slide>
+                        <WrapDisplay>
+                            {props.auctionCards.auctionCards.map((value, index) => (
+                                <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500} key={index}>
+                                    <AuctionCard>
+                                        <CardValue>{value}</CardValue>
+                                    </AuctionCard>
+                                </Slide>
+                            ))}  
+                        </WrapDisplay>
                     }
                 </Grid>
                 <Grid item xs={6}>

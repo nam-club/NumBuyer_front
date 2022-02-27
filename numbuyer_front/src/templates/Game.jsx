@@ -36,7 +36,7 @@ const Game = () => {
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
-    const [auctionCard, setAuctionCard] = React.useState(selector.game.auctionCard);
+    const [auctionCards, setAuctionCards] = React.useState([selector.game.auctionCards]);
     const [aucBtnFlg, setAucBtnFlg] = React.useState(selector.game.aucBtnFlg);
     const [calcBtnFlg, setCalcBtnFlg] = React.useState(selector.game.calcBtnFlg);
     const [player, setPlayer] = React.useState(selector.players.player);
@@ -55,12 +55,12 @@ const Game = () => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setTargetCard(selector.game.targetCard);
-        setAuctionCard(selector.game.auctionCard);
+        setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
         setWinPlayerName(selector.game.winPlayerName);
-    }, [selector.players.player, selector.players.player.cards, selector.room.roomId, selector.game.targetCard, selector.game.auctionCard,
+    }, [selector.players.player, selector.players.player.cards, selector.room.roomId, selector.game.targetCard, selector.game.auctionCards,
          selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     React.useEffect(() => {
@@ -97,7 +97,7 @@ const Game = () => {
                         </MessageBox>
                     </Grid>
                     <Grid item xs={3}>
-                        <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCard={auctionCard}
+                        <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
                          roomId={roomId} playerId={player.playerId}/>
                     </Grid>
                 </Grid>
@@ -123,7 +123,7 @@ const Game = () => {
                         }
                     </Grid>
                     <Grid item xs={6}>
-                        <AucComponent auctionCard={auctionCard} aucBtnFlg={aucBtnFlg}/>
+                        <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
                         <CalcComponent calcBtnFlg={calcBtnFlg}/>
                     </Grid>
                     <Grid item xs={3}>
@@ -134,8 +134,8 @@ const Game = () => {
                                 : <GoalMessage>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessage>
                             }
                         </GoalArea>
-                        {selector.players.players.map((value) => (
-                            <PlayerList key={value.playerId}>
+                        {selector.players.players.map((value, index) => (
+                            <PlayerList key={index}>
                                 <PlayerName><b>{value.playerName}</b></PlayerName>
                                 <PlayerInfoIcon src={card} /><PlayerInfo>×{value.cardNum}　</PlayerInfo>
                                 <PlayerInfoIcon src={coin} /> <PlayerInfo>{value.coin + ' ' + selector.msg.lang.COIN}</PlayerInfo>

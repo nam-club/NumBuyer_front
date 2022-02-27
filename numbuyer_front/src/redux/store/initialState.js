@@ -39,7 +39,7 @@ const initialState = {
         remTimeFlg: false, // 残り時間追加フラグ
         goalCoin: 0, // 目標コイン
         targetCard: '　', // ターゲットカード
-        auctionCard: '　', // オークションカード
+        auctionCards: [], // オークションカード配列
         ansPlayers: null, // 正解者配列と獲得コイン
         highestBid: 0, // 現在の最高入札額
         highestName: '', // 現在の最高入札額のプレイヤー名

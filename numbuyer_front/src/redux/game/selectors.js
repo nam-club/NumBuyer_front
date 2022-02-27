@@ -42,9 +42,9 @@ export const getTargetCard = createSelector(
     state => state.targetCard
 )
 
-export const getAuctionCard = createSelector(
+export const getAuctionCards = createSelector(
     [gameSelector],
-    state => state.auctionCard
+    state => state.auctionCards
 )
 
 export const getAucBtnFlg = createSelector(

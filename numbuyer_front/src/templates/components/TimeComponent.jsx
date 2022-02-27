@@ -5,6 +5,7 @@ import { CTX } from '../../Socket';
 import { setMessageAction, setPhaseAction, setTimeAction, setRemainingTimeAction, setSkipAction, setPassAction,
 setFinishGameAction, setWinPlayerAction, setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
 
+import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
 
 import { useStyles, TimeArea, TimeTag, TimeValue } from '../theme';
@@ -72,8 +73,11 @@ const TimeComponent = (props) => {
                         }
                         // 正解者がいない場合はターゲットカード表示フェーズをスキップ
                         if(selector.game.targetSkipFlg) {
+                            // オークションカード配列の中身を表示
+                            let aucMessage = arrayOutput(props.auctionCards);
+
                             dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                            dispatch(setMessageAction(props.auctionCard + selector.msg.lang.SHOW_AUC_MSG));
+                            dispatch(setMessageAction(aucMessage + selector.msg.lang.SHOW_AUC_MSG));
                             dispatch(setTimeAction(selector.game.phaseTimes.auction));
                             setTime(selector.game.phaseTimes.showAuction);
                         }else {
@@ -90,8 +94,10 @@ const TimeComponent = (props) => {
                     break;
                 case Constants.SHOW_TAR_PH:
                     if(time === 0) {
+                        // オークションカード配列の中身を表示
+                        let aucMessage = arrayOutput(props.auctionCards.auctionCards);
                         dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
-                        dispatch(setMessageAction(props.auctionCard + selector.msg.lang.SHOW_AUC_MSG));
+                        dispatch(setMessageAction(aucMessage + selector.msg.lang.SHOW_AUC_MSG));
                         dispatch(setTimeAction(selector.game.phaseTimes.showAuction));
                         setTime(selector.game.phaseTimes.showAuction);
                     }
@@ -109,7 +115,9 @@ const TimeComponent = (props) => {
                     dispatch(setTimeAction(selector.game.phaseTimes.auction));
                     setTime(selector.game.phaseTimes.auction);
                     setShowFlg(true);
-                    dispatch(setMessageAction(selector.msg.lang.AUCTION_MSG1 + props.auctionCard + selector.msg.lang.AUCTION_MSG2));
+                    // オークションカード配列の中身を表示
+                    let aucMessage = arrayOutput(props.auctionCards.auctionCards);
+                    dispatch(setMessageAction(selector.msg.lang.AUCTION_MSG1 + aucMessage + selector.msg.lang.AUCTION_MSG2));
                     break;
                 case Constants.AUC_RESULT_PH:
                     // コインとカード情報の更新

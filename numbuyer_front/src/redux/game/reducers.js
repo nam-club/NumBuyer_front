@@ -42,10 +42,8 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...action.payload
             }
         case Actions.SET_AUCTION:
-            return {
-                ...state,
-                ...action.payload
-            }
+            state.auctionCards = action.payload;
+            return state;
         case Actions.SET_AUC_BTN:
             return {
                 ...state,

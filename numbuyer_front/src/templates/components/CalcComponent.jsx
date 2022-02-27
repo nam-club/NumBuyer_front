@@ -158,9 +158,8 @@ const CalcComponent = (props) => {
                         ) &&
                             <WrapDisplay>
                                 {hands.map((value, index) => (
-                                    <Grow in={fade} timeout={1000}>
-                                        <TermCard variant="contained" 
-                                        key={index}
+                                    <Grow in={fade} timeout={1000} key={index}>
+                                        <TermCard variant="contained"
                                         onClick={() => selectHands(index, value)}
                                         disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
                                             <CardValue>{value}</CardValue>
@@ -179,9 +178,8 @@ const CalcComponent = (props) => {
                             {calcs &&
                                 <WrapDisplay>
                                     {calcs.map((value, index) => (
-                                        <Grow in={fade} timeout={1000}>
+                                        <Grow in={fade} timeout={1000} key={index}>
                                             <TermCard variant="contained" 
-                                            key={index}
                                             onClick={() => selectCalcs(index, value)}
                                             disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                                 <CardValue>{value}</CardValue>

@@ -103,7 +103,7 @@ export const setAuctionAction = (auctionState) => {
     return {
         type: "SET_AUCTION",
         payload: {
-            auctionCard: auctionState
+            auctionCards: auctionState
         }
     }
 }

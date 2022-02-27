@@ -8,6 +8,7 @@ import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetA
 
  import { push } from 'connected-react-router';
 
+import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
 import { setRoomAction } from './redux/room/actions';
 export const CTX = React.createContext();
@@ -16,45 +17,6 @@ const io = require("socket.io-client");
 let socket;
 
 let resObj = ""; 
-
-/* ====== 通常関数 ====== */
-
-// 符号を表示用 or 計算用に変換する
-export const changeCode = (cards, type) => {
-    console.log(cards);
-    if(cards) {
-        switch(type) {
-            case 'display':
-                cards.forEach((card, index) => {
-                    if(card === '*') {
-                        cards[index] = '×';
-                    }else if(card === '/') {
-                        cards[index] = '÷';
-                    }
-                })
-                break;
-            case 'auction':
-                if(cards === '*') {
-                    return '×';
-                }else if(cards === '/') {
-                    return '÷';
-                }else {
-                    return cards;
-                }
-                break;
-            case 'calculate':
-                cards.forEach((card, index) => {
-                    if(card === '×') {
-                        cards[index] = '*';
-                    }else if(card === '÷') {
-                        cards[index] = '/';
-                    }
-                })
-                break;
-        }
-    }
-}
-
 
 /* ====== リクエストAPI ====== */
 
@@ -165,7 +127,7 @@ export default function Socket(props) {
             dispatch(setCardsAction(object.cards));
             dispatch(setCoinAction(object.coin));
             dispatch(setTargetAction(object.targetCard));
-            dispatch(setAuctionAction(object.auctionCard));
+            dispatch(setAuctionAction(object.auctionCards));
             dispatch(setPhaseAction(Constants.READY_PH));
             dispatch(setTimeAction(selector.game.phaseTimes.ready));
             callback();
@@ -180,10 +142,11 @@ export default function Socket(props) {
             console.log("game/next_turn:")
             console.log(msg);
             resObj = JSON.parse(msg);
+            console.log(typeof resObj.auctionCards);
 
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
-            resObj.auctionCard = changeCode(resObj.auctionCard, 'auction');
+            resObj.auctionCards = changeCode(resObj.auctionCards, 'auction');
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {
                 setGame(resObj, moveGame);
@@ -192,7 +155,7 @@ export default function Socket(props) {
                 dispatch(setCardsAction(resObj.cards));
                 dispatch(setCoinAction(resObj.coin));
                 dispatch(setTargetAction(resObj.targetCard));
-                dispatch(setAuctionAction(resObj.auctionCard));
+                dispatch(setAuctionAction(resObj.auctionCards));
                 dispatch(setTimeAction(selector.game.phaseTimes.ready));
             }
         })
@@ -231,12 +194,14 @@ export default function Socket(props) {
                 // 誰も入札しなかったと表示
                 dispatch(setMessageAction(selector.msg.lang.AUC_RESULT_MSG0));
             }else {
+                // オークションカード配列の中身を表示
+                let aucMessage = arrayOutput(resObj.auctionCards);
                 // 誰がいくらで落札したかを表示
                 if(selector.msg.lang.LANGUAGE === 'Chinese') {
                     dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.coin
-                        + selector.msg.lang.AUC_RESULT_MSG2 + resObj.auctionCard + selector.msg.lang.AUC_RESULT_MSG3));
+                        + selector.msg.lang.AUC_RESULT_MSG2 + aucMessage + selector.msg.lang.AUC_RESULT_MSG3));
                 }else {
-                    dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.auctionCard
+                    dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + aucMessage
                         + selector.msg.lang.AUC_RESULT_MSG2 + resObj.coin + selector.msg.lang.AUC_RESULT_MSG3));
                 }
             }
@@ -256,7 +221,7 @@ export default function Socket(props) {
             // 返された手札をセット
             dispatch(setCardsAction(resObj.cards));
             // オークションカードを非公開にする
-            dispatch(setAuctionAction('　'));
+            dispatch(setAuctionAction([]));
             // BIDボタン、PASSボタンを押せるように戻す（パスを押した時用）
             dispatch(setAucBtnAction(true));
         })

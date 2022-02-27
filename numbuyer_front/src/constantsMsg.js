@@ -27,7 +27,7 @@ export const English = {
     START_BTN: 'Start',
     BACK_BTN: 'Back',
     TARGET: 'Target Card',
-    AUCTION: 'Auction Card',
+    AUCTION: 'Auction Cards',
     BID_MSG: 'Please enter the bid amount',
     BID_BTN: 'Bid',
     PASS_BTN: 'Pass',
@@ -145,8 +145,8 @@ export const Japanese = {
     INTRODUCTION_MSG7: 'この「オークションカード」は手持ちのコインを使ってオークション形式で入手することができます。',
     INTRODUCTION_MSG8: '「オークションカード」をうまく活用して「目標カード」の数字を効率良く作りましょう!',
     INTRODUCTION_MSG9: 'オークションフェーズの終了後、計算フェーズがやってきます。手持ちのカードで「目標カード」の数字が計算結果となるように計算式を作りましょう。(もちろん「目標カード」の数字と全く同じカードを1枚だけ使っても良いです)',
-    INTRODUCTION_MSG10: '「目標カード」の数字を見事作ることができれば「目標カード」の数字と同額のコインがもらえます！(使ったカードの枚数に応じて、ボーナスコインがもらえます!)',
-    INTRODUCTION_MSG11: '後はひたすらこの一連の流れを繰り返してコインを誰よりも早くたくさん集めましょう！',
+    INTRODUCTION_MSG10: '「目標カード」の数字を見事作ることができれば「目標カード」の数字と同額のコインがもらえます!(使ったカードの枚数に応じて、ボーナスコインがもらえます!)',
+    INTRODUCTION_MSG11: '後はひたすらこの一連の流れを繰り返してコインを誰よりも早くたくさん集めましょう!',
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -155,7 +155,7 @@ export const Japanese = {
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
     BID_ERR: '最高入札額より高い金額を入力してください。', // 最高入札額以下の金額が入力されている
     LACK_ERR: "所持金が足りません。", // 所持金が足りない
-    DOUBLE_ERR: "２回続けて入札はできません。", // ２回連続入札
+    DOUBLE_ERR: "2回続けて入札はできません。", // ２回連続入札
 
     // ナビゲーションメッセージ
     GIVE_CARD_MSG: 'カードを配布しています…',

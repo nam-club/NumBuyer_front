@@ -331,8 +331,9 @@ export const AuctionArea = styled('div')({
 export const AuctionCard = styled(Card)({
   background: lightBlue[200],
   color: grey[700],
-  marginLeft: 50,
-  marginRight: 50,
+  marginLeft: '5%',
+  width: '5vw',
+  height: '10vh',
   'white-space': 'nowrap',
 });
 
@@ -371,7 +372,7 @@ export const HighBidMessage = styled('p')({
 // エリアタグ
 export const AreaTag = styled('p')({
   color: grey[700],
-  marginLeft: 10,
+  marginLeft: '2%',
   fontSize: '1.2em',
 });
 
