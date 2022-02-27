@@ -74,7 +74,7 @@ const TimeComponent = (props) => {
                         // 正解者がいない場合はターゲットカード表示フェーズをスキップ
                         if(selector.game.targetSkipFlg) {
                             // オークションカード配列の中身を表示
-                            let aucMessage = arrayOutput(props.auctionCards);
+                            let aucMessage = arrayOutput(props.auctionCards.auctionCards);
 
                             dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                             dispatch(setMessageAction(aucMessage + selector.msg.lang.SHOW_AUC_MSG));
