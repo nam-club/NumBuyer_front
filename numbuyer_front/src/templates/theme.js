@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
-import { grey, yellow, amber, blue, lightBlue, indigo, teal, red } from '@mui/material/colors';
+import { grey, yellow, amber, blue, lightBlue, indigo, teal, lightGreen, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
@@ -238,6 +238,13 @@ export const SettingHeader = styled(Typography)({
 export const LobbyTitle = styled('p')({
   color: lightBlue[700],
   fontSize: '2em',
+  fontWeight: 'bold',
+});
+
+// オーナー一覧
+export const OwnerList = styled('p')({
+  color: lightGreen['A700'],
+  fontSize: '1.5em',
   fontWeight: 'bold',
 });
 

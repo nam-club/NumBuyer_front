@@ -1,25 +1,19 @@
 import React from 'react';
-import { Transition } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
-import usePersist from '../../Persist';
 
 import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Grow from '@mui/material/Grow';
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 const CalcComponent = (props) => {
     const classes = useStyles();

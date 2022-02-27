@@ -103,7 +103,7 @@ export default function Socket(props) {
         }
 
         socket.on('game/players_info', function(msg) {
-            console.log("game/playersInfo:")
+            console.log("game/playersInfo:");
             console.log(msg);
             resObj = JSON.parse(msg);
             setPlayers(resObj.players).then(()=>{

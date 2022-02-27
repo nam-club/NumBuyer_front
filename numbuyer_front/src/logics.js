@@ -4,7 +4,7 @@ export const arrayOutput = (array) => {
     let loopNum = 1;
 
     for(let a of array) {
-        if(loopNum != array.length) {
+        if(loopNum !== array.length) {
             message += a + ', ';
         }else {
             message += a;

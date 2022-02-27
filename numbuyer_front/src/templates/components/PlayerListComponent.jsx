@@ -3,24 +3,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 import { push } from 'connected-react-router';
 
-import { useStyles, MenuCard, LobbyTitle, ParticipantList, StartButton, BackButton, RoomCodeTag } from '../theme';
+import { useStyles, MenuCard, LobbyTitle, OwnerList, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag } from '../theme';
 
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
 
 const PlayerListComponent = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { start } = React.useContext(CTX);
+    const [owners, setOwners] = React.useState([]); // オーナー一覧
+    const [members, setMembers] = React.useState([]); // オーナー以外のメンバー一覧
+
+    React.useEffect(() => {
+        setOwners(selector.players.players.filter((player) => { return player.isOwner }));
+        setMembers(selector.players.players.filter((player) => { return !player.isOwner }));
+    }, [selector.players.players]);
 
     return (
         <MenuCard>
             <LobbyTitle>{selector.msg.lang.LOBBY}</LobbyTitle>
-            {selector.players.players &&
-             selector.players.players.map((value) => (<ParticipantList key={value.playerName}>{value.playerName}</ParticipantList>))}
+            {owners &&
+                owners.map((value) => (<OwnerList key={value.playerName}>{value.playerName} ({selector.msg.lang.OWNER})</OwnerList>))
+            }
+            {members &&
+                members.map((value) => (<ParticipantList key={value.playerName}>{value.playerName}</ParticipantList>))
+            }
             <CardActions>
                 <div style={{ flexGrow: 1 }}></div>
                 <Grid container>
