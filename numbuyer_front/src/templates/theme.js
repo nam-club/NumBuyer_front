@@ -13,6 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SettingsIcon from '@mui/icons-material/Settings';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { Typography } from '@mui/material';
 
 export const theme = createTheme({
@@ -242,10 +243,9 @@ export const LobbyTitle = styled('p')({
 });
 
 // オーナー一覧
-export const OwnerList = styled('p')({
-  color: lightGreen['A700'],
-  fontSize: '1.5em',
-  fontWeight: 'bold',
+export const OwnerIcon = styled(ManageAccountsIcon)({
+  color: lightBlue['A700'],
+  marginTop: 0,
 });
 
 // 参加プレイヤー一覧
