@@ -82,11 +82,6 @@ export const getFinishFlg = createSelector(
     state => state.finishFlg
 )
 
-export const getWinPlayer = createSelector(
-    [gameSelector],
-    state => state.winPlayerName
-)
-
 export const getFirstTurnFlg = createSelector(
     [gameSelector],
     state => state.firstTurnFlg

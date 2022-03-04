@@ -1,38 +1,25 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Transition } from 'react-transition-group';
+import { useSelector } from 'react-redux';
 
-import { useStyles, GameBack, MessageBox, NaviMessage, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage,
-         PlayerList, PlayerName, PlayerInfo, PlayerInfoIcon, FinishModal, FinishMenu, RankingTitle, 
-         Winner, WinnerInfoIcon, Loser, LoserInfoIcon, FinishButton, AgainButton } from './theme';
-import usePersist from '../Persist';
-import { push } from 'connected-react-router';
+import { GameBack, MessageBox, NaviMessage, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage,
+         PlayerList, PlayerName, PlayerInfo, PlayerInfoIcon, FinishModal, FinishMenu } from './theme';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
-import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
 import AucComponent from './components/AucComponent';
 import CalcComponent from './components/CalcComponent';
+import RankingComponent from './components/RankingComponent';
 
 import coin from '../assets/coin.png';
 import card from '../assets/card.png';
 
-import { CTX } from '../Socket';
-import { setRankingAction } from '../redux/players/actions';
-import { setFinishGameAction, setMessageAction } from '../redux/game/actions';
-
 const Game = () => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const { start } = React.useContext(CTX);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
@@ -42,7 +29,6 @@ const Game = () => {
     const [player, setPlayer] = React.useState(selector.players.player);
     const [roomId, setRoomId] = React.useState(selector.room.roomId);
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
-    const [winPlayerName, setWinPlayerName] = React.useState(selector.game.winPlayerName);
 
     const transitionStyles = {
         entering: { opacity: 1, transition: 'all 1s ease' },
@@ -59,7 +45,6 @@ const Game = () => {
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
-        setWinPlayerName(selector.game.winPlayerName);
     }, [selector.players.player, selector.players.player.cards, selector.room.roomId, selector.game.targetCard, selector.game.auctionCards,
          selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
@@ -69,22 +54,6 @@ const Game = () => {
             setFade(true);
         }
     }, [selector.game.phase]);
-
-    const finishGame = (mode) => {
-        dispatch(setRankingAction([]));
-        dispatch(setFinishGameAction(false));
-        dispatch(setMessageAction(''));
-        switch(mode) {
-            case 'finish':
-                dispatch(push('/'));
-                break;
-            case 'again':
-                start({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
-                break;
-            default:
-                break;
-        }
-    } 
 
     return (
         <Typography component="div" align="center">
@@ -150,29 +119,7 @@ const Game = () => {
                 >
                     <Fade in={finishFlg}>
                         <FinishMenu>
-                            <RankingTitle align="center" elevation={0}>{selector.msg.lang.RANKING}</RankingTitle>
-                            {selector.players.ranking && selector.players.ranking.map((value) => (
-                                <div key={value.rank} align="center">
-                                {value.rank === 1 ?
-                                    <div>
-                                        <Winner>{value.rank} : {value.playerName} </Winner>
-                                        <WinnerInfoIcon src={coin} />
-                                        <Winner>{value.coin + ' ' + selector.msg.lang.COIN}</Winner>
-                                    </div>:
-                                    <div>
-                                        <Loser>{value.rank} : {value.playerName} </Loser>
-                                        <LoserInfoIcon src={coin} />
-                                        <Loser> {value.coin + ' ' + selector.msg.lang.COIN}</Loser>
-                                    </div>
-                                }    
-                                </div>
-                            ))}
-                            <div align="center">
-                                <FinishButton size="large" variant="contained" 
-                                onClick={() => finishGame('finish')}>{selector.msg.lang.FINISH_BTN}</FinishButton>
-                                <AgainButton size="large" variant="contained" 
-                                onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
-                            </div>
+                            <RankingComponent />
                         </FinishMenu>
                     </Fade>
                 </FinishModal>

@@ -66,8 +66,8 @@ const PlayerListComponent = () => {
                 </Grid>
             </CardActions>
             <Grid container>
-                <Grid item xs={4.75} />
-                <Grid item xs={2.4}>
+                <Grid item xs={4.6} />
+                <Grid item xs={2.8}>
                     <RoomCodeTag>{selector.msg.lang.ROOM_ID + ' : ' + selector.room.roomId}</RoomCodeTag>
                 </Grid>
                 <Grid item xs={0.3}>

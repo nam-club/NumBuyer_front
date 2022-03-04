@@ -48,7 +48,6 @@ const initialState = {
             cardNumBonus: 0, // カード枚数ボーナスコイン
         },
         finishFlg: false, // ゲーム終了フラグ
-        winPlayerName: '', // 勝利プレイヤー名
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ
         firstTurnFlg: true, // 初回ターンフラグ

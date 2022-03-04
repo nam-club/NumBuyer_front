@@ -164,17 +164,6 @@ export const setFinishGameAction = (finishGameState) => {
     }
 }
 
-export const SET_WIN_PLAYER = "SET_WIN_PLAYER";
-
-export const setWinPlayerAction = (winPlayerState) => {
-    return {
-        type: "SET_WIN_PLAYER",
-        payload: {
-            winPlayerName: winPlayerState
-        }
-    }
-}
-
 export const SET_FIRST_TURN = "SET_FIRST_TURN";
 
 export const setFirstTurnAction = (firstTurnState) => {
