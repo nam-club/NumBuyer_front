@@ -12,9 +12,11 @@ import Fade from '@mui/material/Fade';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
+import { useSelector } from 'react-redux';
 
 const Lobby = () => {
     const classes = useStyles();
+    const selector = useSelector(state => state);
 
     const [settingOpen, setSettingOpen] = React.useState(false); // 設定ボタンのモーダル
 

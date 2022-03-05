@@ -297,7 +297,6 @@ export const GameBack = styled('div')({
 // メッセージボックス
 export const MessageBox = styled(Card)({
   background: indigo[200],
-  marginLeft: '25%',
 });
 
 // メッセージ本体

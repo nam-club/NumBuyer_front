@@ -13,7 +13,8 @@ const initialState = {
         ranking: [], // ランキング
     },
     room: {
-        roomId: '' // ルームID
+        roomId: '', // ルームID
+        isQuickMatch: false, // クイックマッチかどうか
     },
     msg: {
         lang: ConstantsMsg.English, // 言語

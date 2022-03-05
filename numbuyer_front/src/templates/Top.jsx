@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangButton, TutorialIcon, MenuModal, TopMenu } from './theme';
@@ -12,7 +11,7 @@ import { CTX } from '../Socket';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setPlayerNameAction } from '../redux/players/actions'
-import { setRoomAction } from '../redux/room/actions';
+import { setRoomAction, setQuickAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
 import SettingComponent from './components/SettingComponent';
@@ -102,6 +101,7 @@ const Top = () => {
         if(name !== '' && !name.match(Constants.NAME_EXP)) {
             dispatch(setValidAction({validFlg: false}));
             dispatch(setPlayerNameAction(name));
+            dispatch(setQuickAction(true));
             joinQuickMatch({playerName: name});
         }else {
             dispatch(setValidAction({validFlg: true}));

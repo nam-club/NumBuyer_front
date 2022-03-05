@@ -58,6 +58,7 @@ export const English = {
     DOUBLE_ERR: "You cannot bid twice in a row.", // ２回連続入札
 
     // ナビゲーションメッセージ
+    QUICK_MSG: 'The game will start automatically when all four players are together.',
     GIVE_CARD_MSG: 'Distributing cards to players...',
     SHOW_TAR_MSG: 'The target card is ',
     SHOW_AUC_MSG: ' was exhibited',
@@ -158,6 +159,7 @@ export const Japanese = {
     DOUBLE_ERR: "2回続けて入札はできません。", // ２回連続入札
 
     // ナビゲーションメッセージ
+    QUICK_MSG: '4人揃うと自動でゲームが始まります。',
     GIVE_CARD_MSG: 'カードを配布しています…',
     SHOW_TAR_MSG1: '目標カードは ',
     SHOW_TAR_MSG2: ' です。',
@@ -250,6 +252,7 @@ export const Chinese = {
     DOUBLE_ERR: "您不能连续出价两次。", // ２回連続入札
 
     // ナビゲーションメッセージ
+    QUICK_MSG: '当所有四个玩家在一起时、游戏将自动开始。',
     GIVE_CARD_MSG: '向玩家分发卡片…',
     SHOW_TAR_MSG: '目标卡是 ',
     SHOW_AUC_MSG: ' 被展出。',

@@ -5,6 +5,17 @@ export const setRoomAction = (roomState) => {
         type: "SET_ROOM",
         payload: {
             roomId: roomState
-        }
+        },
+    }
+};
+
+export const SET_QUICK = "SET_QUICK";
+
+export const setQuickAction = (quickState) => {
+    return {
+        type: "SET_QUICK",
+        payload: {
+            isQuickMatch: quickState
+        },
     }
 };

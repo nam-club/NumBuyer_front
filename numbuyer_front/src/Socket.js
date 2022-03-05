@@ -10,7 +10,7 @@ import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetA
 
 import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
-import { setRoomAction } from './redux/room/actions';
+import { setRoomAction, setQuickAction } from './redux/room/actions';
 export const CTX = React.createContext();
 
 const io = require("socket.io-client");
@@ -112,10 +112,11 @@ export default function Socket(props) {
         })
 
         socket.on('game/start', function(msg) {
-            console.log("game/start:")
+            console.log("game/start:");
             console.log(msg);
             resObj = JSON.parse(msg);
             console.log(resObj);
+            dispatch(setQuickAction(false));
             dispatch(setPhaseTimesAction(resObj.phaseTimes));
             dispatch(setGoalAction(resObj.goalCoin));
             nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});

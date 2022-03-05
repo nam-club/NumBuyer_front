@@ -8,6 +8,11 @@ export const RoomReducer = (state = initialState.room, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_QUICK:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }

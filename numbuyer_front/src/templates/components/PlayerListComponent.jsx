@@ -4,12 +4,14 @@ import { CTX } from '../../Socket';
 import { push } from 'connected-react-router';
 
 import { useStyles, MenuCard, LobbyTitle, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag } from '../theme';
+import NavigationComponent from './NavigationComponent';
 
 import Grid from '@mui/material/Grid';
 import CardActions from '@mui/material/CardActions';
 import CopyToClipBoard from 'react-copy-to-clipboard';
 import IconButton      from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { setQuickAction } from '../../redux/room/actions';
 
 const PlayerListComponent = () => {
     const classes = useStyles();
@@ -35,6 +37,9 @@ const PlayerListComponent = () => {
 
     return (
         <MenuCard>
+            {selector.room.isQuickMatch && 
+                <NavigationComponent message={selector.msg.lang.QUICK_MSG} messages={[]} />
+            }
             <LobbyTitle>{selector.msg.lang.LOBBY}</LobbyTitle>
             {owners &&
                 owners.map((value) => (<ParticipantList key={value.playerName}>
@@ -52,6 +57,7 @@ const PlayerListComponent = () => {
                         <BackButton size="large" variant="contained"
                         onClick={() => {
                             dispatch(push('/'));
+                            dispatch(setQuickAction(false));
                         }}>{selector.msg.lang.BACK_BTN}</BackButton>
                     </Grid>
                     <Grid item xs={4} />
