@@ -31,6 +31,26 @@ export const setMessageAction = (messageState) => {
     }
 }
 
+export const SET_MESSAGES = "SET_MESSAGES";
+
+export const setMessagesAction = (messagesState) => {
+    console.log(messagesState);
+    return {
+        type: "SET_MESSAGES",
+        payload: {
+            messages: messagesState
+        }
+    }
+}
+
+export const RESET_MESSAGES = "RESET_MESSAGES";
+
+export const resetMessagesAction = () => {
+    return {
+        type: "RESET_MESSAGES"
+    }
+}
+
 export const SET_TIME = "SET_TIME";
 
 export const setTimeAction = (timeState) => {

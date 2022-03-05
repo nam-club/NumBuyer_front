@@ -16,6 +16,12 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_MESSAGES:
+            state.messages = action.payload;
+            return state;
+        case Actions.RESET_MESSAGES:
+            state.messages.length = 0;
+            return state;
         case Actions.SET_TIME:
             return {
                 ...state,

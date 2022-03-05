@@ -17,6 +17,11 @@ export const getMessage = createSelector(
     state => state.message
 )
 
+export const getMessages = createSelector(
+    [gameSelector],
+    state => state.messages
+)
+
 export const getTime = createSelector(
     [gameSelector],
     state => state.time

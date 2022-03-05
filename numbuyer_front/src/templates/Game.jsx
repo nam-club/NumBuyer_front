@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { GameBack, MessageBox, NaviMessage, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage,
+import { GameBack, MessageBox, NaviMessage, NaviMessages, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage,
          PlayerList, PlayerName, PlayerInfo, PlayerInfoIcon, FinishModal, FinishMenu } from './theme';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
@@ -17,6 +17,7 @@ import RankingComponent from './components/RankingComponent';
 
 import coin from '../assets/coin.png';
 import card from '../assets/card.png';
+import NavigationComponent from './components/NavigationComponent';
 
 const Game = () => {
     const selector = useSelector(state => state);
@@ -29,6 +30,8 @@ const Game = () => {
     const [player, setPlayer] = React.useState(selector.players.player);
     const [roomId, setRoomId] = React.useState(selector.room.roomId);
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
+    const [message, setMessage] = React.useState(selector.game.message);
+    const [messages, setMessages] = React.useState(selector.game.messages);
 
     const transitionStyles = {
         entering: { opacity: 1, transition: 'all 1s ease' },
@@ -40,13 +43,16 @@ const Game = () => {
     React.useEffect(() => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
+        setMessage(selector.game.message);
+        setMessages(selector.game.messages);
         setTargetCard(selector.game.targetCard);
         setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
-    }, [selector.players.player, selector.players.player.cards, selector.room.roomId, selector.game.targetCard, selector.game.auctionCards,
-         selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
+    }, [selector.players.player, selector.players.player.cards, selector.room.roomId,
+        selector.game.message, selector.game.messages, selector.game.targetCard, selector.game.auctionCards,
+        selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     React.useEffect(() => {
         if(selector.game.phase === Constants.SHOW_TAR_PH) {
@@ -61,9 +67,7 @@ const Game = () => {
             <GameBack>
                 <Grid container>
                     <Grid item xs={9}>
-                        <MessageBox>
-                            <NaviMessage>{selector.game.message}</NaviMessage>
-                        </MessageBox>
+                        <NavigationComponent message={message} messages={messages} />
                     </Grid>
                     <Grid item xs={3}>
                         <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}

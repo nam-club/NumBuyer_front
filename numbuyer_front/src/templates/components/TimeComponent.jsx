@@ -2,8 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setPhaseAction, setTimeAction, setRemainingTimeAction, setSkipAction, setPassAction,
-setFinishGameAction, setWinPlayerAction, setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
+import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction, setRemainingTimeAction,
+    setSkipAction, setPassAction, setFinishGameAction, setWinPlayerAction,
+    setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
 
 import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
@@ -59,6 +60,7 @@ const TimeComponent = (props) => {
             switch(selector.game.phase) {
                 case Constants.READY_PH:
                     if(time === 0) {
+                        dispatch(resetMessagesAction());
                         dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
                         dispatch(setMessageAction(selector.msg.lang.GIVE_CARD_MSG));
                         dispatch(setTimeAction(selector.game.phaseTimes.giveCards));
@@ -138,6 +140,7 @@ const TimeComponent = (props) => {
                         dispatch(setMessageAction(selector.msg.lang.CALC_FINISH_MSG0));
                     }else {
                         let ansMessage = selector.msg.lang.CALC_FINISH_MSG1;
+                        let ansMessages = []; // 各プレイヤーの獲得コインとカードのメッセージ
                         let loopNum = 1;
 
                         for(let ansPlayer of selector.game.ansPlayers) {
@@ -152,13 +155,14 @@ const TimeComponent = (props) => {
                         ansMessage += selector.msg.lang.CALC_FINISH_MSG2;
 
                         for(let ansPlayer of selector.game.ansPlayers) {
-                            ansMessage += ansPlayer.playerName + selector.msg.lang.CALC_FINISH_MSG3_1
+                            let resultMsg = ansPlayer.playerName + selector.msg.lang.CALC_FINISH_MSG3_1
                              + ansPlayer.addedCoin.total + selector.msg.lang.CALC_FINISH_MSG3_2 
                              + ansPlayer.addedCoin.cardNumBonus + selector.msg.lang.CALC_FINISH_MSG3_3;
+                            ansMessages.push(resultMsg);
                         }
 
                         dispatch(setMessageAction(ansMessage));
-
+                        dispatch(setMessagesAction(ansMessages));
                         // ターゲットカードを消す
                         props.setTargetCard(" ");
                     }

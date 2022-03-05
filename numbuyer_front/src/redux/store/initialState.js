@@ -34,6 +34,7 @@ const initialState = {
             nextTurn: 0
         },
         message: '　', // ナビゲーション用メッセージ
+        messages: [], // ナビゲーション用複数行メッセージ
         time: 0, // 画面表示用タイマー
         remainingTime: 0, // オークション用残り時間
         remTimeFlg: false, // 残り時間追加フラグ
