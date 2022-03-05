@@ -62,7 +62,8 @@ const PlayerListComponent = () => {
                     </Grid>
                     <Grid item xs={4} />
                     <Grid item xs={4}>
-                    {(selector.players.player && selector.players.player.isOwner) &&
+                    {(selector.players.player && selector.players.player.isOwner &&
+                    selector.players.players.length > 1) &&
                         <StartButton size="large" variant="contained"
                         onClick={() => {
                             start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
