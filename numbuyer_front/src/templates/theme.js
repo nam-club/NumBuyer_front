@@ -343,13 +343,18 @@ export const AuctionArea = styled('div')({
 });
 
 // オークションカード
-export const AuctionCard = styled(Card)({
+export const AuctionCard = styled(Button)({
   background: lightBlue[200],
   color: grey[700],
-  marginLeft: '5%',
+  marginLeft: '3%',
   width: '5vw',
   height: '10vh',
-  'white-space': 'nowrap',
+  cursor: 'default',
+  boxShadow: 'none',
+  '&:hover': {
+    background: lightBlue[200],
+    boxShadow: 'none',
+  },
 });
 
 // 入札金額を入力してくださいメッセージ

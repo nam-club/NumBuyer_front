@@ -131,7 +131,7 @@ const AucComponent = (props) => {
                         <WrapDisplay>
                             {props.auctionCards.auctionCards.map((value, index) => (
                                 <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500} key={index}>
-                                    <AuctionCard>
+                                    <AuctionCard variant="contained">
                                         <CardValue>{value}</CardValue>
                                     </AuctionCard>
                                 </Slide>

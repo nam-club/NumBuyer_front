@@ -10,9 +10,6 @@ import { Typography } from '@mui/material';
 const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);
 
-    console.log(props.myPlayer);
-    console.log(props.players);
-
     return (
         <Typography>
             {props.myPlayer &&
