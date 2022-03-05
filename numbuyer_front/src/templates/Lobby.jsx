@@ -34,15 +34,17 @@ const Lobby = () => {
         <Typography component="div" align="center">
             <GlobalStyle />
             <Back>
-                <Grid container>
-                    <Grid item xs={8}/>
-                    <Grid item xs={2}>
-                        <Button onClick={handleSettingOpen}>
-                            <SettingIcon/>
-                        </Button>
+                {!selector.room.isQuickMatch && 
+                    <Grid container>
+                        <Grid item xs={8}/>
+                        <Grid item xs={2}>
+                            <Button onClick={handleSettingOpen}>
+                                <SettingIcon/>
+                            </Button>
+                        </Grid>
+                        <Grid item xs={2}/>
                     </Grid>
-                    <Grid item xs={2}/>
-                </Grid>
+                }
                 <MenuModal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
