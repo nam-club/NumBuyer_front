@@ -511,7 +511,16 @@ export const GoalMessage = styled('p')({
   fontWeight: 'bold',
 });
 
-// プレイヤー一覧エリア
+// プレイヤー一覧エリア（自分）
+export const MyPlayerList = styled(Card)({
+  background: yellow[100],
+  color: grey[700],
+  marginTop: 5,
+  marginRight: 25,
+  marginLeft: 75,
+});
+
+// プレイヤー一覧エリア（自分以外）
 export const PlayerList = styled(Card)({
   background: grey[50],
   color: grey[700],

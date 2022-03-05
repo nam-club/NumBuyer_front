@@ -1,23 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { GameBack, MessageBox, NaviMessage, NaviMessages, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage,
-         PlayerList, PlayerName, PlayerInfo, PlayerInfoIcon, FinishModal, FinishMenu } from './theme';
+import { GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
+import AucComponent from './components/AucComponent';
+import CalcComponent from './components/CalcComponent';
+import RankingComponent from './components/RankingComponent';
+import NavigationComponent from './components/NavigationComponent';
+import PlayerInfoComponent from './components/PlayerInfoComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
-import AucComponent from './components/AucComponent';
-import CalcComponent from './components/CalcComponent';
-import RankingComponent from './components/RankingComponent';
-
-import coin from '../assets/coin.png';
-import card from '../assets/card.png';
-import NavigationComponent from './components/NavigationComponent';
 
 const Game = () => {
     const selector = useSelector(state => state);
@@ -28,6 +25,10 @@ const Game = () => {
     const [aucBtnFlg, setAucBtnFlg] = React.useState(selector.game.aucBtnFlg);
     const [calcBtnFlg, setCalcBtnFlg] = React.useState(selector.game.calcBtnFlg);
     const [player, setPlayer] = React.useState(selector.players.player);
+    const [myPlayer, setMyPlayer] = React.useState(selector.players.players.find((my) => {
+        return my.playerId === player.playerId })); // プレイヤー一覧表示用
+    const [otherPlayers, setOtherPlayers] = React.useState(selector.players.players.filter((other) => {
+        return other.playerId !== player.playerId })); // プレイヤー一覧表示用
     const [roomId, setRoomId] = React.useState(selector.room.roomId);
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
     const [message, setMessage] = React.useState(selector.game.message);
@@ -43,6 +44,8 @@ const Game = () => {
     React.useEffect(() => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
+        setMyPlayer(selector.players.players.find((my) => { return my.playerId === player.playerId }));
+        setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
         setTargetCard(selector.game.targetCard);
@@ -50,7 +53,7 @@ const Game = () => {
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
-    }, [selector.players.player, selector.players.player.cards, selector.room.roomId,
+    }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
         selector.game.message, selector.game.messages, selector.game.targetCard, selector.game.auctionCards,
         selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
@@ -107,13 +110,7 @@ const Game = () => {
                                 : <GoalMessage>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessage>
                             }
                         </GoalArea>
-                        {selector.players.players.map((value, index) => (
-                            <PlayerList key={index}>
-                                <PlayerName><b>{value.playerName}</b></PlayerName>
-                                <PlayerInfoIcon src={card} /><PlayerInfo>×{value.cardNum}　</PlayerInfo>
-                                <PlayerInfoIcon src={coin} /> <PlayerInfo>{value.coin + ' ' + selector.msg.lang.COIN}</PlayerInfo>
-                            </PlayerList>
-                        ))}
+                        <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
                     </Grid>
                 </Grid>
                 <FinishModal
