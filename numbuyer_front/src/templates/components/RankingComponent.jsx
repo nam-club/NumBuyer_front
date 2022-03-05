@@ -7,6 +7,7 @@ import { RankingTitle, Winner, WinnerInfoIcon, Loser, LoserInfoIcon, FinishButto
 import { CTX } from '../../Socket';
 import { setRankingAction } from '../../redux/players/actions';
 import { setFinishGameAction, setMessageAction } from '../../redux/game/actions';
+import { setQuickAction } from '../../redux/room/actions';
 
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -84,9 +85,15 @@ const RankingComponent = () => {
             </TableContainer>
             <div align="center">
                 <FinishButton size="large" variant="contained" 
-                onClick={() => finishGame('finish')}>{selector.msg.lang.FINISH_BTN}</FinishButton>
-                <AgainButton size="large" variant="contained" 
-                onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
+                    onClick={() => {
+                    finishGame('finish');
+                    dispatch(setQuickAction(false));
+                }}>{selector.msg.lang.FINISH_BTN}
+                </FinishButton>
+                {!selector.room.isQuickMatch &&
+                    <AgainButton size="large" variant="contained" 
+                    onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
+                }
             </div>
         </Typography>
     );
