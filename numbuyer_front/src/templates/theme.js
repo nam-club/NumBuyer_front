@@ -178,6 +178,69 @@ export const FriendButton = styled(Button)({
   },
 });
 
+// アビリティモーダル
+export const AbilityModal = styled(Modal)({
+  marginTop: '5%',
+  marginLeft: '5%',
+  marginRight: '5%',
+  overflow: 'scroll',
+});
+
+// アビリティカード
+export const AbilityCard = styled(Card)({
+  margin: '4%',
+});
+
+// アビリティボタン（未選択）
+export const AbilityButton = styled(Button)({
+  padding: '10%',
+  margin: '5%',
+  fontSize: '1em',
+  color: grey[800],
+  background: grey[200],
+  width: '75%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: grey[100],
+  },
+});
+
+// アビリティボタン（選択）
+export const SelectedAbilityButton = styled(Button)({
+  padding: '10%',
+  margin: '5%',
+  fontSize: '1em',
+  width: '75%',
+  'white-space': 'nowrap',
+});
+
+// 吹き出しコメント
+export const SpeechBubble = styled('p')({
+  fontSize: '1.5em',
+});
+
+// 確定ボタン
+export const ConfirmButton = styled(Button)({
+  color: grey[100],
+  width: '20%',
+  margin: '10%',
+  'white-space': 'nowrap',
+  fontSize: '2em',
+  zIndex: 2,
+  background: indigo[200],
+  '&:hover': {
+    background: indigo[100],
+  },
+});
+
+// アビリティタグ
+export const AbilityTag = styled('p')({
+  color: grey[700],
+  margin:0,
+  fontSize: '1.2em',
+});
+
+
 // フレンドマッチのモーダル
 export const FriendModal = styled(Modal)({
   display: 'flex',
@@ -519,18 +582,18 @@ export const GoalMessage = styled('p')({
 export const MyPlayerList = styled(Card)({
   background: yellow[100],
   color: grey[700],
-  marginTop: 5,
-  marginRight: 25,
-  marginLeft: 75,
+  marginTop: '1%',
+  marginRight: '10%',
+  marginLeft: '20%',
 });
 
 // プレイヤー一覧エリア（自分以外）
 export const PlayerList = styled(Card)({
   background: grey[50],
   color: grey[700],
-  marginTop: 5,
-  marginRight: 25,
-  marginLeft: 75,
+  marginTop: '1%',
+  marginRight: '10%',
+  marginLeft: '20%',
 });
 
 // プレイヤー名
@@ -543,7 +606,7 @@ export const PlayerName = styled('p')({
 // プレイヤー情報
 export const PlayerInfo = styled('span')({
   margin: 0,
-  fontSize: 25,
+  fontSize: '1.5em',
   fontWeight: 100,
 });
 

@@ -3,22 +3,30 @@ export const English = {
     LANGUAGE: 'English',
 
     // ボタン・タグ
-    PLAYER_NAME: 'Player Name',
-    QUICK_MATCH: 'Quick Match',
-    FRIEND_MATCH: 'Play with Friend',
-    LANG_EN: 'English',
-    LANG_JP: 'Japanese',
-    LANG_CN: 'Chinese',
-    TUTORIAL: 'Tutorial',
-    INTRODUCTION: 'What is NumBuyer?',
-    CAPTION: 'Game Flow',
-    TIME_LINE1: 'Before Game',
-    TIME_LINE2: 'Distribution and Publication',
-    TIME_LINE3: 'Auction',
-    TIME_LINE4: 'Calculation',
-    CREATE_BTN: 'Create',
-    JOIN_BTN: 'Join',
-    ROOM_ID: 'Room ID',
+    PLAYER_NAME: "Player Name",
+    QUICK_MATCH: "Quick Match",
+    FRIEND_MATCH: "Play with Friend",
+    LANG_EN: "English",
+    LANG_JP: "Japanese",
+    LANG_CN: "Chinese",
+    TUTORIAL: "Tutorial",
+    INTRODUCTION: "What is NumBuyer?",
+    CAPTION: "Game Flow",
+    TIME_LINE1: "Before Game",
+    TIME_LINE2: "Distribution and Publication",
+    TIME_LINE3: "Auction",
+    TIME_LINE4: "Calculation",
+    CREATE_BTN: "Create",
+    JOIN_BTN: "Join",
+    ROOM_ID: "Room ID",
+    ABILITY: "Please select two abilities.",
+    ABILITY_EXP1: "Abilities are special abilities that can be activated during the game.",
+    ABILITY_EXP2: "There are active abilities that can be used only a limited number of times and passive abilities that are always in effect.",
+    BST_TYPE: 'Boost Type',
+    ATK_TYPE: 'Attack Type',
+    DEF_TYPE: 'Defense Type',
+    JAM_TYPE: 'Jamming Type',
+    CNF_TYPE: 'Confusion Type',
     LOBBY: 'Lobby',
     SETTING: 'Settings',
     MULTIPLICATION: 'Multiplication',
@@ -36,6 +44,7 @@ export const English = {
     CALCULATE_FIELD: 'Calculate Field',
     YES_BTN: 'Yes',
     NO_BTN: 'No',
+    CONFIRM_BTN: 'Done',
     TIME: 'Time',
     WIN_CONDITIONS: 'Win conditions',
     WIN_MSG: 'Have',
@@ -49,11 +58,12 @@ export const English = {
     INTRODUCTION_MSG2: 'Game rules',
 
     // エラーメッセージ
-    NULL_NAME_ERR: 'Please enter your name.', // 名前が未入力
-    SYMBOL_ERR: 'You cannot enter that character.', // 禁止文字が入力されている
-    NULL_BID_ERR: 'Please enter the amount.', // 金額が未入力
-    NUM_ERR: 'You can only enter numbers.', // 数字以外が入力されている
-    BID_ERR: 'Please enter an amount higher than the highest bid.', // 最高入札額以下の金額が入力されている
+    NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
+    SYMBOL_ERR: "You cannot enter that character.", // 禁止文字が入力されている
+    ABILITY_ERR: 'Please select two abilities.', // アビリティを2つ選択していない
+    NULL_BID_ERR: "Please enter the amount.", // 金額が未入力
+    NUM_ERR: "You can only enter numbers.", // 数字以外が入力されている
+    BID_ERR: "Please enter an amount higher than the highest bid.", // 最高入札額以下の金額が入力されている
     LACK_ERR: "You don't have enough money.", // 所持金が足りない
     DOUBLE_ERR: "You cannot bid twice in a row.", // ２回連続入札
 
@@ -111,6 +121,14 @@ export const Japanese = {
     CREATE_BTN: '部屋を作る',
     JOIN_BTN: '部屋に参加する',
     ROOM_ID: 'ルームID',
+    ABILITY: 'アビリティを2つ選択してください。',
+    ABILITY_EXP1: "アビリティはゲーム中に発動できる特殊能力です。",
+    ABILITY_EXP2: "使用回数の限られているアクティブアビリティと常に効果が発動しているパッシブアビリティがあります。",
+    BST_TYPE: '速攻タイプ',
+    ATK_TYPE: '攻撃タイプ',
+    DEF_TYPE: '防御タイプ',
+    JAM_TYPE: '妨害タイプ',
+    CNF_TYPE: '混乱タイプ',
     LOBBY: 'ロビー',
     SETTING: '各種設定',
     MULTIPLICATION: '掛け算',
@@ -128,6 +146,7 @@ export const Japanese = {
     CALCULATE_FIELD: '計算フィールド',
     YES_BTN: 'はい',
     NO_BTN: 'いいえ',
+    CONFIRM_BTN: '確定',
     TIME: '残り時間',
     WIN_CONDITIONS: '勝利条件',
     WIN_MSG: 'を集める',
@@ -152,6 +171,7 @@ export const Japanese = {
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
+    ABILITY_ERR: 'アビリティを2つ選択してください。', // アビリティを2つ選択していない
     NULL_BID_ERR: '金額を入力してください。', // 金額が未入力
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
     BID_ERR: '最高入札額より高い金額を入力してください。', // 最高入札額以下の金額が入力されている
@@ -213,6 +233,14 @@ export const Chinese = {
     CREATE_BTN: '做一个房间',
     JOIN_BTN: '加入房间',
     ROOM_ID: '房间号',
+    ABILITY: '选择两个技能。',
+    ABILITY_EXP1: "能力是可以在游戏中激活的特殊能力。有只能使用有限次数的主动技能和始终有效的被动技能。",
+    ABILITY_EXP2: "有只能使用有限次数的主动技能和始终有效的被动技能。",
+    BST_TYPE: '急速类型',
+    ATK_TYPE: '攻击类型',
+    DEF_TYPE: '防御类型',
+    JAM_TYPE: '干扰类型',
+    CNF_TYPE: '混乱类型',
     LOBBY: '大堂',
     SETTING: '各种设置',
     MULTIPLICATION: '乘法',
@@ -230,6 +258,7 @@ export const Chinese = {
     CALCULATE_FIELD: '计算字段',
     YES_BTN: '是的',
     NO_BTN: '不是',
+    CONFIRM_BTN: '确认',
     TIME: '剩余时间',
     WIN_CONDITIONS: '胜利条件',
     WIN_MSG: '有',
@@ -239,12 +268,13 @@ export const Chinese = {
     AGAIN_BTN: '再玩一遍',
 
     // チュートリアルメッセージ
-    INTRODUCTION_MSG1: 'NumBuyer是一个由Number和Buyer两个字诞生的称号，顾名思义，它是一种将计算卡牌游戏与拍卖元素相结合的新型卡牌游戏。',
+    INTRODUCTION_MSG1: 'NumBuyer是一个由Number和Buyer两个字诞生的称号, 顾名思义, 它是一种将计算卡牌游戏与拍卖元素相结合的新型卡牌游戏。',
     INTRODUCTION_MSG2: '游戏规则',
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力
     SYMBOL_ERR: '您不能输入该字符。', // 禁止文字が入力されている
+    ABILITY_ERR: '选择两个技能。', // アビリティを2つ選択していない
     NULL_BID_ERR: '请输入金额。', // 金額が未入力
     NUM_ERR: '您只能输入数字。', // 数字以外が入力されている
     BID_ERR: '请输入高于最高出价的金额。', // 最高入札額以下の金額が入力されている
@@ -252,11 +282,11 @@ export const Chinese = {
     DOUBLE_ERR: "您不能连续出价两次。", // ２回連続入札
 
     // ナビゲーションメッセージ
-    QUICK_MSG: '当所有四个玩家在一起时、游戏将自动开始。',
+    QUICK_MSG: '当所有四个玩家在一起时, 游戏将自动开始。',
     GIVE_CARD_MSG: '向玩家分发卡片…',
     SHOW_TAR_MSG: '目标卡是 ',
     SHOW_AUC_MSG: ' 被展出。',
-    AUCTION_MSG1: '输入您的出价金额、选择出价 ',
+    AUCTION_MSG1: '输入您的出价金额, 选择出价 ',
     AUCTION_MSG2: ' 或通过。',
     AUC_BID_MSG1: ' 出价 ',
     AUC_BID_MSG2: ' 硬币。',
@@ -267,7 +297,7 @@ export const Chinese = {
     AUC_RESULT_MSG1: ' 用',
     AUC_RESULT_MSG2: ' 硬币中标了 ',
     AUC_RESULT_MSG3: ' !',
-    CALCULATE_MSG1: '从你的手牌中选择一张牌、使计算结果为 ',
+    CALCULATE_MSG1: '从你的手牌中选择一张牌, 使计算结果为 ',
     CALCULATE_MSG2: ' 、然后按「回答」。',
     CALC_ERR_MSG1: '请从您的手牌中选择一张牌!',
     CALC_ERR_MSG2: '标志在最后!',
@@ -280,6 +310,6 @@ export const Chinese = {
     CALC_FINISH_MSG3_2: ' 硬币(卡号红利 : ',
     CALC_FINISH_MSG3_3: ' 硬币)和一张卡片! ',
     PASS_TITLE: '你确定你不想出价吗？',
-    PASS_MSG: '如果要通过、请按「是的」。',
+    PASS_MSG: '如果要通过, 请按「是的」。',
 
 }

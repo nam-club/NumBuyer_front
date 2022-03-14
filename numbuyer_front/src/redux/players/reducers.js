@@ -14,7 +14,6 @@ export const PlayersReducer = (state = initialState.players, action) => {
             return state;
         case Actions.SET_CARDS:
             state.player.cards = action.payload.cards;
-            console.log(state.player);
             return state;
         case Actions.SET_COIN:
             state.player.coin = action.payload.coin;
@@ -24,7 +23,15 @@ export const PlayersReducer = (state = initialState.players, action) => {
             return state;
         case Actions.SET_RANKING:
             state.ranking = action.payload.ranking;
-            console.log(state.ranking);
+            return state;
+        case Actions.SET_ABILITY:
+            if(state.player.abilities.length === 0 ||  state.player.abilities.length === 1) {
+                state.player.abilities.push(action.payload.abilities);
+            }else {
+                state.player.abilities[0] = state.player.abilities[1];
+                state.player.abilities[1] = action.payload.abilities;
+            }
+            console.log(state.player.abilities)
             return state;
         default:
             return state;

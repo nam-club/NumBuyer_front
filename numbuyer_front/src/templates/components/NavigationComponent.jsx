@@ -5,7 +5,7 @@ import { MessageBox, NaviMessage, NaviMessages } from '../theme';
 const NavigationComponent = (props) => {
 
     return (
-        <MessageBox>
+        <MessageBox sx={{background: props.color}}>
             <NaviMessage>{props.message}</NaviMessage>
             {props.messages.length !==0 && props.messages.messages.map((value, index) => (
                 <NaviMessages key={index}>{value}</NaviMessages>))

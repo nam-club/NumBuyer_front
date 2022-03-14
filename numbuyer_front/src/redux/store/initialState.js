@@ -8,6 +8,7 @@ const initialState = {
             cards: [], // 自分の手札
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限
+            abilities: [], // 保持アビリティ
         },
         players: [], // プレイヤー一覧
         ranking: [], // ランキング

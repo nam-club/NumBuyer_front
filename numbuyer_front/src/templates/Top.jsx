@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
-        LangButton, TutorialIcon, MenuModal, TopMenu } from './theme';
+        LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -14,18 +14,20 @@ import { setPlayerNameAction } from '../redux/players/actions'
 import { setRoomAction, setQuickAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
 
-import SettingComponent from './components/SettingComponent';
 import TutorialComponent from './components/TutorialComponent';
+import NavigationComponent from './components/NavigationComponent';
+import AbilityComponent from './components/AbilityComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Grid from '@mui/material/Grid';
-import { grey } from '@mui/material/colors';
+import { grey, yellow, amber, blue, lightBlue, deepPurple, indigo, teal, lightGreen, red } from '@mui/material/colors';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
@@ -39,7 +41,15 @@ const Top = () => {
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
     const [tutorialOpen, setTutorialOpen] = React.useState(false); // チュートリアルのモーダル
+    const [abilityOpen, setAbilityOpen] = React.useState(false); // アビリティ選択のモーダル
     const [friendOpen, setFriendOpen] = React.useState(false); // フレンドマッチのモーダル
+
+    // アビリティ
+    const [bstAbilities, setBstAbilities] = React.useState(Constants.BST_ABILITIES);
+    const [atkAbilities, setAtkAbilities] = React.useState(Constants.ATK_ABILITIES);
+    const [defAbilities, setDefAbilities] = React.useState(Constants.DEF_ABILITIES);
+    const [jamAbilities, setJamAbilities] = React.useState(Constants.JAM_ABILITIES);
+    const [cnfAbilities, setCnfAbilities] = React.useState(Constants.CNF_ABILITIES);
 
     /** 強制的に再レンダリングさせる */
     const useForceUpdate = () => {
@@ -60,10 +70,10 @@ const Top = () => {
         setTutorialOpen(false);
     };
 
-    // フレンドマッチ用モーダルを開く
-    const handleFriendOpen = () => {
+    // アビリティ選択モーダルを開く
+    const handleAbilityOpen = () => {
         if(name !== '' && !name.match(Constants.NAME_EXP)) {
-            setFriendOpen(true);
+            setAbilityOpen(true);
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(name !== '') {
@@ -71,6 +81,27 @@ const Top = () => {
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
             }
+        }
+    };
+
+    // アビリティ選択モーダルを閉じる
+    const handleAbilityClose = () => {
+        setAbilityOpen(false);
+    };
+
+    // アビリティを確定する
+    const confirmAbilities = () => {
+        if(selector.players.player.abilities.length >= 2) {
+            if(selector.room.isQuickMatch) {
+                joinQuickMatch({playerName: name, abilities: selector.players.player.abilities});
+            }else {
+                setFriendOpen(true);
+            }
+            handleAbilityClose();
+            dispatch(setValidAction({validFlg: false}));
+        }else {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: selector.msg.lang.ABILITY_ERR}));
         }
     };
 
@@ -102,7 +133,7 @@ const Top = () => {
             dispatch(setValidAction({validFlg: false}));
             dispatch(setPlayerNameAction(name));
             dispatch(setQuickAction(true));
-            joinQuickMatch({playerName: name});
+            handleAbilityOpen();
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(name !== '') {
@@ -174,7 +205,7 @@ const Top = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <FriendButton size="large" variant="contained"
-                            onClick={handleFriendOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
+                            onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                         </Grid>
                     </CardActions>
                     <FriendModal
@@ -215,6 +246,53 @@ const Top = () => {
                             </FriendMenu>
                         </Fade>
                     </FriendModal>
+                    <AbilityModal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        open={abilityOpen}
+                        onClose={handleAbilityClose}
+                        closeAfterTransition
+                    >
+                        <Fade in={abilityOpen}>
+                            <TopMenu>
+                                <Typography component="div" align="center">
+                                    <NavigationComponent message={selector.msg.lang.ABILITY} messages={[]} />
+                                    <Grid container>
+                                        <Grid item xs={1} />
+                                        <Grid item xs={2}>
+                                            <AbilityComponent color={teal[300]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                                type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <AbilityComponent color={red[300]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
+                                                type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <AbilityComponent color={blue[300]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
+                                                type={selector.msg.lang.DEF_TYPE} abilities={defAbilities} update={forceUpdate} />
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <AbilityComponent color={amber[300]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
+                                                type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <AbilityComponent color={grey[700]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
+                                                type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
+                                        </Grid>
+                                        <Grid item xs={1} />
+                                    </Grid>
+                                    {selector.msg.validFlg &&
+                                        <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
+                                     }
+                                    <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
+                                        {selector.msg.lang.CONFIRM_BTN}
+                                    </ConfirmButton>
+                                    <AbilityTag>{selector.msg.lang.ABILITY_EXP1}</AbilityTag>
+                                    <AbilityTag>{selector.msg.lang.ABILITY_EXP2}</AbilityTag>
+                                </Typography>
+                            </TopMenu>
+                        </Fade>
+                    </AbilityModal>
                 </MenuCard>
             </Back>
         </Typography>

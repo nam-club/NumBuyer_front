@@ -31,3 +31,8 @@ export const getRanking = createSelector(
     [playersSelector],
     state => state.ranking
 )
+
+export const getAbilities = createSelector(
+    [playersSelector],
+    state => state.abilities
+)

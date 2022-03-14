@@ -75,3 +75,14 @@ export const setRankingAction = (rankingState) => {
         }
     }
 }
+
+export const SET_ABILITY = "SET_ABILITY";
+
+export const setAbilityAction = (abilityState) => {
+    return {
+        type: "SET_ABILITY",
+        payload: {
+            abilities: abilityState
+        }
+    }
+}
