@@ -151,6 +151,17 @@ export const setCalcBtnAction = (calcBtnState) => {
     }
 }
 
+export const SET_CALC_RESULT = "SET_CALC_RESULT";
+
+export const setCalcResultAction = (calcResultState) => {
+    return {
+        type: "SET_CALC_RESULT",
+        payload: {
+            calcResult: calcResultState,
+        }
+    }
+}
+
 export const SET_ADDED_COIN = "SET_ADDED_COIN";
 
 export const setAddedCoinAction = (addedCoinState) => {

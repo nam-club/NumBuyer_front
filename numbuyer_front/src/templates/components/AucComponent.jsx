@@ -24,7 +24,7 @@ const AucComponent = (props) => {
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
-    const [fee, setFee] = React.useState(0);
+    const [fee, setFee] = React.useState('0');
     const {bid} = React.useContext(CTX);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
 
@@ -62,10 +62,11 @@ const AucComponent = (props) => {
     }
 
     const changeBid = (code) => {
+        let feeNum = Number(fee);
         if(code === '+') {
-            setFee(fee+1);
+            setFee(String(feeNum+1));
         }else if(code === '-') {
-            setFee(fee-1);
+            setFee(String(feeNum-1));
         }
     }
 

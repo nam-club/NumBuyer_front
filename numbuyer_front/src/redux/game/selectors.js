@@ -72,6 +72,11 @@ export const getCalcBtnFlg = createSelector(
     state => state.calcBtnFlg
 )
 
+export const getCalcResultFlg = createSelector(
+    [gameSelector],
+    state => state.calcResult
+)
+
 export const getAddedCoin = createSelector(
     [gameSelector],
     state => state.addedCoin

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction, setRemainingTimeAction,
-    setSkipAction, setPassAction, setFinishGameAction, setWinPlayerAction,
+    setSkipAction, setPassAction, setFinishGameAction, setWinPlayerAction, setCalcResultAction,
     setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
 
 import { arrayOutput } from '../../logics';
@@ -44,6 +44,10 @@ const TimeComponent = (props) => {
             dispatch(setRemTimeFlgAction(false));
         }
     }, [selector.game.remTimeFlg]);
+
+    /*React.useEffect(() => {
+        setTimeout(dispatch(setCalcResultAction(Constants.NONE)), 2000);
+    }, [selector.game.calcResult]);*/
 
     // ターゲットカード公開フェーズロジック
     const showTarget = () => {

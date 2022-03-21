@@ -137,17 +137,17 @@ export const CNF_ABILITIES = [
             {
                 lang: "English",
                 name: "Shake Shake",
-                comment: "Randomly shuffle everyone's coins and hands (can only be used once).[Active Ability]",
+                comment: "At the beginning of the next turn, randomly shuffle everyone's coins and hands (can only be used once).[Active Ability]",
             },
             {
                 lang: "Japanese",
                 name: "シェイクシェイク",
-                comment: "全員のコインと手札をランダムにシャッフルする(1回のみ使用可能)。[アクティブアビリティ]",
+                comment: "次のターンの開始時、全員のコインと手札をランダムにシャッフルする(1回のみ使用可能)。[アクティブアビリティ]",
             },
             {
                 lang: "Chinese",
                 name: "摇摇",
-                comment: "随机洗牌每个人的硬币和手牌（只能使用一次）。[主动技能]",
+                comment: "在下一回合开始时、随机洗牌每个人的硬币和手牌（只能使用一次）。[主动技能]",
             },
         ],
     },
@@ -169,3 +169,8 @@ export const END_PH = 'END';
 // 入力可能文字列 
 export const NAME_EXP = "[¥$=<>+*]+";
 export const BID_EXP = "[0-9]+";
+
+// 正解ステータス
+export const SUCCESS = "SUCCESS";
+export const FAILED = "FAILED";
+export const NONE = "NONE";

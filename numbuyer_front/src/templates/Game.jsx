@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
+import { useStyles, GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
 import AucComponent from './components/AucComponent';
@@ -15,8 +15,10 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
+import Card from '@mui/material/Card';
 
 const Game = () => {
+    const classes = useStyles();
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ

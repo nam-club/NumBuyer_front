@@ -760,4 +760,30 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'scale(0.98)',
     },
   },
+
+  // 正解・不正解エフェクト
+  success: {
+    background: 'rgba(0,255,0,0.5)',
+  },
+  failed: {
+    background: 'rgba(255,0,0,0.5)',
+  },
+  result_animation: {
+    position: 'absolute',
+    top: '50%',
+    color: grey[100],
+    animation: 'slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards',
+  },
+  '@keyframes slideIn': {
+    '0%': {
+      transform: 'translateX(180px)',
+      opacity: 0,
+    },
+    '100%': {
+      transform: 'translateX(0)',
+    },
+    '40%,100%': {
+      opacity: 1,
+    },
+  }
 }));

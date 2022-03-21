@@ -1,4 +1,5 @@
 import * as ConstantsMsg from '../../constantsMsg';
+import * as Constants from '../../constants';
 
 const initialState = {
     players: {
@@ -50,6 +51,7 @@ const initialState = {
             total: 0, // 獲得コインの合計
             cardNumBonus: 0, // カード枚数ボーナスコイン
         },
+        calcResult: Constants.NONE, // 計算結果ステータス
         finishFlg: false, // ゲーム終了フラグ
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ

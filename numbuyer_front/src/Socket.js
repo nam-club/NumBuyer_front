@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
      setRankingAction } from './redux/players/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
- setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction,
+ setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
   setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
@@ -230,11 +230,15 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             if(resObj.isCorrectAnswer) {
+                // 正解アニメーション
+                dispatch(setCalcResultAction(Constants.SUCCESS));
                 // 正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG1));
                 // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
                 dispatch(setCalcBtnAction(false));
             }else {
+                // 不正解アニメーション
+                dispatch(setCalcResultAction(Constants.FAILED));
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
                 // 画面更新調整用
