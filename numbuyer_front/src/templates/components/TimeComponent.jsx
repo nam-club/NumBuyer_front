@@ -45,10 +45,6 @@ const TimeComponent = (props) => {
         }
     }, [selector.game.remTimeFlg]);
 
-    /*React.useEffect(() => {
-        setTimeout(dispatch(setCalcResultAction(Constants.NONE)), 2000);
-    }, [selector.game.calcResult]);*/
-
     // ターゲットカード公開フェーズロジック
     const showTarget = () => {
         dispatch(setPhaseAction(Constants.SHOW_TAR_PH));

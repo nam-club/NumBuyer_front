@@ -16,6 +16,7 @@ import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
+import { teal, red } from '@mui/material/colors';
 
 const Game = () => {
     const classes = useStyles();
@@ -70,6 +71,16 @@ const Game = () => {
         <Typography component="div" align="center">
             <GlobalStyle />
             <GameBack>
+                {selector.game.calcResult === Constants.SUCCESS &&
+                    <Card className={classes.result_animation} sx={{background: teal['A100']}} >
+                        {selector.msg.lang.SUCCESS}
+                    </Card>
+                }
+                {selector.game.calcResult === Constants.FAILED &&
+                    <Card className={classes.result_animation} sx={{background: red['A100']}}>
+                        {selector.msg.lang.FAILED}
+                    </Card>
+                }
                 <Grid container>
                     <Grid item xs={3} />
                     <Grid item xs={6}>

@@ -66,6 +66,7 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...action.payload
             }
         case Actions.SET_CALC_RESULT:
+            console.log(action.payload);
             return {
                 ...state,
                 ...action.payload

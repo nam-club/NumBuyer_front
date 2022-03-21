@@ -762,28 +762,32 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   // 正解・不正解エフェクト
-  success: {
-    background: 'rgba(0,255,0,0.5)',
-  },
-  failed: {
-    background: 'rgba(255,0,0,0.5)',
-  },
   result_animation: {
     position: 'absolute',
-    top: '50%',
+    top: '20%',
+    left: '30%',
+    width: '25%',
+    padding: '5% 10%',
+    zIndex: 100,
+    fontSize: '4em',
     color: grey[100],
-    animation: 'slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards',
+    opacity: 0,
+    'animation-name': '$slide',
+    'animation-duration': '1.5s',
+    'animation-fill-mode': 'forwards',
   },
-  '@keyframes slideIn': {
+  '@keyframes slide': {
     '0%': {
-      transform: 'translateX(180px)',
       opacity: 0,
+      transform: 'translateX(180px)',
     },
-    '100%': {
+    '50%': {
+      opacity: 0.8,
       transform: 'translateX(0)',
     },
-    '40%,100%': {
-      opacity: 1,
+    '100%': {
+      opacity: 0,
+      transform: 'translateX(-180px)',
     },
-  }
+  },
 }));

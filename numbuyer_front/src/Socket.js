@@ -226,7 +226,7 @@ export default function Socket(props) {
             dispatch(setAucBtnAction(true));
         })
 
-        socket.on('game/calculate_result', function(msg) {
+        socket.on('game/calculate_result', async function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             if(resObj.isCorrectAnswer) {
@@ -245,6 +245,11 @@ export default function Socket(props) {
                 dispatch(setCalcBtnAction(false));
                 dispatch(setCalcBtnAction(true));
             }
+
+            await setTimeout(() => {
+                dispatch(setCalcResultAction(Constants.NONE));
+            }, 1500);
+
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
 
