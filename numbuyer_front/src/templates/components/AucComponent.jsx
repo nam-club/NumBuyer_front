@@ -4,7 +4,7 @@ import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, BidButton, PassButton, YesButton,
+import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
          AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
@@ -24,7 +24,7 @@ const AucComponent = (props) => {
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
-    const [fee, setFee] = React.useState('');
+    const [fee, setFee] = React.useState(0);
     const {bid} = React.useContext(CTX);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
 
@@ -58,6 +58,14 @@ const AucComponent = (props) => {
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
             }
+        }
+    }
+
+    const changeBid = (code) => {
+        if(code === '+') {
+            setFee(fee+1);
+        }else if(code === '-') {
+            setFee(fee-1);
         }
     }
 
@@ -143,10 +151,11 @@ const AucComponent = (props) => {
                     {(selector.game.phase === Constants.AUCTION_PH) ?
                         <div>
                             <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
-                            <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
-                            type="number" 
+                            <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
                             id="standard-basic" value={fee} 
                             onChange={doChange} />
+                            <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
+                            <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
                         </div>
                     :   <AuctionArea></AuctionArea>
                     }  

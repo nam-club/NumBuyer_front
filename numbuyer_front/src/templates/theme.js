@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
-import { grey, yellow, amber, blue, lightBlue, indigo, teal, lightGreen, red } from '@mui/material/colors';
+import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, lightGreen, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
@@ -428,8 +428,23 @@ export const BidMessage = styled('p')({
 // 入札金額入力ボックス
 export const CoinField = styled(TextField)({
   color: grey[600],
-  width: '25%',
+  width: '20%',
   margin: 0,
+});
+
+// 入札金額変更ボタン
+export const ChangeBidButton = styled(Button)({
+  margin: '3% 2%',
+  padding: 0,
+  fontSize: '1.5em',
+  width: '1%',
+  color: grey[100],
+  background: cyan[200],
+  fontWeight: 'bold',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: cyan[100],
+  },
 });
 
 // 入札ボタン

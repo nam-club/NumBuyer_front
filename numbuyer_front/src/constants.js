@@ -15,9 +15,9 @@ export const DEF_TP = 'defense';
 export const JAM_TP = 'jam';
 export const CNF_TP = 'confuse';
 
-// アクティブスキル
-export const ACT_SKL = 'active';
-export const PSV_SKL = 'passive';
+// トリガー
+export const ACT_TRG = 'active';
+export const PSV_TRG = 'passive';
 
 // アビリティ（ブースト系）
 export const BST_ABILITIES = [
@@ -25,7 +25,7 @@ export const BST_ABILITIES = [
         abilityId: "bst_prm_001",
         status: UNUSED_ST,
         type: BST_TP,
-        skill: PSV_SKL,
+        trigger: PSV_TRG,
         display: [
             {
                 lang: "English",
@@ -52,22 +52,22 @@ export const ATK_ABILITIES = [
         abilityId: 'atk_prm_001',
         status: UNUSED_ST,
         type: ATK_TP,
-        skill: PSV_SKL,
+        trigger: PSV_TRG,
         display: [
             {
                 lang: "English",
                 name: "NumViolence",
-                comment: "If the number of cards used for the answer is the largest among all, the cards of all the opponents are randomly reduced by one.[Passive Ability]",
+                comment: "If the number of cards used for the answer is the largest among all, the cards of all the opponents are randomly reduced by 2.[Passive Ability]",
             },
             {
                 lang: "Japanese",
                 name: "数の暴力",
-                comment: "解答に使用したカード枚数が全員の中で最も多ければ、相手全員のカードをランダムに1枚減らす。[パッシブアビリティ]",
+                comment: "解答に使用したカード枚数が全員の中で最も多ければ、相手全員のカードをランダムに2枚減らす。[パッシブアビリティ]",
             },
             {
                 lang: "Chinese",
                 name: "数字的暴政",
-                comment: "如果用于答案的牌数是所有牌中最多的, 则所有对手的牌随机减一。[被动技能]",
+                comment: "如果用于答案的牌数是所有牌中最多的, 则所有对手的牌随机减2。[被动技能]",
             },
         ],
     },
@@ -78,7 +78,7 @@ export const DEF_ABILITIES = [
         abilityId: 'def_tmp_001',
         status: UNUSED_ST,
         type: DEF_TP,
-        skill: ACT_SKL,
+        trigger: ACT_TRG,
         display: [
             {
                 lang: "English",
@@ -105,7 +105,7 @@ export const JAM_ABILITIES = [
         abilityId: 'jam_prm_001',
         status: UNUSED_ST,
         type: JAM_TP,
-        skill: PSV_SKL,
+        trigger: PSV_TRG,
         display: [
             {
                 lang: "English",
@@ -132,7 +132,7 @@ export const CNF_ABILITIES = [
         abilityId: 'cnf_prm_001',
         status: UNUSED_ST,
         type: CNF_TP,
-        skill: ACT_SKL,
+        trigger: ACT_TRG,
         display: [
             {
                 lang: "English",
