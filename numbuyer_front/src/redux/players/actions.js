@@ -82,7 +82,7 @@ export const setAbilityAction = (abilityState) => {
     return {
         type: "SET_ABILITY",
         payload: {
-            abilities: abilityState
+            abilityIds: abilityState
         }
     }
 }

@@ -3,10 +3,10 @@ export const COIN = 100;
 
 
 // アビリティステータス
-export const ACTIVE_ST = 'active';
-export const READY_ST = 'ready';
-export const UNUSED_ST = 'unused';
-export const USED_ST = 'used';
+export const UNUSED_ST = 'unused'; // 効果未使用
+export const READY_ST = 'ready'; // 効果発動準備中
+export const ACTIVE_ST = 'active'; // 効果発動中
+export const USED_ST = 'used'; // 効果使用済
 
 // アビリティタイプ
 export const BST_TP = 'boost';
@@ -23,9 +23,6 @@ export const PSV_TRG = 'passive';
 export const BST_ABILITIES = [
     {
         abilityId: "bst_prm_001",
-        status: UNUSED_ST,
-        type: BST_TP,
-        trigger: PSV_TRG,
         display: [
             {
                 lang: "English",
@@ -50,9 +47,6 @@ export const BST_ABILITIES = [
 export const ATK_ABILITIES = [
     {
         abilityId: 'atk_prm_001',
-        status: UNUSED_ST,
-        type: ATK_TP,
-        trigger: PSV_TRG,
         display: [
             {
                 lang: "English",
@@ -76,9 +70,6 @@ export const ATK_ABILITIES = [
 export const DEF_ABILITIES = [
     {
         abilityId: 'def_tmp_001',
-        status: UNUSED_ST,
-        type: DEF_TP,
-        trigger: ACT_TRG,
         display: [
             {
                 lang: "English",
@@ -103,9 +94,6 @@ export const DEF_ABILITIES = [
 export const JAM_ABILITIES = [
     {
         abilityId: 'jam_prm_001',
-        status: UNUSED_ST,
-        type: JAM_TP,
-        trigger: PSV_TRG,
         display: [
             {
                 lang: "English",
@@ -130,9 +118,6 @@ export const JAM_ABILITIES = [
 export const CNF_ABILITIES = [
     {
         abilityId: 'cnf_prm_001',
-        status: UNUSED_ST,
-        type: CNF_TP,
-        trigger: ACT_TRG,
         display: [
             {
                 lang: "English",
