@@ -20,7 +20,7 @@ const AbilityComponent = (props) => {
             <AbilityCard>
                 <NavigationComponent message={props.type} messages={[]} color={props.color} bColor={props.bColor} />
                 {props.abilities.map((value) => (
-                    selector.players.player.abilityIds.find((id) => {return id === value.abilityId}) 
+                    selector.players.player.abilities.find((id) => {return id === value.abilityId}) 
                     ?
                     <Tooltip key={value.abilityId} title={
                         <SpeechBubble>
@@ -43,7 +43,7 @@ const AbilityComponent = (props) => {
                             onClick={() => {
                                 dispatch(setAbilityAction(value.abilityId));
                                 props.update();
-                                if(selector.players.player.abilityIds.length >= 2) {
+                                if(selector.players.player.abilities.length >= 2) {
                                     dispatch(setValidAction({validFlg: false}));
                                 }
                             }}>

@@ -91,9 +91,9 @@ const Top = () => {
 
     // アビリティを確定する
     const confirmAbilities = () => {
-        if(selector.players.player.abilityIds.length >= 2) {
+        if(selector.players.player.abilities.length >= 2) {
             if(selector.room.isQuickMatch) {
-                joinQuickMatch({playerName: name, abilityIds: selector.players.player.abilityIds});
+                joinQuickMatch({playerName: name, abilityIds: selector.players.player.abilities});
             }else {
                 setFriendOpen(true);
             }
@@ -223,7 +223,7 @@ const Top = () => {
                                         dispatch(setValidAction({validFlg: false}));
                                         dispatch(setRoomAction({roomId: roomId}));
                                         dispatch(setPlayerNameAction(name));
-                                        createMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilityIds});
+                                        createMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
                                     }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
                                 </div>
                                 <Grid container>
@@ -239,7 +239,7 @@ const Top = () => {
                                             dispatch(setValidAction({validFlg: false}));
                                             dispatch(setRoomAction({roomId: roomId}));
                                             dispatch(setPlayerNameAction(name));
-                                            joinFriendMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilityIds});
+                                            joinFriendMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
                                         }}>{selector.msg.lang.JOIN_BTN}</JoinButton>
                                     </Grid>
                                 </Grid>

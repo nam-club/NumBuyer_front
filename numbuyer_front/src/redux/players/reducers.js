@@ -25,13 +25,13 @@ export const PlayersReducer = (state = initialState.players, action) => {
             state.ranking = action.payload.ranking;
             return state;
         case Actions.SET_ABILITY:
-            if(state.player.abilityIds.length === 0 ||  state.player.abilityIds.length === 1) {
-                state.player.abilityIds.push(action.payload.abilityIds);
+            if(state.player.abilities.length === 0 ||  state.player.abilities.length === 1) {
+                state.player.abilities.push(action.payload.abilities);
             }else {
-                state.player.abilityIds[0] = state.player.abilityIds[1];
-                state.player.abilityIds[1] = action.payload.abilityIds;
+                state.player.abilities[0] = state.player.abilities[1];
+                state.player.abilities[1] = action.payload.abilities;
             }
-            console.log(state.player.abilityIds)
+            console.log(state.player.abilities)
             return state;
         default:
             return state;
