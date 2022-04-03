@@ -83,8 +83,8 @@ const Game = () => {
                     </Card>
                 }
                 <Grid container>
-                    <Grid item xs={3} />
-                    <Grid item xs={6}>
+                    <Grid item xs={1} />
+                    <Grid item xs={8}>
                         <NavigationComponent message={message} messages={messages} />
                     </Grid>
                     <Grid item xs={3}>

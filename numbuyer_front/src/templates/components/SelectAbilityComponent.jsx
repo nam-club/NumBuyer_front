@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AbilityCard, AbilityButton, SelectedAbilityButton, AbilitySkillTag, SpeechBubble } from '../theme';
+import { AbilityCard, AbilityButton, SelectedAbilityButton, SpeechBubble } from '../theme';
 
 import { setAbilityAction } from '../../redux/players/actions';
 import { setValidAction } from '../../redux/msg/actions';

@@ -426,7 +426,7 @@ export const BidMessage = styled('p')({
 // 入札金額入力ボックス
 export const CoinField = styled(TextField)({
   color: grey[600],
-  width: '20%',
+  width: '25%',
   margin: 0,
 });
 
@@ -531,7 +531,7 @@ export const ConfuseButton = styled(Button) ({
   margin: '2%',
   'white-space': 'nowrap',
   '&:hover': {
-    background: grey[700],
+    background: grey[600],
   },
 });
 

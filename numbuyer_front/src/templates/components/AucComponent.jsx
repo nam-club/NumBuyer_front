@@ -154,7 +154,7 @@ const AucComponent = (props) => {
                         <div>
                             <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
                             <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
-                            id="standard-basic" value={fee} 
+                            id="standard-basic" value={fee} size="small"
                             onChange={doChange} />
                             <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
                             <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
