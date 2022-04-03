@@ -9,6 +9,7 @@ import CalcComponent from './components/CalcComponent';
 import RankingComponent from './components/RankingComponent';
 import NavigationComponent from './components/NavigationComponent';
 import PlayerInfoComponent from './components/PlayerInfoComponent';
+import UseAbilityComponent from './components/UseAbilityComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
@@ -92,28 +93,40 @@ const Game = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item xs={1} />
-                    <Grid item xs={2}>
-                        {(targetCard !== '　'
-                            && (
-                                !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
-                                ||
-                                (selector.game.targetSkipFlg && 
-                                    ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                    <Grid item xs={1}/>
+                    <Grid item xs={8}>
+                        <Grid container>
+                            <Grid item xs={2}>
+                                {(targetCard !== '　'
+                                    && (
+                                        !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                        ||
+                                        (selector.game.targetSkipFlg && 
+                                            ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                        )
+                                    )
                                 )
-                            )
-                        )
-                        &&
-                            <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                                <TargetCard>
-                                    <CardTag>{selector.msg.lang.TARGET}</CardTag>
-                                    <CardValue>{targetCard}</CardValue>
-                                </TargetCard>
-                            </Slide>
-                        }
-                    </Grid>
-                    <Grid item xs={6}>
-                        <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                &&
+                                    <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
+                                        <TargetCard>
+                                            <CardTag>{selector.msg.lang.TARGET}</CardTag>
+                                            <CardValue>{targetCard}</CardValue>
+                                        </TargetCard>
+                                    </Slide>
+                                }
+                            </Grid>
+                            <Grid item xs={10}>
+                                <Grid container>
+                                    <Grid item xs={8}>
+                                        <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <UseAbilityComponent/>
+                                    </Grid>
+                                </Grid>
+                                
+                            </Grid>
+                        </Grid>
                         <CalcComponent calcBtnFlg={calcBtnFlg}/>
                     </Grid>
                     <Grid item xs={3}>

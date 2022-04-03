@@ -11,7 +11,7 @@ import NavigationComponent from './NavigationComponent';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 
-const AbilityComponent = (props) => {
+const SelectAbilityComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
@@ -57,4 +57,4 @@ const AbilityComponent = (props) => {
     );
 }
 
-export default AbilityComponent;
+export default SelectAbilityComponent;

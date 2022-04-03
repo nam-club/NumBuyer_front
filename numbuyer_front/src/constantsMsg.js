@@ -40,6 +40,7 @@ export const English = {
     BID_BTN: 'Bid',
     PASS_BTN: 'Pass',
     ANSWER_BTN: 'Answer',
+    ABILITY_TAG: 'Abilities',
     YOUR_CARDS: 'Your Cards',
     CALCULATE_FIELD: 'Calculate Field',
     YES_BTN: 'Yes',
@@ -62,6 +63,7 @@ export const English = {
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
     SYMBOL_ERR: "You cannot enter that character.", // 禁止文字が入力されている
+    NULL_ROOM_ID_ERR: "Please enter Room ID.", // ルームが未入力
     ABILITY_ERR: 'Please select two abilities.', // アビリティを2つ選択していない
     NULL_BID_ERR: "Please enter the amount.", // 金額が未入力
     NUM_ERR: "You can only enter numbers.", // 数字以外が入力されている
@@ -144,6 +146,7 @@ export const Japanese = {
     BID_BTN: '入札',
     PASS_BTN: 'パス',
     ANSWER_BTN: '解答',
+    ABILITY_TAG: 'アビリティ',
     YOUR_CARDS: 'あなたの手札',
     CALCULATE_FIELD: '計算フィールド',
     YES_BTN: 'はい',
@@ -175,6 +178,7 @@ export const Japanese = {
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
+    NULL_ROOM_ID_ERR: 'ルームIDを入力してください。', // ルームIDが未入力
     ABILITY_ERR: 'アビリティを2つ選択してください。', // アビリティを2つ選択していない
     NULL_BID_ERR: '金額を入力してください。', // 金額が未入力
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
@@ -258,6 +262,7 @@ export const Chinese = {
     BID_BTN: '投标',
     PASS_BTN: '不叫牌',
     ANSWER_BTN: '回答',
+    ABILITY_TAG: '能力',
     YOUR_CARDS: '你的手',
     CALCULATE_FIELD: '计算字段',
     YES_BTN: '是的',
@@ -280,6 +285,7 @@ export const Chinese = {
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力
     SYMBOL_ERR: '您不能输入该字符。', // 禁止文字が入力されている
+    NULL_ROOM_ID_ERR: '请输入房间号。', // ルームIDが未入力
     ABILITY_ERR: '选择两个技能。', // アビリティを2つ選択していない
     NULL_BID_ERR: '请输入金额。', // 金額が未入力
     NUM_ERR: '您只能输入数字。', // 数字以外が入力されている

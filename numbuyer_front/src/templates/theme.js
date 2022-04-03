@@ -380,8 +380,6 @@ export const NaviMessages = styled('p')({
 export const TargetCard = styled(Card)({
   background: teal['A100'],
   color: grey[700],
-  marginLeft: 50,
-  marginRight: 10,
   'white-space': 'nowrap',
 });
 
@@ -466,11 +464,75 @@ export const HighBidMessage = styled('p')({
   fontSize: '1.5em',
 });
 
+// アビリティエリア
+export const AbilityArea = styled(Card)({
+  background: grey[50],
+  color: grey[700],
+  marginLeft: '2%',
+  padding: '5%',
+});
+
 // エリアタグ
 export const AreaTag = styled('p')({
   color: grey[700],
   marginLeft: '2%',
   fontSize: '1.2em',
+});
+
+// アビリティボタン（速攻）
+export const BoostButton = styled(Button) ({
+  background: teal[300],
+  width: '75%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: teal[200],
+  },
+});
+
+// アビリティボタン（攻撃）
+export const AttackButton = styled(Button) ({
+  background: red[300],
+  width: '75%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: red[200],
+  },
+});
+
+// アビリティボタン（防御）
+export const DefenseButton = styled(Button) ({
+  background: blue[300],
+  width: '75%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: blue[200],
+  },
+});
+
+// アビリティボタン（妨害）
+export const JamButton = styled(Button) ({
+  background: yellow[300],
+  color: grey[700],
+  width: '75%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: yellow[200],
+  },
+});
+
+// アビリティボタン（混乱）
+export const ConfuseButton = styled(Button) ({
+  background: grey[700],
+  width: '75%',
+  margin: '2%',
+  'white-space': 'nowrap',
+  '&:hover': {
+    background: grey[700],
+  },
 });
 
 // 項カード
@@ -489,10 +551,6 @@ export const TermCard = styled(Button)({
 // 計算エリア
 export const CalcArea = styled(Card)({
   background: grey[50],
-  marginTop: 5,
-  marginLeft: -250,
-  position: 'relative',
-  top: 50,
 });
 
 // 折り返し表示用
@@ -738,12 +796,65 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
+  // アビリティボタン（速攻）
+  bst_ability: {
+    background: teal[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: teal[200],
+    },
+  },
+
+  // アビリティボタン（攻撃）
+  atk_ability: {
+    background: red[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: red[200],
+    },
+  },
+
+  // アビリティボタン（防御）
+  def_ability: {
+    background: blue[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: blue[200],
+    },
+  },
+
+  // アビリティボタン（妨害）
+  jam_ability: {
+    background: yellow[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: teal[200],
+    },
+  },
+
+  // アビリティボタン（混乱）
+  cnf_ability: {
+    background: grey[700],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: grey[700],
+    },
+  },
+
   // 手札エリア
   hand: {
     background: grey[200],
-    marginLeft: -250,
-    position: 'relative',
-    top: 50,
+    marginTop:'2%',
   },
   hand_animation: {
     background: grey[50],

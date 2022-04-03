@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
-     setRankingAction } from './redux/players/actions';
+     setRankingAction, setResAbilityAction} from './redux/players/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
   setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction } from './redux/game/actions';
@@ -80,7 +80,7 @@ export default function Socket(props) {
     if(!socket) {
       socket = io(process.env.REACT_APP_SOCKET_URL);
 
-        socket.on('game/join', function(msg) {
+        socket.on('game/join', async function(msg) {
             console.log("game/join:")
             console.log(msg)
             resObj = JSON.parse(msg);
@@ -90,10 +90,58 @@ export default function Socket(props) {
             dispatch(setRoomAction(resObj.roomId));
             // オーナーフラグをセット
             dispatch(setOwnerAction(resObj.isOwner));
-            console.log("roomIdは" + resObj.roomId);
-            console.log("playerIdは" + resObj.playerId);
+            // アビリティをセット
+            let abilities = [];
+            for(let a of resObj.abilities) {
+                abilities.push(await setAbility(a));
+            }
+            console.log(abilities);
+            dispatch(setResAbilityAction(abilities));
             playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
         })
+
+        // アビリティのパラメータをセット
+        const setAbility = (resAbility) => {
+            let ability = {
+                abilityId: "",
+                status: "",
+                remaining: 0,
+                type: "",
+                trigger: "",
+                display: [],
+            }
+
+            ability.abilityId = resAbility.abilityId;
+            ability.status = resAbility.status;
+            ability.remaining = resAbility.remaining;
+            ability.type = resAbility.type;
+            ability.trigger = resAbility.trigger;
+            console.log(searchAbility(resAbility.abilityId).display);
+            ability.display = searchAbility(resAbility.abilityId).display;
+
+            return ability;
+        }
+
+        // アビリティ検索
+        const searchAbility = (id) => {
+            let bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
+            let atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
+            let defAbility = Constants.DEF_ABILITIES.find((a) => {return a.abilityId === id});
+            let jamAbility = Constants.JAM_ABILITIES.find((a) => {return a.abilityId === id});
+            let cnfAbility = Constants.CNF_ABILITIES.find((a) => {return a.abilityId === id});
+
+            if(bstAbility) {
+                return bstAbility;
+            }else if(atkAbility) {
+                return atkAbility;
+            }else if(defAbility) {
+                return defAbility;
+            }else if(jamAbility) {
+                return jamAbility;
+            }else if(cnfAbility) {
+                return cnfAbility;
+            }
+        }
 
         const setPlayers = (value) => {
             return new Promise((resolve, reject)=>{

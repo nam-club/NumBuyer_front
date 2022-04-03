@@ -128,9 +128,10 @@ const AucComponent = (props) => {
     };
 
     return (
-        <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}>
+        <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
+        sx={{marginLeft: "1%"}}>
             <Grid container>
-                <Grid item xs={5}>
+                <Grid item xs={6}>
                     <AreaTag align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.AUCTION}</AreaTag>
                     {(props.auctionCards.length !== 0 && 
                         !((selector.game.phase === Constants.READY_PH)
