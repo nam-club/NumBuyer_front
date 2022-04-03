@@ -93,10 +93,11 @@ export default function Socket(props) {
             // アビリティをセット
             let abilities = [];
             for(let a of resObj.abilities) {
-                abilities.push(await setAbility(a));
+                console.log(a);
+                abilities.push(setAbility(a));
             }
             console.log(abilities);
-            dispatch(setResAbilityAction(abilities));
+            await dispatch(setResAbilityAction(abilities));
             playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
         })
 
@@ -124,6 +125,7 @@ export default function Socket(props) {
 
         // アビリティ検索
         const searchAbility = (id) => {
+            console.log(id);
             let bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
             let atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
             let defAbility = Constants.DEF_ABILITIES.find((a) => {return a.abilityId === id});

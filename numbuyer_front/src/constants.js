@@ -117,7 +117,7 @@ export const JAM_ABILITIES = [
 // アビリティ（混乱系）
 export const CNF_ABILITIES = [
     {
-        abilityId: 'cnf_prm_001',
+        abilityId: 'cnf_tmp_001',
         display: [
             {
                 lang: "English",
