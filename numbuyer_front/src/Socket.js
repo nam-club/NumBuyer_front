@@ -106,7 +106,8 @@ export default function Socket(props) {
             let ability = {
                 abilityId: "",
                 status: "",
-                remaining: 0,
+                max: null,
+                remaining: null,
                 type: "",
                 trigger: "",
                 display: [],
@@ -114,10 +115,15 @@ export default function Socket(props) {
 
             ability.abilityId = resAbility.abilityId;
             ability.status = resAbility.status;
-            ability.remaining = resAbility.remaining;
+            if(resAbility.remaining < 0) {
+                ability.max = "";
+                ability.remaining = "";
+            }else {
+                ability.max = "/" + resAbility.remaining;
+                ability.remaining = resAbility.remaining;
+            }
             ability.type = resAbility.type;
             ability.trigger = resAbility.trigger;
-            console.log(searchAbility(resAbility.abilityId).display);
             ability.display = searchAbility(resAbility.abilityId).display;
 
             return ability;

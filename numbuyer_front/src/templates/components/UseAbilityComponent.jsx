@@ -4,12 +4,11 @@ import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles, AbilityArea, AreaTag, BoostButton, AttackButton, DefenseButton, JamButton, ConfuseButton,
-         SpeechBubble } from '../theme';
+import { useStyles, AbilityArea, AreaTag, UseAbilityButton, SpeechBubble } from '../theme';
 
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import { yellow } from '@mui/material/colors';
+import { teal, red, blue, yellow, grey } from '@mui/material/colors';
 
 const UseAbilityComponent = (props) => {
     const classes = useStyles();
@@ -43,9 +42,9 @@ const UseAbilityComponent = (props) => {
                 {abilities.map((value, index) => (
                     <div key={index}>
                         {value.status === Constants.USED_ST ?
-                            <Button size="large" variant="contained" disabled>
+                            <UseAbilityButton size="large" variant="contained" disabled>
                                 {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                            </Button> 
+                            </UseAbilityButton> 
                             :
                             <div>
                                 {value.status === Constants.READY_ST ?
@@ -56,11 +55,12 @@ const UseAbilityComponent = (props) => {
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                 </SpeechBubble>}
                                             placement="bottom">
-                                                <BoostButton size="large" variant="contained" 
-                                                sx={{border:2, borderColor: yellow["A200"]}}>
-                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                    {selector.msg.lang.REMAINING} {value.remaining}
-                                                </BoostButton>
+                                                <UseAbilityButton size="large" variant="contained"
+                                                 sx={{ background: teal[300], cursor: 'default', boxShadow: 'none',
+                                                '&:hover': {background: teal[300], boxShadow: 'none'} }}>
+                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                                    <br/> {value.remaining}{value.max}
+                                                </UseAbilityButton>
                                             </Tooltip> : 
                                             <div>
                                                 {value.type === Constants.ATK_TP ? 
@@ -69,11 +69,12 @@ const UseAbilityComponent = (props) => {
                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                         </SpeechBubble>}
                                                     placement="bottom">
-                                                        <AttackButton size="large" variant="contained" 
-                                                        sx={{border:2, borderColor: yellow["A200"]}}>
-                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                            {selector.msg.lang.REMAINING} {value.remaining}
-                                                        </AttackButton>
+                                                        <UseAbilityButton size="large" variant="contained"
+                                                         sx={{ background: red[300], cursor: 'default', boxShadow: 'none',
+                                                         '&:hover': {background: red[300], boxShadow: 'none'} }}>
+                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                                            <br/> {value.remaining}{value.max}
+                                                        </UseAbilityButton>
                                                     </Tooltip> :
                                                     <div>
                                                         {value.type === Constants.DEF_TP ? 
@@ -82,11 +83,12 @@ const UseAbilityComponent = (props) => {
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                 </SpeechBubble>}
                                                             placement="bottom">
-                                                                <DefenseButton size="large" variant="contained" 
-                                                                sx={{border:2, borderColor: yellow["A200"]}}>
-                                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                                    {selector.msg.lang.REMAINING} {value.remaining}
-                                                                </DefenseButton>
+                                                                <UseAbilityButton size="large" variant="contained"
+                                                                 sx={{ background: blue[300], cursor: 'default', boxShadow: 'none',
+                                                                 '&:hover': {background: blue[300], boxShadow: 'none'} }}>
+                                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                                                     <br/> {value.remaining}{value.max}
+                                                                </UseAbilityButton>
                                                             </Tooltip> :
                                                             <div>
                                                                 {value.type === Constants.JAM_TP ? 
@@ -95,22 +97,24 @@ const UseAbilityComponent = (props) => {
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
-                                                                        <JamButton size="large" variant="contained" 
-                                                                        sx={{border:2, borderColor: yellow["A200"]}}>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                                            {selector.msg.lang.REMAINING} {value.remaining}
-                                                                        </JamButton>
+                                                                        <UseAbilityButton size="large" variant="contained"
+                                                                         sx={{ background: yellow[300], color: grey[700], cursor: 'default', boxShadow: 'none',
+                                                                         '&:hover': {background: yellow[300], boxShadow: 'none'} }}>
+                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                                                            <br/> {value.remaining}{value.max}
+                                                                        </UseAbilityButton>
                                                                     </Tooltip> :
                                                                     <Tooltip key={value.abilityId} title={
                                                                         <SpeechBubble>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
-                                                                        <ConfuseButton size="large" variant="contained" 
-                                                                        sx={{border:2, borderColor: yellow["A200"]}}>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                                            {selector.msg.lang.REMAINING} {value.remaining}
-                                                                        </ConfuseButton>
+                                                                        <UseAbilityButton size="large" variant="contained"
+                                                                         sx={{ background: grey[700], cursor: 'default', boxShadow: 'none',
+                                                                         '&:hover': {background: grey[700], boxShadow: 'none'} }}>
+                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                                                            <br/> {value.remaining}{value.max}
+                                                                        </UseAbilityButton>
                                                                     </Tooltip>
                                                                 }
                                                             </div>
@@ -127,10 +131,11 @@ const UseAbilityComponent = (props) => {
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                 </SpeechBubble>}
                                             placement="bottom">
-                                                <BoostButton size="large" variant="contained">
+                                                <UseAbilityButton size="large" variant="contained"
+                                                 sx={{ background: grey[50], color: grey[700], border: 2, borderColor: teal[300], '&:hover': {background: "white"} }}>
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                    {selector.msg.lang.REMAINING} {value.remaining}
-                                                </BoostButton>
+                                                    {value.remaining}{value.max}
+                                                </UseAbilityButton>
                                             </Tooltip> : 
                                             <div>
                                                 {value.type === Constants.ATK_TP ? 
@@ -139,10 +144,11 @@ const UseAbilityComponent = (props) => {
                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                         </SpeechBubble>}
                                                     placement="bottom">
-                                                        <AttackButton size="large" variant="contained">
+                                                        <UseAbilityButton size="large" variant="contained"
+                                                         sx={{ background: grey[50], color: grey[700], border: 2, borderColor: red[300], '&:hover': {background: "white"} }}>
                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                            {selector.msg.lang.REMAINING} {value.remaining}
-                                                        </AttackButton>
+                                                            {value.remaining}{value.max}
+                                                        </UseAbilityButton>
                                                     </Tooltip> :
                                                     <div>
                                                         {value.type === Constants.DEF_TP ? 
@@ -151,10 +157,11 @@ const UseAbilityComponent = (props) => {
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                 </SpeechBubble>}
                                                             placement="bottom">
-                                                                <DefenseButton size="large" variant="contained">
+                                                                <UseAbilityButton size="large" variant="contained"
+                                                                 sx={{ background: grey[50], color: grey[700], border: 2, borderColor: blue[300], '&:hover': {background: "white"} }}>
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                                    {selector.msg.lang.REMAINING} {value.remaining}
-                                                                </DefenseButton>
+                                                                    {value.remaining}{value.max}
+                                                                </UseAbilityButton>
                                                             </Tooltip> :
                                                             <div>
                                                                 {value.type === Constants.JAM_TP ? 
@@ -163,20 +170,22 @@ const UseAbilityComponent = (props) => {
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
-                                                                        <JamButton size="large" variant="contained">
+                                                                        <UseAbilityButton size="large" variant="contained"
+                                                                         sx={{ background: grey[50], color: grey[700], border: 2, borderColor: yellow[300], '&:hover': {background: "white"} }}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                                            {selector.msg.lang.REMAINING} {value.remaining}
-                                                                        </JamButton>
+                                                                            {value.remaining}{value.max}
+                                                                        </UseAbilityButton>
                                                                     </Tooltip> :
                                                                     <Tooltip key={value.abilityId} title={
                                                                         <SpeechBubble>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
-                                                                        <ConfuseButton size="large" variant="contained">
+                                                                        <UseAbilityButton size="large" variant="contained"
+                                                                         sx={{ background: grey[50], color: grey[700], border: 2, borderColor: grey[700], '&:hover': {background: "white"} }}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
-                                                                            {selector.msg.lang.REMAINING} {value.remaining}
-                                                                        </ConfuseButton>
+                                                                            {value.remaining}{value.max}
+                                                                        </UseAbilityButton>
                                                                     </Tooltip>
                                                                 }
                                                             </div>

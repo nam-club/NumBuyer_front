@@ -479,60 +479,11 @@ export const AreaTag = styled('p')({
   fontSize: '1.2em',
 });
 
-// アビリティボタン（速攻）
-export const BoostButton = styled(Button) ({
-  background: teal[300],
+// アビリティボタン（ゲーム中）
+export const UseAbilityButton = styled(Button) ({
   width: '75%',
   margin: '2%',
   'white-space': 'nowrap',
-  '&:hover': {
-    background: teal[200],
-  },
-});
-
-// アビリティボタン（攻撃）
-export const AttackButton = styled(Button) ({
-  background: red[300],
-  width: '75%',
-  margin: '2%',
-  'white-space': 'nowrap',
-  '&:hover': {
-    background: red[200],
-  },
-});
-
-// アビリティボタン（防御）
-export const DefenseButton = styled(Button) ({
-  background: blue[300],
-  width: '75%',
-  margin: '2%',
-  'white-space': 'nowrap',
-  '&:hover': {
-    background: blue[200],
-  },
-});
-
-// アビリティボタン（妨害）
-export const JamButton = styled(Button) ({
-  background: yellow[300],
-  color: grey[700],
-  width: '75%',
-  margin: '2%',
-  'white-space': 'nowrap',
-  '&:hover': {
-    background: yellow[200],
-  },
-});
-
-// アビリティボタン（混乱）
-export const ConfuseButton = styled(Button) ({
-  background: grey[700],
-  width: '75%',
-  margin: '2%',
-  'white-space': 'nowrap',
-  '&:hover': {
-    background: grey[600],
-  },
 });
 
 // 項カード
