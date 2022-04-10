@@ -184,6 +184,17 @@ export const setAnsPlayersAction = (ansPlayersState) => {
     }
 }
 
+export const SET_FIRED_ABILITIES = "SET_FIRED_ABILITIES";
+
+export const setFiredAbilitiesAction = (firedAbilitiesState) => {
+    return {
+        type: "SET_FIRED_ABILITIES",
+        payload: {
+            firedAbilities: firedAbilitiesState
+        }
+    }
+}
+
 export const SET_FINISH_GAME = "SET_FINISH_GAME";
 
 export const setFinishGameAction = (finishGameState) => {

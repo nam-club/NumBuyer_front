@@ -87,6 +87,11 @@ export const getAnsPlayers = createSelector(
     state => state.ansPlayers
 )
 
+export const getFiredAbilities = createSelector(
+    [gameSelector],
+    state => state.firedAbilities
+)
+
 export const getFinishFlg = createSelector(
     [gameSelector],
     state => state.finishFlg

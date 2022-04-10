@@ -24,50 +24,55 @@ export const joinQuickMatch = function(value) {
     console.log("quickMatch:")
     console.log(value);
     socket.emit('join/quick_match', JSON.stringify(value));
-}
+};
 
 export const createMatch = function(value) {
     console.log("createMatch:")
     console.log(value);
     socket.emit('create/match', JSON.stringify(value));
-}
+};
 
 export const joinFriendMatch = function(value) {
     console.log("joinFriendMatch:")
     console.log(value);
     socket.emit('join/friend_match', JSON.stringify(value));
-}
+};
 
 export const playersInfo = function(value) {
     console.log(value);
     socket.emit('game/players_info', JSON.stringify(value));
-}
+};
 
 export const start = function(value) {
     console.log(value);
     socket.emit('game/start', JSON.stringify(value));
-}
+};
 
 export const nextTurn = function(value) {
     console.log(value);
     socket.emit('game/next_turn', JSON.stringify(value));
-}
+};
 
 export const bid = function(value) {
     console.log(value);
     socket.emit('game/bid', JSON.stringify(value));
-}
+};
 
 export const buy = function(value) {
     console.log(value);
     socket.emit('game/buy', JSON.stringify(value));
-}
+};
 
 export const calculate = function(value) {
     changeCode(value.calculateCards, 'calculate');
     console.log(value);
     socket.emit('game/calculate', JSON.stringify(value));
-}
+};
+
+export const useAbility = function(value) {
+    console.log(value);
+    socket.emit('game/ready_ability', JSON.stringify(value));
+};
 
 
 /* ====== レスポンスAPI ====== */
@@ -99,9 +104,9 @@ export default function Socket(props) {
             console.log(abilities);
             await dispatch(setResAbilityAction(abilities));
             playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
-        })
+        });
 
-        // アビリティのパラメータをセット
+        // アビリティのパラメータをセット（初回）
         const setAbility = (resAbility) => {
             let ability = {
                 abilityId: "",
@@ -124,19 +129,44 @@ export default function Socket(props) {
             }
             ability.type = resAbility.type;
             ability.trigger = resAbility.trigger;
-            ability.display = searchAbility(resAbility.abilityId).display;
+            ability.display = searchAbility(resAbility.abilityId, "const").display;
 
             return ability;
-        }
+        };
+
+        // アビリティのパラメータを更新（ステータスと残り使用回数）
+        const updateAbility = (resAbility) => {
+            let ability = searchAbility(resAbility.abilityId, "select");
+            ability.status = resAbility.status;
+            if(resAbility.remaining < 0) {
+                ability.remaining = "";
+            }else {
+                ability.remaining = resAbility.remaining;
+            }
+        };
 
         // アビリティ検索
-        const searchAbility = (id) => {
-            console.log(id);
-            let bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
-            let atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
-            let defAbility = Constants.DEF_ABILITIES.find((a) => {return a.abilityId === id});
-            let jamAbility = Constants.JAM_ABILITIES.find((a) => {return a.abilityId === id});
-            let cnfAbility = Constants.CNF_ABILITIES.find((a) => {return a.abilityId === id});
+        const searchAbility = (id, mode) => {
+            let bstAbility, atkAbility, defAbility, jamAbility,  cnfAbility;
+
+            switch(mode) {
+                case "const":
+                    bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
+                    atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
+                    defAbility = Constants.DEF_ABILITIES.find((a) => {return a.abilityId === id});
+                    jamAbility = Constants.JAM_ABILITIES.find((a) => {return a.abilityId === id});
+                    cnfAbility = Constants.CNF_ABILITIES.find((a) => {return a.abilityId === id});
+                    break;
+                case "select":
+                    bstAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
+                    atkAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
+                    defAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
+                    jamAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
+                    cnfAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
+                    break;
+                default:
+                    return {}
+            }
 
             if(bstAbility) {
                 return bstAbility;
@@ -149,14 +179,14 @@ export default function Socket(props) {
             }else if(cnfAbility) {
                 return cnfAbility;
             }
-        }
+        };
 
         const setPlayers = (value) => {
             return new Promise((resolve, reject)=>{
                 dispatch(setPlayersAction(value));
                 resolve();
             })
-        }
+        };
 
         socket.on('game/players_info', function(msg) {
             console.log("game/playersInfo:");
@@ -165,7 +195,7 @@ export default function Socket(props) {
             setPlayers(resObj.players).then(()=>{
                 dispatch(push('/Lobby'));
             });
-        })
+        });
 
         socket.on('game/start', function(msg) {
             console.log("game/start:");
@@ -175,7 +205,7 @@ export default function Socket(props) {
             dispatch(setPhaseTimesAction(resObj.phaseTimes));
             dispatch(setGoalAction(resObj.goalCoin));
             nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});
-        })
+        });
 
         // ゲームに必要な情報をセット
         const setGame = (object, callback) => {
@@ -187,12 +217,12 @@ export default function Socket(props) {
             dispatch(setPhaseAction(Constants.READY_PH));
             dispatch(setTimeAction(selector.game.phaseTimes.ready));
             callback();
-        }
+        };
 
         // ゲーム画面に遷移
         const moveGame = () => {
             dispatch(push('/Game'));
-        }
+        };
         
         socket.on('game/next_turn', function(msg) {
             console.log("game/next_turn:")
@@ -214,7 +244,7 @@ export default function Socket(props) {
                 dispatch(setAuctionAction(resObj.auctionCards));
                 dispatch(setTimeAction(selector.game.phaseTimes.ready));
             }
-        })
+        });
 
         socket.on('game/update_state', function(msg) {
             console.log("game/update_state:")
@@ -223,7 +253,7 @@ export default function Socket(props) {
             dispatch(setPlayersAction(resObj.players));
             console.log(resObj.phase);
             dispatch(setPhaseAction(resObj.phase));
-        })
+        });
 
         // 誰がいくら入札したかをメッセージに表示する
         socket.on('game/bid', function(msg) {
@@ -238,7 +268,7 @@ export default function Socket(props) {
             dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_BID_MSG1 + resObj.coin + selector.msg.lang.AUC_BID_MSG2));
             // 最高入札額と入札者を更新
             dispatch(setHighestAction(resObj));
-        })
+        });
 
         // 誰が何円で落札したか
         socket.on('game/buy_notify', function(msg) {
@@ -261,7 +291,7 @@ export default function Socket(props) {
                         + selector.msg.lang.AUC_RESULT_MSG2 + resObj.coin + selector.msg.lang.AUC_RESULT_MSG3));
                 }
             }
-        })
+        });
 
         // 落札したプレイヤーのコインとカード情報を更新する
         socket.on('game/buy_update', function(msg) {
@@ -280,7 +310,7 @@ export default function Socket(props) {
             dispatch(setAuctionAction([]));
             // BIDボタン、PASSボタンを押せるように戻す（パスを押した時用）
             dispatch(setAucBtnAction(true));
-        })
+        });
 
         socket.on('game/calculate_result', async function(msg) {
             console.log(msg);
@@ -313,7 +343,14 @@ export default function Socket(props) {
             dispatch(setCoinAction(resObj.coin));
             // 返された手札をセット
             dispatch(setCardsAction(resObj.cards));
-        })
+        });
+
+        socket.on('game/ready_ability', function(msg) {
+            console.log(msg);
+            resObj = JSON.parse(msg);
+            updateAbility(resObj);
+
+        });
 
         socket.on('game/correct_players', function(msg) {
             console.log(msg);
@@ -328,7 +365,7 @@ export default function Socket(props) {
             }else {
                 dispatch(setTargetSkipAction(false));
             }
-        })
+        });
 
         socket.on('game/finish_game', function(msg) {
             console.log(msg);
@@ -336,12 +373,13 @@ export default function Socket(props) {
             dispatch(setMessageAction(''));
             dispatch(setRankingAction(resObj.players));
             dispatch(setFinishGameAction(true));
-        })
+        });
     }
 
 
     return (
-        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo, start, nextTurn, bid, buy, calculate}}>
+        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
+         start, nextTurn, bid, buy, calculate, useAbility}}>
             {props.children}
         </CTX.Provider>
     )

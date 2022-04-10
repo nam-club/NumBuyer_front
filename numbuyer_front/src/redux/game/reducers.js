@@ -66,7 +66,6 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...action.payload
             }
         case Actions.SET_CALC_RESULT:
-            console.log(action.payload);
             return {
                 ...state,
                 ...action.payload
@@ -79,6 +78,9 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_FIRED_ABILITIES:
+            state.firedAbilities = action.payload.firedAbilities;
+            return state;
         case Actions.SET_FINISH_GAME:
             return {
                 ...state,

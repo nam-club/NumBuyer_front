@@ -76,19 +76,19 @@ export const English = {
     GIVE_CARD_MSG: 'Distributing cards to players...',
     SHOW_TAR_MSG: 'The target card is ',
     SHOW_AUC_MSG: ' was exhibited',
-    AUCTION_MSG1: 'Please enter the bid amount and select whether to bid for " ',
-    AUCTION_MSG2: ' " or pass.',
+    AUCTION_MSG1: "Please enter the bid amount and select whether to bid for ' ",
+    AUCTION_MSG2: " ' or pass.",
     AUC_BID_MSG1: ' bid for ',
     AUC_BID_MSG2: ' coin.',
     AUC_HIGHEST_MSG1: 'Current highest bid: ',
     AUC_HIGHEST_MSG2: 'coin ( ',
     AUC_HIGHEST_MSG3: ' )',
     AUC_RESULT_MSG0: 'No one bid.',
-    AUC_RESULT_MSG1: ' made a successful bid for " ',
-    AUC_RESULT_MSG2: ' " with ',
+    AUC_RESULT_MSG1: " made a successful bid for ' ",
+    AUC_RESULT_MSG2: " ' with ",
     AUC_RESULT_MSG3: ' coin! ',
-    CALCULATE_MSG1: 'Select from your cards so that the calculation result is " ',
-    CALCULATE_MSG2: ' " and press "ANSWER".',
+    CALCULATE_MSG1: "Select from your cards so that the calculation result is ' ",
+    CALCULATE_MSG2: " ' and press 'ANSWER'.",
     CALC_ERR_MSG1: 'Please select your Cards!',
     CALC_ERR_MSG2: 'Code is at the end!',
     CALC_RESULT_MSG0: 'Incorrect...! Calc again or pass.',
@@ -100,7 +100,9 @@ export const English = {
     CALC_FINISH_MSG3_2: ' coin(card number bonus : ',
     CALC_FINISH_MSG3_3: ' coin) and one card! ',
     PASS_TITLE: 'Are you sure you want to pass?',
-    PASS_MSG: 'If you want to pass, press the "YES"',
+    PASS_MSG: "If you want to pass, press the 'YES'",
+    ABILITY_TITLE: "Do you really use it?",
+    ABILITY_MSG: "If you want to use, press the 'YES'",
 
 }
 
@@ -217,6 +219,8 @@ export const Japanese = {
     CALC_FINISH_MSG3_3: 'コイン）とカードが1枚配られました! ',
     PASS_TITLE: '本当にパスしますか？',
     PASS_MSG: 'パスする場合は「はい」を押してください。',
+    ABILITY_TITLE: "本当に使用しますか？",
+    ABILITY_MSG: "使用する場合は「はい」を押してください。",
 
 }
 
@@ -323,5 +327,7 @@ export const Chinese = {
     CALC_FINISH_MSG3_3: ' 硬币)和一张卡片! ',
     PASS_TITLE: '你确定你不想出价吗？',
     PASS_MSG: '如果要通过, 请按「是的」。',
+    ABILITY_TITLE: "你真的会用吗？",
+    ABILITY_MSG: "按'是的'使用",
 
 }

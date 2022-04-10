@@ -1,24 +1,25 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles, AbilityArea, AreaTag, UseAbilityButton, SpeechBubble } from '../theme';
+import { useStyles, AbilityArea, AreaTag, UseAbilityButton, SpeechBubble, ConfirmTitle, ConfirmMessage, PassButton, YesButton } from '../theme';
 
-import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 import Tooltip from '@mui/material/Tooltip';
 import { teal, red, blue, yellow, grey } from '@mui/material/colors';
 
 const UseAbilityComponent = (props) => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
+    const {useAbility} = React.useContext(CTX); // アビリティ使用リクエストAPI
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
-    
-    // アビリティ
-    const [abilities, setAbilities] = React.useState(selector.players.player.abilities);
+
+    const [abilities, setAbilities] = React.useState(selector.players.player.abilities); // 所持アビリティ
+    const [useAbilityId, setUseAbilityId] = React.useState(null); // 使用するアビリティID
 
     React.useEffect(() => {
         setAbilities(selector.players.player.abilities);
@@ -26,14 +27,27 @@ const UseAbilityComponent = (props) => {
 
     
     // ダイアログ表示
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickOpen = (ability) => {
+        if(ability.remaining > 0) {
+            setUseAbilityId(ability.abilityId);
+            setOpen(true);
+        }
     };
     
     // ダイアログ閉じる
     const handleClose = () => {
         setOpen(false);
     };
+
+    // アビリティ使用関数
+    const useAbilityAction = () => {
+        handleClose();
+        useAbility({
+            roomId: selector.room.roomId,
+            playerId: selector.players.player.playerId,
+            abilityId: useAbilityId
+        });
+    }
 
     return (
         <AbilityArea>
@@ -132,7 +146,8 @@ const UseAbilityComponent = (props) => {
                                                 </SpeechBubble>}
                                             placement="bottom">
                                                 <UseAbilityButton size="large" variant="contained"
-                                                 sx={{ background: grey[50], color: grey[700], border: 2, borderColor: teal[300], '&:hover': {background: "white"} }}>
+                                                 sx={{ background: "white", color: grey[700], border: 2, borderColor: teal[300], '&:hover': {background: "white"} }}
+                                                 onClick={() => {handleClickOpen(value)}}>
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                     {value.remaining}{value.max}
                                                 </UseAbilityButton>
@@ -145,7 +160,8 @@ const UseAbilityComponent = (props) => {
                                                         </SpeechBubble>}
                                                     placement="bottom">
                                                         <UseAbilityButton size="large" variant="contained"
-                                                         sx={{ background: grey[50], color: grey[700], border: 2, borderColor: red[300], '&:hover': {background: "white"} }}>
+                                                         sx={{ background: "white", color: grey[700], border: 2, borderColor: red[300], '&:hover': {background: "white"} }}
+                                                         onClick={() => {handleClickOpen(value)}}>
                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                             {value.remaining}{value.max}
                                                         </UseAbilityButton>
@@ -158,7 +174,8 @@ const UseAbilityComponent = (props) => {
                                                                 </SpeechBubble>}
                                                             placement="bottom">
                                                                 <UseAbilityButton size="large" variant="contained"
-                                                                 sx={{ background: grey[50], color: grey[700], border: 2, borderColor: blue[300], '&:hover': {background: "white"} }}>
+                                                                 sx={{ background: "white", color: grey[700], border: 2, borderColor: blue[300], '&:hover': {background: "white"} }}
+                                                                 onClick={() => {handleClickOpen(value)}}>
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                     {value.remaining}{value.max}
                                                                 </UseAbilityButton>
@@ -171,7 +188,8 @@ const UseAbilityComponent = (props) => {
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
                                                                         <UseAbilityButton size="large" variant="contained"
-                                                                         sx={{ background: grey[50], color: grey[700], border: 2, borderColor: yellow[300], '&:hover': {background: "white"} }}>
+                                                                         sx={{ background: "white", color: grey[700], border: 2, borderColor: yellow[300], '&:hover': {background: "white"} }}
+                                                                         onClick={() => {handleClickOpen(value)}}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                             {value.remaining}{value.max}
                                                                         </UseAbilityButton>
@@ -182,7 +200,8 @@ const UseAbilityComponent = (props) => {
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
                                                                         <UseAbilityButton size="large" variant="contained"
-                                                                         sx={{ background: grey[50], color: grey[700], border: 2, borderColor: grey[700], '&:hover': {background: "white"} }}>
+                                                                         sx={{ background: "white", color: grey[700], border: 2, borderColor: grey[700], '&:hover': {background: "white"} }}
+                                                                         onClick={() => {handleClickOpen(value)}}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                             {value.remaining}{value.max}
                                                                         </UseAbilityButton>
@@ -192,6 +211,23 @@ const UseAbilityComponent = (props) => {
                                                         }
                                                     </div>
                                                 }
+                                                <Dialog
+                                                    open={open}
+                                                    onClose={handleClose}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                >
+                                                    <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.ABILITY_TITLE}</ConfirmTitle>
+                                                    <DialogContent align="center">
+                                                        <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.ABILITY_MSG}</ConfirmMessage>
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                        <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                                                        <YesButton onClick={useAbilityAction} autoFocus>
+                                                            {selector.msg.lang.YES_BTN}
+                                                        </YesButton>
+                                                    </DialogActions>
+                                                </Dialog>
                                             </div>
                                         }
                                     </div>
