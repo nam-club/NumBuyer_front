@@ -4,7 +4,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
      setRankingAction, setResAbilityAction} from './redux/players/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction } from './redux/game/actions';
+  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction, setFiredAbilitiesAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -251,6 +251,7 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setPlayersAction(resObj.players));
+            //dispatch(setFiredAbilitiesAction(resObj.firedAbilities));
             console.log(resObj.phase);
             dispatch(setPhaseAction(resObj.phase));
         });
