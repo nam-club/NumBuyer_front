@@ -10,16 +10,23 @@ import card from '../../assets/card.png';
 
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Tooltip from '@mui/material/Tooltip';
 import { teal, red, blue, yellow, grey } from '@mui/material/colors';
 
 const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);
     const [myAbilities, setMyAbilities] = React.useState([]); // 自分の所持アビリティ
+    const prvAbilities = [Constants.PRV_ABILITY, Constants.PRV_ABILITY]; // 非公開アビリティ
 
     React.useEffect(() => {
         setMyAbilities(selector.players.player.abilities);
-    }, [selector.players.player.abilities]); 
+
+        // 発動アビリティが1つの時に片方を「???」にする
+        for(let p of props.players) {
+            if(p.firedAbilities && p.firedAbilities.length === 1) {
+                p.firedAbilities.push(Constants.PRV_ABILITY);
+            }
+        }
+    }, [selector.players.player.abilities, props.players]);
 
     return (
         <Typography>
@@ -69,14 +76,11 @@ const PlayerInfoComponent = (props) => {
                         {(!value.firedAbilities || value.firedAbilities.length === 0) ?
                             <div>
                                 <Grid container>
-                                    <Grid item xs={6}>
-                                        <AbilityInfoCard size="large" variant="contained"
-                                        sx={{ background: grey[400], color: grey[700] }}>???</AbilityInfoCard>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <AbilityInfoCard size="large" variant="contained"
-                                        sx={{ background: grey[400], color: grey[700] }}>???</AbilityInfoCard>
-                                    </Grid>
+                                    {prvAbilities.map((pa,paIndex) => (
+                                        <Grid item xs={6}>
+                                            <PlayerInfoAbilityComponent key={paIndex} ability={pa} background={grey[400]} color={grey[700]} />
+                                        </Grid>
+                                    ))}
                                 </Grid>
                             </div>
                         :
@@ -100,7 +104,13 @@ const PlayerInfoComponent = (props) => {
                                                                     {fa.type === Constants.JAM_TP ? 
                                                                         <PlayerInfoAbilityComponent ability={fa} background={yellow[300]} color={grey[700]} /> 
                                                                     :
-                                                                        <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
+                                                                        <div>
+                                                                            {fa.type === Constants.CNF_TP ?
+                                                                                <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
+                                                                            :
+                                                                                <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
+                                                                            }
+                                                                        </div>
                                                                     }
                                                                 </div>
                                                             }

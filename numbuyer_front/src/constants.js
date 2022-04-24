@@ -165,6 +165,26 @@ export const CNF_ABILITIES = [
     },
 ];
 
+// アビリティ（非公開）
+export const PRV_ABILITY = 
+    {
+        abilityId: 'prv',
+        display: [
+            {
+                lang: "English",
+                name: "???",
+            },
+            {
+                lang: "Japanese",
+                name: "???",
+            },
+            {
+                lang: "Chinese",
+                name: "???",
+            },
+        ],
+    };
+
 
 // フェーズ
 export const READY_PH = 'READY';
