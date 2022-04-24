@@ -17,7 +17,7 @@ import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
-import { teal, red } from '@mui/material/colors';
+import { teal, red, orange } from '@mui/material/colors';
 
 const Game = () => {
     const classes = useStyles();

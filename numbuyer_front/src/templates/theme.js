@@ -403,18 +403,13 @@ export const AuctionArea = styled('div')({
 });
 
 // オークションカード
-export const AuctionCard = styled(Button)({
+export const AuctionCard = styled(Card)({
   background: lightBlue[200],
   color: grey[700],
   marginLeft: '3%',
   width: '5vw',
   height: '10vh',
-  cursor: 'default',
-  boxShadow: 'none',
-  '&:hover': {
-    background: lightBlue[200],
-    boxShadow: 'none',
-  },
+  'white-space': 'nowrap',
 });
 
 // 入札金額を入力してくださいメッセージ
@@ -639,6 +634,11 @@ export const PlayerInfoIcon = styled('img')({
   width: '8%',
 });
 
+// アビリティ情報（プレイヤー一覧）
+export const AbilityInfoCard = styled(Card) ({
+  'white-space': 'nowrap',
+});
+
 // ゲーム終了のモーダル
 export const FinishModal = styled(Modal)({
   display: 'flex',
@@ -855,4 +855,5 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'translateX(-180px)',
     },
   },
+
 }));

@@ -247,11 +247,20 @@ export default function Socket(props) {
         });
 
         socket.on('game/update_state', function(msg) {
-            console.log("game/update_state:")
+            console.log("game/update_state:");
             console.log(msg);
             resObj = JSON.parse(msg);
+            // 発動アビリティをセット
+            for(let p of resObj.players) {
+                let abilities = [];
+                for(let a of p.firedAbilities) {
+                    console.log(a);
+                    abilities.push(setAbility(a));
+                }
+                p.firedAbilities = abilities;
+            }
+            // プレイヤー情報をセット
             dispatch(setPlayersAction(resObj.players));
-            //dispatch(setFiredAbilitiesAction(resObj.firedAbilities));
             console.log(resObj.phase);
             dispatch(setPhaseAction(resObj.phase));
         });
