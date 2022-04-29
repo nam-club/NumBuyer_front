@@ -28,7 +28,7 @@ const UseAbilityComponent = (props) => {
     
     // ダイアログ表示
     const handleClickOpen = (ability) => {
-        if(ability.remaining > 0) {
+        if(ability.remaining !== 0) {
             setUseAbilityId(ability.abilityId);
             setOpen(true);
         }
@@ -55,7 +55,9 @@ const UseAbilityComponent = (props) => {
             <div align="center">
                 {abilities.map((value, index) => (
                     <div key={index}>
-                        {value.status === Constants.USED_ST ?
+                        {value.trigger === Constants.ACT_TRG &&
+                        <div>
+                            {value.status === Constants.USED_ST ?
                             <UseAbilityButton size="large" variant="contained" disabled>
                                 {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                             </UseAbilityButton> 
@@ -70,8 +72,8 @@ const UseAbilityComponent = (props) => {
                                                 </SpeechBubble>}
                                             placement="bottom">
                                                 <UseAbilityButton size="large" variant="contained"
-                                                 sx={{ background: teal[300], cursor: 'default', boxShadow: 'none',
-                                                '&:hover': {background: teal[300], boxShadow: 'none'} }}>
+                                                 sx={{ background: blue[300], cursor: 'default', boxShadow: 'none',
+                                                '&:hover': {background: blue[300], boxShadow: 'none'} }}>
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                                     <br/> {value.remaining}{value.max}
                                                 </UseAbilityButton>
@@ -91,15 +93,15 @@ const UseAbilityComponent = (props) => {
                                                         </UseAbilityButton>
                                                     </Tooltip> :
                                                     <div>
-                                                        {value.type === Constants.DEF_TP ? 
+                                                        {value.type === Constants.RCV_TP ? 
                                                             <Tooltip key={value.abilityId} title={
                                                                 <SpeechBubble>
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                 </SpeechBubble>}
                                                             placement="bottom">
                                                                 <UseAbilityButton size="large" variant="contained"
-                                                                 sx={{ background: blue[300], cursor: 'default', boxShadow: 'none',
-                                                                 '&:hover': {background: blue[300], boxShadow: 'none'} }}>
+                                                                 sx={{ background: teal[300], cursor: 'default', boxShadow: 'none',
+                                                                 '&:hover': {background: teal[300], boxShadow: 'none'} }}>
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                                                      <br/> {value.remaining}{value.max}
                                                                 </UseAbilityButton>
@@ -146,7 +148,7 @@ const UseAbilityComponent = (props) => {
                                                 </SpeechBubble>}
                                             placement="bottom">
                                                 <UseAbilityButton size="large" variant="contained"
-                                                 sx={{ background: "white", color: grey[700], border: 2, borderColor: teal[300], '&:hover': {background: "white"} }}
+                                                 sx={{ background: blue[300], '&:hover': {background: blue[200]} }}
                                                  onClick={() => {handleClickOpen(value)}}>
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                     {value.remaining}{value.max}
@@ -160,21 +162,21 @@ const UseAbilityComponent = (props) => {
                                                         </SpeechBubble>}
                                                     placement="bottom">
                                                         <UseAbilityButton size="large" variant="contained"
-                                                         sx={{ background: "white", color: grey[700], border: 2, borderColor: red[300], '&:hover': {background: "white"} }}
+                                                         sx={{ background: red[300], '&:hover': {background: red[200]} }}
                                                          onClick={() => {handleClickOpen(value)}}>
                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                             {value.remaining}{value.max}
                                                         </UseAbilityButton>
                                                     </Tooltip> :
                                                     <div>
-                                                        {value.type === Constants.DEF_TP ? 
+                                                        {value.type === Constants.RCV_TP ? 
                                                             <Tooltip key={value.abilityId} title={
                                                                 <SpeechBubble>
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                                                 </SpeechBubble>}
                                                             placement="bottom">
                                                                 <UseAbilityButton size="large" variant="contained"
-                                                                 sx={{ background: "white", color: grey[700], border: 2, borderColor: blue[300], '&:hover': {background: "white"} }}
+                                                                 sx={{ background: teal[300], '&:hover': {background: teal[200]} }}
                                                                  onClick={() => {handleClickOpen(value)}}>
                                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                     {value.remaining}{value.max}
@@ -188,7 +190,7 @@ const UseAbilityComponent = (props) => {
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
                                                                         <UseAbilityButton size="large" variant="contained"
-                                                                         sx={{ background: "white", color: grey[700], border: 2, borderColor: yellow[300], '&:hover': {background: "white"} }}
+                                                                         sx={{ background: yellow[300], color: grey[700], '&:hover': {background: yellow[200]} }}
                                                                          onClick={() => {handleClickOpen(value)}}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                             {value.remaining}{value.max}
@@ -200,7 +202,7 @@ const UseAbilityComponent = (props) => {
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
                                                                         <UseAbilityButton size="large" variant="contained"
-                                                                         sx={{ background: "white", color: grey[700], border: 2, borderColor: grey[700], '&:hover': {background: "white"} }}
+                                                                         sx={{ background: grey[700],　'&:hover': {background: grey[600]} }}
                                                                          onClick={() => {handleClickOpen(value)}}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                             {value.remaining}{value.max}
@@ -233,6 +235,8 @@ const UseAbilityComponent = (props) => {
                                     </div>
                                 }  
                             </div>
+                        }
+                        </div>
                         }
                     </div>
                 ))}

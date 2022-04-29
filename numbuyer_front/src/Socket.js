@@ -153,7 +153,7 @@ export default function Socket(props) {
                 case "const":
                     bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
                     atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
-                    defAbility = Constants.DEF_ABILITIES.find((a) => {return a.abilityId === id});
+                    defAbility = Constants.RCV_ABILITIES.find((a) => {return a.abilityId === id});
                     jamAbility = Constants.JAM_ABILITIES.find((a) => {return a.abilityId === id});
                     cnfAbility = Constants.CNF_ABILITIES.find((a) => {return a.abilityId === id});
                     break;

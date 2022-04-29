@@ -749,12 +749,12 @@ export const useStyles = makeStyles((theme) => ({
 
   // アビリティボタン（速攻）
   bst_ability: {
-    background: teal[300],
+    background: blue[300],
     width: '75%',
     margin: '2%',
     'white-space': 'nowrap',
     '&:hover': {
-      background: teal[200],
+      background: blue[200],
     },
   },
 
@@ -769,14 +769,14 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
-  // アビリティボタン（防御）
-  def_ability: {
-    background: blue[300],
+  // アビリティボタン（回復）
+  rcv_ability: {
+    background: teal[300],
     width: '75%',
     margin: '2%',
     'white-space': 'nowrap',
     '&:hover': {
-      background: blue[200],
+      background: teal[200],
     },
   },
 

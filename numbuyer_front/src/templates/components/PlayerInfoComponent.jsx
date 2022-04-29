@@ -56,14 +56,14 @@ const PlayerInfoComponent = (props) => {
                                         <Grid item xs={6}>
                                                 <div key={index}>
                                                 {value.type === Constants.BST_TP ? 
-                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} />    : 
+                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} />    : 
                                                     <div>
                                                         {value.type === Constants.ATK_TP ? 
                                                             <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
                                                         :
                                                             <div>
-                                                                {value.type === Constants.DEF_TP ? 
-                                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} /> 
+                                                                {value.type === Constants.RCV_TP ? 
+                                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
                                                                 :
                                                                     <div>
                                                                         {value.type === Constants.JAM_TP ? 
@@ -130,7 +130,7 @@ const PlayerInfoComponent = (props) => {
                                                         <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
                                                     :
                                                         <div>
-                                                            {value.type === Constants.DEF_TP ? 
+                                                            {value.type === Constants.RCV_TP ? 
                                                                 <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} /> 
                                                             :
                                                                 <div>

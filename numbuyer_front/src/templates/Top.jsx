@@ -47,7 +47,7 @@ const Top = () => {
     // アビリティ
     const [bstAbilities, setBstAbilities] = React.useState(Constants.BST_ABILITIES);
     const [atkAbilities, setAtkAbilities] = React.useState(Constants.ATK_ABILITIES);
-    const [defAbilities, setDefAbilities] = React.useState(Constants.DEF_ABILITIES);
+    const [rcvAbilities, setRcvAbilities] = React.useState(Constants.RCV_ABILITIES);
     const [jamAbilities, setJamAbilities] = React.useState(Constants.JAM_ABILITIES);
     const [cnfAbilities, setCnfAbilities] = React.useState(Constants.CNF_ABILITIES);
 
@@ -292,7 +292,7 @@ const Top = () => {
                                     <Grid container>
                                         <Grid item xs={1} />
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={teal[300]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                            <SelectAbilityComponent color={blue[300]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
                                                 type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
@@ -300,8 +300,8 @@ const Top = () => {
                                                 type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={blue[300]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
-                                                type={selector.msg.lang.DEF_TYPE} abilities={defAbilities} update={forceUpdate} />
+                                            <SelectAbilityComponent color={teal[300]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                                type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
                                             <SelectAbilityComponent color={amber[300]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
