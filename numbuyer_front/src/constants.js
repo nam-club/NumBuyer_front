@@ -14,6 +14,7 @@ export const ATK_TP = 'attack';
 export const DEF_TP = 'defense';
 export const JAM_TP = 'jam';
 export const CNF_TP = 'confuse';
+export const NON_TP = 'none';
 
 // トリガー
 export const ACT_TRG = 'active';

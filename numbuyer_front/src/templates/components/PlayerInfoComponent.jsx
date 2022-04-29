@@ -19,14 +19,28 @@ const PlayerInfoComponent = (props) => {
 
     React.useEffect(() => {
         setMyAbilities(selector.players.player.abilities);
+    }, [selector.players.player.abilities]);
 
+    React.useEffect(() => {
         // 発動アビリティが1つの時に片方を「???」にする
         for(let p of props.players) {
             if(p.firedAbilities && p.firedAbilities.length === 1) {
                 p.firedAbilities.push(Constants.PRV_ABILITY);
             }
         }
-    }, [selector.players.player.abilities, props.players]);
+    }, [props.players]);
+
+    React.useEffect(() => {
+        // 発動アビリティが1つの時に片方をグレーにする
+        if(props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length === 1) {
+            let greyAbilities = myAbilities.filter((d) => {return d.abilityId !== props.myPlayer.firedAbilities[0].abilityId});
+            for(let g of greyAbilities) {
+                g.type = Constants.NON_TP;
+                props.myPlayer.firedAbilities.push(g);
+            }
+            console.log(props.myPlayer.firedAbilities);
+        }
+    }, [props.myPlayer]);
 
     return (
         <Typography>
@@ -35,37 +49,56 @@ const PlayerInfoComponent = (props) => {
                     <PlayerName><b>{props.myPlayer.playerName}</b></PlayerName>
                     <PlayerInfoIcon src={card} /><PlayerInfo>×{props.myPlayer.cardNum}　</PlayerInfo>
                     <PlayerInfoIcon src={coin} /> <PlayerInfo>{props.myPlayer.coin + ' ' + selector.msg.lang.COIN}</PlayerInfo>
-                    <Grid container>
-                        {myAbilities && myAbilities.map((value, index) => (
-                            <Grid item xs={6}>
-                            <div key={index}>
-                            {value.type === Constants.BST_TP ? 
-                                <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} />
-                            : 
-                                <div>
-                                    {value.type === Constants.ATK_TP ? 
-                                        <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
-                                    :
-                                        <div>
-                                            {value.type === Constants.DEF_TP ? 
-                                                <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} /> 
-                                            :
-                                                <div>
-                                                    {value.type === Constants.JAM_TP ? 
-                                                        <PlayerInfoAbilityComponent ability={value} background={yellow[300]} color={grey[700]} /> 
-                                                    :
-                                                        <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
-                                                    }
+                        {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
+                            <div>
+                                 <Grid container>
+                                    {props.myPlayer.firedAbilities.map((value, index) => (
+                                        <Grid item xs={6}>
+                                                <div key={index}>
+                                                {value.type === Constants.BST_TP ? 
+                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} />    : 
+                                                    <div>
+                                                        {value.type === Constants.ATK_TP ? 
+                                                            <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
+                                                        :
+                                                            <div>
+                                                                {value.type === Constants.DEF_TP ? 
+                                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} /> 
+                                                                :
+                                                                    <div>
+                                                                        {value.type === Constants.JAM_TP ? 
+                                                                            <PlayerInfoAbilityComponent ability={value} background={yellow[300]} color={grey[700]} /> 
+                                                                        :
+                                                                            <div>
+                                                                                {value.type === Constants.CNF_TP ? 
+                                                                                    <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
+                                                                                :
+                                                                                    <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
+                                                                                }
+                                                                            </div>
+                                                                        }
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
                                                 </div>
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                            }
+                                        </Grid>
+                                    ))}
+                                </Grid>
                             </div>
+                        :
+                        <div>
+                            <Grid container>
+                                {myAbilities.map((value, index) => (
+                                    <Grid item xs={6} key={index}>
+                                        <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
+                        </div>
+                        }
                 </MyPlayerList>
             }
             {props.players && props.players.map((value, index) => (

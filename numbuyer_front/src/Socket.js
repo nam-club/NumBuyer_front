@@ -359,7 +359,6 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             updateAbility(resObj);
-
         });
 
         socket.on('game/correct_players', function(msg) {
