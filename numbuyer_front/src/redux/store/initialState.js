@@ -38,6 +38,7 @@ const initialState = {
         },
         message: "　", // ナビゲーション用メッセージ
         messages: [], // ナビゲーション用複数行メッセージ
+        ablMessages: [], // アビリティ用メッセージ配列
         time: 0, // 画面表示用タイマー
         remainingTime: 0, // オークション用残り時間
         remTimeFlg: false, // 残り時間追加フラグ

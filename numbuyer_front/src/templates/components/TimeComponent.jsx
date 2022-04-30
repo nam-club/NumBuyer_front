@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction, setRemainingTimeAction,
-    setSkipAction, setPassAction, setFinishGameAction, setWinPlayerAction, setCalcResultAction,
+import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction, resetAblMessagesAction,
     setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
 
 import { arrayOutput } from '../../logics';
@@ -61,6 +60,7 @@ const TimeComponent = (props) => {
                 case Constants.READY_PH:
                     if(time === 0) {
                         dispatch(resetMessagesAction());
+                        dispatch(resetAblMessagesAction());
                         dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
                         dispatch(setMessageAction(selector.msg.lang.GIVE_CARD_MSG));
                         dispatch(setTimeAction(selector.game.phaseTimes.giveCards));

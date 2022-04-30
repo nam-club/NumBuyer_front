@@ -103,6 +103,8 @@ export const English = {
     PASS_MSG: "If you want to pass, press the 'YES'",
     ABILITY_TITLE: "Do you really use it?",
     ABILITY_MSG: "If you want to use, press the 'YES'",
+    FIRED_ABILITY_MSG1: " activates '",
+    FIRED_ABILITY_MSG2: "'!",
 
 }
 
@@ -221,6 +223,8 @@ export const Japanese = {
     PASS_MSG: 'パスする場合は「はい」を押してください。',
     ABILITY_TITLE: "本当に使用しますか？",
     ABILITY_MSG: "使用する場合は「はい」を押してください。",
+    FIRED_ABILITY_MSG1: "が「",
+    FIRED_ABILITY_MSG2: "」を発動した！",
 
 }
 
@@ -329,5 +333,6 @@ export const Chinese = {
     PASS_MSG: '如果要通过, 请按「是的」。',
     ABILITY_TITLE: "你真的会用吗？",
     ABILITY_MSG: "按'是的'使用",
-
+    FIRED_ABILITY_MSG1: "激活「",
+    FIRED_ABILITY_MSG2: "」!",
 }

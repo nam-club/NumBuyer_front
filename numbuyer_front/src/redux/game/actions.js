@@ -34,7 +34,6 @@ export const setMessageAction = (messageState) => {
 export const SET_MESSAGES = "SET_MESSAGES";
 
 export const setMessagesAction = (messagesState) => {
-    console.log(messagesState);
     return {
         type: "SET_MESSAGES",
         payload: {
@@ -48,6 +47,26 @@ export const RESET_MESSAGES = "RESET_MESSAGES";
 export const resetMessagesAction = () => {
     return {
         type: "RESET_MESSAGES"
+    }
+}
+
+export const SET_ABL_MESSAGES = "SET_ABL_MESSAGES";
+
+export const setAblMessagesAction = (ablMessagesState) => {
+    console.log(ablMessagesState);
+    return {
+        type: "SET_ABL_MESSAGES",
+        payload: {
+            ablMessages: ablMessagesState
+        }
+    }
+}
+
+export const RESET_ABL_MESSAGES = "RESET_ABL_MESSAGES";
+
+export const resetAblMessagesAction = () => {
+    return {
+        type: "RESET_ABL_MESSAGES"
     }
 }
 

@@ -22,6 +22,13 @@ export const GameReducer = (state = initialState.game, action) => {
         case Actions.RESET_MESSAGES:
             state.messages.length = 0;
             return state;
+        case Actions.SET_ABL_MESSAGES:
+            state.ablMessages = action.payload.ablMessages;
+            console.log(state.ablMessages);
+            return state;
+        case Actions.RESET_ABL_MESSAGES:
+            state.ablMessages.length = 0;
+            return state;
         case Actions.SET_TIME:
             return {
                 ...state,

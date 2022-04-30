@@ -22,6 +22,11 @@ export const getMessages = createSelector(
     state => state.messages
 )
 
+export const getAblMessages = createSelector(
+    [gameSelector],
+    state => state.ablMessages
+)
+
 export const getTime = createSelector(
     [gameSelector],
     state => state.time

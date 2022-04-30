@@ -123,7 +123,7 @@ const PlayerInfoComponent = (props) => {
                                         <Grid item xs={6}>
                                             <div key={faIndex}>
                                             {fa.type === Constants.BST_TP ? 
-                                                <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} />
+                                                <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} />
                                             : 
                                                 <div>
                                                     {fa.type === Constants.ATK_TP ? 
@@ -131,7 +131,7 @@ const PlayerInfoComponent = (props) => {
                                                     :
                                                         <div>
                                                             {value.type === Constants.RCV_TP ? 
-                                                                <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} /> 
+                                                                <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
                                                             :
                                                                 <div>
                                                                     {fa.type === Constants.JAM_TP ? 

@@ -4,7 +4,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
      setRankingAction, setResAbilityAction} from './redux/players/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction, setFiredAbilitiesAction } from './redux/game/actions';
+  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction, setFiredAbilitiesAction, setAblMessagesAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -246,22 +246,50 @@ export default function Socket(props) {
             }
         });
 
+        // フェーズ遷移時の情報更新
         socket.on('game/update_state', function(msg) {
             console.log("game/update_state:");
             console.log(msg);
             resObj = JSON.parse(msg);
-            // 発動アビリティをセット
+
+            let ablMessages = [];
+            let ablMessage = {
+                type: "", // 発動アビリティタイプ
+                message: "", // 発動メッセージ
+                effect: "", // 発動アビリティ効果メッセージ
+            };
+
             for(let p of resObj.players) {
                 let abilities = [];
+                let ablDisplay = {};
+                // 発動アビリティをセット
                 for(let a of p.firedAbilities) {
                     console.log(a);
                     abilities.push(setAbility(a));
+                    // アビリティメッセージをセット
+                    ablDisplay = searchAbility(a.abilityId, "const").display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE});;
+                    ablMessage.type = a.type;
+                    ablMessage.message = p.playerName + selector.msg.lang.FIRED_ABILITY_MSG1 +
+                                         ablDisplay.name + selector.msg.lang.FIRED_ABILITY_MSG2;
+                    switch(ablDisplay.fired_msg.length) {
+                        case 1:
+                            ablMessage.effect = ablDisplay.fired_msg[0];
+                            break;
+                        case 2:
+                            ablMessage.effect = ablDisplay.fired_msg[0] + p.playerName + ablDisplay.fired_msg[1];
+                        default:
+                            break;
+                    }
+                    ablMessages.push(ablMessage);
                 }
-                p.firedAbilities = abilities;
+                p.firedAbilities = abilities;   
             }
-            // プレイヤー情報をセット
+            // プレイヤー情報をstoreにセット
             dispatch(setPlayersAction(resObj.players));
+            // アビリティメッセージをstoreにセット
+            dispatch(setAblMessagesAction(ablMessages));
             console.log(resObj.phase);
+            // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
         });
 

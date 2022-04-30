@@ -17,7 +17,8 @@ import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
-import { teal, red, orange } from '@mui/material/colors';
+import { blue, red, teal, yellow, grey } from '@mui/material/colors';
+import AblNavigationComponent from './components/AblNavigationComponent';
 
 const Game = () => {
     const classes = useStyles();
@@ -86,6 +87,39 @@ const Game = () => {
                     <Grid item xs={1} />
                     <Grid item xs={8}>
                         <NavigationComponent message={message} messages={messages} />
+                        {selector.game.ablMessages.length > 0 && selector.game.ablMessages.map((am,index) => (
+                            <div key={index}>
+                                {am.type === Constants.BST_TP ?
+                                    <AblNavigationComponent background={blue[300]} message={am.message} effect={am.effect} />
+                                :
+                                <div>
+                                    {am.type === Constants.ATK_TP ?
+                                        <AblNavigationComponent background={red[300]} message={am.message} effect={am.effect} />
+                                    :
+                                    <div>
+                                        {am.type === Constants.RCV_TP ?
+                                            <AblNavigationComponent background={teal[300]} message={am.message} effect={am.effect} />
+                                        :
+                                        <div>
+                                            {am.type === Constants.JAM_TP ?
+                                                <AblNavigationComponent background={yellow[300]} message={am.message} effect={am.effect} />
+                                            :
+                                            <div>
+                                                {am.type === Constants.CNF_TP ?
+                                                    <AblNavigationComponent background={grey[300]} message={am.message} effect={am.effect} />
+                                                :
+                                                    <AblNavigationComponent background={grey[200]} message={am.message} effect={am.effect} />
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                        }
+                                    </div>
+                                    }
+                                </div>
+                                }
+                            </div>
+                        ))}
                     </Grid>
                     <Grid item xs={3}>
                         <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
