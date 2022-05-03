@@ -18,7 +18,7 @@ const SelectAbilityComponent = (props) => {
     return (
         <Typography component="div" align="center">
             <AbilityCard>
-                <NavigationComponent message={props.type} messages={[]} color={props.color} bColor={props.bColor} />
+                <NavigationComponent message={props.type} messages={[]} color={props.color} background={props.background} />
                 {props.abilities.map((value) => (
                     selector.players.player.abilities.find((id) => {return id === value.abilityId}) 
                     ?

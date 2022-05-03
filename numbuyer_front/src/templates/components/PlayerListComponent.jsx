@@ -12,6 +12,7 @@ import CopyToClipBoard from 'react-copy-to-clipboard';
 import IconButton      from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { setQuickAction } from '../../redux/room/actions';
+import { grey } from '@mui/material/colors';
 
 const PlayerListComponent = () => {
     const classes = useStyles();
@@ -38,7 +39,7 @@ const PlayerListComponent = () => {
     return (
         <MenuCard>
             {selector.room.isQuickMatch && 
-                <NavigationComponent message={selector.msg.lang.QUICK_MSG} messages={[]} />
+                <NavigationComponent color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
             }
             <LobbyTitle>{selector.msg.lang.LOBBY}</LobbyTitle>
             {owners &&

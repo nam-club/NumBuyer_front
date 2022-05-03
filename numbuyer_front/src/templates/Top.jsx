@@ -288,27 +288,27 @@ const Top = () => {
                         <Fade in={abilityOpen}>
                             <TopMenu>
                                 <Typography component="div" align="center">
-                                    <NavigationComponent message={selector.msg.lang.ABILITY} messages={[]} />
+                                    <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
                                     <Grid container>
                                         <Grid item xs={1} />
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={blue[300]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
+                                            <SelectAbilityComponent background={blue[300]} color={grey[50]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
                                                 type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={red[300]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
+                                            <SelectAbilityComponent background={red[300]} color={grey[50]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
                                                 type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={teal[300]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                            <SelectAbilityComponent background={teal[300]} color={grey[50]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
                                                 type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={amber[300]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
+                                            <SelectAbilityComponent background={amber[300]} color={grey[50]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
                                                 type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <SelectAbilityComponent color={grey[700]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
+                                            <SelectAbilityComponent background={grey[700]} color={grey[50]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
                                                 type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
                                         </Grid>
                                         <Grid item xs={1} />

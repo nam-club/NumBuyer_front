@@ -10,7 +10,7 @@ import card from '../../assets/card.png';
 
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { teal, red, blue, yellow, grey } from '@mui/material/colors';
+import { teal, red, blue, amber, grey } from '@mui/material/colors';
 
 const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);
@@ -67,7 +67,7 @@ const PlayerInfoComponent = (props) => {
                                                                 :
                                                                     <div>
                                                                         {value.type === Constants.JAM_TP ? 
-                                                                            <PlayerInfoAbilityComponent ability={value} background={yellow[300]} color={grey[700]} /> 
+                                                                            <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
                                                                         :
                                                                             <div>
                                                                                 {value.type === Constants.CNF_TP ? 
@@ -135,7 +135,7 @@ const PlayerInfoComponent = (props) => {
                                                             :
                                                                 <div>
                                                                     {fa.type === Constants.JAM_TP ? 
-                                                                        <PlayerInfoAbilityComponent ability={fa} background={yellow[300]} color={grey[700]} /> 
+                                                                        <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
                                                                     :
                                                                         <div>
                                                                             {fa.type === Constants.CNF_TP ?

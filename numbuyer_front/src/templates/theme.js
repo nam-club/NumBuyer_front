@@ -365,14 +365,12 @@ export const MessageBox = styled(Card)({
 // メッセージ本体
 export const NaviMessage = styled('p')({
   fontSize: '1.5em',
-  color: grey[50],
   margin: 0,
 });
 
 // メッセージ本体（複数行））
 export const NaviMessages = styled('p')({
   fontSize: '1.2em',
-  color: grey[50],
   margin: 0,
 });
 

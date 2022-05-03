@@ -76,7 +76,6 @@ const CalcComponent = (props) => {
             newHands.splice(index, 1);
             setHands(newHands);
             setCalcs([...calcs, value]);
-            console.log(calcs);
         }
     }
 
@@ -127,9 +126,6 @@ const CalcComponent = (props) => {
         handleClose();
         calcs.length = 0;
         calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
-
-        // ボタン押せないようにする（パス押したらもう回答できない）
-        dispatch(setCalcBtnAction(false));
     }
 
     // ダイアログ表示
