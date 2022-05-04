@@ -52,6 +52,7 @@ const initialState = {
             total: 0, // 獲得コインの合計
             cardNumBonus: 0, // カード枚数ボーナスコイン
         },
+        aucResult: Constants.NONE, // 落札結果ステータス
         calcResult: Constants.NONE, // 計算結果ステータス
         firedAbilities: [], // 発動アビリティ配列
         finishFlg: false, // ゲーム終了フラグ

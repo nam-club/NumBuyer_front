@@ -73,6 +73,11 @@ const Game = () => {
         <Typography component="div" align="center">
             <GlobalStyle />
             <GameBack>
+                {selector.game.aucResult === Constants.SUCCESS &&
+                    <Card className={classes.result_animation} sx={{background: amber['A100']}} >
+                        {selector.msg.lang.SUCCESS_BID}
+                    </Card>
+                }
                 {selector.game.calcResult === Constants.SUCCESS &&
                     <Card className={classes.result_animation} sx={{background: teal['A100']}} >
                         {selector.msg.lang.SUCCESS}
@@ -87,6 +92,10 @@ const Game = () => {
                     <Grid item xs={1} />
                     <Grid item xs={8}>
                         <NavigationComponent color={grey[50]} message={message} messages={messages} />
+                        {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
+                            <AblNavigationComponent background={amber[500]} color={grey[50]} 
+                            message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
+                        }
                         {selector.game.ablMessages.length > 0 && selector.game.ablMessages.map((am,index) => (
                             <div key={index}>
                                 {am.type === Constants.BST_TP ?

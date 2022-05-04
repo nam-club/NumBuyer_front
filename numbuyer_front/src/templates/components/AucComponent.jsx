@@ -4,7 +4,7 @@ import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
+import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
          AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
@@ -182,11 +182,6 @@ const AucComponent = (props) => {
                     </Dialog>
                     <BidButton size="large" variant="contained"
                     onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</BidButton>
-                    {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
-                        <HighBidMessage>
-                            {selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3}
-                        </HighBidMessage>
-                    }
                 </Grid>
             </Grid>
         </Card>

@@ -24,7 +24,6 @@ export const GameReducer = (state = initialState.game, action) => {
             return state;
         case Actions.SET_ABL_MESSAGES:
             state.ablMessages = action.payload.ablMessages;
-            console.log(state.ablMessages);
             return state;
         case Actions.RESET_ABL_MESSAGES:
             state.ablMessages.length = 0;
@@ -63,6 +62,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...action.payload
             }
         case Actions.SET_HIGHEST:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case Actions.SET_AUC_RESULT:
             return {
                 ...state,
                 ...action.payload

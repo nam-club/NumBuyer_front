@@ -53,7 +53,6 @@ export const resetMessagesAction = () => {
 export const SET_ABL_MESSAGES = "SET_ABL_MESSAGES";
 
 export const setAblMessagesAction = (ablMessagesState) => {
-    console.log(ablMessagesState);
     return {
         type: "SET_ABL_MESSAGES",
         payload: {
@@ -155,6 +154,18 @@ export const setHighestAction = (highestState) => {
         payload: {
             highestName: highestState.playerName,
             highestBid: highestState.coin
+        }
+    }
+}
+
+export const SET_AUC_RESULT = "SET_AUC_RESULT";
+
+export const setAucResultAction = (aucResultState) => {
+    console.log(aucResultState);
+    return {
+        type: "SET_AUC_RESULT",
+        payload: {
+            aucResult: aucResultState,
         }
     }
 }

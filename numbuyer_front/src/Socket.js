@@ -4,7 +4,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
      setRankingAction, setResAbilityAction} from './redux/players/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setWinPlayerAction, setTargetSkipAction, setRemTimeFlgAction, setAddedCoinAction, setFiredAbilitiesAction, setAblMessagesAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -332,11 +332,14 @@ export default function Socket(props) {
         });
 
         // 落札したプレイヤーのコインとカード情報を更新する
-        socket.on('game/buy_update', function(msg) {
+        socket.on('game/buy_update', async function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
+
+            // 落札成功アニメーション
+            dispatch(setAucResultAction(Constants.SUCCESS));
 
             // 最高入札額をリセット
             dispatch(setHighestAction({playerName: '', coin: 0}));
@@ -348,6 +351,11 @@ export default function Socket(props) {
             dispatch(setAuctionAction([]));
             // BIDボタン、PASSボタンを押せるように戻す（パスを押した時用）
             dispatch(setAucBtnAction(true));
+
+            // アニメーションを停止
+            await setTimeout(() => {
+                dispatch(setAucResultAction(Constants.NONE));
+            }, 1500);
         });
 
         socket.on('game/calculate_result', async function(msg) {
