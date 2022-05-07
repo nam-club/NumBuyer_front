@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const msgSelector = (state) => state.msg;
 
-export const getLangFlg = createSelector(
+export const getLang = createSelector(
     [msgSelector],
     state => state.lang
 )
@@ -15,4 +15,9 @@ export const getValidFlg = createSelector(
 export const getErrMsg = createSelector(
     [msgSelector],
     state => state.errMsg
+)
+
+export const getTPage = createSelector(
+    [msgSelector],
+    state => state.tPage
 )

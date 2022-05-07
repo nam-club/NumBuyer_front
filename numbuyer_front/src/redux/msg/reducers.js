@@ -16,6 +16,9 @@ export const MsgReducer = (state = initialState.msg, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_T_PAGE:
+            state.tPage = action.payload.tPage;
+            return state;
         default:
             return state
     }

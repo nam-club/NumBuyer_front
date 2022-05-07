@@ -30,3 +30,14 @@ export const setErrMsgAction = (errMsgState) => {
         }
     }
 }
+
+export const SET_T_PAGE = "SET_T_PAGE";
+
+export const setTPageAction = (tPageState) => {
+    return {
+        type: "SET_T_PAGE",
+        payload: {
+            tPage: tPageState
+        }
+    }
+}

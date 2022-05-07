@@ -22,6 +22,7 @@ const initialState = {
         lang: ConstantsMsg.English, // 言語
         validFlg: false, // バリデーションフラグ
         errMsg: "", // エラーメッセージ
+        tPage: Constants.T_PAGE1, // チュートリアル表示ページ 
     },
     game: {
         phase: "", // フェーズ

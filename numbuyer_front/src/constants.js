@@ -1,6 +1,13 @@
 // 初期プロパティ
 export const COIN = 100;
 
+// チュートリアル
+export const T_PAGE1 = "What is NumBuyer?";
+export const T_PAGE2 = "Before Game";
+export const T_PAGE3 = "Distribution and Publication";
+export const T_PAGE4 = "Auction";
+export const T_PAGE5 = "Calculation";
+export const T_PAGE6 = "Use Ability";
 
 // アビリティステータス
 export const UNUSED_ST = 'unused'; // 効果未使用

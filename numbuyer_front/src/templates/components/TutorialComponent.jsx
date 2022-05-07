@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useStyles, SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage, DetailMessage } from '../theme';
+import { SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage, DetailMessage } from '../theme';
 import * as ConstantsMsg from '../../constantsMsg';
+import * as Constants from '../../constants';
 
 import { grey, blue } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
@@ -16,9 +17,11 @@ import TimelineDot from '@mui/lab/TimelineDot';
 
 
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
+import { setTPageAction } from '../../redux/msg/actions';
 
 const TutorialComponent = () => {
     const selector = useSelector(state => state);
+    const dispatch = useDispatch();
  
     // ゲーム紹介項目
     const [introduction, setIntroduction] = React.useState({name: selector.msg.lang.INTRODUCTION, color: blue[700]});
@@ -29,53 +32,87 @@ const TutorialComponent = () => {
         {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
         {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
         {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+        {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
     ]);
 
     const selectButton = (name) => {
         switch(name) {
             case selector.msg.lang.INTRODUCTION:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE1));
+                // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: blue[700]});
                 setTimeLines([
                     {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
                 ]);
                 break;
             case selector.msg.lang.TIME_LINE1:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE2));
+                // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
                     {name: selector.msg.lang.TIME_LINE1, color: blue[700]},
                     {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
                 ]);
                 break;
             case selector.msg.lang.TIME_LINE2:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE3));
+                // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
                     {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE2, color: blue[700]},
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
                 ]);
                 break;
             case selector.msg.lang.TIME_LINE3:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE4));
+                // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
                     {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE3, color: blue[700]},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
                 ]);
                 break;
             case selector.msg.lang.TIME_LINE4:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE5));
+                // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
                     {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
                     {name: selector.msg.lang.TIME_LINE4, color: blue[700]},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+                ]);
+                break;
+            case selector.msg.lang.ABILITY_TAG:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE6));
+                // 選択項目に色をつける
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
+                    {name: selector.msg.lang.ABILITY_TAG, color: blue[700]},
                 ]);
                 break;
             default:
@@ -109,7 +146,7 @@ const TutorialComponent = () => {
                                 <TimelineItem key={index}>
                                     <TimelineSeparator>
                                         <TimelineDot />
-                                        {(index !== 0) && (index !== timeLines.length-1) && 
+                                        {(index !== 0) && (index !== timeLines.length-2) && (index !== timeLines.length-1) && 
                                             <TimelineConnector />
                                         }
                                     </TimelineSeparator>
@@ -130,52 +167,59 @@ const TutorialComponent = () => {
                                     }
                                 </TimelineItem>
                             ))}
+                            
                         </Timeline>
                 </SideBar>
                 <TutorialBody component="main">
-                    <TutorialImage src={whatIsNumBuyer}/>
-                    {selector.msg.lang === ConstantsMsg.English ?
+                    {selector.msg.tPage === Constants.T_PAGE1 ?
                     <div>
-                        <EmphasisMessage paragraph sx={{fontSize: "1.5em"}}>
-                            {selector.msg.lang.INTRODUCTION_MSG1}
-                        </EmphasisMessage>
-                        <Divider />
-                        <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
-                            <b>{selector.msg.lang.INTRODUCTION_MSG2}</b>
-                        </EmphasisMessage>
-                        <Typography sx={{fontSize: "1.2em"}}>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG6}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG7}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG8}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG9}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG10}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG11}</p>
-                        </Typography>
+                        <TutorialImage src={whatIsNumBuyer}/>
+                        {selector.msg.lang === ConstantsMsg.English ?
+                        <div>
+                            <EmphasisMessage paragraph sx={{fontSize: "1.5em"}}>
+                                {selector.msg.lang.INTRODUCTION_MSG1}
+                            </EmphasisMessage>
+                            <Divider />
+                            <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
+                                <b>{selector.msg.lang.INTRODUCTION_MSG2}</b>
+                            </EmphasisMessage>
+                            <Typography sx={{fontSize: "1.2em"}}>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG6}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG7}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG8}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG9}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG10}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG11}</p>
+                            </Typography>
+                        </div>
+                        :
+                        <div>
+                            <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                                {selector.msg.lang.INTRODUCTION_MSG1}
+                            </EmphasisMessage>
+                            <Divider />
+                            <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                                <b>{selector.msg.lang.INTRODUCTION_MSG2}</b>
+                            </EmphasisMessage>
+                            <Typography sx={{fontSize: "1em"}}>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG6}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG7}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG8}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG9}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG10}</p>
+                                <p>{selector.msg.lang.INTRODUCTION_MSG11}</p>
+                            </Typography>
+                        </div>
+                        }
                     </div>
                     :
-                    <div>
-                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
-                            {selector.msg.lang.INTRODUCTION_MSG1}
-                        </EmphasisMessage>
-                        <Divider />
-                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
-                            <b>{selector.msg.lang.INTRODUCTION_MSG2}</b>
-                        </EmphasisMessage>
-                        <Typography sx={{fontSize: "1em"}}>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG6}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG7}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG8}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG9}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG10}</p>
-                            <p>{selector.msg.lang.INTRODUCTION_MSG11}</p>
-                        </Typography>
-                    </div>
+                    <div></div>
                     }
                 </TutorialBody>
             </Box>
