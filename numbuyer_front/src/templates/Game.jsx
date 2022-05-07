@@ -92,7 +92,7 @@ const Game = () => {
                     <Grid item xs={1} />
                     <Grid item xs={8}>
                         <NavigationComponent color={grey[50]} message={message} messages={messages} />
-                        {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
+                        {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH ) &&
                             <AblNavigationComponent background={amber[500]} color={grey[50]} 
                             message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                         }

@@ -5,7 +5,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
 import { setValidAction, setErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, resetAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -299,8 +299,14 @@ export default function Socket(props) {
 
             // プレイヤー情報をstoreにセット
             dispatch(setPlayersAction(resObj.players));
+            console.log("アビリティメッセージをセット");
             // アビリティメッセージをstoreにセット
             dispatch(setAblMessagesAction(ablMessages));
+            // アビリティメッセージをリセット
+            /*setTimeout(() => {
+                console.log("アビリティメッセージをリセット");
+                dispatch(resetAblMessagesAction());
+            }, 10000);*/
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
@@ -364,7 +370,9 @@ export default function Socket(props) {
             changeCode(resObj.cards, 'display');
 
             // 落札成功アニメーション
-            dispatch(setAucResultAction(Constants.SUCCESS));
+            if(resObj.isSuccessed) {
+                dispatch(setAucResultAction(Constants.SUCCESS));
+            }
 
             // 最高入札額をリセット
             dispatch(setHighestAction({playerName: '', coin: 0}));
@@ -385,37 +393,46 @@ export default function Socket(props) {
 
         socket.on('game/calculate_result', async function(msg) {
             console.log(msg);
-            resObj = JSON.parse(msg);
-            if(resObj.isCorrectAnswer) {
+            resObj = JSON.parse(msg)
+
+            if(resObj.actionResult === Constants.CORRECT) {
                 // 正解アニメーション
                 dispatch(setCalcResultAction(Constants.SUCCESS));
                 // 正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG1));
                 // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
                 dispatch(setCalcBtnAction(false));
-            }else {
+            }else if(resObj.actionResult === Constants.INCORRECT) {
                 // 不正解アニメーション
                 dispatch(setCalcResultAction(Constants.FAILED));
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
-            }
-
-            // パス状態になったらボタン押せないようにする
-            if(resObj.isPassed) {
+            }else if(resObj.actionResult === Constants.INC_PASS) {
+                // 不正解アニメーション
+                dispatch(setCalcResultAction(Constants.FAILED));
+                // 不正解メッセージを表示
+                dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
+                // ボタンを押せないようにする
                 dispatch(setCalcBtnAction(false));
             }
 
-            await setTimeout(() => {
-                dispatch(setCalcResultAction(Constants.NONE));
-            }, 1500);
+            // パス状態
+            if(resObj.actionResult === Constants.PASS) {
+                // ボタンを押せないようにする
+                dispatch(setCalcBtnAction(false));
+            }else {
+                await setTimeout(() => {
+                    dispatch(setCalcResultAction(Constants.NONE));
+                }, 1500);
 
-            // 画面表示用に掛け算と割り算を変換
-            changeCode(resObj.cards, 'display');
+                // 画面表示用に掛け算と割り算を変換
+                changeCode(resObj.cards, 'display');
 
-            // 返された所持コインをセット
-            dispatch(setCoinAction(resObj.coin));
-            // 返された手札をセット
-            dispatch(setCardsAction(resObj.cards));
+                // 返された所持コインをセット
+                dispatch(setCoinAction(resObj.coin));
+                // 返された手札をセット
+                dispatch(setCardsAction(resObj.cards));
+            }
         });
 
         socket.on('game/ready_ability', function(msg) {
@@ -434,6 +451,11 @@ export default function Socket(props) {
                         default:
                             break;
                     }
+                    // アビリティメッセージをリセット
+                    /*setTimeout(() => {
+                        console.log("アビリティメッセージをリセット");
+                        dispatch(resetAblMessagesAction());
+                    }, 10000);*/
                 }  
             }else {
                 updateAbility(resObj);

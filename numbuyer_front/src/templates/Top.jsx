@@ -20,7 +20,6 @@ import SelectAbilityComponent from './components/SelectAbilityComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';

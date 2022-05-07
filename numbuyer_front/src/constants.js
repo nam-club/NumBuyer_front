@@ -201,10 +201,16 @@ export const END_PH = 'END';
 export const NAME_EXP = "[¥$=<>+*]+";
 export const BID_EXP = "[0-9]+";
 
-// 正解ステータス
+// 成功・失敗ステータス
 export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 export const NONE = "NONE";
+
+// 計算結果ステータス
+export const CORRECT = "correct";
+export const INCORRECT = "incorrect";
+export const PASS = "pass";
+export const INC_PASS = "incorrectWithPass";
 
 // レスポンスエラー
 export const VALID_ERR = "error.validation";
