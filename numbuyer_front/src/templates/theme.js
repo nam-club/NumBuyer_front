@@ -59,8 +59,7 @@ export const MenuModal = styled(Modal)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginLeft: '5%',
-  marginRight: '5%',
+  margin: '5%',
   overflow: 'scroll',
 });
 
@@ -124,7 +123,6 @@ export const TutorialImage = styled('img')({
 
 // チュートリアルの強調部分の説明
 export const EmphasisMessage = styled(Typography)({
-  fontSize: '1.2em',
   marginTop: '2%',
 });
 

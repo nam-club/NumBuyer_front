@@ -257,3 +257,14 @@ export const setTargetSkipAction = (targetSkipState) => {
         }
     }
 }
+
+export const SET_HANDS_UPDATE = "SET_HANDS_UPDATE";
+
+export const setHandsUpdateAction = (handsUpdateState) => {
+    return {
+        type: "SET_HANDS_UPDATE",
+        payload: {
+            handsUpdateFlg: handsUpdateState
+        }
+    }
+}

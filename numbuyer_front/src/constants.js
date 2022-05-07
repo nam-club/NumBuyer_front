@@ -83,18 +83,21 @@ export const RCV_ABILITIES = [
                 name: "Reload",
                 comment: "You can pay half the coins and redraw all your hands (the auction phase cannot be activated).[Active Ability]",
                 fired_msg: ["paid half the coins and redrawn all hands!"],
+                err_msg: "This ability cannot be used during the auction phase.",
             },
             {
                 lang: "Japanese",
                 name: "リロード",
                 comment: "コインを半分支払って自分の手札を全て引き直せる（オークションフェーズは発動できない）。[アクティブアビリティ]",
                 fired_msg: ["コインを半分支払い、手札を全て引き直した！"],
+                err_msg: "このアビリティはオークションフェーズに使用できません。",
             },
             {
                 lang: "Chinese",
                 name: "重新加载",
                 comment: "您可以支付一半的硬币并重新绘制所有手牌（拍卖阶段无法激活）。[主动技能]",
                 fired_msg: ["支付了一半的硬币并重新绘制了所有的手！"],
+                err_msg: "此能力不能在拍卖阶段使用。",
             },
         ],
     },
@@ -198,3 +201,4 @@ export const NONE = "NONE";
 
 // レスポンスエラー
 export const VALID_ERR = "error.validation";
+export const JOIN_ERR = "can not join game";

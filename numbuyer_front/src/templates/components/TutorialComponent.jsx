@@ -85,7 +85,7 @@ const TutorialComponent = () => {
 
     return (
         <Typography component="div" align="center">
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', marginTop: '20%' }}>
                 <SideBar component="nav">
                         {selector.msg.lang === ConstantsMsg.English ?
                         <div>
@@ -136,14 +136,14 @@ const TutorialComponent = () => {
                     <TutorialImage src={whatIsNumBuyer}/>
                     {selector.msg.lang === ConstantsMsg.English ?
                     <div>
-                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                        <EmphasisMessage paragraph sx={{fontSize: "1.5em"}}>
                             {selector.msg.lang.INTRODUCTION_MSG1}
                         </EmphasisMessage>
                         <Divider />
-                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
-                            {selector.msg.lang.INTRODUCTION_MSG2}
+                        <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
+                            <b>{selector.msg.lang.INTRODUCTION_MSG2}</b>
                         </EmphasisMessage>
-                        <Typography sx={{fontSize: "1em"}}>
+                        <Typography sx={{fontSize: "1.2em"}}>
                             <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
                             <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
                             <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
@@ -157,14 +157,14 @@ const TutorialComponent = () => {
                     </div>
                     :
                     <div>
-                        <EmphasisMessage paragraph sx={{fontSize: "1em"}}>
+                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
                             {selector.msg.lang.INTRODUCTION_MSG1}
                         </EmphasisMessage>
                         <Divider />
-                        <EmphasisMessage paragraph sx={{fontSize: "1em"}}>
-                            {selector.msg.lang.INTRODUCTION_MSG2}
+                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                            <b>{selector.msg.lang.INTRODUCTION_MSG2}</b>
                         </EmphasisMessage>
-                        <Typography sx={{fontSize: "0.8em"}}>
+                        <Typography sx={{fontSize: "1em"}}>
                             <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
                             <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
                             <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>

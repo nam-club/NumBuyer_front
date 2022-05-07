@@ -107,6 +107,11 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_HANDS_UPDATE:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }

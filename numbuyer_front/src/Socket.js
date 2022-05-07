@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
      setRankingAction, setResAbilityAction} from './redux/players/actions';
+import { setValidAction, setErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -93,8 +94,11 @@ export default function Socket(props) {
             // レスポンスエラー
             if(resObj.code) {
                 // バリデーションエラー
-                if(resObj.code === "error.validation") {
-
+                if(resObj.code === Constants.VALID_ERR) {
+                    if(resObj.message === Constants.JOIN_ERR) {
+                        dispatch(setValidAction({validFlg: true}));
+                        dispatch(setErrMsgAction({errMsg: selector.msg.lang.NOT_EXIST_ROOM_ERR}));
+                    }
                 }
             }else {
                 // プレイヤーIDをセット
@@ -307,7 +311,9 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 手札を更新
+            dispatch(setHandsUpdateAction(false));
             dispatch(setCardsAction(resObj.cards));
+            dispatch(setHandsUpdateAction(true));
             // コインを更新
             dispatch(setCoinAction(resObj.coin));
         });
@@ -415,7 +421,23 @@ export default function Socket(props) {
         socket.on('game/ready_ability', function(msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            updateAbility(resObj);
+            // エラーがある時
+            if(resObj.code) {
+                // バリデーションエラー
+                if(resObj.code === Constants.VALID_ERR) {
+                    let errMessage = "";
+                    switch(resObj.abilityId) {
+                        case Constants.RCV_ABILITIES[0].abilityId:
+                            errMessage = Constants.RCV_ABILITIES[0].display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).err_msg;
+                            dispatch(setAblMessagesAction(errMessage));
+                            break;
+                        default:
+                            break;
+                    }
+                }  
+            }else {
+                updateAbility(resObj);
+            }
         });
 
         socket.on('game/correct_players', function(msg) {

@@ -58,14 +58,24 @@ export const English = {
     AGAIN_BTN: 'Play Again',
 
     // チュートリアルメッセージ
-    INTRODUCTION_MSG1: 'NumBuyer is a title born from the two words Number and Buyer, and as the name implies, it is a new type of card game that combines a calculation card game with an auction element.',
-    INTRODUCTION_MSG2: 'Game rules',
+    INTRODUCTION_MSG1: "NumBuyer is a title born from the two words Number and Buyer, and as the name implies, it is a new type of card game that combines a calculation card game with an auction element.",
+    INTRODUCTION_MSG2: "Game rules",
+    INTRODUCTION_MSG3: "First, 5 cards of 2 types, numbers and operators, are randomly dealt.",
+    INTRODUCTION_MSG4: "After that, a Target card with numbers will be released. You can earn coins by combining the cards you have to make the number of Target card.",
+    INTRODUCTION_MSG5: "The first person to collect the amount of coins presented as a victory condition is the winner of this game!",
+    INTRODUCTION_MSG6: "One card will be dealt each turn, but that alone will not be enough to make the number of Target card. Therefore, the Auction card will be released after the Target card is released.",
+    INTRODUCTION_MSG7: "This Auction card can be obtained in an auction format using your coins.",
+    INTRODUCTION_MSG8: "Let's make good use of Auction cards and efficiently create numbers for Target card!",
+    INTRODUCTION_MSG9: "After the end of the auction phase, the calculation phase comes. Let's make a calculation formula so that the number of the Target card will be the calculation result with the card you have. (Of course, you can use only one card that has exactly the same number as the Target card)",
+    INTRODUCTION_MSG10: "If you can make the numbers of the Target card brilliantly, you will get coins for the value of the Target card and the number of cards you used! (You will get bonus coins according to the number of cards you used!)",
+    INTRODUCTION_MSG11: "After that, let's just repeat this series of steps and collect a lot of coins faster than anyone else!",
 
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
     SYMBOL_ERR: "You cannot enter that character.", // 禁止文字が入力されている
     NULL_ROOM_ID_ERR: "Please enter Room ID.", // ルームが未入力
     LENGTH_ROOM_ID_ERR: 'Please enter the room ID in 10 digits.', // ルームIDが10桁以外
+    NOT_EXIST_ROOM_ERR: 'This room ID does not exist.', // 存在しないルームID
     ABILITY_ERR: 'Please select two abilities.', // アビリティを2つ選択していない
     NULL_BID_ERR: "Please enter the amount.", // 金額が未入力
     NUM_ERR: "You can only enter numbers.", // 数字以外が入力されている
@@ -179,7 +189,7 @@ export const Japanese = {
     INTRODUCTION_MSG7: 'この「オークションカード」は手持ちのコインを使ってオークション形式で入手することができます。',
     INTRODUCTION_MSG8: '「オークションカード」をうまく活用して「目標カード」の数字を効率良く作りましょう!',
     INTRODUCTION_MSG9: 'オークションフェーズの終了後、計算フェーズがやってきます。手持ちのカードで「目標カード」の数字が計算結果となるように計算式を作りましょう。(もちろん「目標カード」の数字と全く同じカードを1枚だけ使っても良いです)',
-    INTRODUCTION_MSG10: '「目標カード」の数字を見事作ることができれば「目標カード」の数字と同額のコインがもらえます!(使ったカードの枚数に応じて、ボーナスコインがもらえます!)',
+    INTRODUCTION_MSG10: '「目標カード」の数字を見事作ることができれば「目標カード」の値と使用した手札の枚数分のコインがもらえます!(使ったカードの枚数に応じて、ボーナスコインがもらえます!)',
     INTRODUCTION_MSG11: '後はひたすらこの一連の流れを繰り返してコインを誰よりも早くたくさん集めましょう!',
 
     // エラーメッセージ
@@ -187,6 +197,7 @@ export const Japanese = {
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
     NULL_ROOM_ID_ERR: 'ルームIDを入力してください。', // ルームIDが未入力
     LENGTH_ROOM_ID_ERR: 'ルームIDは10桁で入力してください。', // ルームIDが10桁以外
+    NOT_EXIST_ROOM_ERR: '存在しないルームIDです。', // 存在しないルームID
     ABILITY_ERR: 'アビリティを2つ選択してください。', // アビリティを2つ選択していない
     NULL_BID_ERR: '金額を入力してください。', // 金額が未入力
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
@@ -300,6 +311,7 @@ export const Chinese = {
     SYMBOL_ERR: '您不能输入该字符。', // 禁止文字が入力されている
     NULL_ROOM_ID_ERR: '请输入房间号。', // ルームIDが未入力
     LENGTH_ROOM_ID_ERR: '请输入10位数字的房间ID。', // ルームIDが10桁以外
+    NOT_EXIST_ROOM_ERR: '此房间ID不存在。', // 存在しないルームID
     ABILITY_ERR: '选择两个技能。', // アビリティを2つ選択していない
     NULL_BID_ERR: '请输入金额。', // 金額が未入力
     NUM_ERR: '您只能输入数字。', // 数字以外が入力されている

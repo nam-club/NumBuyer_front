@@ -60,6 +60,7 @@ const initialState = {
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ
         firstTurnFlg: true, // 初回ターンフラグ
         targetSkipFlg: false, // ターゲットフェーズスキップフラグ
+        handsUpdateFlg: true, // 手札更新フラグ
     }
 };
 

@@ -116,3 +116,8 @@ export const getTargetSkipFlg = createSelector(
     [gameSelector],
     state => state.targetSkipFlg
 )
+
+export const getHandsUpdateFlg = createSelector(
+    [gameSelector],
+    state => state.handsUpdateFlg
+)
