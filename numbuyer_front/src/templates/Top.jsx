@@ -129,7 +129,7 @@ const Top = () => {
 
     // ルームID入力
     const roomIdChange = (e) => {
-        if(e.target.value.match(Constants.BID_EXP)) {
+        if(e.target.value.match(Constants.BID_EXP) && e.target.value.length <= 10) {
             setRoomId(e.target.value);
         }
         if(e.target.value !== '' && e.target.value.match(Constants.BID_EXP)) {
@@ -163,18 +163,23 @@ const Top = () => {
 
     // ジョイン
     const clickJoin = () => {
-        if(roomId !== '' && roomId.match(Constants.BID_EXP)) {
+        // ルームIDが未入力
+        if(roomId === '') {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_ROOM_ID_ERR}));
+        // ルームIDが数字以外
+        }else if(!roomId.match(Constants.BID_EXP)) {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+        // ルームIDが10文字以外
+        }else if(roomId.length !== 10) {
+            dispatch(setValidAction({validFlg: true}));
+            dispatch(setErrMsgAction({errMsg: selector.msg.lang.LENGTH_ROOM_ID_ERR}));
+        }else {
             dispatch(setValidAction({validFlg: false}));
             dispatch(setRoomAction({roomId: roomId}));
             dispatch(setPlayerNameAction(name));
             joinFriendMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
-        }else {
-            dispatch(setValidAction({validFlg: true}));
-            if(roomId !== '') {
-                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
-            }else {
-                dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_ROOM_ID_ERR}));
-            }
         }
     }
 

@@ -195,3 +195,6 @@ export const BID_EXP = "[0-9]+";
 export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 export const NONE = "NONE";
+
+// レスポンスエラー
+export const VALID_ERR = "error.validation";

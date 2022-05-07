@@ -65,6 +65,7 @@ export const English = {
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
     SYMBOL_ERR: "You cannot enter that character.", // 禁止文字が入力されている
     NULL_ROOM_ID_ERR: "Please enter Room ID.", // ルームが未入力
+    LENGTH_ROOM_ID_ERR: 'Please enter the room ID in 10 digits.', // ルームIDが10桁以外
     ABILITY_ERR: 'Please select two abilities.', // アビリティを2つ選択していない
     NULL_BID_ERR: "Please enter the amount.", // 金額が未入力
     NUM_ERR: "You can only enter numbers.", // 数字以外が入力されている
@@ -185,6 +186,7 @@ export const Japanese = {
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
     NULL_ROOM_ID_ERR: 'ルームIDを入力してください。', // ルームIDが未入力
+    LENGTH_ROOM_ID_ERR: 'ルームIDは10桁で入力してください。', // ルームIDが10桁以外
     ABILITY_ERR: 'アビリティを2つ選択してください。', // アビリティを2つ選択していない
     NULL_BID_ERR: '金額を入力してください。', // 金額が未入力
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
@@ -297,6 +299,7 @@ export const Chinese = {
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力
     SYMBOL_ERR: '您不能输入该字符。', // 禁止文字が入力されている
     NULL_ROOM_ID_ERR: '请输入房间号。', // ルームIDが未入力
+    LENGTH_ROOM_ID_ERR: '请输入10位数字的房间ID。', // ルームIDが10桁以外
     ABILITY_ERR: '选择两个技能。', // アビリティを2つ選択していない
     NULL_BID_ERR: '请输入金额。', // 金額が未入力
     NUM_ERR: '您只能输入数字。', // 数字以外が入力されている

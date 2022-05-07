@@ -5,7 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 import createStore from './redux/store/store';
+
 import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
 import { theme } from "./templates/theme";

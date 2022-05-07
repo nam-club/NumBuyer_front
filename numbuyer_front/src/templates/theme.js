@@ -450,13 +450,6 @@ export const BidButton = styled(Button)({
   },
 });
 
-// 最高入札額メッセージ
-export const HighBidMessage = styled('p')({
-  margin:0,
-  color: amber[500],
-  fontSize: '1.5em',
-});
-
 // アビリティエリア
 export const AbilityArea = styled(Card)({
   background: grey[50],

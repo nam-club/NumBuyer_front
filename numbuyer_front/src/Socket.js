@@ -89,21 +89,28 @@ export default function Socket(props) {
             console.log("game/join:")
             console.log(msg)
             resObj = JSON.parse(msg);
-            // プレイヤーIDをセット
-            dispatch(setPlayerIdAction(resObj.playerId));
-            // ルームIDをセット
-            dispatch(setRoomAction(resObj.roomId));
-            // オーナーフラグをセット
-            dispatch(setOwnerAction(resObj.isOwner));
-            // アビリティをセット
-            let abilities = [];
-            for(let a of resObj.abilities) {
-                console.log(a);
-                abilities.push(setAbility(a));
+
+            // レスポンスエラー
+            if(resObj.code) {
+                // バリデーションエラー
+                if(resObj.code === "error.validation") {
+
+                }
+            }else {
+                // プレイヤーIDをセット
+                dispatch(setPlayerIdAction(resObj.playerId));
+                // ルームIDをセット
+                dispatch(setRoomAction(resObj.roomId));
+                // オーナーフラグをセット
+                dispatch(setOwnerAction(resObj.isOwner));
+                // アビリティをセット
+                let abilities = [];
+                for(let a of resObj.abilities) {
+                    abilities.push(setAbility(a));
+                }
+                await dispatch(setResAbilityAction(abilities));
+                playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
             }
-            console.log(abilities);
-            await dispatch(setResAbilityAction(abilities));
-            playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
         });
 
         // アビリティのパラメータをセット（初回）
@@ -188,12 +195,14 @@ export default function Socket(props) {
             })
         };
 
+        // ゲーム開始前に全プレイヤーの情報をセットし、ロビー画面に移動
         socket.on('game/players_info', function(msg) {
             console.log("game/playersInfo:");
             console.log(msg);
             resObj = JSON.parse(msg);
             setPlayers(resObj.players).then(()=>{
                 dispatch(push('/Lobby'));
+                console.log("ロビー画面に移動しました");
             });
         });
 
@@ -224,11 +233,11 @@ export default function Socket(props) {
             dispatch(push('/Game'));
         };
         
+        // 次のターンに遷移
         socket.on('game/next_turn', function(msg) {
             console.log("game/next_turn:")
             console.log(msg);
             resObj = JSON.parse(msg);
-            console.log(typeof resObj.auctionCards);
 
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
@@ -291,6 +300,16 @@ export default function Socket(props) {
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
+        });
+
+        // 自分の手札とコインをセット（更新）
+        socket.on('game/player_info', function(msg) {
+            console.log(msg);
+            resObj = JSON.parse(msg);
+            // 手札を更新
+            dispatch(setCardsAction(resObj.cards));
+            // コインを更新
+            dispatch(setCoinAction(resObj.coin));
         });
 
         // 誰がいくら入札したかをメッセージに表示する
@@ -373,9 +392,6 @@ export default function Socket(props) {
                 dispatch(setCalcResultAction(Constants.FAILED));
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
-                // 画面更新調整用
-                /*dispatch(setCalcBtnAction(false));
-                dispatch(setCalcBtnAction(true));*/
             }
 
             // パス状態になったらボタン押せないようにする

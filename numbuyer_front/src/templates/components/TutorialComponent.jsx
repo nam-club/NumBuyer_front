@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useStyles, SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage, DetailMessage } from '../theme';
+import * as ConstantsMsg from '../../constantsMsg';
 
 import { grey, blue } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Timeline from '@mui/lab/Timeline';
@@ -18,8 +18,6 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
 
 const TutorialComponent = () => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
     const selector = useSelector(state => state);
  
     // ゲーム紹介項目
@@ -89,10 +87,23 @@ const TutorialComponent = () => {
         <Typography component="div" align="center">
             <Box sx={{ display: 'flex' }}>
                 <SideBar component="nav">
-                        <PageTitle onClick={()=>{selectButton(introduction.name)}} sx={{color: introduction.color}}>
-                            {introduction.name}
-                        </PageTitle>
-                        <Caption>{selector.msg.lang.CAPTION}</Caption>
+                        {selector.msg.lang === ConstantsMsg.English ?
+                        <div>
+                            <PageTitle onClick={()=>{selectButton(introduction.name)}} 
+                            sx={{fontSize: '1.5em', color: introduction.color}}>
+                                {introduction.name}
+                            </PageTitle>
+                            <Caption sx={{fontSize: '1.2em'}}>{selector.msg.lang.CAPTION}</Caption>
+                        </div>
+                        :
+                        <div>
+                            <PageTitle onClick={()=>{selectButton(introduction.name)}} 
+                            sx={{fontSize: '1.3em', color: introduction.color}}>
+                                {introduction.name}
+                            </PageTitle>
+                            <Caption sx={{fontSize: '1em'}}>{selector.msg.lang.CAPTION}</Caption>
+                        </div>
+                        }
                         <Timeline position="left" sx={{padding: 0, margin: 0}}>
                             {timeLines.map((value, index) => (
                                 <TimelineItem key={index}>
@@ -102,29 +113,70 @@ const TutorialComponent = () => {
                                             <TimelineConnector />
                                         }
                                     </TimelineSeparator>
-                                    <TimeItemName>
-                                        <TLButton onClick={()=>{selectButton(value.name)}} sx={{color: value.color}}>
-                                            {value.name}
-                                        </TLButton>
-                                    </TimeItemName>
+                                    {selector.msg.lang === ConstantsMsg.English ?
+                                        <TimeItemName>
+                                            <TLButton onClick={()=>{selectButton(value.name)}} 
+                                            sx={{fontSize: "1em", color: value.color}}>
+                                                {value.name}
+                                            </TLButton>
+                                        </TimeItemName>
+                                    :
+                                        <TimeItemName>
+                                            <TLButton onClick={()=>{selectButton(value.name)}} 
+                                            sx={{fontSize: "0.8em", color: value.color}}>
+                                                {value.name}
+                                            </TLButton>
+                                        </TimeItemName>
+                                    }
                                 </TimelineItem>
                             ))}
                         </Timeline>
                 </SideBar>
                 <TutorialBody component="main">
                     <TutorialImage src={whatIsNumBuyer}/>
-                    <EmphasisMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG1}</EmphasisMessage>
-                    <Divider />
-                    <EmphasisMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG2}</EmphasisMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG3}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG4}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG5}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG6}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG7}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG8}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG9}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG10}</DetailMessage>
-                    <DetailMessage paragraph>{selector.msg.lang.INTRODUCTION_MSG11}</DetailMessage>
+                    {selector.msg.lang === ConstantsMsg.English ?
+                    <div>
+                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                            {selector.msg.lang.INTRODUCTION_MSG1}
+                        </EmphasisMessage>
+                        <Divider />
+                        <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                            {selector.msg.lang.INTRODUCTION_MSG2}
+                        </EmphasisMessage>
+                        <Typography sx={{fontSize: "1em"}}>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG6}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG7}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG8}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG9}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG10}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG11}</p>
+                        </Typography>
+                    </div>
+                    :
+                    <div>
+                        <EmphasisMessage paragraph sx={{fontSize: "1em"}}>
+                            {selector.msg.lang.INTRODUCTION_MSG1}
+                        </EmphasisMessage>
+                        <Divider />
+                        <EmphasisMessage paragraph sx={{fontSize: "1em"}}>
+                            {selector.msg.lang.INTRODUCTION_MSG2}
+                        </EmphasisMessage>
+                        <Typography sx={{fontSize: "0.8em"}}>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG3}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG4}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG5}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG6}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG7}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG8}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG9}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG10}</p>
+                            <p>{selector.msg.lang.INTRODUCTION_MSG11}</p>
+                        </Typography>
+                    </div>
+                    }
                 </TutorialBody>
             </Box>
         </Typography>

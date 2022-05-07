@@ -5,7 +5,7 @@ import { CTX } from '../../Socket';
 import * as Constants from '../../constants';
 
 import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
-         AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
+         AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
 
