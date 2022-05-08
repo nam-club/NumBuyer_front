@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useStyles, GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import * as Constants from '../constants';
@@ -19,9 +19,11 @@ import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
 import { blue, red, teal, amber, grey } from '@mui/material/colors';
 import AblNavigationComponent from './components/AblNavigationComponent';
+import { setAblMessagesAction } from '../redux/game/actions';
 
 const Game = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
@@ -38,6 +40,7 @@ const Game = () => {
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
     const [message, setMessage] = React.useState(selector.game.message);
     const [messages, setMessages] = React.useState(selector.game.messages);
+    const [ablMessages, setAblMessages] = React.useState(selector.game.ablMessages);
 
     const transitionStyles = {
         entering: { opacity: 1, transition: 'all 1s ease' },
@@ -53,13 +56,14 @@ const Game = () => {
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
+        setAblMessages(selector.game.ablMessages);
         setTargetCard(selector.game.targetCard);
         setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
     }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
-        selector.game.message, selector.game.messages, selector.game.targetCard, selector.game.auctionCards,
+        selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.targetCard, selector.game.auctionCards,
         selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     React.useEffect(() => {
@@ -68,6 +72,28 @@ const Game = () => {
             setFade(true);
         }
     }, [selector.game.phase]);
+
+    // アビリティメッセージ表示時間管理
+    React.useEffect(() => {
+        let newAblMessages = [];
+        const interval = setInterval(() => {
+            for(let a of selector.game.ablMessages) {
+                if(a.time > 0) {
+                    a.time--;
+                }
+                console.log(a.message + " " + a.time);
+            }
+            newAblMessages = selector.game.ablMessages.filter((a) => a.time > 0);
+            console.log(newAblMessages);
+            setAblMessages(newAblMessages);
+            /*console.log("ablMessages:");
+            console.log(ablMessages);*/
+            dispatch(setAblMessagesAction(newAblMessages));
+            console.log("selector.ablMessages:");
+            console.log(selector.game.ablMessages);
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [ablMessages]);
 
     return (
         <Typography component="div" align="center">

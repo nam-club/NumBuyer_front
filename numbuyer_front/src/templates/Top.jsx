@@ -32,7 +32,6 @@ import logo from '../assets/logo.png';
 import title from '../assets/title.png';
 
 const Top = () => {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const {joinQuickMatch, createMatch, joinFriendMatch} = React.useContext(CTX);

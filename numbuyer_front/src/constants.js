@@ -9,6 +9,9 @@ export const T_PAGE4 = "Auction";
 export const T_PAGE5 = "Calculation";
 export const T_PAGE6 = "Use Ability";
 
+// メッセージ表示時間
+export const ABL_MSG_TIME = 10; // アビリティメッセージ表示時間
+
 // アビリティステータス
 export const UNUSED_ST = 'unused'; // 効果未使用
 export const READY_ST = 'ready'; // 効果発動準備中

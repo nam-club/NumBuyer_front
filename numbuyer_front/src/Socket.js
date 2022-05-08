@@ -5,7 +5,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
 import { setValidAction, setErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, resetAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -265,36 +265,41 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
 
-            let ablMessages = [];
+            let ablMessages = selector.game.ablMessages;
 
             for(let p of resObj.players) {
                 let abilities = [];
                 let ablDisplay = {};
                 // 発動アビリティをセット
-                for(let a of p.firedAbilities) {
-                    let ablMessage = {
-                        type: "", // 発動アビリティタイプ
-                        message: "", // 発動メッセージ
-                        effect: "", // 発動アビリティ効果メッセージ
-                    };
-                    abilities.push(setAbility(a));
-                    // アビリティメッセージをセット
-                    ablDisplay = searchAbility(a.abilityId, "const").display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE});
-                    ablMessage.type = a.type;
-                    ablMessage.message = p.playerName + selector.msg.lang.FIRED_ABILITY_MSG1 +
-                                         ablDisplay.name + selector.msg.lang.FIRED_ABILITY_MSG2;
-                    switch(ablDisplay.fired_msg.length) {
-                        case 1:
-                            ablMessage.effect = ablDisplay.fired_msg[0];
-                            break;
-                        case 2:
-                            ablMessage.effect = ablDisplay.fired_msg[0] + p.playerName + ablDisplay.fired_msg[1];
-                        default:
-                            break;
+                if(p.firedAbilities.length > 0) {
+                    for(let a of p.firedAbilities) {
+                        let ablMessage = {
+                            type: "", // 発動アビリティタイプ
+                            message: "", // 発動メッセージ
+                            effect: "", // 発動アビリティ効果メッセージ
+                            time: Constants.ABL_MSG_TIME, // メッセージ表示時間
+                        };
+                        abilities.push(setAbility(a));
+                        // アビリティメッセージをセット
+                        ablDisplay = searchAbility(a.abilityId, "const").display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE});
+                        ablMessage.type = a.type;
+                        ablMessage.message = p.playerName + selector.msg.lang.FIRED_ABILITY_MSG1 +
+                                            ablDisplay.name + selector.msg.lang.FIRED_ABILITY_MSG2;
+                        switch(ablDisplay.fired_msg.length) {
+                            case 1:
+                                ablMessage.effect = ablDisplay.fired_msg[0];
+                                break;
+                            case 2:
+                                ablMessage.effect = ablDisplay.fired_msg[0] + p.playerName + ablDisplay.fired_msg[1];
+                            default:
+                                break;
+                        }
+                        ablMessages.push(ablMessage);
                     }
-                    ablMessages.push(ablMessage);
+                    p.firedAbilities = abilities;
+                }else {
+                    p.firedAbilities.length = 0;
                 }
-                p.firedAbilities = abilities;   
             }
 
             // プレイヤー情報をstoreにセット
@@ -302,11 +307,6 @@ export default function Socket(props) {
             console.log("アビリティメッセージをセット");
             // アビリティメッセージをstoreにセット
             dispatch(setAblMessagesAction(ablMessages));
-            // アビリティメッセージをリセット
-            /*setTimeout(() => {
-                console.log("アビリティメッセージをリセット");
-                dispatch(resetAblMessagesAction());
-            }, 10000);*/
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
@@ -398,6 +398,7 @@ export default function Socket(props) {
             if(resObj.actionResult === Constants.CORRECT) {
                 // 正解アニメーション
                 dispatch(setCalcResultAction(Constants.SUCCESS));
+                console.log(selector.game.calcResult);
                 // 正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG1));
                 // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
@@ -405,11 +406,13 @@ export default function Socket(props) {
             }else if(resObj.actionResult === Constants.INCORRECT) {
                 // 不正解アニメーション
                 dispatch(setCalcResultAction(Constants.FAILED));
+                console.log(selector.game.calcResult);
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
             }else if(resObj.actionResult === Constants.INC_PASS) {
                 // 不正解アニメーション
                 dispatch(setCalcResultAction(Constants.FAILED));
+                console.log(selector.game.calcResult);
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
                 // ボタンを押せないようにする
@@ -424,7 +427,7 @@ export default function Socket(props) {
                 await setTimeout(() => {
                     dispatch(setCalcResultAction(Constants.NONE));
                 }, 1500);
-
+                console.log(selector.game.calcResult);
                 // 画面表示用に掛け算と割り算を変換
                 changeCode(resObj.cards, 'display');
 
@@ -451,11 +454,6 @@ export default function Socket(props) {
                         default:
                             break;
                     }
-                    // アビリティメッセージをリセット
-                    /*setTimeout(() => {
-                        console.log("アビリティメッセージをリセット");
-                        dispatch(resetAblMessagesAction());
-                    }, 10000);*/
                 }  
             }else {
                 updateAbility(resObj);
