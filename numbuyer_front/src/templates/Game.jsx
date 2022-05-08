@@ -159,15 +159,18 @@ const Game = () => {
                                 }
                             </Grid>
                             <Grid item xs={10}>
-                                <Grid container>
-                                    <Grid item xs={8}>
-                                        <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                {(player.abilities[0].trigger === Constants.ACT_TRG) || (player.abilities[1].trigger === Constants.ACT_TRG) ?
+                                    <Grid container>
+                                        <Grid item xs={8}>
+                                            <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <UseAbilityComponent/>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={4}>
-                                        <UseAbilityComponent/>
-                                    </Grid>
-                                </Grid>
-                                
+                                :
+                                    <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                }
                             </Grid>
                         </Grid>
                         <CalcComponent calcBtnFlg={calcBtnFlg}/>
