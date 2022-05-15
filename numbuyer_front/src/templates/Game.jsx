@@ -75,22 +75,13 @@ const Game = () => {
 
     // アビリティメッセージ表示時間管理
     React.useEffect(() => {
-        let newAblMessages = [];
         const interval = setInterval(() => {
-            for(let a of selector.game.ablMessages) {
+            for(let a of ablMessages) {
                 if(a.time > 0) {
                     a.time--;
                 }
                 console.log(a.message + " " + a.time);
             }
-            newAblMessages = selector.game.ablMessages.filter((a) => a.time > 0);
-            console.log(newAblMessages);
-            setAblMessages(newAblMessages);
-            /*console.log("ablMessages:");
-            console.log(ablMessages);*/
-            dispatch(setAblMessagesAction(newAblMessages));
-            console.log("selector.ablMessages:");
-            console.log(selector.game.ablMessages);
         }, 1000);
         return () => clearInterval(interval);
     }, [ablMessages]);
@@ -122,7 +113,7 @@ const Game = () => {
                             <AblNavigationComponent background={amber[500]} color={grey[50]} 
                             message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                         }
-                        {selector.game.ablMessages.length > 0 && selector.game.ablMessages.map((am,index) => (
+                        {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am,index) => (
                             <div key={index}>
                                 {am.type === Constants.BST_TP ?
                                     <AblNavigationComponent background={blue[300]} color={grey[50]} message={am.message} effect={am.effect} />

@@ -306,7 +306,7 @@ export default function Socket(props) {
             dispatch(setPlayersAction(resObj.players));
             console.log("アビリティメッセージをセット");
             // アビリティメッセージをstoreにセット
-            dispatch(setAblMessagesAction(ablMessages));
+            dispatch(setAblMessagesAction(ablMessages.filter((a) => a.time > 0)));
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
