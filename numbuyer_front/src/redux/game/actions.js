@@ -53,6 +53,7 @@ export const resetMessagesAction = () => {
 export const SET_ABL_MESSAGES = "SET_ABL_MESSAGES";
 
 export const setAblMessagesAction = (ablMessagesState) => {
+    console.log(ablMessagesState);
     return {
         type: "SET_ABL_MESSAGES",
         payload: {

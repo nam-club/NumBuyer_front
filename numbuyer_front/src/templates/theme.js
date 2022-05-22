@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
-import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, lightGreen, red } from '@mui/material/colors';
+import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';

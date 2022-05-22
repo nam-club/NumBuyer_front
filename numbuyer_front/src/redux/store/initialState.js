@@ -22,6 +22,8 @@ const initialState = {
         lang: ConstantsMsg.English, // 言語
         validFlg: false, // バリデーションフラグ
         errMsg: "", // エラーメッセージ
+        errMsgVars: [], // 言語変更時エラーメッセージ変数保持配列
+        ablErrMsg: "", // アビリティ用エラーメッセージ
         tPage: Constants.T_PAGE1, // チュートリアル表示ページ 
     },
     game: {

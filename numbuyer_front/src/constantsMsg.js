@@ -82,6 +82,7 @@ export const English = {
     BID_ERR: "Please enter an amount higher than the highest bid.", // 最高入札額以下の金額が入力されている
     LACK_ERR: "You don't have enough money.", // 所持金が足りない
     DOUBLE_ERR: "You cannot bid twice in a row.", // ２回連続入札
+    BAD_TIMING_ABILITY_AUC_ERR: "This ability cannot be used during the auction phase.", // オークションフェーズに発動できないアビリティ
 
     // ナビゲーションメッセージ
     QUICK_MSG: 'The game will start automatically when all four players are together.',
@@ -203,10 +204,11 @@ export const Japanese = {
     NUM_ERR: '数字を入力してください。', // 数字以外が入力されている
     BID_ERR: '最高入札額より高い金額を入力してください。', // 最高入札額以下の金額が入力されている
     LACK_ERR: "所持金が足りません。", // 所持金が足りない
-    DOUBLE_ERR: "2回続けて入札はできません。", // ２回連続入札
+    DOUBLE_ERR: "２回続けて入札はできません。", // ２回連続入札
+    BAD_TIMING_ABILITY_AUC_ERR: "このアビリティはオークションフェーズに使用できません。", // オークションフェーズに発動できないアビリティ
 
     // ナビゲーションメッセージ
-    QUICK_MSG: '4人揃うと自動でゲームが始まります。',
+    QUICK_MSG: '４人揃うと自動でゲームが始まります。',
     GIVE_CARD_MSG: 'カードを配布しています…',
     SHOW_TAR_MSG1: '目標カードは ',
     SHOW_TAR_MSG2: ' です。',
@@ -227,13 +229,13 @@ export const Japanese = {
     CALC_ERR_MSG1: '手札からカードを選択してください!',
     CALC_ERR_MSG2: '符号が末尾に置かれています!',
     CALC_RESULT_MSG0: '不正解です…! 再び解答するかパスをしてください。',
-    CALC_RESULT_MSG1: '正解!! カードが1枚付与されます! 他のプレイヤーが解答するのを待っています…',
+    CALC_RESULT_MSG1: '正解!! カードが１枚付与されます! 他のプレイヤーが解答するのを待っています…',
     CALC_FINISH_MSG0: '正解者は誰もいませんでした…',
     CALC_FINISH_MSG1: '正解者は ',
     CALC_FINISH_MSG2: ' です! ',
     CALC_FINISH_MSG3_1: 'に',
     CALC_FINISH_MSG3_2: 'コイン(カード枚数ボーナス: +',
-    CALC_FINISH_MSG3_3: 'コイン）とカードが1枚配られました! ',
+    CALC_FINISH_MSG3_3: 'コイン）とカードが１枚配られました! ',
     PASS_TITLE: '本当にパスしますか？',
     PASS_MSG: 'パスする場合は「はい」を押してください。',
     ABILITY_TITLE: "本当に使用しますか？",
@@ -327,6 +329,7 @@ export const Chinese = {
     BID_ERR: '请输入高于最高出价的金额。', // 最高入札額以下の金額が入力されている
     LACK_ERR: "你没有足够的钱。", // 所持金が足りない
     DOUBLE_ERR: "您不能连续出价两次。", // ２回連続入札
+    BAD_TIMING_ABILITY_AUC_ERR: "此能力不能在拍卖阶段使用。", // オークションフェーズに発動できないアビリティ
 
     // ナビゲーションメッセージ
     QUICK_MSG: '当所有四个玩家在一起时, 游戏将自动开始。',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useStyles, MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
+import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import * as Constants from '../constants';
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setPlayerNameAction } from '../redux/players/actions'
 import { setRoomAction, setQuickAction } from '../redux/room/actions';
-import { setLangAction, setValidAction, setErrMsgAction } from '../redux/msg/actions';
+import { setLangAction, setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../redux/msg/actions';
 
 import TutorialComponent from './components/TutorialComponent';
 import NavigationComponent from './components/NavigationComponent';
@@ -26,7 +26,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Grid from '@mui/material/Grid';
-import { grey, yellow, amber, blue, lightBlue, deepPurple, indigo, teal, lightGreen, red } from '@mui/material/colors';
+import { grey, amber, blue, teal, red } from '@mui/material/colors';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
@@ -38,6 +38,7 @@ const Top = () => {
 
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
+    const [errMsg, setErrMsg] = React.useState('');
     const [tutorialOpen, setTutorialOpen] = React.useState(false); // チュートリアルのモーダル
     const [abilityOpen, setAbilityOpen] = React.useState(false); // アビリティ選択のモーダル
     const [friendOpen, setFriendOpen] = React.useState(false); // フレンドマッチのモーダル
@@ -58,6 +59,10 @@ const Top = () => {
     };
     const forceUpdate = useForceUpdate();
 
+    React.useEffect(() => {
+        setErrMsg(selector.msg.errMsg);
+    }, [selector.msg.errMsg]);
+
     // チュートリアルを開く or 閉じる
     const handleTutorialOpen = () => {
         setTutorialOpen(!tutorialOpen);
@@ -76,8 +81,18 @@ const Top = () => {
             dispatch(setValidAction({validFlg: true}));
             if(name !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.SYMBOL_ERR,
+                    ConstantsMsg.Japanese.SYMBOL_ERR,
+                    ConstantsMsg.Chinese.SYMBOL_ERR
+                ]));
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NULL_NAME_ERR,
+                    ConstantsMsg.Japanese.NULL_NAME_ERR,
+                    ConstantsMsg.Chinese.NULL_NAME_ERR
+                ]));
             }
         }
     };
@@ -100,6 +115,11 @@ const Top = () => {
         }else {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.ABILITY_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.ABILITY_ERR,
+                ConstantsMsg.Japanese.ABILITY_ERR,
+                ConstantsMsg.Chinese.ABILITY_ERR
+            ]));
         }
     };
 
@@ -119,8 +139,18 @@ const Top = () => {
             dispatch(setValidAction({validFlg: true}));
             if(e.target.value !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.SYMBOL_ERR,
+                    ConstantsMsg.Japanese.SYMBOL_ERR,
+                    ConstantsMsg.Chinese.SYMBOL_ERR
+                ]));
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NULL_NAME_ERR,
+                    ConstantsMsg.Japanese.NULL_NAME_ERR,
+                    ConstantsMsg.Chinese.NULL_NAME_ERR
+                ]));
             }
         }
     }
@@ -136,8 +166,18 @@ const Top = () => {
             dispatch(setValidAction({validFlg: true}));
             if(e.target.value !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NUM_ERR,
+                    ConstantsMsg.Japanese.NUM_ERR,
+                    ConstantsMsg.Chinese.NUM_ERR
+                ]));
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_ROOM_ID_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NULL_ROOM_ID_ERR,
+                    ConstantsMsg.Japanese.NULL_ROOM_ID_ERR,
+                    ConstantsMsg.Chinese.NULL_ROOM_ID_ERR
+                ]));
             }
         }
     }
@@ -153,8 +193,18 @@ const Top = () => {
             dispatch(setValidAction({validFlg: true}));
             if(name !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.SYMBOL_ERR,
+                    ConstantsMsg.Japanese.SYMBOL_ERR,
+                    ConstantsMsg.Chinese.SYMBOL_ERR
+                ]));
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NULL_NAME_ERR,
+                    ConstantsMsg.Japanese.NULL_NAME_ERR,
+                    ConstantsMsg.Chinese.NULL_NAME_ERR
+                ]));
             }
         }
     }
@@ -165,14 +215,29 @@ const Top = () => {
         if(roomId === '') {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_ROOM_ID_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.NULL_ROOM_ID_ERR,
+                ConstantsMsg.Japanese.NULL_ROOM_ID_ERR,
+                ConstantsMsg.Chinese.NULL_ROOM_ID_ERR
+            ]));
         // ルームIDが数字以外
         }else if(!roomId.match(Constants.BID_EXP)) {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.NUM_ERR,
+                ConstantsMsg.Japanese.NUM_ERR,
+                ConstantsMsg.Chinese.NUM_ERR
+            ]));
         // ルームIDが10文字以外
         }else if(roomId.length !== 10) {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.LENGTH_ROOM_ID_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.LENGTH_ROOM_ID_ERR,
+                ConstantsMsg.Japanese.LENGTH_ROOM_ID_ERR,
+                ConstantsMsg.Chinese.LENGTH_ROOM_ID_ERR
+            ]));
         }else {
             dispatch(setValidAction({validFlg: false}));
             dispatch(setRoomAction({roomId: roomId}));
@@ -191,14 +256,17 @@ const Top = () => {
                         <ButtonGroup variant="text" aria-label="text button group">
                             <LangButton onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.English));
+                                setErrMsg(selector.msg.errMsgVars[0]);
                                 forceUpdate();
                             }}>{selector.msg.lang.LANG_EN}</LangButton>
                             <LangButton onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.Japanese));
+                                setErrMsg(selector.msg.errMsgVars[1]);
                                 forceUpdate();
                             }}>{selector.msg.lang.LANG_JP}</LangButton>
                             <LangButton onClick={() => {
                                 dispatch(setLangAction(ConstantsMsg.Chinese));
+                                setErrMsg(selector.msg.errMsgVars[2]);
                                 forceUpdate();
                             }}>{selector.msg.lang.LANG_CN}</LangButton>
                         </ButtonGroup>
@@ -232,7 +300,7 @@ const Top = () => {
                         InputLabelProps={{ style: {fontSize: '3em'} }}
                         onChange={doChange}/>
                         {selector.msg.validFlg &&
-                            <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
+                            <ErrorMessage>{errMsg}</ErrorMessage>
                         }
                     </CardContent>
                     <CardActions>
@@ -256,7 +324,7 @@ const Top = () => {
                             <FriendMenu>
                                 <Typography component="div" align="center">
                                     {selector.msg.validFlg &&
-                                        <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
+                                        <ErrorMessage>{errMsg}</ErrorMessage>
                                     }
                                     <CreateButton size="large" variant="contained"
                                     onClick={() => {
@@ -317,7 +385,7 @@ const Top = () => {
                                         <Grid item xs={1} />
                                     </Grid>
                                     {selector.msg.validFlg &&
-                                        <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
+                                        <ErrorMessage>{errMsg}</ErrorMessage>
                                      }
                                     <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
                                         {selector.msg.lang.CONFIRM_BTN}

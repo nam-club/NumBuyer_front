@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
      setRankingAction, setResAbilityAction} from './redux/players/actions';
-import { setValidAction, setErrMsgAction } from './redux/msg/actions';
+import { setValidAction, setErrMsgAction, setErrMsgVarsAction, setAblErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
   setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
@@ -11,6 +11,7 @@ import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetA
 
 import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
+import * as ConstantsMsg from './constantsMsg';
 import { setRoomAction } from './redux/room/actions';
 export const CTX = React.createContext();
 
@@ -93,12 +94,15 @@ export default function Socket(props) {
 
             // レスポンスエラー
             if(resObj.code) {
-                // バリデーションエラー
-                if(resObj.code === Constants.VALID_ERR) {
-                    if(resObj.message === Constants.JOIN_ERR) {
-                        dispatch(setValidAction({validFlg: true}));
-                        dispatch(setErrMsgAction({errMsg: selector.msg.lang.NOT_EXIST_ROOM_ERR}));
-                    }
+                // 存在しないルームコード
+                if(resObj.code === Constants.NO_ROOM_ERR) {
+                    dispatch(setValidAction({validFlg: true}));
+                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.NOT_EXIST_ROOM_ERR}));
+                    dispatch(setErrMsgVarsAction([
+                        ConstantsMsg.English.NOT_EXIST_ROOM_ERR,
+                        ConstantsMsg.Japanese.NOT_EXIST_ROOM_ERR,
+                        ConstantsMsg.Chinese.NOT_EXIST_ROOM_ERR
+                    ]));
                 }
             }else {
                 // プレイヤーIDをセット
@@ -291,6 +295,7 @@ export default function Socket(props) {
                                 break;
                             case 2:
                                 ablMessage.effect = ablDisplay.fired_msg[0] + p.playerName + ablDisplay.fired_msg[1];
+                                break;
                             default:
                                 break;
                         }
@@ -307,6 +312,8 @@ export default function Socket(props) {
             console.log("アビリティメッセージをセット");
             // アビリティメッセージをstoreにセット
             dispatch(setAblMessagesAction(ablMessages.filter((a) => a.time > 0)));
+            // アビリティエラーメッセージをリセット
+            dispatch(setAblErrMsgAction(""));
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
@@ -444,17 +451,9 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
             // エラーがある時
             if(resObj.code) {
-                // バリデーションエラー
-                if(resObj.code === Constants.VALID_ERR) {
-                    let errMessage = "";
-                    switch(resObj.abilityId) {
-                        case Constants.RCV_ABILITIES[0].abilityId:
-                            errMessage = Constants.RCV_ABILITIES[0].display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).err_msg;
-                            dispatch(setAblMessagesAction(errMessage));
-                            break;
-                        default:
-                            break;
-                    }
+                // 使用できないタイミングのエラー
+                if(resObj.code === Constants.BAD_TIMING_RELOAD_ERR) {
+                    dispatch(setAblErrMsgAction(selector.msg.lang.BAD_TIMING_ABILITY_AUC_ERR));
                 }  
             }else {
                 updateAbility(resObj);

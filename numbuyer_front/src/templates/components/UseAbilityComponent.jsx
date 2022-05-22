@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
 
-import { useStyles, AbilityArea, AreaTag, UseAbilityButton, SpeechBubble, ConfirmTitle, ConfirmMessage, PassButton, YesButton } from '../theme';
+import { AbilityArea, AreaTag, UseAbilityButton, SpeechBubble, ConfirmTitle, ConfirmMessage, PassButton, YesButton, ErrorMessage } from '../theme';
+
+import { setAblErrMsgAction } from '../../redux/msg/actions';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,6 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { teal, red, blue, yellow, grey } from '@mui/material/colors';
 
 const UseAbilityComponent = (props) => {
+    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     const {useAbility} = React.useContext(CTX); // アビリティ使用リクエストAPI
@@ -42,6 +45,7 @@ const UseAbilityComponent = (props) => {
     // アビリティ使用関数
     const useAbilityAction = () => {
         handleClose();
+        dispatch(setAblErrMsgAction(""));
         useAbility({
             roomId: selector.room.roomId,
             playerId: selector.players.player.playerId,
@@ -240,6 +244,9 @@ const UseAbilityComponent = (props) => {
                         }
                     </div>
                 ))}
+                {selector.msg.ablErrMsg !== "" &&
+                    <ErrorMessage>{selector.msg.ablErrMsg}</ErrorMessage>
+                }
             </div>
         </AbilityArea>
     )

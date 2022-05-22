@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useStyles, GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import * as Constants from '../constants';
@@ -19,11 +19,9 @@ import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
 import { blue, red, teal, amber, grey } from '@mui/material/colors';
 import AblNavigationComponent from './components/AblNavigationComponent';
-import { setAblMessagesAction } from '../redux/game/actions';
 
 const Game = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
@@ -51,7 +49,6 @@ const Game = () => {
 
     React.useEffect(() => {
         setPlayer(selector.players.player);
-        console.log(player);
         setRoomId(selector.room.roomId);
         setMyPlayer(selector.players.players.find((my) => { return my.playerId === player.playerId }));
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));

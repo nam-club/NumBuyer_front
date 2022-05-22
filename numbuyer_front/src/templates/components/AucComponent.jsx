@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
+import * as ConstantsMsg from '../../constantsMsg';
 
 import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
          AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
-import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
+import { setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../../redux/msg/actions';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -53,9 +54,19 @@ const AucComponent = (props) => {
             // 数字以外が入力
             if(e.target.value !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NUM_ERR,
+                    ConstantsMsg.Japanese.NUM_ERR,
+                    ConstantsMsg.Chinese.NUM_ERR
+                ]));
             // 金額が未入力
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NULL_BID_ERR,
+                    ConstantsMsg.Japanese.NULL_BID_ERR,
+                    ConstantsMsg.Chinese.NULL_BID_ERR
+                ]));
             }
         }
     }
@@ -74,10 +85,20 @@ const AucComponent = (props) => {
         if(fee === '') {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.NULL_BID_ERR,
+                ConstantsMsg.Japanese.NULL_BID_ERR,
+                ConstantsMsg.Chinese.NULL_BID_ERR
+            ]));
         // 数字以外が入力
         }else if(!fee.match(Constants.BID_EXP)) {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.NUM_ERR,
+                ConstantsMsg.Japanese.NUM_ERR,
+                ConstantsMsg.Chinese.NUM_ERR
+            ]));
         }else if(fee.match(Constants.BID_EXP)) {
             // 2回連続入札していないか
             if((selector.game.highestName !== selector.players.player.playerName) || (selector.game.highestName === '')) {
@@ -93,16 +114,31 @@ const AucComponent = (props) => {
                     }else {
                         dispatch(setValidAction({validFlg: true}));
                         dispatch(setErrMsgAction({errMsg: selector.msg.lang.BID_ERR}));
+                        dispatch(setErrMsgVarsAction([
+                            ConstantsMsg.English.NULL_BID_ERR,
+                            ConstantsMsg.Japanese.NULL_BID_ERR,
+                            ConstantsMsg.Chinese.NULL_BID_ERR
+                        ]));
                     }
                 // 所持金が足りない
                 }else {
                     dispatch(setValidAction({validFlg: true}));
                     dispatch(setErrMsgAction({errMsg: selector.msg.lang.LACK_ERR}));
+                    dispatch(setErrMsgVarsAction([
+                        ConstantsMsg.English.LACK_ERR,
+                        ConstantsMsg.Japanese.LACK_ERR,
+                        ConstantsMsg.Chinese.LACK_ERR
+                    ]));
                 }
             // 2回連続入札
             }else {
                 dispatch(setValidAction({validFlg: true}));
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.DOUBLE_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.DOUBLE_ERR,
+                    ConstantsMsg.Japanese.DOUBLE_ERR,
+                    ConstantsMsg.Chinese.DOUBLE_ERR
+                ]));
             }
         }
     }

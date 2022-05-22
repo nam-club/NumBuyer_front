@@ -17,6 +17,16 @@ export const getErrMsg = createSelector(
     state => state.errMsg
 )
 
+export const getErrMsgVars = createSelector(
+    [msgSelector],
+    state => state.errMsgVars
+)
+
+export const getAblErrMsg = createSelector(
+    [msgSelector],
+    state => state.ablErrMsg
+)
+
 export const getTPage = createSelector(
     [msgSelector],
     state => state.tPage
