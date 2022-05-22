@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts start",
-    "netlify_build": "REACT_APP_SOCKET_URL='https://52.199.238.198:443' react-scripts build",
+    "netlify_build": "REACT_APP_SOCKET_URL='https://52.193.50.238:443' react-scripts build",
     "build": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts build",
     "test": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts test",
     "eject": "REACT_APP_SOCKET_URL='http://localhost:8000/' react-scripts eject"
