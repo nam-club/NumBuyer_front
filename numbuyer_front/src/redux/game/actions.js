@@ -161,7 +161,6 @@ export const setHighestAction = (highestState) => {
 export const SET_AUC_RESULT = "SET_AUC_RESULT";
 
 export const setAucResultAction = (aucResultState) => {
-    console.log(aucResultState);
     return {
         type: "SET_AUC_RESULT",
         payload: {

@@ -823,7 +823,6 @@ export const useStyles = makeStyles((theme) => ({
     padding: '5% 10%',
     zIndex: 100,
     fontSize: '4em',
-    color: grey[100],
     opacity: 0,
     'white-space': 'nowrap',
     'animation-name': '$slide',

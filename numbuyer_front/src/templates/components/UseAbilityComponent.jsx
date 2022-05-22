@@ -202,7 +202,7 @@ const UseAbilityComponent = (props) => {
                                                                         </SpeechBubble>}
                                                                     placement="bottom">
                                                                         <UseAbilityButton size="large" variant="contained"
-                                                                         sx={{ background: grey[700],　'&:hover': {background: grey[600]} }}
+                                                                         sx={{ background: grey[700], '&:hover': {background: grey[600]} }}
                                                                          onClick={() => {handleClickOpen(value)}}>
                                                                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                                             {value.remaining}{value.max}

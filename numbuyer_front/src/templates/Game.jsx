@@ -51,6 +51,7 @@ const Game = () => {
 
     React.useEffect(() => {
         setPlayer(selector.players.player);
+        console.log(player);
         setRoomId(selector.room.roomId);
         setMyPlayer(selector.players.players.find((my) => { return my.playerId === player.playerId }));
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
@@ -91,17 +92,17 @@ const Game = () => {
             <GlobalStyle />
             <GameBack>
                 {selector.game.aucResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: amber['A100']}} >
+                    <Card className={classes.result_animation} sx={{background: amber['A100'], color: grey[700]}} >
                         {selector.msg.lang.SUCCESS_BID}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: teal['A100']}} >
+                    <Card className={classes.result_animation} sx={{background: teal['A100'], color: grey[700]}} >
                         {selector.msg.lang.SUCCESS}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.FAILED &&
-                    <Card className={classes.result_animation} sx={{background: red['A100']}}>
+                    <Card className={classes.result_animation} sx={{background: red['A100'], color: grey[700]}}>
                         {selector.msg.lang.FAILED}
                     </Card>
                 }
@@ -132,7 +133,7 @@ const Game = () => {
                                             :
                                             <div>
                                                 {am.type === Constants.CNF_TP ?
-                                                    <AblNavigationComponent background={grey[300]} color={grey[50]} message={am.message} effect={am.effect} />
+                                                    <AblNavigationComponent background={grey[700]} color={grey[50]} message={am.message} effect={am.effect} />
                                                 :
                                                     <AblNavigationComponent background={grey[100]} color={grey[700]} message={am.message} effect={am.effect} />
                                                 }

@@ -439,6 +439,7 @@ export default function Socket(props) {
         });
 
         socket.on('game/ready_ability', function(msg) {
+            console.log("game/ready_ability:");
             console.log(msg);
             resObj = JSON.parse(msg);
             // エラーがある時

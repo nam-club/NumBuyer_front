@@ -30,18 +30,6 @@ const PlayerInfoComponent = (props) => {
         }
     }, [props.players]);
 
-    React.useEffect(() => {
-        // 発動アビリティが1つの時に片方をグレーにする
-        if(props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length === 1) {
-            let greyAbilities = myAbilities.filter((d) => {return d.abilityId !== props.myPlayer.firedAbilities[0].abilityId});
-            for(let g of greyAbilities) {
-                g.type = Constants.NON_TP;
-                props.myPlayer.firedAbilities.push(g);
-            }
-            console.log(props.myPlayer.firedAbilities);
-        }
-    }, [props.myPlayer]);
-
     return (
         <Typography>
             {props.myPlayer &&
