@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
-import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, lightGreen, red } from '@mui/material/colors';
+import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
@@ -59,8 +59,7 @@ export const MenuModal = styled(Modal)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginLeft: '5%',
-  marginRight: '5%',
+  margin: '5%',
   overflow: 'scroll',
 });
 
@@ -124,7 +123,6 @@ export const TutorialImage = styled('img')({
 
 // チュートリアルの強調部分の説明
 export const EmphasisMessage = styled(Typography)({
-  fontSize: '1.2em',
   marginTop: '2%',
 });
 
@@ -365,14 +363,12 @@ export const MessageBox = styled(Card)({
 // メッセージ本体
 export const NaviMessage = styled('p')({
   fontSize: '1.5em',
-  color: grey[50],
   margin: 0,
 });
 
 // メッセージ本体（複数行））
 export const NaviMessages = styled('p')({
   fontSize: '1.2em',
-  color: grey[50],
   margin: 0,
 });
 
@@ -380,8 +376,6 @@ export const NaviMessages = styled('p')({
 export const TargetCard = styled(Card)({
   background: teal['A100'],
   color: grey[700],
-  marginLeft: 50,
-  marginRight: 10,
   'white-space': 'nowrap',
 });
 
@@ -405,18 +399,13 @@ export const AuctionArea = styled('div')({
 });
 
 // オークションカード
-export const AuctionCard = styled(Button)({
+export const AuctionCard = styled(Card)({
   background: lightBlue[200],
   color: grey[700],
   marginLeft: '3%',
   width: '5vw',
   height: '10vh',
-  cursor: 'default',
-  boxShadow: 'none',
-  '&:hover': {
-    background: lightBlue[200],
-    boxShadow: 'none',
-  },
+  'white-space': 'nowrap',
 });
 
 // 入札金額を入力してくださいメッセージ
@@ -428,7 +417,7 @@ export const BidMessage = styled('p')({
 // 入札金額入力ボックス
 export const CoinField = styled(TextField)({
   color: grey[600],
-  width: '20%',
+  width: '25%',
   margin: 0,
 });
 
@@ -459,11 +448,12 @@ export const BidButton = styled(Button)({
   },
 });
 
-// 最高入札額メッセージ
-export const HighBidMessage = styled('p')({
-  margin:0,
-  color: amber[500],
-  fontSize: '1.5em',
+// アビリティエリア
+export const AbilityArea = styled(Card)({
+  background: grey[50],
+  color: grey[700],
+  marginLeft: '2%',
+  padding: '5%',
 });
 
 // エリアタグ
@@ -471,6 +461,13 @@ export const AreaTag = styled('p')({
   color: grey[700],
   marginLeft: '2%',
   fontSize: '1.2em',
+});
+
+// アビリティボタン（ゲーム中）
+export const UseAbilityButton = styled(Button) ({
+  width: '75%',
+  margin: '2%',
+  'white-space': 'nowrap',
 });
 
 // 項カード
@@ -489,10 +486,6 @@ export const TermCard = styled(Button)({
 // 計算エリア
 export const CalcArea = styled(Card)({
   background: grey[50],
-  marginTop: 5,
-  marginLeft: -250,
-  position: 'relative',
-  top: 50,
 });
 
 // 折り返し表示用
@@ -630,6 +623,11 @@ export const PlayerInfoIcon = styled('img')({
   width: '8%',
 });
 
+// アビリティ情報（プレイヤー一覧）
+export const AbilityInfoCard = styled(Card) ({
+  'white-space': 'nowrap',
+});
+
 // ゲーム終了のモーダル
 export const FinishModal = styled(Modal)({
   display: 'flex',
@@ -738,12 +736,65 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
+  // アビリティボタン（速攻）
+  bst_ability: {
+    background: blue[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: blue[200],
+    },
+  },
+
+  // アビリティボタン（攻撃）
+  atk_ability: {
+    background: red[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: red[200],
+    },
+  },
+
+  // アビリティボタン（回復）
+  rcv_ability: {
+    background: teal[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: teal[200],
+    },
+  },
+
+  // アビリティボタン（妨害）
+  jam_ability: {
+    background: yellow[300],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: teal[200],
+    },
+  },
+
+  // アビリティボタン（混乱）
+  cnf_ability: {
+    background: grey[700],
+    width: '75%',
+    margin: '2%',
+    'white-space': 'nowrap',
+    '&:hover': {
+      background: grey[700],
+    },
+  },
+
   // 手札エリア
   hand: {
     background: grey[200],
-    marginLeft: -250,
-    position: 'relative',
-    top: 50,
+    marginTop:'2%',
   },
   hand_animation: {
     background: grey[50],
@@ -772,7 +823,6 @@ export const useStyles = makeStyles((theme) => ({
     padding: '5% 10%',
     zIndex: 100,
     fontSize: '4em',
-    color: grey[100],
     opacity: 0,
     'white-space': 'nowrap',
     'animation-name': '$slide',
@@ -793,4 +843,5 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'translateX(-180px)',
     },
   },
+
 }));

@@ -30,3 +30,36 @@ export const setErrMsgAction = (errMsgState) => {
         }
     }
 }
+
+export const SET_ERR_MSG_VARS = "SET_ERR_MSG_VARS";
+
+export const setErrMsgVarsAction = (errMsgVarsState) => {
+    return {
+        type: "SET_ERR_MSG_VARS",
+        payload: {
+            errMsgVars: errMsgVarsState
+        }
+    }
+}
+
+export const SET_ABL_ERR_MSG = "SET_ABL_ERR_MSG";
+
+export const setAblErrMsgAction = (ablErrMsgState) => {
+    return {
+        type: "SET_ABL_ERR_MSG",
+        payload: {
+            ablErrMsg: ablErrMsgState
+        }
+    }
+}
+
+export const SET_T_PAGE = "SET_T_PAGE";
+
+export const setTPageAction = (tPageState) => {
+    return {
+        type: "SET_T_PAGE",
+        payload: {
+            tPage: tPageState
+        }
+    }
+}

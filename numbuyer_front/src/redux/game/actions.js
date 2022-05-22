@@ -34,7 +34,6 @@ export const setMessageAction = (messageState) => {
 export const SET_MESSAGES = "SET_MESSAGES";
 
 export const setMessagesAction = (messagesState) => {
-    console.log(messagesState);
     return {
         type: "SET_MESSAGES",
         payload: {
@@ -48,6 +47,26 @@ export const RESET_MESSAGES = "RESET_MESSAGES";
 export const resetMessagesAction = () => {
     return {
         type: "RESET_MESSAGES"
+    }
+}
+
+export const SET_ABL_MESSAGES = "SET_ABL_MESSAGES";
+
+export const setAblMessagesAction = (ablMessagesState) => {
+    console.log(ablMessagesState);
+    return {
+        type: "SET_ABL_MESSAGES",
+        payload: {
+            ablMessages: ablMessagesState
+        }
+    }
+}
+
+export const RESET_ABL_MESSAGES = "RESET_ABL_MESSAGES";
+
+export const resetAblMessagesAction = () => {
+    return {
+        type: "RESET_ABL_MESSAGES"
     }
 }
 
@@ -140,6 +159,17 @@ export const setHighestAction = (highestState) => {
     }
 }
 
+export const SET_AUC_RESULT = "SET_AUC_RESULT";
+
+export const setAucResultAction = (aucResultState) => {
+    return {
+        type: "SET_AUC_RESULT",
+        payload: {
+            aucResult: aucResultState,
+        }
+    }
+}
+
 export const SET_CALC_BTN = "SET_CALC_BTN";
 
 export const setCalcBtnAction = (calcBtnState) => {
@@ -184,6 +214,17 @@ export const setAnsPlayersAction = (ansPlayersState) => {
     }
 }
 
+export const SET_FIRED_ABILITIES = "SET_FIRED_ABILITIES";
+
+export const setFiredAbilitiesAction = (firedAbilitiesState) => {
+    return {
+        type: "SET_FIRED_ABILITIES",
+        payload: {
+            firedAbilities: firedAbilitiesState
+        }
+    }
+}
+
 export const SET_FINISH_GAME = "SET_FINISH_GAME";
 
 export const setFinishGameAction = (finishGameState) => {
@@ -213,6 +254,17 @@ export const setTargetSkipAction = (targetSkipState) => {
         type: "SET_TARGET_SKIP",
         payload: {
             targetSkipFlg: targetSkipState
+        }
+    }
+}
+
+export const SET_HANDS_UPDATE = "SET_HANDS_UPDATE";
+
+export const setHandsUpdateAction = (handsUpdateState) => {
+    return {
+        type: "SET_HANDS_UPDATE",
+        payload: {
+            handsUpdateFlg: handsUpdateState
         }
     }
 }

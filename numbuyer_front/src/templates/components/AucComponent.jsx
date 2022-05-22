@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import * as Constants from '../../constants';
+import * as ConstantsMsg from '../../constantsMsg';
 
-import { useStyles, AuctionCard, CardTag, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
-         AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, HighBidMessage, ErrorMessage } from '../theme';
+import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
+         AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, ErrorMessage } from '../theme';
 import { setAucBtnAction } from '../../redux/game/actions';
-import { setValidAction, setErrMsgAction } from '../../redux/msg/actions';
+import { setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../../redux/msg/actions';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -54,9 +54,19 @@ const AucComponent = (props) => {
             // 数字以外が入力
             if(e.target.value !== '') {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NUM_ERR,
+                    ConstantsMsg.Japanese.NUM_ERR,
+                    ConstantsMsg.Chinese.NUM_ERR
+                ]));
             // 金額が未入力
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.NULL_BID_ERR,
+                    ConstantsMsg.Japanese.NULL_BID_ERR,
+                    ConstantsMsg.Chinese.NULL_BID_ERR
+                ]));
             }
         }
     }
@@ -75,10 +85,20 @@ const AucComponent = (props) => {
         if(fee === '') {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_BID_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.NULL_BID_ERR,
+                ConstantsMsg.Japanese.NULL_BID_ERR,
+                ConstantsMsg.Chinese.NULL_BID_ERR
+            ]));
         // 数字以外が入力
         }else if(!fee.match(Constants.BID_EXP)) {
             dispatch(setValidAction({validFlg: true}));
             dispatch(setErrMsgAction({errMsg: selector.msg.lang.NUM_ERR}));
+            dispatch(setErrMsgVarsAction([
+                ConstantsMsg.English.NUM_ERR,
+                ConstantsMsg.Japanese.NUM_ERR,
+                ConstantsMsg.Chinese.NUM_ERR
+            ]));
         }else if(fee.match(Constants.BID_EXP)) {
             // 2回連続入札していないか
             if((selector.game.highestName !== selector.players.player.playerName) || (selector.game.highestName === '')) {
@@ -94,16 +114,31 @@ const AucComponent = (props) => {
                     }else {
                         dispatch(setValidAction({validFlg: true}));
                         dispatch(setErrMsgAction({errMsg: selector.msg.lang.BID_ERR}));
+                        dispatch(setErrMsgVarsAction([
+                            ConstantsMsg.English.NULL_BID_ERR,
+                            ConstantsMsg.Japanese.NULL_BID_ERR,
+                            ConstantsMsg.Chinese.NULL_BID_ERR
+                        ]));
                     }
                 // 所持金が足りない
                 }else {
                     dispatch(setValidAction({validFlg: true}));
                     dispatch(setErrMsgAction({errMsg: selector.msg.lang.LACK_ERR}));
+                    dispatch(setErrMsgVarsAction([
+                        ConstantsMsg.English.LACK_ERR,
+                        ConstantsMsg.Japanese.LACK_ERR,
+                        ConstantsMsg.Chinese.LACK_ERR
+                    ]));
                 }
             // 2回連続入札
             }else {
                 dispatch(setValidAction({validFlg: true}));
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.DOUBLE_ERR}));
+                dispatch(setErrMsgVarsAction([
+                    ConstantsMsg.English.DOUBLE_ERR,
+                    ConstantsMsg.Japanese.DOUBLE_ERR,
+                    ConstantsMsg.Chinese.DOUBLE_ERR
+                ]));
             }
         }
     }
@@ -128,9 +163,10 @@ const AucComponent = (props) => {
     };
 
     return (
-        <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}>
+        <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
+        sx={{marginLeft: "1%"}}>
             <Grid container>
-                <Grid item xs={5}>
+                <Grid item xs={6}>
                     <AreaTag align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.AUCTION}</AreaTag>
                     {(props.auctionCards.length !== 0 && 
                         !((selector.game.phase === Constants.READY_PH)
@@ -153,7 +189,7 @@ const AucComponent = (props) => {
                         <div>
                             <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
                             <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
-                            id="standard-basic" value={fee} 
+                            id="standard-basic" value={fee} size="small"
                             onChange={doChange} />
                             <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
                             <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
@@ -182,11 +218,6 @@ const AucComponent = (props) => {
                     </Dialog>
                     <BidButton size="large" variant="contained"
                     onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</BidButton>
-                    {(selector.game.highestBid !== 0 && selector.game.phase === Constants.AUCTION_PH ) &&
-                        <HighBidMessage>
-                            {selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3}
-                        </HighBidMessage>
-                    }
                 </Grid>
             </Grid>
         </Card>

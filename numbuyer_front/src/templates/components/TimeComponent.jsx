@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction, setRemainingTimeAction,
-    setSkipAction, setPassAction, setFinishGameAction, setWinPlayerAction, setCalcResultAction,
+import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction,
     setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
 
 import { arrayOutput } from '../../logics';

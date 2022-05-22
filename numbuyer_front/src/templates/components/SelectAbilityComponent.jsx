@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AbilityCard, AbilityButton, SelectedAbilityButton, AbilitySkillTag, SpeechBubble } from '../theme';
+import { AbilityCard, AbilityButton, SelectedAbilityButton, SpeechBubble } from '../theme';
 
 import { setAbilityAction } from '../../redux/players/actions';
 import { setValidAction } from '../../redux/msg/actions';
@@ -11,16 +11,16 @@ import NavigationComponent from './NavigationComponent';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 
-const AbilityComponent = (props) => {
+const SelectAbilityComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
 
     return (
         <Typography component="div" align="center">
             <AbilityCard>
-                <NavigationComponent message={props.type} messages={[]} color={props.color} bColor={props.bColor} />
+                <NavigationComponent message={props.type} messages={[]} color={props.color} background={props.background} />
                 {props.abilities.map((value) => (
-                    selector.players.player.abilities.find((a) => {return a.abilityId === value.abilityId}) 
+                    selector.players.player.abilities.find((id) => {return id === value.abilityId}) 
                     ?
                     <Tooltip key={value.abilityId} title={
                         <SpeechBubble>
@@ -41,7 +41,7 @@ const AbilityComponent = (props) => {
                         placement="bottom">
                         <AbilityButton
                             onClick={() => {
-                                dispatch(setAbilityAction(value));
+                                dispatch(setAbilityAction(value.abilityId));
                                 props.update();
                                 if(selector.players.player.abilities.length >= 2) {
                                     dispatch(setValidAction({validFlg: false}));
@@ -57,4 +57,4 @@ const AbilityComponent = (props) => {
     );
 }
 
-export default AbilityComponent;
+export default SelectAbilityComponent;

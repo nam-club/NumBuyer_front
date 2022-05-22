@@ -76,11 +76,24 @@ export const setRankingAction = (rankingState) => {
     }
 }
 
+// ロビー画面でのアビリティ選択用
 export const SET_ABILITY = "SET_ABILITY";
 
 export const setAbilityAction = (abilityState) => {
     return {
         type: "SET_ABILITY",
+        payload: {
+            abilities: abilityState
+        }
+    }
+}
+
+// back側から返ってきたアビリティ情報を入れる用
+export const SET_RES_ABILITY = "SET_RES_ABILITY";
+
+export const setResAbilityAction = (abilityState) => {
+    return {
+        type: "SET_RES_ABILITY",
         payload: {
             abilities: abilityState
         }

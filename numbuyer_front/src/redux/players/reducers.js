@@ -31,7 +31,10 @@ export const PlayersReducer = (state = initialState.players, action) => {
                 state.player.abilities[0] = state.player.abilities[1];
                 state.player.abilities[1] = action.payload.abilities;
             }
-            console.log(state.player.abilities)
+            return state;
+        case Actions.SET_RES_ABILITY:
+            state.player.abilities = action.payload.abilities;
+            console.log(state);
             return state;
         default:
             return state;

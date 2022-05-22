@@ -4,27 +4,30 @@ import * as Constants from '../../constants';
 const initialState = {
     players: {
         player: {
-            playerId: '', // 自分のプレイヤーID
-            playerName: '', // 自分のプレイヤー名
+            playerId: "", // 自分のプレイヤーID
+            playerName: "", // 自分のプレイヤー名
             cards: [], // 自分の手札
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限
-            abilities: [], // 保持アビリティ
+            abilities: [], // アビリティ配列
         },
         players: [], // プレイヤー一覧
         ranking: [], // ランキング
     },
     room: {
-        roomId: '', // ルームID
+        roomId: "", // ルームID
         isQuickMatch: false, // クイックマッチかどうか
     },
     msg: {
         lang: ConstantsMsg.English, // 言語
         validFlg: false, // バリデーションフラグ
-        errMsg: '', // エラーメッセージ
+        errMsg: "", // エラーメッセージ
+        errMsgVars: [], // 言語変更時エラーメッセージ変数保持配列
+        ablErrMsg: "", // アビリティ用エラーメッセージ
+        tPage: Constants.T_PAGE1, // チュートリアル表示ページ 
     },
     game: {
-        phase: '', // フェーズ
+        phase: "", // フェーズ
         phaseTimes: { // 各フェーズ時間
             ready: 0,
             giveCards: 0,
@@ -36,13 +39,14 @@ const initialState = {
             calculateResult: 0,
             nextTurn: 0
         },
-        message: '　', // ナビゲーション用メッセージ
+        message: "　", // ナビゲーション用メッセージ
         messages: [], // ナビゲーション用複数行メッセージ
+        ablMessages: [], // アビリティ用メッセージ配列
         time: 0, // 画面表示用タイマー
         remainingTime: 0, // オークション用残り時間
         remTimeFlg: false, // 残り時間追加フラグ
         goalCoin: 0, // 目標コイン
-        targetCard: '　', // ターゲットカード
+        targetCard: "　", // ターゲットカード
         auctionCards: [], // オークションカード配列
         ansPlayers: null, // 正解者配列と獲得コイン
         highestBid: 0, // 現在の最高入札額
@@ -51,12 +55,15 @@ const initialState = {
             total: 0, // 獲得コインの合計
             cardNumBonus: 0, // カード枚数ボーナスコイン
         },
+        aucResult: Constants.NONE, // 落札結果ステータス
         calcResult: Constants.NONE, // 計算結果ステータス
+        firedAbilities: [], // 発動アビリティ配列
         finishFlg: false, // ゲーム終了フラグ
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ
         firstTurnFlg: true, // 初回ターンフラグ
         targetSkipFlg: false, // ターゲットフェーズスキップフラグ
+        handsUpdateFlg: true, // 手札更新フラグ
     }
 };
 

@@ -22,6 +22,11 @@ export const getMessages = createSelector(
     state => state.messages
 )
 
+export const getAblMessages = createSelector(
+    [gameSelector],
+    state => state.ablMessages
+)
+
 export const getTime = createSelector(
     [gameSelector],
     state => state.time
@@ -62,6 +67,11 @@ export const getHighest = createSelector(
     state => state.highestBid
 )
 
+export const getAucResultFlg = createSelector(
+    [gameSelector],
+    state => state.aucResult
+)
+
 export const getHighestName = createSelector(
     [gameSelector],
     state => state.highestName
@@ -87,6 +97,11 @@ export const getAnsPlayers = createSelector(
     state => state.ansPlayers
 )
 
+export const getFiredAbilities = createSelector(
+    [gameSelector],
+    state => state.firedAbilities
+)
+
 export const getFinishFlg = createSelector(
     [gameSelector],
     state => state.finishFlg
@@ -100,4 +115,9 @@ export const getFirstTurnFlg = createSelector(
 export const getTargetSkipFlg = createSelector(
     [gameSelector],
     state => state.targetSkipFlg
+)
+
+export const getHandsUpdateFlg = createSelector(
+    [gameSelector],
+    state => state.handsUpdateFlg
 )

@@ -9,6 +9,7 @@ import CalcComponent from './components/CalcComponent';
 import RankingComponent from './components/RankingComponent';
 import NavigationComponent from './components/NavigationComponent';
 import PlayerInfoComponent from './components/PlayerInfoComponent';
+import UseAbilityComponent from './components/UseAbilityComponent';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
@@ -16,7 +17,8 @@ import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
-import { teal, red } from '@mui/material/colors';
+import { blue, red, teal, amber, grey } from '@mui/material/colors';
+import AblNavigationComponent from './components/AblNavigationComponent';
 
 const Game = () => {
     const classes = useStyles();
@@ -36,6 +38,7 @@ const Game = () => {
     const [finishFlg, setFinishFlg] = React.useState(selector.game.finishFlg);
     const [message, setMessage] = React.useState(selector.game.message);
     const [messages, setMessages] = React.useState(selector.game.messages);
+    const [ablMessages, setAblMessages] = React.useState(selector.game.ablMessages);
 
     const transitionStyles = {
         entering: { opacity: 1, transition: 'all 1s ease' },
@@ -51,13 +54,14 @@ const Game = () => {
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
+        setAblMessages(selector.game.ablMessages);
         setTargetCard(selector.game.targetCard);
         setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
     }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
-        selector.game.message, selector.game.messages, selector.game.targetCard, selector.game.auctionCards,
+        selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.targetCard, selector.game.auctionCards,
         selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     React.useEffect(() => {
@@ -67,24 +71,79 @@ const Game = () => {
         }
     }, [selector.game.phase]);
 
+    // アビリティメッセージ表示時間管理
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            for(let a of ablMessages) {
+                if(a.time > 0) {
+                    a.time--;
+                }
+                console.log(a.message + " " + a.time);
+            }
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [ablMessages]);
+
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
             <GameBack>
+                {selector.game.aucResult === Constants.SUCCESS &&
+                    <Card className={classes.result_animation} sx={{background: amber['A100'], color: grey[700]}} >
+                        {selector.msg.lang.SUCCESS_BID}
+                    </Card>
+                }
                 {selector.game.calcResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: teal['A100']}} >
+                    <Card className={classes.result_animation} sx={{background: teal['A100'], color: grey[700]}} >
                         {selector.msg.lang.SUCCESS}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.FAILED &&
-                    <Card className={classes.result_animation} sx={{background: red['A100']}}>
+                    <Card className={classes.result_animation} sx={{background: red['A100'], color: grey[700]}}>
                         {selector.msg.lang.FAILED}
                     </Card>
                 }
                 <Grid container>
-                    <Grid item xs={3} />
-                    <Grid item xs={6}>
-                        <NavigationComponent message={message} messages={messages} />
+                    <Grid item xs={1} />
+                    <Grid item xs={8}>
+                        <NavigationComponent color={grey[50]} message={message} messages={messages} />
+                        {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH ) &&
+                            <AblNavigationComponent background={amber[500]} color={grey[50]} 
+                            message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
+                        }
+                        {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am,index) => (
+                            <div key={index}>
+                                {am.type === Constants.BST_TP ?
+                                    <AblNavigationComponent background={blue[300]} color={grey[50]} message={am.message} effect={am.effect} />
+                                :
+                                <div>
+                                    {am.type === Constants.ATK_TP ?
+                                        <AblNavigationComponent background={red[300]} color={grey[50]} message={am.message} effect={am.effect} />
+                                    :
+                                    <div>
+                                        {am.type === Constants.RCV_TP ?
+                                            <AblNavigationComponent background={teal[300]} color={grey[50]} message={am.message} effect={am.effect} />
+                                        :
+                                        <div>
+                                            {am.type === Constants.JAM_TP ?
+                                                <AblNavigationComponent background={amber[300]} color={grey[600]} message={am.message} effect={am.effect} />
+                                            :
+                                            <div>
+                                                {am.type === Constants.CNF_TP ?
+                                                    <AblNavigationComponent background={grey[700]} color={grey[50]} message={am.message} effect={am.effect} />
+                                                :
+                                                    <AblNavigationComponent background={grey[100]} color={grey[700]} message={am.message} effect={am.effect} />
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                        }
+                                    </div>
+                                    }
+                                </div>
+                                }
+                            </div>
+                        ))}
                     </Grid>
                     <Grid item xs={3}>
                         <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
@@ -92,28 +151,43 @@ const Game = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item xs={1} />
-                    <Grid item xs={2}>
-                        {(targetCard !== '　'
-                            && (
-                                !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
-                                ||
-                                (selector.game.targetSkipFlg && 
-                                    ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                    <Grid item xs={1}/>
+                    <Grid item xs={8}>
+                        <Grid container>
+                            <Grid item xs={2}>
+                                {(targetCard !== '　'
+                                    && (
+                                        !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                        ||
+                                        (selector.game.targetSkipFlg && 
+                                            ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                        )
+                                    )
                                 )
-                            )
-                        )
-                        &&
-                            <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                                <TargetCard>
-                                    <CardTag>{selector.msg.lang.TARGET}</CardTag>
-                                    <CardValue>{targetCard}</CardValue>
-                                </TargetCard>
-                            </Slide>
-                        }
-                    </Grid>
-                    <Grid item xs={6}>
-                        <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                &&
+                                    <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
+                                        <TargetCard>
+                                            <CardTag>{selector.msg.lang.TARGET}</CardTag>
+                                            <CardValue>{targetCard}</CardValue>
+                                        </TargetCard>
+                                    </Slide>
+                                }
+                            </Grid>
+                            <Grid item xs={10}>
+                                {(player.abilities[0].trigger === Constants.ACT_TRG) || (player.abilities[1].trigger === Constants.ACT_TRG) ?
+                                    <Grid container>
+                                        <Grid item xs={8}>
+                                            <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <UseAbilityComponent/>
+                                        </Grid>
+                                    </Grid>
+                                :
+                                    <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                                }
+                            </Grid>
+                        </Grid>
                         <CalcComponent calcBtnFlg={calcBtnFlg}/>
                     </Grid>
                     <Grid item xs={3}>

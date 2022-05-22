@@ -41,6 +41,7 @@ const CalcComponent = (props) => {
     }, [selector.game.phase]);
 
     React.useEffect(() => {
+        console.log("手札が更新されてるよ");
         setHands(selector.players.player.cards);
         if(!(selector.game.phase === Constants.CALCULATE_PH)) {
             calcs.length = 0;
@@ -76,7 +77,6 @@ const CalcComponent = (props) => {
             newHands.splice(index, 1);
             setHands(newHands);
             setCalcs([...calcs, value]);
-            console.log(calcs);
         }
     }
 
@@ -127,9 +127,6 @@ const CalcComponent = (props) => {
         handleClose();
         calcs.length = 0;
         calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
-
-        // ボタン押せないようにする（パス押したらもう回答できない）
-        dispatch(setCalcBtnAction(false));
     }
 
     // ダイアログ表示
@@ -146,7 +143,7 @@ const CalcComponent = (props) => {
         <div>
             <Grid container>
                 <Grid item xs={12}>
-                    <Card className={classes.hand + ' ' + (selector.game.phase === Constants.CALCULATE_PH ? classes.hand_animation : '')}>
+                    <Card className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}>
                         <AreaTag align="left">{selector.msg.lang.YOUR_CARDS}</AreaTag>
                         {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                         ) &&
