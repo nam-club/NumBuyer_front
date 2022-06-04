@@ -300,6 +300,16 @@ export default function Socket(props) {
                                 break;
                         }
                         ablMessages.push(ablMessage);
+
+                        // 自分のアビリティにステータスを反映する
+                        if(p.playerId === selector.players.player.playerId) {
+                            let pAbilities = selector.players.player.abilities;
+                            for(let pa of pAbilities) {
+                                if(pa.abilityId === a.abilityId) {
+                                    pa.status = a.status;
+                                }
+                            }
+                        }
                     }
                     p.firedAbilities = abilities;
                 }else {

@@ -67,7 +67,7 @@ const UseAbilityComponent = (props) => {
                             </UseAbilityButton> 
                             :
                             <div>
-                                {value.status === Constants.READY_ST ?
+                                {value.status !== Constants.UNUSED_ST ?
                                     <div>
                                         {value.type === Constants.BST_TP ? 
                                             <Tooltip key={value.abilityId} title={
