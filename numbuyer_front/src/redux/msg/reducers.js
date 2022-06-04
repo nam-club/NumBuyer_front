@@ -27,7 +27,10 @@ export const MsgReducer = (state = initialState.msg, action) => {
         case Actions.SET_T_PAGE:
             state.tPage = action.payload.tPage;
             return state;
+        case Actions.SET_TL_COLOR:
+            state.tlColor = action.payload.tlColor;
+            return state;
         default:
-            return state
+            return state;
     }
 }

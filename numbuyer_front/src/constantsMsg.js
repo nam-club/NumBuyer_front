@@ -5,7 +5,7 @@ export const English = {
     // ボタン・タグ
     PLAYER_NAME: "Player Name",
     QUICK_MATCH: "Quick Match",
-    FRIEND_MATCH: "Play with Friend",
+    FRIEND_MATCH: "Play with Friends",
     LANG_EN: "English",
     LANG_JP: "Japanese",
     LANG_CN: "Chinese",
@@ -69,6 +69,15 @@ export const English = {
     INTRODUCTION_MSG9: "After the end of the auction phase, the calculation phase comes. Let's make a calculation formula so that the number of the Target card will be the calculation result with the card you have. (Of course, you can use only one card that has exactly the same number as the Target card)",
     INTRODUCTION_MSG10: "If you can make the numbers of the Target card brilliantly, you will get coins for the value of the Target card and the number of cards you used! (You will get bonus coins according to the number of cards you used!)",
     INTRODUCTION_MSG11: "After that, let's just repeat this series of steps and collect a lot of coins faster than anyone else!",
+    BEFORE_GAME_MSG1: "To start the game",
+    BEFORE_GAME_MSG2: "①Click here to change to your favorite language.",
+    BEFORE_GAME_MSG3: "②This is where you enter your player name that you want to use in the game.",
+    BEFORE_GAME_MSG4: '③Click "Quick Match" to play against 4 random players from all over the world.',
+    BEFORE_GAME_MSG5: '④If you click "Play with Friends", you can play 2-4 people with an acquaintance by sharing the room code.',
+    BEFORE_GAME_MSG6: "Select abilities",
+    BEFORE_GAME_MSG7: "①Select the two abilities you want to use from the five types of abilities.",
+    BEFORE_GAME_MSG8: '②After selecting the abilities, click "Done" to proceed to the next screen.',
+    BEFORE_GAME_MSG9: 'Create or enter a room (only for "Play with Friends")',
 
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
@@ -192,6 +201,15 @@ export const Japanese = {
     INTRODUCTION_MSG9: 'オークションフェーズの終了後、計算フェーズがやってきます。手持ちのカードで「目標カード」の数字が計算結果となるように計算式を作りましょう。(もちろん「目標カード」の数字と全く同じカードを１枚だけ使っても良いです)',
     INTRODUCTION_MSG10: '「目標カード」の数字を見事作ることができれば「目標カード」の値と使用した手札の枚数分のコインがもらえます!(使ったカードの枚数に応じて、ボーナスコインがもらえます!)',
     INTRODUCTION_MSG11: '後はひたすらこの一連の流れを繰り返してコインを誰よりも早くたくさん集めましょう!',
+    BEFORE_GAME_MSG1: "ゲームを始めるために",
+    BEFORE_GAME_MSG2: "①ここをクリックすると好きな言語に変更できます。",
+    BEFORE_GAME_MSG3: "②ゲームで使用したい自身のプレイヤー名を入力する箇所です。",
+    BEFORE_GAME_MSG4: "③「誰かと対戦する」をクリックすると、世界中のランダムなプレイヤーと４人対戦できます。",
+    BEFORE_GAME_MSG5: "④「友達と対戦する」をクリックすると、ルームコードを共有することで知り合いと２〜４人対戦できます。",
+    BEFORE_GAME_MSG6: "アビリティを選択する",
+    BEFORE_GAME_MSG7: "①５つのタイプのアビリティから使用したいアビリティを２つ選択します。",
+    BEFORE_GAME_MSG8: "②アビリティを選択したら「確定」をクリックすると次の画面に進みます。",
+    BEFORE_GAME_MSG9: "ルームを作成または入室する（「友達と対戦する」の場合のみ）",
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -316,6 +334,15 @@ export const Chinese = {
     INTRODUCTION_MSG9: '拍卖阶段结束后、进入计算阶段。让我们做一个计算公式、这样「目标卡」的数量就是你拥有的卡的计算结果。（当然、您只能使用与「目标卡」编号完全相同的一张卡）',
     INTRODUCTION_MSG10: '如果你能把「目标卡」的数字打出精彩，你将获得「目标卡」的价值和你使用的卡数的金币！（你将根据你使用的卡数获得奖励金币！)',
     INTRODUCTION_MSG11: '之后、让我们重复这一系列步骤、并以比任何人更快的速度收集大量硬币！',
+    BEFORE_GAME_MSG1: "开始游戏",
+    BEFORE_GAME_MSG2: "①单击此处更改为您喜欢的语言。",
+    BEFORE_GAME_MSG3: "②您可以在此处输入要在游戏中使用的玩家姓名。",
+    BEFORE_GAME_MSG4: "③单击「与某人比赛」与来自世界各地的４名随机玩家对战。",
+    BEFORE_GAME_MSG5: "④如果您单击「与朋友对战」、您可以通过共享房间代码与熟人一起玩２〜４人。",
+    BEFORE_GAME_MSG6: "选择一个能力",
+    BEFORE_GAME_MSG7: "①从五种能力中选择您要使用的两种能力。",
+    BEFORE_GAME_MSG8: "②选择能力后、单击「确定」进入下一个屏幕。",
+    BEFORE_GAME_MSG9: "创建或进入房间（仅限「与朋友对战」）",
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力

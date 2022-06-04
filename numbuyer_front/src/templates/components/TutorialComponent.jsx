@@ -17,24 +17,28 @@ import TimelineDot from '@mui/lab/TimelineDot';
 
 
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
-import { setTPageAction } from '../../redux/msg/actions';
+import beforeGame1 from '../../assets/before_game1.png';
+import beforeGame2 from '../../assets/before_game2.png';
+import beforeGame3 from '../../assets/before_game3.png';
+import { setTLColorAction, setTPageAction } from '../../redux/msg/actions';
 
 const TutorialComponent = () => {
     const selector = useSelector(state => state);
     const dispatch = useDispatch();
  
     // ゲーム紹介項目
-    const [introduction, setIntroduction] = React.useState({name: selector.msg.lang.INTRODUCTION, color: blue[700]});
+    const [introduction, setIntroduction] = React.useState({name: selector.msg.lang.INTRODUCTION, color: selector.msg.tlColor[0].text});
 
     // タイムライン項目
     const [timeLines, setTimeLines] = React.useState([
-        {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
-        {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
-        {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
-        {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
-        {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+        {name: selector.msg.lang.TIME_LINE1, color: selector.msg.tlColor[1].text, dot: selector.msg.tlColor[1].dot},
+        {name: selector.msg.lang.TIME_LINE2, color: selector.msg.tlColor[2].text, dot: selector.msg.tlColor[2].dot},
+        {name: selector.msg.lang.TIME_LINE3, color: selector.msg.tlColor[3].text, dot: selector.msg.tlColor[3].dot},
+        {name: selector.msg.lang.TIME_LINE4, color: selector.msg.tlColor[4].text, dot: selector.msg.tlColor[4].dot},
+        {name: selector.msg.lang.ABILITY_TAG, color: selector.msg.tlColor[5].text, dot: selector.msg.tlColor[5].dot},
     ]);
 
+    // タイムラインから説明を読みたい項目を選択
     const selectButton = (name) => {
         switch(name) {
             case selector.msg.lang.INTRODUCTION:
@@ -43,12 +47,21 @@ const TutorialComponent = () => {
                 // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: blue[700]});
                 setTimeLines([
-                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
-                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
                 ]);
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: blue[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"}
+                ]));
                 break;
             case selector.msg.lang.TIME_LINE1:
                 // ページを変更する
@@ -56,12 +69,21 @@ const TutorialComponent = () => {
                 // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
-                    {name: selector.msg.lang.TIME_LINE1, color: blue[700]},
-                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
-                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE1, color: blue[700], dot: "primary"},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
                 ]);
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"}
+                ]));
                 break;
             case selector.msg.lang.TIME_LINE2:
                 // ページを変更する
@@ -69,12 +91,21 @@ const TutorialComponent = () => {
                 // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
-                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE2, color: blue[700]},
-                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
-                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE2, color: blue[700], dot: "primary"},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
                 ]);
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "grey"},
+                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"}
+                ]));
                 break;
             case selector.msg.lang.TIME_LINE3:
                 // ページを変更する
@@ -82,12 +113,21 @@ const TutorialComponent = () => {
                 // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
-                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE3, color: blue[700]},
-                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
-                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE3, color: blue[700], dot: "primary"},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
                 ]);
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"}
+                ]));
                 break;
             case selector.msg.lang.TIME_LINE4:
                 // ページを変更する
@@ -95,12 +135,22 @@ const TutorialComponent = () => {
                 // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
-                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE4, color: blue[700]},
-                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700]},
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE4, color: blue[700], dot: "primary"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
                 ]);
+                // storeにもタイムラインの色を反映
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"}
+                ]));
                 break;
             case selector.msg.lang.ABILITY_TAG:
                 // ページを変更する
@@ -108,21 +158,41 @@ const TutorialComponent = () => {
                 // 選択項目に色をつける
                 setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
                 setTimeLines([
-                    {name: selector.msg.lang.TIME_LINE1, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE2, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE3, color: grey[700]},
-                    {name: selector.msg.lang.TIME_LINE4, color: grey[700]},
-                    {name: selector.msg.lang.ABILITY_TAG, color: blue[700]},
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: blue[700], dot: "primary"},
                 ]);
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "primary"}
+                ]));
                 break;
             default:
                 break;
         }
     }
 
+    const createMarginTop = (page) => {
+        switch(page) {
+            case Constants.T_PAGE1:
+                return '20%';
+            case Constants.T_PAGE2:
+                return '50%';
+            default:
+                return  "0";
+        }
+    }
+
     return (
         <Typography component="div" align="center">
-            <Box sx={{ display: 'flex', marginTop: '20%' }}>
+            <Box sx={{ display: 'flex', marginTop: createMarginTop(selector.msg.tPage) }}>
                 <SideBar component="nav">
                         {selector.msg.lang === ConstantsMsg.English ?
                         <div>
@@ -145,7 +215,7 @@ const TutorialComponent = () => {
                             {timeLines.map((value, index) => (
                                 <TimelineItem key={index}>
                                     <TimelineSeparator>
-                                        <TimelineDot />
+                                        <TimelineDot color={value.dot}/>
                                         {(index !== 0) && (index !== timeLines.length-2) && (index !== timeLines.length-1) && 
                                             <TimelineConnector />
                                         }
@@ -219,7 +289,71 @@ const TutorialComponent = () => {
                         }
                     </div>
                     :
-                    <div></div>
+                    <div>
+                        {selector.msg.tPage === Constants.T_PAGE2 ?
+                        <div>
+                            {selector.msg.lang === ConstantsMsg.English ?
+                            <div>
+                                <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
+                                <b>{selector.msg.lang.BEFORE_GAME_MSG1}</b>
+                                </EmphasisMessage>
+                                <TutorialImage src={beforeGame1}/>
+                                <Typography sx={{fontSize: "1.2em"}}>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG2}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG3}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG4}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG5}</p>
+                                </Typography>
+                                <Divider />
+                                <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
+                                <b>{selector.msg.lang.BEFORE_GAME_MSG6}</b>
+                                </EmphasisMessage>
+                                <TutorialImage src={beforeGame2}/>
+                                <Typography sx={{fontSize: "1.2em"}}>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG7}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG8}</p>
+                                </Typography>
+                                <Divider />
+                                <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
+                                <b>{selector.msg.lang.BEFORE_GAME_MSG9}</b>
+                                </EmphasisMessage>
+                                <TutorialImage src={beforeGame3}/>
+                            </div>
+                            :
+                            <div>
+                                <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                                <b>{selector.msg.lang.BEFORE_GAME_MSG1}</b>
+                                </EmphasisMessage>
+                                <TutorialImage src={beforeGame1}/>
+                                <Typography sx={{fontSize: "1em"}}>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG2}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG3}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG4}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG5}</p>
+                                </Typography>
+                                <Divider />
+                                <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                                <b>{selector.msg.lang.BEFORE_GAME_MSG6}</b>
+                                </EmphasisMessage>
+                                <TutorialImage src={beforeGame2}/>
+                                <Typography sx={{fontSize: "1em"}}>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG7}</p>
+                                    <p>{selector.msg.lang.BEFORE_GAME_MSG8}</p>
+                                </Typography>
+                                <Divider />
+                                <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
+                                <b>{selector.msg.lang.BEFORE_GAME_MSG9}</b>
+                                </EmphasisMessage>
+                                <TutorialImage src={beforeGame3}/>
+                            </div>
+                            }
+                        </div>
+                        :
+                        <div>
+
+                        </div>
+                        }
+                    </div>
                     }
                 </TutorialBody>
             </Box>

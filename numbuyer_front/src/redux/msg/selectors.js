@@ -31,3 +31,8 @@ export const getTPage = createSelector(
     [msgSelector],
     state => state.tPage
 )
+
+export const getTLColor = createSelector(
+    [msgSelector],
+    state => state.tlColor
+)

@@ -118,12 +118,13 @@ export const TutorialBody = styled(Box)({
 // チュートリアルのイメージ画像
 export const TutorialImage = styled('img')({
   width: '40%',
-  marginTop: '5%',
+  marginTop: '2%',
 });
 
 // チュートリアルの強調部分の説明
 export const EmphasisMessage = styled(Typography)({
   marginTop: '2%',
+  marginBottom: '1%',
 });
 
 // チュートリアルの詳細説明

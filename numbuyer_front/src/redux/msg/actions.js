@@ -63,3 +63,14 @@ export const setTPageAction = (tPageState) => {
         }
     }
 }
+
+export const SET_TL_COLOR = "SET_TL_COLOR";
+
+export const setTLColorAction = (tlColorState) => {
+    return {
+        type: "SET_TL_COLOR",
+        payload: {
+            tlColor: tlColorState
+        }
+    }
+}

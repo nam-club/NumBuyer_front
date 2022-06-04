@@ -1,6 +1,8 @@
 import * as ConstantsMsg from '../../constantsMsg';
 import * as Constants from '../../constants';
 
+import { grey, blue } from '@mui/material/colors';
+
 const initialState = {
     players: {
         player: {
@@ -25,6 +27,14 @@ const initialState = {
         errMsgVars: [], // 言語変更時エラーメッセージ変数保持配列
         ablErrMsg: "", // アビリティ用エラーメッセージ
         tPage: Constants.T_PAGE1, // チュートリアル表示ページ 
+        tlColor: [ // タイムラインの色配列
+            {text: blue[700], dot: "primary"}, 
+            {text: grey[700], dot: "grey"},
+            {text: grey[700], dot: "grey"},
+            {text: grey[700], dot: "grey"},
+            {text: grey[700], dot: "grey"},
+            {text: grey[700], dot: "grey"},
+        ],
     },
     game: {
         phase: "", // フェーズ
