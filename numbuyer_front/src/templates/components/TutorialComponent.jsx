@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage, DetailMessage } from '../theme';
 import * as ConstantsMsg from '../../constantsMsg';
 import * as Constants from '../../constants';
+import TutorialSectionComponent from './TutorialSectionComponent';
 
 import { grey, blue } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
@@ -20,8 +21,12 @@ import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
 import beforeGame1 from '../../assets/before_game1.png';
 import beforeGame2 from '../../assets/before_game2.png';
 import beforeGame3 from '../../assets/before_game3.png';
+import beforeGame4 from '../../assets/before_game4.png';
+import beforeGame5 from '../../assets/before_game5.png';
+import distribution1 from '../../assets/distribution1.png';
 import { setTLColorAction, setTPageAction } from '../../redux/msg/actions';
 
+/** チュートリアル全体 */
 const TutorialComponent = () => {
     const selector = useSelector(state => state);
     const dispatch = useDispatch();
@@ -184,7 +189,7 @@ const TutorialComponent = () => {
             case Constants.T_PAGE1:
                 return '20%';
             case Constants.T_PAGE2:
-                return '50%';
+                return '150%';
             default:
                 return  "0";
         }
@@ -246,7 +251,7 @@ const TutorialComponent = () => {
                         <TutorialImage src={whatIsNumBuyer}/>
                         {selector.msg.lang === ConstantsMsg.English ?
                         <div>
-                            <EmphasisMessage paragraph sx={{fontSize: "1.5em"}}>
+                            <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
                                 {selector.msg.lang.INTRODUCTION_MSG1}
                             </EmphasisMessage>
                             <Divider />
@@ -292,65 +297,72 @@ const TutorialComponent = () => {
                     <div>
                         {selector.msg.tPage === Constants.T_PAGE2 ?
                         <div>
-                            {selector.msg.lang === ConstantsMsg.English ?
-                            <div>
-                                <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
-                                <b>{selector.msg.lang.BEFORE_GAME_MSG1}</b>
-                                </EmphasisMessage>
-                                <TutorialImage src={beforeGame1}/>
-                                <Typography sx={{fontSize: "1.2em"}}>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG2}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG3}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG4}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG5}</p>
-                                </Typography>
-                                <Divider />
-                                <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
-                                <b>{selector.msg.lang.BEFORE_GAME_MSG6}</b>
-                                </EmphasisMessage>
-                                <TutorialImage src={beforeGame2}/>
-                                <Typography sx={{fontSize: "1.2em"}}>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG7}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG8}</p>
-                                </Typography>
-                                <Divider />
-                                <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
-                                <b>{selector.msg.lang.BEFORE_GAME_MSG9}</b>
-                                </EmphasisMessage>
-                                <TutorialImage src={beforeGame3}/>
-                            </div>
-                            :
-                            <div>
-                                <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
-                                <b>{selector.msg.lang.BEFORE_GAME_MSG1}</b>
-                                </EmphasisMessage>
-                                <TutorialImage src={beforeGame1}/>
-                                <Typography sx={{fontSize: "1em"}}>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG2}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG3}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG4}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG5}</p>
-                                </Typography>
-                                <Divider />
-                                <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
-                                <b>{selector.msg.lang.BEFORE_GAME_MSG6}</b>
-                                </EmphasisMessage>
-                                <TutorialImage src={beforeGame2}/>
-                                <Typography sx={{fontSize: "1em"}}>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG7}</p>
-                                    <p>{selector.msg.lang.BEFORE_GAME_MSG8}</p>
-                                </Typography>
-                                <Divider />
-                                <EmphasisMessage paragraph sx={{fontSize: "1.2em"}}>
-                                <b>{selector.msg.lang.BEFORE_GAME_MSG9}</b>
-                                </EmphasisMessage>
-                                <TutorialImage src={beforeGame3}/>
-                            </div>
-                            }
+                            <TutorialSectionComponent
+                                title={selector.msg.lang.BEFORE_GAME_MSG1}
+                                image={beforeGame1}
+                                texts={[
+                                    selector.msg.lang.BEFORE_GAME_MSG2,
+                                    selector.msg.lang.BEFORE_GAME_MSG3,
+                                    selector.msg.lang.BEFORE_GAME_MSG4,
+                                    selector.msg.lang.BEFORE_GAME_MSG5
+                                ]}>
+                            </TutorialSectionComponent>
+                            <TutorialSectionComponent
+                                title={selector.msg.lang.BEFORE_GAME_MSG6}
+                                image={beforeGame2}
+                                texts={[
+                                    selector.msg.lang.BEFORE_GAME_MSG7,
+                                    selector.msg.lang.BEFORE_GAME_MSG8,
+                                    selector.msg.lang.ABILITY_EXP1,
+                                    selector.msg.lang.ABILITY_EXP2
+                                ]}>
+                            </TutorialSectionComponent>
+                            <TutorialSectionComponent
+                                title={selector.msg.lang.BEFORE_GAME_MSG9}
+                                image={beforeGame3}
+                                texts={[
+                                    selector.msg.lang.BEFORE_GAME_MSG10,
+                                    selector.msg.lang.BEFORE_GAME_MSG11,
+                                    selector.msg.lang.BEFORE_GAME_MSG12
+                                ]}>
+                            </TutorialSectionComponent>
+                            <TutorialSectionComponent
+                                title={selector.msg.lang.BEFORE_GAME_MSG13}
+                                image={beforeGame4}
+                                texts={[
+                                    selector.msg.lang.BEFORE_GAME_MSG14,
+                                    selector.msg.lang.BEFORE_GAME_MSG15,
+                                    selector.msg.lang.BEFORE_GAME_MSG16,
+                                    selector.msg.lang.BEFORE_GAME_MSG17
+                                ]}>
+                            </TutorialSectionComponent>
+                            <TutorialSectionComponent
+                                title={selector.msg.lang.BEFORE_GAME_MSG18}
+                                image={beforeGame5}
+                                texts={[
+                                    selector.msg.lang.BEFORE_GAME_MSG19,
+                                    selector.msg.lang.BEFORE_GAME_MSG20,
+                                    selector.msg.lang.BEFORE_GAME_MSG15
+                                ]}>
+                            </TutorialSectionComponent>
                         </div>
                         :
                         <div>
-
+                            {selector.msg.tPage === Constants.T_PAGE3 ?
+                            <div>
+                                <TutorialSectionComponent
+                                title={selector.msg.lang.DISTRIBUTION_MSG1}
+                                image={distribution1}
+                                texts={[
+                                    selector.msg.lang.DISTRIBUTION_MSG2,
+                                    selector.msg.lang.DISTRIBUTION_MSG3,
+                                    selector.msg.lang.DISTRIBUTION_MSG4
+                                ]}>
+                            </TutorialSectionComponent>
+                            </div>
+                            :
+                            <div></div>
+                            }
                         </div>
                         }
                     </div>
