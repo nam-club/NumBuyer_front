@@ -27,6 +27,7 @@ import distribution1 from '../../assets/distribution1.png';
 import distribution2 from '../../assets/distribution2.png';
 import distribution3 from '../../assets/distribution3.png';
 import auction1 from '../../assets/auction1.png';
+import auction2 from '../../assets/auction2.png';
 import { setTLColorAction, setTPageAction } from '../../redux/msg/actions';
 
 /** チュートリアル全体 */
@@ -190,11 +191,11 @@ const TutorialComponent = () => {
     const createMarginTop = (page) => {
         switch(page) {
             case Constants.T_PAGE1:
-                return '20%';
+                return '18%';
             case Constants.T_PAGE2:
                 return '150%';
             case Constants.T_PAGE3:
-                return '20%';
+                return '47%';
             default:
                 return  "0";
         }
@@ -384,7 +385,13 @@ const TutorialComponent = () => {
                             <div>
                                 {selector.msg.tPage === Constants.T_PAGE4 ?
                                 <div>
-
+                                    <TutorialSectionComponent
+                                        title={selector.msg.lang.AUCTION_PHASE_MSG1}
+                                        image={auction1}
+                                        texts={[
+                                            selector.msg.lang.AUCTION_PHASE_MSG2
+                                        ]}>
+                                    </TutorialSectionComponent>
                                 </div>
                                 :
                                 <div></div>

@@ -96,8 +96,14 @@ export const English = {
     DISTRIBUTION_MSG5: "Hand distribution",
     DISTRIBUTION_MSG6: "①Here you will see a description of the game situation and how to perform each action.",
     DISTRIBUTION_MSG7: "②First, two types of cards, numbers and operators, are dealt.",
-    DISTRIBUTION_MSG8: "Release of Target Card",
-    DISTRIBUTION_MSG9: '"Target Card" with numbers will be released. You can earn coins by combining your hands and making this number.',
+    DISTRIBUTION_MSG8: "Publication of Target Card",
+    DISTRIBUTION_MSG9: 'Target Card with numbers will be released. You can earn coins by combining your hands and making this number.',
+    AUCTION_PHASE_MSG1: "Publication of Auction Card",
+    AUCTION_PHASE_MSG2: "After the Target Card is released, Auction Card will be released. In this Auction Phase, an auction will be held for all players and this Auction Card will be added to the hand of the winning bidder.",
+    AUCTION_PHASE_MSG3: "How to bid or decline",
+    AUCTION_PHASE_MSG4: '①Rewrite this number as it is, or click the "+" button or "-" button to set the bid amount.',
+    AUCTION_PHASE_MSG5: '②You can decline the auction this turn by clicking the "Pass" button.',
+    AUCTION_PHASE_MSG6: '③You can bid at the set bid amount by clicking the "Bid" button.',
 
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
@@ -250,6 +256,12 @@ export const Japanese = {
     DISTRIBUTION_MSG7: "②最初に数字と演算子の２種類のカードが配られます。",
     DISTRIBUTION_MSG8: "目標カードの公開",
     DISTRIBUTION_MSG9: "数字が書かれた「目標カード」が公開されます。手札を組み合わせてこの数字を作るとコインを獲得できます。",
+    AUCTION_PHASE_MSG1: "オークションカードの公開",
+    AUCTION_PHASE_MSG2: "目標カードの公開後、オークションカードが公開されます。このオークションフェーズでは全プレイヤーでオークションが開かれ、落札した人の手札にこのオークションカードが加わります。",
+    AUCTION_PHASE_MSG3: "入札または辞退の方法",
+    AUCTION_PHASE_MSG4: "①こちらの数字をそのまま書き換えるか「＋」ボタンか「ー」ボタンをクリックして入札金額を設定します。",
+    AUCTION_PHASE_MSG5: "②「パス」ボタンをクリックするとこのターンのオークションを辞退できます。",
+    AUCTION_PHASE_MSG6: "③「入札」ボタンをクリックすると設定した入札金額で入札できます。",
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -403,6 +415,12 @@ export const Chinese = {
     DISTRIBUTION_MSG7: "②首先，发两种类型的牌，数字和运算符。",
     DISTRIBUTION_MSG8: "释放目标卡",
     DISTRIBUTION_MSG9: "将发布带有数字的“目标卡”。您可以通过组合双手并制作此数字来赚取硬币。",
+    AUCTION_PHASE_MSG1: "拍卖卡的发布",
+    AUCTION_PHASE_MSG2: "释放目标卡后，将释放拍卖卡。在此拍卖阶段，将为所有玩家举行一次拍卖，并将这张拍卖卡添加到中标者的手上。",
+    AUCTION_PHASE_MSG3: "如何出价或拒绝",
+    AUCTION_PHASE_MSG4: "①按原样改写该数字，或单击“+”按钮或“-”按钮设置投标金额。",
+    AUCTION_PHASE_MSG5: "②您可以通过单击“通过”按钮在本回合拒绝拍卖。",
+    AUCTION_PHASE_MSG6: "③您可以通过点击“出价”按钮以设定的出价金额出价。",
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力

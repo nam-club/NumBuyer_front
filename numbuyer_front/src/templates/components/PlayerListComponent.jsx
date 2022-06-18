@@ -57,9 +57,9 @@ const PlayerListComponent = () => {
                     <Grid item xs={4}>
                         <BackButton size="large" variant="contained"
                         onClick={() => {
-                            dispatch(push('/'));
                             leaveLobby({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
                             dispatch(setQuickAction(false));
+                            dispatch(push('/'));
                         }}>{selector.msg.lang.BACK_BTN}</BackButton>
                     </Grid>
                     <Grid item xs={4} />
