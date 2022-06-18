@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CTX } from '../../Socket';
+import { CTX, leaveLobby } from '../../Socket';
 import { push } from 'connected-react-router';
 
 import { useStyles, MenuCard, LobbyTitle, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag } from '../theme';
@@ -58,6 +58,7 @@ const PlayerListComponent = () => {
                         <BackButton size="large" variant="contained"
                         onClick={() => {
                             dispatch(push('/'));
+                            leaveLobby({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
                             dispatch(setQuickAction(false));
                         }}>{selector.msg.lang.BACK_BTN}</BackButton>
                     </Grid>

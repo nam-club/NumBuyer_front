@@ -24,6 +24,9 @@ import beforeGame3 from '../../assets/before_game3.png';
 import beforeGame4 from '../../assets/before_game4.png';
 import beforeGame5 from '../../assets/before_game5.png';
 import distribution1 from '../../assets/distribution1.png';
+import distribution2 from '../../assets/distribution2.png';
+import distribution3 from '../../assets/distribution3.png';
+import auction1 from '../../assets/auction1.png';
 import { setTLColorAction, setTPageAction } from '../../redux/msg/actions';
 
 /** チュートリアル全体 */
@@ -190,6 +193,8 @@ const TutorialComponent = () => {
                 return '20%';
             case Constants.T_PAGE2:
                 return '150%';
+            case Constants.T_PAGE3:
+                return '20%';
             default:
                 return  "0";
         }
@@ -351,17 +356,40 @@ const TutorialComponent = () => {
                             {selector.msg.tPage === Constants.T_PAGE3 ?
                             <div>
                                 <TutorialSectionComponent
-                                title={selector.msg.lang.DISTRIBUTION_MSG1}
-                                image={distribution1}
-                                texts={[
-                                    selector.msg.lang.DISTRIBUTION_MSG2,
-                                    selector.msg.lang.DISTRIBUTION_MSG3,
-                                    selector.msg.lang.DISTRIBUTION_MSG4
-                                ]}>
-                            </TutorialSectionComponent>
+                                    title={selector.msg.lang.DISTRIBUTION_MSG1}
+                                    image={distribution1}
+                                    texts={[
+                                        selector.msg.lang.DISTRIBUTION_MSG2,
+                                        selector.msg.lang.DISTRIBUTION_MSG3,
+                                        selector.msg.lang.DISTRIBUTION_MSG4
+                                    ]}>
+                                </TutorialSectionComponent>
+                                <TutorialSectionComponent
+                                    title={selector.msg.lang.DISTRIBUTION_MSG5}
+                                    image={distribution2}
+                                    texts={[
+                                        selector.msg.lang.DISTRIBUTION_MSG6,
+                                        selector.msg.lang.DISTRIBUTION_MSG7
+                                    ]}>
+                                </TutorialSectionComponent>
+                                <TutorialSectionComponent
+                                    title={selector.msg.lang.DISTRIBUTION_MSG8}
+                                    image={distribution3}
+                                    texts={[
+                                        selector.msg.lang.DISTRIBUTION_MSG9
+                                    ]}>
+                                </TutorialSectionComponent>
                             </div>
                             :
-                            <div></div>
+                            <div>
+                                {selector.msg.tPage === Constants.T_PAGE4 ?
+                                <div>
+
+                                </div>
+                                :
+                                <div></div>
+                                }
+                            </div>
                             }
                         </div>
                         }

@@ -60,7 +60,7 @@ export const English = {
     // チュートリアルメッセージ
     INTRODUCTION_MSG1: "NumBuyer is a title born from the two words Number and Buyer, and as the name implies, it is a new type of card game that combines a calculation card game with an auction element.",
     INTRODUCTION_MSG2: "Game rules",
-    INTRODUCTION_MSG3: "First, 5 cards of 2 types, numbers and operators, are randomly dealt.",
+    INTRODUCTION_MSG3: "First, two types of cards, numbers and operators, are dealt.",
     INTRODUCTION_MSG4: "After that, a Target card with numbers will be released. You can earn coins by combining the cards you have to make the number of Target card.",
     INTRODUCTION_MSG5: "The first person to collect the amount of coins presented as a victory condition is the winner of this game!",
     INTRODUCTION_MSG6: "One card will be dealt each turn, but that alone will not be enough to make the number of Target card. Therefore, the Auction card will be released after the Target card is released.",
@@ -91,8 +91,13 @@ export const English = {
     BEFORE_GAME_MSG20: "The game starts when there are 4 participants in the room.",
     DISTRIBUTION_MSG1: "Start the game",
     DISTRIBUTION_MSG2: "①The victory conditions of the game are written here. Collecting 100 coins is the winning condition for this game.",
-    DISTRIBUTION_MSG3: "②You can check the player information here. The player name, the number of cards in your hand, and the coins you have are listed. (Yellow background is my information)",
+    DISTRIBUTION_MSG3: "②You can check the player information. The player name, the number of cards in your hand, and the coins you have are listed. (Yellow background is my information)",
     DISTRIBUTION_MSG4: "③You can check your abilities. You can also see a description of each ability by focusing on it. You cannot see your opponent's abilities. (You can check only the timing when the other party is activated)",
+    DISTRIBUTION_MSG5: "Hand distribution",
+    DISTRIBUTION_MSG6: "①Here you will see a description of the game situation and how to perform each action.",
+    DISTRIBUTION_MSG7: "②First, two types of cards, numbers and operators, are dealt.",
+    DISTRIBUTION_MSG8: "Release of Target Card",
+    DISTRIBUTION_MSG9: '"Target Card" with numbers will be released. You can earn coins by combining your hands and making this number.',
 
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
@@ -207,7 +212,7 @@ export const Japanese = {
     // チュートリアルメッセージ
     INTRODUCTION_MSG1: 'NumBuyerとはNumber(数字)とBuyer(買い手)の二つの単語から生まれたタイトルであり、その名の通り計算カードゲームにオークション要素を組み合わせた新感覚のカードゲームです。',
     INTRODUCTION_MSG2: 'ゲームのルール',
-    INTRODUCTION_MSG3: '最初に数字と演算子の２種類のカードがランダムに５枚配られます。',
+    INTRODUCTION_MSG3: '最初に数字と演算子の２種類のカードが配られます。',
     INTRODUCTION_MSG4: 'その後、数字が書かれた「目標カード」が公開されます。手持ちのカードを組み合わせて「目標カード」の数字を作るとコインを獲得できます。',
     INTRODUCTION_MSG5: '勝利条件として提示された額のコインを一番最初に集めた人がこのゲームの勝者です!',
     INTRODUCTION_MSG6: '毎ターン１枚ずつカードは配られますが、それだけでは「目標カード」の数字を作るまでの道のりが程遠いでしょう。したがって「目標カード」の公開後に「オークションカード」が公開されます。',
@@ -238,8 +243,13 @@ export const Japanese = {
     BEFORE_GAME_MSG20: "ルームの参加者が４人になると、ゲームが開始されます。",
     DISTRIBUTION_MSG1: "ゲームの開始",
     DISTRIBUTION_MSG2: "①ここにゲームの勝利条件が書かれています。１００コインを集めることがこのゲームの勝利条件です。",
-    DISTRIBUTION_MSG3: "②ここでプレイヤーの情報が確認できます。プレイヤー名、手札の枚数、所持コインが載っています。（黄色背景が自分の情報）",
+    DISTRIBUTION_MSG3: "②プレイヤーの情報を確認できます。プレイヤー名、手札の枚数、所持コインが載っています。（黄色背景が自分の情報）",
     DISTRIBUTION_MSG4: "③所持アビリティを確認できます。フォーカスを当てるとそれぞれの能力の説明も確認できます。相手の所持アビリティは見えません。（相手が発動したタイミングのみ確認できます）",
+    DISTRIBUTION_MSG5: "手札の配布",
+    DISTRIBUTION_MSG6: "①ここにゲームの状況と各アクションの実行方法などの説明が表示されます。",
+    DISTRIBUTION_MSG7: "②最初に数字と演算子の２種類のカードが配られます。",
+    DISTRIBUTION_MSG8: "目標カードの公開",
+    DISTRIBUTION_MSG9: "数字が書かれた「目標カード」が公開されます。手札を組み合わせてこの数字を作るとコインを獲得できます。",
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -355,7 +365,7 @@ export const Chinese = {
     // チュートリアルメッセージ
     INTRODUCTION_MSG1: 'NumBuyer是一个由Number和Buyer两个字诞生的称号，顾名思义，它是一种将计算卡牌游戏与拍卖元素相结合的新型卡牌游戏。',
     INTRODUCTION_MSG2: '游戏规则',
-    INTRODUCTION_MSG3: '首先，随机发２种类型，数字和运算符的５张牌。',
+    INTRODUCTION_MSG3: '首先，发两种类型的牌，数字和运算符。',
     INTRODUCTION_MSG4: '之后，将发布带有数字的“目标卡“。您可以通过组合您必须制作“目标卡“数量的卡来赚取金币。',
     INTRODUCTION_MSG5: '第一个收集作为胜利条件的硬币数量的人就是这场比赛的获胜者！',
     INTRODUCTION_MSG6: '每回合会发一张牌，但仅凭这一点不足以构成“目标牌”的数量。因此，在“目标卡“发布后，「拍卖卡」将被发布。',
@@ -386,8 +396,13 @@ export const Chinese = {
     BEFORE_GAME_MSG20: "当房间里有４名参与者时，游戏开始。",
     DISTRIBUTION_MSG1: "开始游戏",
     DISTRIBUTION_MSG2: "①游戏的胜利条件写在这里。收集１００个硬币是本场比赛的获胜条件。",
-    DISTRIBUTION_MSG3: "②您可以在此处查看玩家信息。列出了玩家姓名、手中的牌张数以及您拥有的硬币。 （黄色背景是我的资料）",
+    DISTRIBUTION_MSG3: "②您可以查看玩家信息。列出了玩家姓名、手中的牌张数以及您拥有的硬币。 （黄色背景是我的资料）",
     DISTRIBUTION_MSG4: "③你可以检查你的能力。您还可以通过关注它来查看每个能力的描述。你看不到对手的能力。 （只能查看对方激活的时间）",
+    DISTRIBUTION_MSG5: "手分配",
+    DISTRIBUTION_MSG6: "①在这里，您将看到游戏情况的描述以及如何执行每个动作。",
+    DISTRIBUTION_MSG7: "②首先，发两种类型的牌，数字和运算符。",
+    DISTRIBUTION_MSG8: "释放目标卡",
+    DISTRIBUTION_MSG9: "将发布带有数字的“目标卡”。您可以通过组合双手并制作此数字来赚取硬币。",
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力

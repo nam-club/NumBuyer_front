@@ -40,6 +40,12 @@ export const joinFriendMatch = function(value) {
     socket.emit('join/friend_match', JSON.stringify(value));
 };
 
+export const leaveLobby = function(value) {
+    console.log("leaveLobby:")
+    console.log(value);
+    socket.emit('join/leave', JSON.stringify(value));
+};
+
 export const playersInfo = function(value) {
     console.log(value);
     socket.emit('game/players_info', JSON.stringify(value));
