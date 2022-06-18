@@ -225,6 +225,17 @@ export const setFiredAbilitiesAction = (firedAbilitiesState) => {
     }
 }
 
+export const SET_LEAVE_LOBBY = "SET_LEAVE_LOBBY";
+
+export const setLeaveLobbyAction = (leaveLobbyState) => {
+    return {
+        type: "SET_LEAVE_LOBBY",
+        payload: {
+            leaveLobbyFlg: leaveLobbyState
+        }
+    }
+}
+
 export const SET_FINISH_GAME = "SET_FINISH_GAME";
 
 export const setFinishGameAction = (finishGameState) => {

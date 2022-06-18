@@ -101,9 +101,10 @@ export const English = {
     AUCTION_PHASE_MSG1: "Publication of Auction Card",
     AUCTION_PHASE_MSG2: "After the Target Card is released, Auction Card will be released. In this Auction Phase, an auction will be held for all players and this Auction Card will be added to the hand of the winning bidder.",
     AUCTION_PHASE_MSG3: "How to bid or decline",
-    AUCTION_PHASE_MSG4: '①Rewrite this number as it is, or click the "+" button or "-" button to set the bid amount.',
+    AUCTION_PHASE_MSG4: "①The time remaining until the end of the auction is displayed here.",
     AUCTION_PHASE_MSG5: '②You can decline the auction this turn by clicking the "Pass" button.',
-    AUCTION_PHASE_MSG6: '③You can bid at the set bid amount by clicking the "Bid" button.',
+    AUCTION_PHASE_MSG6: '③Rewrite this number as it is, or click the "+" button or "-" button to set the bid amount.',
+    AUCTION_PHASE_MSG7: '④You can bid at the set bid amount by clicking the "Bid" button.',
 
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
@@ -259,9 +260,10 @@ export const Japanese = {
     AUCTION_PHASE_MSG1: "オークションカードの公開",
     AUCTION_PHASE_MSG2: "目標カードの公開後、オークションカードが公開されます。このオークションフェーズでは全プレイヤーでオークションが開かれ、落札した人の手札にこのオークションカードが加わります。",
     AUCTION_PHASE_MSG3: "入札または辞退の方法",
-    AUCTION_PHASE_MSG4: "①こちらの数字をそのまま書き換えるか「＋」ボタンか「ー」ボタンをクリックして入札金額を設定します。",
+    AUCTION_PHASE_MSG4: "①オークション終了までの残り時間がこちらに表示されます。",
     AUCTION_PHASE_MSG5: "②「パス」ボタンをクリックするとこのターンのオークションを辞退できます。",
-    AUCTION_PHASE_MSG6: "③「入札」ボタンをクリックすると設定した入札金額で入札できます。",
+    AUCTION_PHASE_MSG6: "③こちらの数字をそのまま書き換えるか「＋」ボタンか「ー」ボタンをクリックして入札金額を設定します。",
+    AUCTION_PHASE_MSG7: "④「入札」ボタンをクリックすると設定した入札金額で入札できます。",
 
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
@@ -418,9 +420,10 @@ export const Chinese = {
     AUCTION_PHASE_MSG1: "拍卖卡的发布",
     AUCTION_PHASE_MSG2: "释放目标卡后，将释放拍卖卡。在此拍卖阶段，将为所有玩家举行一次拍卖，并将这张拍卖卡添加到中标者的手上。",
     AUCTION_PHASE_MSG3: "如何出价或拒绝",
-    AUCTION_PHASE_MSG4: "①按原样改写该数字，或单击“+”按钮或“-”按钮设置投标金额。",
+    AUCTION_PHASE_MSG4: "①此处显示距离拍卖结束的剩余时间。",
     AUCTION_PHASE_MSG5: "②您可以通过单击“通过”按钮在本回合拒绝拍卖。",
-    AUCTION_PHASE_MSG6: "③您可以通过点击“出价”按钮以设定的出价金额出价。",
+    AUCTION_PHASE_MSG6: "③按原样改写该数字，或单击“+”按钮或“-”按钮设置投标金额。",
+    AUCTION_PHASE_MSG7: "④您可以通过点击“出价”按钮以设定的出价金额出价。",
 
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力

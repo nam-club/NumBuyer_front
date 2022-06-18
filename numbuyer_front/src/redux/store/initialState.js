@@ -68,6 +68,7 @@ const initialState = {
         aucResult: Constants.NONE, // 落札結果ステータス
         calcResult: Constants.NONE, // 計算結果ステータス
         firedAbilities: [], // 発動アビリティ配列
+        leaveLobbyFlg: false, // ロビー退出フラグ
         finishFlg: false, // ゲーム終了フラグ
         aucBtnFlg: true, // オークション関連ボタン押下可能フラグ
         calcBtnFlg: true, // 計算関連ボタン押下可能フラグ

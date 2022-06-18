@@ -102,6 +102,11 @@ export const getFiredAbilities = createSelector(
     state => state.firedAbilities
 )
 
+export const getLeaveLobbyFlg = createSelector(
+    [gameSelector],
+    state => state.leaveLobbyFlg
+)
+
 export const getFinishFlg = createSelector(
     [gameSelector],
     state => state.finishFlg

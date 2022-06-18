@@ -392,6 +392,15 @@ const TutorialComponent = () => {
                                             selector.msg.lang.AUCTION_PHASE_MSG2
                                         ]}>
                                     </TutorialSectionComponent>
+                                    <TutorialSectionComponent
+                                        title={selector.msg.lang.AUCTION_PHASE_MSG3}
+                                        image={auction2}
+                                        texts={[
+                                            selector.msg.lang.AUCTION_PHASE_MSG4,
+                                            selector.msg.lang.AUCTION_PHASE_MSG5,
+                                            selector.msg.lang.AUCTION_PHASE_MSG6
+                                        ]}>
+                                    </TutorialSectionComponent>
                                 </div>
                                 :
                                 <div></div>

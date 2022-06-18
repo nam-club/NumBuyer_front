@@ -97,6 +97,9 @@ export const GameReducer = (state = initialState.game, action) => {
                 ...state,
                 ...action.payload
             }
+        case Actions.SET_LEAVE_LOBBY:
+            state.leaveLobbyFlg = action.payload.leaveLobbyFlg;
+            return state;
         case Actions.SET_FIRST_TURN:
             return {
                 ...state,

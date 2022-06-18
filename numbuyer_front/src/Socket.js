@@ -5,7 +5,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction, setAblErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction, setLeaveLobbyAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -215,8 +215,14 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
             setPlayers(resObj.players).then(()=>{
-                dispatch(push('/Lobby'));
-                console.log("ロビー画面に移動しました");
+                if(selector.game.leaveLobbyFlg === false) {
+                    dispatch(push('/Lobby'));
+                    console.log("ロビー画面に移動しました");
+                }else {
+                    dispatch(push('/'));
+                    console.log("トップ画面に移動しました");
+                    dispatch(setLeaveLobbyAction(false));
+                }
             });
         });
 

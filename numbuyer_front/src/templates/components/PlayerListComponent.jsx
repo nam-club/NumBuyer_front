@@ -13,6 +13,7 @@ import IconButton      from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { setQuickAction } from '../../redux/room/actions';
 import { grey } from '@mui/material/colors';
+import { setLeaveLobbyAction } from '../../redux/game/actions';
 
 const PlayerListComponent = () => {
     const classes = useStyles();
@@ -56,10 +57,10 @@ const PlayerListComponent = () => {
                 <Grid container>
                     <Grid item xs={4}>
                         <BackButton size="large" variant="contained"
-                        onClick={() => {
-                            leaveLobby({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
+                        onClick={async () => {
+                            dispatch(setLeaveLobbyAction(true));
+                            await leaveLobby({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
                             dispatch(setQuickAction(false));
-                            dispatch(push('/'));
                         }}>{selector.msg.lang.BACK_BTN}</BackButton>
                     </Grid>
                     <Grid item xs={4} />
