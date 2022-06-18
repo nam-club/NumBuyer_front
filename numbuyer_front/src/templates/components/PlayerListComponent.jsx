@@ -25,8 +25,10 @@ const PlayerListComponent = () => {
     const [openTip, setOpenTip] = React.useState(false);
 
     React.useEffect(() => {
-        setOwners(selector.players.players.filter((player) => { return player.isOwner }));
-        setMembers(selector.players.players.filter((player) => { return !player.isOwner }));
+        if(selector.players.players) {
+            setOwners(selector.players.players.filter((player) => { return player.isOwner }));
+            setMembers(selector.players.players.filter((player) => { return !player.isOwner }));
+        }
     }, [selector.players.players]);
 
     const handleCloseTip = () => {
@@ -65,7 +67,7 @@ const PlayerListComponent = () => {
                     </Grid>
                     <Grid item xs={4} />
                     <Grid item xs={4}>
-                    {(selector.players.player && selector.players.player.isOwner &&
+                    {(selector.players.player && selector.players.players && selector.players.player.isOwner &&
                     selector.players.players.length > 1) &&
                         <StartButton size="large" variant="contained"
                         onClick={() => {

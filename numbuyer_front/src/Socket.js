@@ -214,8 +214,13 @@ export default function Socket(props) {
             console.log("game/playersInfo:");
             console.log(msg);
             resObj = JSON.parse(msg);
+
             setPlayers(resObj.players).then(()=>{
                 if(selector.game.leaveLobbyFlg === false) {
+                    // オーナーフラグを更新
+                    let player = selector.players.players.find((p) => {return p.playerId === selector.players.player.playerId});
+                    dispatch(setOwnerAction(player.isOwner));
+                    console.log(selector.players.player);
                     dispatch(push('/Lobby'));
                     console.log("ロビー画面に移動しました");
                 }else {
