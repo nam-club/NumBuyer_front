@@ -125,8 +125,8 @@ const TutorialComponent = () => {
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
-                    {text: blue[700], dot: "grey"},
-                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "primary"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
@@ -149,9 +149,9 @@ const TutorialComponent = () => {
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
-                    {text: blue[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
-                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "primary"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"}
@@ -174,10 +174,10 @@ const TutorialComponent = () => {
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
-                    {text: blue[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
-                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "primary"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"}
                 ]));
@@ -198,11 +198,11 @@ const TutorialComponent = () => {
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
-                    {text: blue[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
-                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "primary"},
                     {text: grey[700], dot: "grey"}
                 ]));
                 break;
@@ -222,12 +222,12 @@ const TutorialComponent = () => {
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
-                    {text: blue[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
-                    {text: grey[700], dot: "primary"}
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "primary"}
                 ]));
                 break;
             default:
