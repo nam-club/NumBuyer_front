@@ -16,7 +16,6 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineDot from '@mui/lab/TimelineDot';
 
-
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
 import beforeGame1 from '../../assets/before_game1.png';
 import beforeGame2 from '../../assets/before_game2.png';
@@ -28,6 +27,17 @@ import distribution2 from '../../assets/distribution2.png';
 import distribution3 from '../../assets/distribution3.png';
 import auction1 from '../../assets/auction1.png';
 import auction2 from '../../assets/auction2.png';
+import auction3 from '../../assets/auction3.png';
+import auction4 from '../../assets/auction4.png';
+import calculation1 from '../../assets/calculation1.png';
+import calculation2 from '../../assets/calculation2.png';
+import calculation3 from '../../assets/calculation3.png';
+import calculation4 from '../../assets/calculation4.png';
+import useAbilities1 from '../../assets/use_abilities1.png';
+import useAbilities2 from '../../assets/use_abilities2.png';
+import useAbilities3 from '../../assets/use_abilities3.png';
+import useAbilities4 from '../../assets/use_abilities4.png';
+import endGame1 from '../../assets/end_game1.png';
 import { setTLColorAction, setTPageAction } from '../../redux/msg/actions';
 
 /** チュートリアル全体 */
@@ -45,6 +55,7 @@ const TutorialComponent = () => {
         {name: selector.msg.lang.TIME_LINE3, color: selector.msg.tlColor[3].text, dot: selector.msg.tlColor[3].dot},
         {name: selector.msg.lang.TIME_LINE4, color: selector.msg.tlColor[4].text, dot: selector.msg.tlColor[4].dot},
         {name: selector.msg.lang.ABILITY_TAG, color: selector.msg.tlColor[5].text, dot: selector.msg.tlColor[5].dot},
+        {name: selector.msg.lang.TIME_LINE5, color: selector.msg.tlColor[6].text, dot: selector.msg.tlColor[6].dot},
     ]);
 
     // タイムラインから説明を読みたい項目を選択
@@ -61,10 +72,12 @@ const TutorialComponent = () => {
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE5, color: grey[700], dot: "grey"},
                 ]);
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: blue[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
@@ -83,11 +96,13 @@ const TutorialComponent = () => {
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE5, color: grey[700], dot: "grey"},
                 ]);
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
                     {text: blue[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
@@ -105,12 +120,14 @@ const TutorialComponent = () => {
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE5, color: grey[700], dot: "grey"},
                 ]);
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
                     {text: blue[700], dot: "grey"},
                     {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"}
@@ -127,6 +144,7 @@ const TutorialComponent = () => {
                     {name: selector.msg.lang.TIME_LINE3, color: blue[700], dot: "primary"},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE5, color: grey[700], dot: "grey"},
                 ]);
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
@@ -134,6 +152,7 @@ const TutorialComponent = () => {
                     {text: blue[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"}
                 ]));
@@ -149,6 +168,7 @@ const TutorialComponent = () => {
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.TIME_LINE4, color: blue[700], dot: "primary"},
                     {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE5, color: grey[700], dot: "grey"},
                 ]);
                 // storeにもタイムラインの色を反映
                 // storeにもタイムラインの色を反映
@@ -158,6 +178,7 @@ const TutorialComponent = () => {
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"}
                 ]));
                 break;
@@ -172,11 +193,37 @@ const TutorialComponent = () => {
                     {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
                     {name: selector.msg.lang.ABILITY_TAG, color: blue[700], dot: "primary"},
+                    {name: selector.msg.lang.TIME_LINE5, color: grey[700], dot: "grey"},
                 ]);
                 // storeにもタイムラインの色を反映
                 dispatch(setTLColorAction([
                     {text: grey[700], dot: "grey"},
                     {text: blue[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
+                    {text: grey[700], dot: "primary"},
+                    {text: grey[700], dot: "grey"}
+                ]));
+                break;
+            case selector.msg.lang.TIME_LINE5:
+                // ページを変更する
+                dispatch(setTPageAction(Constants.T_PAGE7));
+                // 選択項目に色をつける
+                setIntroduction({name: selector.msg.lang.INTRODUCTION, color: grey[700]});
+                setTimeLines([
+                    {name: selector.msg.lang.TIME_LINE1, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE2, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE3, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE4, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.ABILITY_TAG, color: grey[700], dot: "grey"},
+                    {name: selector.msg.lang.TIME_LINE5, color: blue[700], dot: "primary"},
+                ]);
+                // storeにもタイムラインの色を反映
+                dispatch(setTLColorAction([
+                    {text: grey[700], dot: "grey"},
+                    {text: blue[700], dot: "grey"},
+                    {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
                     {text: grey[700], dot: "grey"},
@@ -196,6 +243,12 @@ const TutorialComponent = () => {
                 return '150%';
             case Constants.T_PAGE3:
                 return '47%';
+            case Constants.T_PAGE4:
+                return '76%';
+            case Constants.T_PAGE5:
+                return '74%';
+            case Constants.T_PAGE6:
+                return '82%';
             default:
                 return  "0";
         }
@@ -227,7 +280,7 @@ const TutorialComponent = () => {
                                 <TimelineItem key={index}>
                                     <TimelineSeparator>
                                         <TimelineDot color={value.dot}/>
-                                        {(index !== 0) && (index !== timeLines.length-2) && (index !== timeLines.length-1) && 
+                                        {(index !== 0) && (index !== timeLines.length-3) && (index !== timeLines.length-2) && (index !== timeLines.length-1) && 
                                             <TimelineConnector />
                                         }
                                     </TimelineSeparator>
@@ -398,12 +451,118 @@ const TutorialComponent = () => {
                                         texts={[
                                             selector.msg.lang.AUCTION_PHASE_MSG4,
                                             selector.msg.lang.AUCTION_PHASE_MSG5,
-                                            selector.msg.lang.AUCTION_PHASE_MSG6
+                                            selector.msg.lang.AUCTION_PHASE_MSG6,
+                                            selector.msg.lang.AUCTION_PHASE_MSG7
+                                        ]}>
+                                    </TutorialSectionComponent>
+                                    <TutorialSectionComponent
+                                        title={selector.msg.lang.AUCTION_PHASE_MSG8}
+                                        image={auction3}
+                                        texts={[
+                                            selector.msg.lang.AUCTION_PHASE_MSG9
+                                        ]}>
+                                    </TutorialSectionComponent>
+                                    <TutorialSectionComponent
+                                        title={selector.msg.lang.AUCTION_PHASE_MSG10}
+                                        image={auction4}
+                                        texts={[
+                                            selector.msg.lang.AUCTION_PHASE_MSG11
                                         ]}>
                                     </TutorialSectionComponent>
                                 </div>
                                 :
-                                <div></div>
+                                <div>
+                                    {selector.msg.tPage === Constants.T_PAGE5 ?
+                                    <div>
+                                        <TutorialSectionComponent
+                                            title={selector.msg.lang.CALCULATION_PHASE_MSG1}
+                                            image={calculation1}
+                                            texts={[
+                                                selector.msg.lang.CALCULATION_PHASE_MSG2,
+                                                selector.msg.lang.CALCULATION_PHASE_MSG3,
+                                            ]}>
+                                        </TutorialSectionComponent>
+                                        <TutorialSectionComponent
+                                            title={selector.msg.lang.CALCULATION_PHASE_MSG4}
+                                            image={calculation2}
+                                            texts={[
+                                                selector.msg.lang.CALCULATION_PHASE_MSG5
+                                            ]}>
+                                        </TutorialSectionComponent>
+                                        <TutorialSectionComponent
+                                            title={selector.msg.lang.CALCULATION_PHASE_MSG6}
+                                            image={calculation3}
+                                            texts={[
+                                                selector.msg.lang.CALCULATION_PHASE_MSG7
+                                            ]}>
+                                        </TutorialSectionComponent>
+                                        <TutorialSectionComponent
+                                            title={selector.msg.lang.CALCULATION_PHASE_MSG8}
+                                            image={calculation4}
+                                            texts={[
+                                                selector.msg.lang.CALCULATION_PHASE_MSG9,
+                                                selector.msg.lang.CALCULATION_PHASE_MSG10
+                                            ]}>
+                                        </TutorialSectionComponent>
+                                    </div>
+                                    :
+                                    <div>
+                                        {selector.msg.tPage === Constants.T_PAGE6 ?
+                                        <div>
+                                            <TutorialSectionComponent
+                                                title={selector.msg.lang.USE_ABILITIES_MSG1}
+                                                image={useAbilities1}
+                                                texts={[
+                                                    selector.msg.lang.USE_ABILITIES_MSG2,
+                                                    selector.msg.lang.USE_ABILITIES_MSG3,
+                                                ]}>
+                                            </TutorialSectionComponent>
+                                            <TutorialSectionComponent
+                                                title={selector.msg.lang.USE_ABILITIES_MSG4}
+                                                image={useAbilities2}
+                                                texts={[
+                                                    selector.msg.lang.USE_ABILITIES_MSG5
+                                                ]}>
+                                            </TutorialSectionComponent>
+                                            <TutorialSectionComponent
+                                                title={selector.msg.lang.USE_ABILITIES_MSG6}
+                                                image={useAbilities3}
+                                                texts={[
+                                                    selector.msg.lang.USE_ABILITIES_MSG7,
+                                                    selector.msg.lang.USE_ABILITIES_MSG8
+                                                ]}>
+                                            </TutorialSectionComponent>
+                                            <TutorialSectionComponent
+                                                title={selector.msg.lang.USE_ABILITIES_MSG9}
+                                                image={useAbilities4}
+                                                texts={[
+                                                    selector.msg.lang.USE_ABILITIES_MSG10,
+                                                    selector.msg.lang.USE_ABILITIES_MSG7,
+                                                    selector.msg.lang.USE_ABILITIES_MSG8
+                                                ]}>
+                                            </TutorialSectionComponent>
+                                        </div>
+                                        :
+                                        <div>
+                                            {selector.msg.tPage === Constants.T_PAGE7 ?
+                                            <div>
+                                                <TutorialSectionComponent
+                                                    title={selector.msg.lang.END_GAME_MSG1}
+                                                    image={endGame1}
+                                                    texts={[
+                                                        selector.msg.lang.END_GAME_MSG2,
+                                                        selector.msg.lang.END_GAME_MSG3,
+                                                    ]}>
+                                                </TutorialSectionComponent>
+                                            </div>
+                                            :
+                                            <div></div>
+                                            }
+                                        </div>
+                                        }
+                                    </div>
+                                    }
+                                </div>
                                 }
                             </div>
                             }

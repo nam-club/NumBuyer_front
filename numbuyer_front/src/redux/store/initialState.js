@@ -34,6 +34,7 @@ const initialState = {
             {text: grey[700], dot: "grey"},
             {text: grey[700], dot: "grey"},
             {text: grey[700], dot: "grey"},
+            {text: grey[700], dot: "grey"},
         ],
     },
     game: {

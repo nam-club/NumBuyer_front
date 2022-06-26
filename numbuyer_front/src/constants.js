@@ -8,6 +8,7 @@ export const T_PAGE3 = "Distribution and Publication";
 export const T_PAGE4 = "Auction";
 export const T_PAGE5 = "Calculation";
 export const T_PAGE6 = "Use Ability";
+export const T_PAGE7 = "Finish Game";
 
 // メッセージ表示時間
 export const ABL_MSG_TIME = 10; // アビリティメッセージ表示時間
