@@ -24,22 +24,17 @@ export const theme = createTheme({
 
 // メインロゴ
 export const MainLogoMobile = styled('img')({
-  width: '50%',
-  marginLeft: '75%',
+  width: '30%',
 });
 
 // メインタイトル
 export const MainTitleMobile = styled('img')({
-  width: '125%',
-  marginLeft: '37.5%',
+  width: '75%',
 });
 
 // トップ・ロビー画面の背景
 export const BackMobile = styled('div')({
-  background: blue[300],
   paddingTop: '10%',
-  paddingBottom: '2%',
-  paddingRight: "50%",
 });
 
 // 言語設定ボタン
@@ -135,8 +130,8 @@ export const DetailMessage = styled(Typography)({
 
 // トップ・ロビー画面のメニュー
 export const MenuCardMobile = styled(Card)({
-  margin: '25%',
-  width: '150%',
+  margin: '20% 12.5%',
+  width: '75%',
 });
 
 // 入力テキストボックス

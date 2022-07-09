@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Helmet from 'react-helmet';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,12 +14,14 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
 import { theme } from "./templates/theme";
 import { ThemeProvider } from '@mui/material/styles';
+import { blue } from '@mui/material/colors';
 
 const history = History.createBrowserHistory();
 export const store = createStore(history);
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
+    <Helmet bodyAttributes={{style: 'background-color : #64b5f6'}}/>
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <App />
