@@ -130,7 +130,7 @@ export const DetailMessage = styled(Typography)({
 
 // トップ・ロビー画面のメニュー
 export const MenuCardMobile = styled(Card)({
-  margin: '20% 12.5%',
+  margin: '10% 12.5%',
   width: '75%',
 });
 
