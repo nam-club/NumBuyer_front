@@ -3,6 +3,9 @@ import React from 'react';
 import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
+import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, TutorialIconMobile, MenuCardMobile,
+        QuickButtonMobile, FriendButtonMobile } from './themeMobile';
+
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
@@ -27,6 +30,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Grid from '@mui/material/Grid';
 import { grey, amber, blue, teal, red } from '@mui/material/colors';
+import { useMediaQuery } from "@mui/material";
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
@@ -49,6 +53,8 @@ const Top = () => {
     const [rcvAbilities, setRcvAbilities] = React.useState(Constants.RCV_ABILITIES);
     const [jamAbilities, setJamAbilities] = React.useState(Constants.JAM_ABILITIES);
     const [cnfAbilities, setCnfAbilities] = React.useState(Constants.CNF_ABILITIES);
+
+    const matches = useMediaQuery("(min-width:520px)");
 
     /** 強制的に再レンダリングさせる */
     const useForceUpdate = () => {
@@ -249,155 +255,268 @@ const Top = () => {
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
-            <Back>
-                <Grid container>
-                    <Grid item xs={7}/>
-                    <Grid item xs={2}>
-                        <ButtonGroup variant="text" aria-label="text button group">
-                            <LangButton onClick={() => {
-                                dispatch(setLangAction(ConstantsMsg.English));
-                                setErrMsg(selector.msg.errMsgVars[0]);
-                                forceUpdate();
-                            }}>{selector.msg.lang.LANG_EN}</LangButton>
-                            <LangButton onClick={() => {
-                                dispatch(setLangAction(ConstantsMsg.Japanese));
-                                setErrMsg(selector.msg.errMsgVars[1]);
-                                forceUpdate();
-                            }}>{selector.msg.lang.LANG_JP}</LangButton>
-                            <LangButton onClick={() => {
-                                dispatch(setLangAction(ConstantsMsg.Chinese));
-                                setErrMsg(selector.msg.errMsgVars[2]);
-                                forceUpdate();
-                            }}>{selector.msg.lang.LANG_CN}</LangButton>
-                        </ButtonGroup>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Button onClick={handleTutorialOpen}>
-                            <TutorialIcon/>
-                        </Button>
-                    </Grid>
-                    <Grid item xs={2}/>
-                </Grid>
-                <MenuModal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={tutorialOpen}
-                    onClose={handleTutorialClose}
-                    closeAfterTransition
-                >
-                    <Fade in={tutorialOpen}>
-                        <TopMenu>
-                            <TutorialComponent/>
-                        </TopMenu>
-                    </Fade>
-                </MenuModal>
-                <MainLogo src={logo}/>
-                <MainTitle src={title}/>
-                <MenuCard>
-                    <CardContent>
-                        <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
-                        inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
-                        InputLabelProps={{ style: {fontSize: '3em'} }}
-                        onChange={doChange}/>
-                        {selector.msg.validFlg &&
-                            <ErrorMessage>{errMsg}</ErrorMessage>
-                        }
-                    </CardContent>
-                    <CardActions>
-                        <Grid item xs={6}>
-                            <QuickButton size="large" variant="contained"
-                            onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButton>
+            {matches ? 
+            <div>
+                <Back>
+                    <Grid container>
+                        <Grid item xs={7}/>
+                        <Grid item xs={2}>
+                            <ButtonGroup variant="text" aria-label="text button group">
+                                <LangButton onClick={() => {
+                                    dispatch(setLangAction(ConstantsMsg.English));
+                                    setErrMsg(selector.msg.errMsgVars[0]);
+                                    forceUpdate();
+                                }}>{selector.msg.lang.LANG_EN}</LangButton>
+                                <LangButton onClick={() => {
+                                    dispatch(setLangAction(ConstantsMsg.Japanese));
+                                    setErrMsg(selector.msg.errMsgVars[1]);
+                                    forceUpdate();
+                                }}>{selector.msg.lang.LANG_JP}</LangButton>
+                                <LangButton onClick={() => {
+                                    dispatch(setLangAction(ConstantsMsg.Chinese));
+                                    setErrMsg(selector.msg.errMsgVars[2]);
+                                    forceUpdate();
+                                }}>{selector.msg.lang.LANG_CN}</LangButton>
+                            </ButtonGroup>
                         </Grid>
-                        <Grid item xs={6}>
-                            <FriendButton size="large" variant="contained"
-                            onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
+                        <Grid item xs={1}>
+                            <Button onClick={handleTutorialOpen}>
+                                <TutorialIcon/>
+                            </Button>
                         </Grid>
-                    </CardActions>
-                    <FriendModal
+                        <Grid item xs={2}/>
+                    </Grid>
+                    <MenuModal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
-                        open={friendOpen}
-                        onClose={handleFriendClose}
+                        open={tutorialOpen}
+                        onClose={handleTutorialClose}
                         closeAfterTransition
                     >
-                        <Fade in={friendOpen}>
-                            <FriendMenu>
-                                <Typography component="div" align="center">
-                                    {selector.msg.validFlg &&
-                                        <ErrorMessage>{errMsg}</ErrorMessage>
-                                    }
-                                    <CreateButton size="large" variant="contained"
-                                    onClick={() => {
-                                        dispatch(setValidAction({validFlg: false}));
-                                        dispatch(setRoomAction({roomId: roomId}));
-                                        dispatch(setPlayerNameAction(name));
-                                        createMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
-                                    }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
-                                </Typography>
-                                <Grid container>
-                                    <Grid item xs={6}>
-                                        <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 
-                                        inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%'} } }
-                                        InputLabelProps={{ style: {fontSize: '3em'} }}
-                                        onChange={roomIdChange} />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <JoinButton size="large" variant="contained"
-                                        onClick={() => {clickJoin();}}>{selector.msg.lang.JOIN_BTN}</JoinButton>
-                                    </Grid>
-                                </Grid>
-                            </FriendMenu>
-                        </Fade>
-                    </FriendModal>
-                    <AbilityModal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        open={abilityOpen}
-                        onClose={handleAbilityClose}
-                        closeAfterTransition
-                    >
-                        <Fade in={abilityOpen}>
+                        <Fade in={tutorialOpen}>
                             <TopMenu>
-                                <Typography component="div" align="center">
-                                    <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
-                                    <Grid container>
-                                        <Grid item xs={1} />
-                                        <Grid item xs={2}>
-                                            <SelectAbilityComponent background={blue[300]} color={grey[50]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
-                                                type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <SelectAbilityComponent background={red[300]} color={grey[50]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
-                                                type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <SelectAbilityComponent background={teal[300]} color={grey[50]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
-                                                type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <SelectAbilityComponent background={amber[300]} color={grey[50]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
-                                                type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <SelectAbilityComponent background={grey[700]} color={grey[50]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
-                                                type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
-                                        </Grid>
-                                        <Grid item xs={1} />
-                                    </Grid>
-                                    {selector.msg.validFlg &&
-                                        <ErrorMessage>{errMsg}</ErrorMessage>
-                                     }
-                                    <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
-                                        {selector.msg.lang.CONFIRM_BTN}
-                                    </ConfirmButton>
-                                    <AbilityTag>{selector.msg.lang.ABILITY_EXP1}</AbilityTag>
-                                    <AbilityTag>{selector.msg.lang.ABILITY_EXP2}</AbilityTag>
-                                </Typography>
+                                <TutorialComponent/>
                             </TopMenu>
                         </Fade>
-                    </AbilityModal>
-                </MenuCard>
-            </Back>
+                    </MenuModal>
+                    <MainLogo src={logo}/>
+                    <MainTitle src={title}/>
+                    <MenuCard>
+                        <CardContent>
+                            <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
+                            inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
+                            InputLabelProps={{ style: {fontSize: '3em'} }}
+                            onChange={doChange}/>
+                            {selector.msg.validFlg &&
+                                <ErrorMessage>{errMsg}</ErrorMessage>
+                            }
+                        </CardContent>
+                        <CardActions>
+                            <Grid item xs={6}>
+                                <QuickButton size="large" variant="contained"
+                                onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButton>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FriendButton size="large" variant="contained"
+                                onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
+                            </Grid>
+                        </CardActions>
+                        <FriendModal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            open={friendOpen}
+                            onClose={handleFriendClose}
+                            closeAfterTransition
+                        >
+                            <Fade in={friendOpen}>
+                                <FriendMenu>
+                                    <Typography component="div" align="center">
+                                        {selector.msg.validFlg &&
+                                            <ErrorMessage>{errMsg}</ErrorMessage>
+                                        }
+                                        <CreateButton size="large" variant="contained"
+                                        onClick={() => {
+                                            dispatch(setValidAction({validFlg: false}));
+                                            dispatch(setRoomAction({roomId: roomId}));
+                                            dispatch(setPlayerNameAction(name));
+                                            createMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
+                                        }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
+                                    </Typography>
+                                    <Grid container>
+                                        <Grid item xs={6}>
+                                            <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 
+                                            inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%'} } }
+                                            InputLabelProps={{ style: {fontSize: '3em'} }}
+                                            onChange={roomIdChange} />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <JoinButton size="large" variant="contained"
+                                            onClick={() => {clickJoin();}}>{selector.msg.lang.JOIN_BTN}</JoinButton>
+                                        </Grid>
+                                    </Grid>
+                                </FriendMenu>
+                            </Fade>
+                        </FriendModal>
+                        <AbilityModal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            open={abilityOpen}
+                            onClose={handleAbilityClose}
+                            closeAfterTransition
+                        >
+                            <Fade in={abilityOpen}>
+                                <TopMenu>
+                                    <Typography component="div" align="center">
+                                        <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                        <Grid container>
+                                            <Grid item xs={1} />
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={blue[300]} color={grey[50]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={red[300]} color={grey[50]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={teal[300]} color={grey[50]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={amber[300]} color={grey[50]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={grey[700]} color={grey[50]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
+                                                    type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={1} />
+                                        </Grid>
+                                        {selector.msg.validFlg &&
+                                            <ErrorMessage>{errMsg}</ErrorMessage>
+                                        }
+                                        <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
+                                            {selector.msg.lang.CONFIRM_BTN}
+                                        </ConfirmButton>
+                                        <AbilityTag>{selector.msg.lang.ABILITY_EXP1}</AbilityTag>
+                                        <AbilityTag>{selector.msg.lang.ABILITY_EXP2}</AbilityTag>
+                                    </Typography>
+                                </TopMenu>
+                            </Fade>
+                        </AbilityModal>
+                    </MenuCard>
+                </Back>
+            </div>
+            :
+            <div>
+                <BackMobile>
+                <MainLogoMobile src={logo}/>
+                    <MainTitleMobile src={title}/>
+                    <MenuCardMobile>
+                        <CardContent>
+                            <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
+                            inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
+                            InputLabelProps={{ style: {fontSize: '3em'} }}
+                            onChange={doChange}/>
+                            {selector.msg.validFlg &&
+                                <ErrorMessage>{errMsg}</ErrorMessage>
+                            }
+                        </CardContent>
+                        <CardActions sx={{marginTop: '20%'}}>
+                            <QuickButtonMobile size="large" variant="contained"
+                            onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
+                        </CardActions>
+                        <CardActions sx={{marginBottom: '10%'}}>
+                            <FriendButtonMobile size="large" variant="contained"
+                            onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
+                        </CardActions>
+                        <FriendModal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            open={friendOpen}
+                            onClose={handleFriendClose}
+                            closeAfterTransition
+                        >
+                            <Fade in={friendOpen}>
+                                <FriendMenu>
+                                    <Typography component="div" align="center">
+                                        {selector.msg.validFlg &&
+                                            <ErrorMessage>{errMsg}</ErrorMessage>
+                                        }
+                                        <CreateButton size="large" variant="contained"
+                                        onClick={() => {
+                                            dispatch(setValidAction({validFlg: false}));
+                                            dispatch(setRoomAction({roomId: roomId}));
+                                            dispatch(setPlayerNameAction(name));
+                                            createMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
+                                        }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
+                                    </Typography>
+                                    <Grid container>
+                                        <Grid item xs={6}>
+                                            <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 
+                                            inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%'} } }
+                                            InputLabelProps={{ style: {fontSize: '3em'} }}
+                                            onChange={roomIdChange} />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <JoinButton size="large" variant="contained"
+                                            onClick={() => {clickJoin();}}>{selector.msg.lang.JOIN_BTN}</JoinButton>
+                                        </Grid>
+                                    </Grid>
+                                </FriendMenu>
+                            </Fade>
+                        </FriendModal>
+                        <AbilityModal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            open={abilityOpen}
+                            onClose={handleAbilityClose}
+                            closeAfterTransition
+                        >
+                            <Fade in={abilityOpen}>
+                                <TopMenu>
+                                    <Typography component="div" align="center">
+                                        <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                        <Grid container>
+                                            <Grid item xs={1} />
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={blue[300]} color={grey[50]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={red[300]} color={grey[50]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={teal[300]} color={grey[50]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={amber[300]} color={grey[50]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
+                                                    type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={2}>
+                                                <SelectAbilityComponent background={grey[700]} color={grey[50]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
+                                                    type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
+                                            </Grid>
+                                            <Grid item xs={1} />
+                                        </Grid>
+                                        {selector.msg.validFlg &&
+                                            <ErrorMessage>{errMsg}</ErrorMessage>
+                                        }
+                                        <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
+                                            {selector.msg.lang.CONFIRM_BTN}
+                                        </ConfirmButton>
+                                        <AbilityTag>{selector.msg.lang.ABILITY_EXP1}</AbilityTag>
+                                        <AbilityTag>{selector.msg.lang.ABILITY_EXP2}</AbilityTag>
+                                    </Typography>
+                                </TopMenu>
+                            </Fade>
+                        </AbilityModal>
+                    </MenuCardMobile>
+                </BackMobile>
+            </div>
+            }
         </Typography>
     )
 }
