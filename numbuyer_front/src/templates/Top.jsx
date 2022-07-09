@@ -4,7 +4,7 @@ import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, TutorialIconMobile, MenuCardMobile,
-        QuickButtonMobile, FriendButtonMobile } from './themeMobile';
+        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
@@ -410,19 +410,20 @@ const Top = () => {
             :
             <div>
                 <BackMobile>
-                <MainLogoMobile src={logo}/>
+                    <MainLogoMobile src={logo}/>
                     <MainTitleMobile src={title}/>
                     <MenuCardMobile>
                         <CardContent>
-                            <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
-                            inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
-                            InputLabelProps={{ style: {fontSize: '3em'} }}
+                            <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name}
+                            sx={{margin: '0 10%'}} 
+                            inputProps={{ style: {fontSize: '2em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } }
+                            InputLabelProps={{ style: {fontSize: '2em'} }}
                             onChange={doChange}/>
-                            {selector.msg.validFlg &&
-                                <ErrorMessage>{errMsg}</ErrorMessage>
-                            }
                         </CardContent>
-                        <CardActions sx={{marginTop: '20%'}}>
+                        {selector.msg.validFlg &&
+                            <ErrorMessageMobile>{errMsg}</ErrorMessageMobile>
+                        }
+                        <CardActions>
                             <QuickButtonMobile size="large" variant="contained"
                             onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
                         </CardActions>

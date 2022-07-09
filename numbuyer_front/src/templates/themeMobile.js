@@ -24,14 +24,14 @@ export const theme = createTheme({
 
 // メインロゴ
 export const MainLogoMobile = styled('img')({
-  width: '75%',
-  marginLeft: '65%',
+  width: '50%',
+  marginLeft: '75%',
 });
 
 // メインタイトル
 export const MainTitleMobile = styled('img')({
-  width: '150%',
-  marginLeft: '25%',
+  width: '125%',
+  marginLeft: '37.5%',
 });
 
 // トップ・ロビー画面の背景
@@ -135,8 +135,8 @@ export const DetailMessage = styled(Typography)({
 
 // トップ・ロビー画面のメニュー
 export const MenuCardMobile = styled(Card)({
-  margin: '10%',
-  width: '180%',
+  margin: '25%',
+  width: '150%',
 });
 
 // 入力テキストボックス
@@ -145,7 +145,9 @@ export const InputField = styled(TextField)({
 });
 
 // エラーメッセージ
-export const ErrorMessage = styled('p')({
+export const ErrorMessageMobile = styled('p')({
+  fontSize: '1.5em',
+  margin: '5% 10%',
   color: red[600],
   background: red[100],
 });
@@ -153,8 +155,9 @@ export const ErrorMessage = styled('p')({
 // クイックマッチボタン
 export const QuickButtonMobile = styled(Button)({
   display: 'inline-block',
-  fontSize: '3em',
+  fontSize: '2em',
   width: '150%',
+  margin: '5% 10%',
   color: grey[700],
   background: blue[200],
   'white-space': 'nowrap',
@@ -166,8 +169,9 @@ export const QuickButtonMobile = styled(Button)({
 // フレンドマッチボタン
 export const FriendButtonMobile = styled(Button)({
   display: 'inline-block',
-  fontSize: '3em',
+  fontSize: '2em',
   width: '150%',
+  margin: '0 10%',
   color: grey[700],
   background: indigo[200],
   'white-space': 'nowrap',
