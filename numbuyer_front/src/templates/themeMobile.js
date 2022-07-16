@@ -39,14 +39,19 @@ export const BackMobile = styled('div')({
 
 // 言語設定ボタン
 export const LangButtonMobile = styled(Button)({
-  fontSize: '3em',
+  margin: '0 2%',
+  fontSize: '1.5em',
   color: grey[50],
+  background: grey[600],
+  '&:hover': {
+    background: grey[500],
+  },
 });
 
 // チュートリアルアイコン
 export const TutorialIconMobile = styled(MenuBookIcon)({
   color: grey[50],
-  fontSize: '5em',
+  fontSize: '2.5em',
   margin: 0,
 });
 

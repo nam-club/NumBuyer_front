@@ -423,14 +423,29 @@ const Top = () => {
                         {selector.msg.validFlg &&
                             <ErrorMessageMobile>{errMsg}</ErrorMessageMobile>
                         }
-                        <CardActions>
-                            <QuickButtonMobile size="large" variant="contained"
-                            onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
-                        </CardActions>
-                        <CardActions sx={{marginBottom: '10%'}}>
-                            <FriendButtonMobile size="large" variant="contained"
-                            onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
-                        </CardActions>
+                        {selector.msg.lang === ConstantsMsg.English ?
+                        <div>
+                            <CardActions>
+                                <QuickButtonMobile size="large" variant="contained"
+                                onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
+                            </CardActions>
+                            <CardActions sx={{marginBottom: '10%'}}>
+                                <FriendButtonMobile size="large" variant="contained"
+                                onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
+                            </CardActions>
+                        </div>
+                        :
+                        <div>
+                            <CardActions>
+                                <QuickButtonMobile size="large" variant="contained" sx={{fontSize: '1.5em', padding: '5.5%'}}
+                                onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
+                            </CardActions>
+                            <CardActions sx={{marginBottom: '10%'}}>
+                                <FriendButtonMobile size="large" variant="contained" sx={{fontSize: '1.5em', padding: '5.5%'}}
+                                onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
+                            </CardActions>
+                        </div>
+                        }
                         <FriendModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
@@ -515,6 +530,46 @@ const Top = () => {
                             </Fade>
                         </AbilityModal>
                     </MenuCardMobile>
+                    <div>
+                        <LangButtonMobile onClick={() => {
+                            dispatch(setLangAction(ConstantsMsg.English));
+                            setErrMsg(selector.msg.errMsgVars[0]);
+                            forceUpdate();
+                        }}>
+                            {selector.msg.lang.LANG_EN}
+                        </LangButtonMobile>
+                        <LangButtonMobile onClick={() => {
+                            dispatch(setLangAction(ConstantsMsg.Japanese));
+                            setErrMsg(selector.msg.errMsgVars[1]);
+                            forceUpdate();
+                        }}>
+                            {selector.msg.lang.LANG_JP}
+                        </LangButtonMobile>
+                        <LangButtonMobile onClick={() => {
+                            dispatch(setLangAction(ConstantsMsg.Chinese));
+                            setErrMsg(selector.msg.errMsgVars[2]);
+                            forceUpdate();
+                        }}>
+                            {selector.msg.lang.LANG_CN}
+                        </LangButtonMobile>
+                    </div>
+                    <LangButtonMobile sx={{marginTop: '5%'}}
+                    onClick={handleTutorialOpen}>
+                        <TutorialIconMobile/>
+                    </LangButtonMobile>
+                    <MenuModal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        open={tutorialOpen}
+                        onClose={handleTutorialClose}
+                        closeAfterTransition
+                    >
+                        <Fade in={tutorialOpen}>
+                            <TopMenu>
+                                <TutorialComponent/>
+                            </TopMenu>
+                        </Fade>
+                    </MenuModal>
                 </BackMobile>
             </div>
             }
