@@ -84,16 +84,19 @@ export const SideBar = styled(Box)({
 });
 
 // ページタイトル
-export const PageTitle = styled(Button)({
-  color: grey[700],
+export const PageTitleMobile = styled(Button)({
   fontSize: '1.5em',
+  background: grey[600],
+  '&:hover': {
+    background: grey[500],
+  },
 });
 
 // 見出し
-export const Caption = styled('p')({
+export const CaptionMobile = styled('p')({
   color: grey[700],
-  fontSize: '1.2em',
-  margin: 0,
+  marginTop: '5%',
+  marginBottom: '0'
 });
 
 // 見出し（タイムライン）
@@ -102,10 +105,12 @@ export const TimeItemName = styled(TimelineContent)({
 });
 
 // ボタン（タイムライン）
-export const TLButton = styled(Button)({
-  color: grey[700],
-  margin:0,
-  padding:0
+export const TLButtonMobile = styled(Button)({
+  margin: '2%',
+  background: teal[300],
+  '&:hover': {
+    background: teal[200],
+  },
 });
 
 // チュートリアル本文
