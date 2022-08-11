@@ -4,7 +4,8 @@ import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, TutorialIconMobile, MenuCardMobile,
-        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, ConfirmButtonMobile } from './themeMobile';
+        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, FriendMenuMobile,
+         ConfirmButtonMobile, CreateButtonMobile, JoinButtonMobile} from './themeMobile';
 
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
@@ -459,32 +460,26 @@ const Top = () => {
                             closeAfterTransition
                         >
                             <Fade in={friendOpen}>
-                                <FriendMenu>
+                                <FriendMenuMobile>
                                     <Typography component="div" align="center">
                                         {selector.msg.validFlg &&
                                             <ErrorMessage>{errMsg}</ErrorMessage>
                                         }
-                                        <CreateButton size="large" variant="contained"
+                                        <CreateButtonMobile size="large" variant="contained"
                                         onClick={() => {
                                             dispatch(setValidAction({validFlg: false}));
                                             dispatch(setRoomAction({roomId: roomId}));
                                             dispatch(setPlayerNameAction(name));
                                             createMatch({playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities});
-                                        }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
+                                        }}>{selector.msg.lang.CREATE_BTN}</CreateButtonMobile>
+                                        <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 
+                                        inputProps={{ style: {fontSize: '3em', color: grey[600], paddingBottom: 0} } }
+                                        InputLabelProps={{ style: {fontSize: '3em'} }}
+                                        onChange={roomIdChange} />
+                                        <JoinButtonMobile size="large" variant="contained"
+                                        onClick={() => {clickJoin();}}>{selector.msg.lang.JOIN_BTN}</JoinButtonMobile>
                                     </Typography>
-                                    <Grid container>
-                                        <Grid item xs={6}>
-                                            <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId} 
-                                            inputProps={{ style: {fontSize: '3em', color: grey[600], marginTop: '2%'} } }
-                                            InputLabelProps={{ style: {fontSize: '3em'} }}
-                                            onChange={roomIdChange} />
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <JoinButton size="large" variant="contained"
-                                            onClick={() => {clickJoin();}}>{selector.msg.lang.JOIN_BTN}</JoinButton>
-                                        </Grid>
-                                    </Grid>
-                                </FriendMenu>
+                                </FriendMenuMobile>
                             </Fade>
                         </FriendModal>
                         <AbilityModal

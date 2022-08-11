@@ -255,18 +255,17 @@ export const FriendModal = styled(Modal)({
 });
 
 // フレンドマッチのメニュー
-export const FriendMenu = styled('div')({
+export const FriendMenuMobile = styled('div')({
   background: grey[50],
   boxShadow: 5,
-  padding: theme.spacing(4, 12, 4),
+  padding: theme.spacing(4, 6, 4),
 });
 
 // 部屋作成ボタン
-export const CreateButton = styled(Button)({
+export const CreateButtonMobile = styled(Button)({
   color: grey[700],
-  width: '50%',
-  marginBottom: '10%',
-  padding: '-20%',
+  width: '100%',
+  marginBottom: '30%',
   'white-space': 'nowrap',
   fontSize: '2em',
   zIndex: 2,
@@ -277,13 +276,11 @@ export const CreateButton = styled(Button)({
 });
 
 // 部屋入室ボタン
-export const JoinButton = styled(Button)({
+export const JoinButtonMobile = styled(Button)({
   color: grey[700],
   top: '50%',
   width: '100%',
-  marginTop: '-10%',
-  marginLeft: '10%',
-  padding: '-20%',
+  marginTop: '20%',
   fontSize: '2em',
   'white-space': 'nowrap',
   background: indigo[200],
