@@ -474,9 +474,8 @@ export const AreaTag = styled('p')({
 });
 
 // アビリティボタン（ゲーム中）
-export const UseAbilityButton = styled(Button) ({
-  width: '75%',
-  margin: '2%',
+export const UseAbilityButtonMobile = styled(Button) ({
+  width: '95%',
   'white-space': 'nowrap',
 });
 
@@ -561,8 +560,10 @@ export const TimeAreaMobile = styled('div')({
 });
 
 // 残り時間タグ
-export const TimeTag = styled('p')({
-  margin: 0,
+export const TimeTagMobile = styled('p')({
+  margin: '100% 70%',
+  padding: 0,
+  color: grey[50],
   fontSize: '1.5em',
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useStyles, GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
-import { GoalMessageMobile } from './themeMobile';
+import { TimeTagMobile, GoalMessageMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
@@ -279,8 +279,15 @@ const Game = () => {
                         ))}
                     </Grid>
                     <Grid item xs={5}>
-                        <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
-                         roomId={roomId} playerId={player.playerId}/>
+                        <Grid container>
+                            <Grid xs={2}>
+                                <TimeTagMobile>{selector.msg.lang.TIME}</TimeTagMobile>
+                            </Grid>
+                            <Grid xs={10}>
+                                <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
+                                roomId={roomId} playerId={player.playerId}/>
+                            </Grid>
+                        </Grid>
                         {selector.msg.lang.LANGUAGE === 'Japanese'
                             ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>
                             : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
@@ -289,46 +296,35 @@ const Game = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item xs={1}/>
-                    <Grid item xs={8}>
-                        <Grid container>
-                            <Grid item xs={2}>
-                                {(targetCard !== '　'
-                                    && (
-                                        !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
-                                        ||
-                                        (selector.game.targetSkipFlg && 
-                                            ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
-                                        )
-                                    )
+                    <Grid item xs={4}>
+                        {(targetCard !== '　'
+                            && (
+                                !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
+                                ||
+                                (selector.game.targetSkipFlg && 
+                                    ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
                                 )
-                                &&
-                                    <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                                        <TargetCard>
-                                            <CardTag>{selector.msg.lang.TARGET}</CardTag>
-                                            <CardValue>{targetCard}</CardValue>
-                                        </TargetCard>
-                                    </Slide>
-                                }
-                            </Grid>
-                            <Grid item xs={10}>
-                                {(player.abilities[0].trigger === Constants.ACT_TRG) || (player.abilities[1].trigger === Constants.ACT_TRG) ?
-                                    <Grid container>
-                                        <Grid item xs={8}>
-                                            <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
-                                        </Grid>
-                                        <Grid item xs={4}>
-                                            <UseAbilityComponent/>
-                                        </Grid>
-                                    </Grid>
-                                :
+                            )
+                        )
+                        &&
+                            <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
+                                <TargetCard>
+                                    <CardTag>{selector.msg.lang.TARGET}</CardTag>
+                                    <CardValue>{targetCard}</CardValue>
+                                </TargetCard>
+                            </Slide>
+                        }
+                    </Grid>
+                    <Grid item xs={8}>   
+                        {(player.abilities[0].trigger === Constants.ACT_TRG) || (player.abilities[1].trigger === Constants.ACT_TRG) ?
                                     <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
-                                }
-                            </Grid>
-                        </Grid>
-                        <CalcComponent calcBtnFlg={calcBtnFlg}/>
+                        :
+                            <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                        }
                     </Grid>
                 </Grid>
+                <UseAbilityComponent/>
+                <CalcComponent calcBtnFlg={calcBtnFlg}/>
                 <FinishModal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
