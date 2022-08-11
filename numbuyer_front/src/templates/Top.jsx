@@ -4,7 +4,7 @@ import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, TutorialIconMobile, MenuCardMobile,
-        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile } from './themeMobile';
+        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, ConfirmButtonMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
@@ -372,22 +372,27 @@ const Top = () => {
                                             <Grid item xs={1} />
                                             <Grid item xs={2}>
                                                 <SelectAbilityComponent background={blue[300]} color={grey[50]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
+                                                    fontSize="1em" naviFontSize="1.5em"
                                                     type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
                                             </Grid>
                                             <Grid item xs={2}>
                                                 <SelectAbilityComponent background={red[300]} color={grey[50]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
+                                                    fontSize="1em" naviFontSize="1.5em"
                                                     type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
                                             </Grid>
                                             <Grid item xs={2}>
                                                 <SelectAbilityComponent background={teal[300]} color={grey[50]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                                    fontSize="1em" naviFontSize="1.5em"
                                                     type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
                                             </Grid>
                                             <Grid item xs={2}>
                                                 <SelectAbilityComponent background={amber[300]} color={grey[50]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
+                                                    fontSize="1em" naviFontSize="1.5em"
                                                     type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
                                             </Grid>
                                             <Grid item xs={2}>
                                                 <SelectAbilityComponent background={grey[700]} color={grey[50]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
+                                                    fontSize="1em" naviFontSize="1.5em"
                                                     type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
                                             </Grid>
                                             <Grid item xs={1} />
@@ -494,35 +499,42 @@ const Top = () => {
                                     <Typography component="div" align="center">
                                         <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
                                         <Grid container>
-                                            <Grid item xs={1} />
-                                            <Grid item xs={2}>
+                                            <Grid item xs={6}>
                                                 <SelectAbilityComponent background={blue[300]} color={grey[50]} btnColor={blue[200]} fcsColor={blue[100]} fcsTagColor={grey[800]}
+                                                    fontSize="0.5em" naviFontSize="0.75em"
                                                     type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
                                             </Grid>
-                                            <Grid item xs={2}>
+                                            <Grid item xs={6}>
                                                 <SelectAbilityComponent background={red[300]} color={grey[50]} btnColor={red[200]} fcsColor={red[100]} fcsTagColor={grey[800]}
+                                                    fontSize="0.5em" naviFontSize="0.75em"
                                                     type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
                                             </Grid>
-                                            <Grid item xs={2}>
+                                        </Grid>
+                                        <Grid container>
+                                            <Grid item xs={6}>
                                                 <SelectAbilityComponent background={teal[300]} color={grey[50]} btnColor={teal[200]} fcsColor={teal[100]} fcsTagColor={grey[800]}
+                                                    fontSize="0.5em" naviFontSize="0.75em"
                                                     type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
                                             </Grid>
-                                            <Grid item xs={2}>
+                                            <Grid item xs={6}>
                                                 <SelectAbilityComponent background={amber[300]} color={grey[50]} btnColor={amber[200]} fcsColor={amber[100]} fcsTagColor={grey[800]}
+                                                    fontSize="0.5em" naviFontSize="0.75em"
                                                     type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
                                             </Grid>
-                                            <Grid item xs={2}>
+                                        </Grid>
+                                        <Grid container>
+                                            <Grid item xs={6}>
                                                 <SelectAbilityComponent background={grey[700]} color={grey[50]} btnColor={grey[700]} fcsColor={grey[600]} fcsTagColor={grey[100]}
+                                                    fontSize="0.5em" naviFontSize="0.75em"
                                                     type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
                                             </Grid>
-                                            <Grid item xs={1} />
                                         </Grid>
                                         {selector.msg.validFlg &&
                                             <ErrorMessage>{errMsg}</ErrorMessage>
                                         }
-                                        <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
+                                        <ConfirmButtonMobile size="large" variant="contained" onClick={() => confirmAbilities()}>
                                             {selector.msg.lang.CONFIRM_BTN}
-                                        </ConfirmButton>
+                                        </ConfirmButtonMobile>
                                         <AbilityTag>{selector.msg.lang.ABILITY_EXP1}</AbilityTag>
                                         <AbilityTag>{selector.msg.lang.ABILITY_EXP2}</AbilityTag>
                                     </Typography>

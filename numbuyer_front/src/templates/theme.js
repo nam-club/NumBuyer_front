@@ -296,8 +296,9 @@ export const SettingHeader = styled(Typography)({
 })
 
 // ロビータイトル
-export const LobbyTitle = styled('p')({
-  color: lightBlue[700],
+export const LobbyTitle = styled(Card)({
+  color: grey[100],
+  background: indigo[400],
   fontSize: '2em',
   fontWeight: 'bold',
 });

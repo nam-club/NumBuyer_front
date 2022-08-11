@@ -202,7 +202,6 @@ export const AbilityCard = styled(Card)({
 export const AbilityButton = styled(Button)({
   padding: '10%',
   margin: '5%',
-  fontSize: '1em',
   color: grey[800],
   background: grey[200],
   width: '75%',
@@ -227,9 +226,9 @@ export const SpeechBubble = styled('p')({
 });
 
 // 確定ボタン
-export const ConfirmButton = styled(Button)({
+export const ConfirmButtonMobile = styled(Button)({
   color: grey[100],
-  width: '20%',
+  width: '75%',
   margin: '10%',
   'white-space': 'nowrap',
   fontSize: '2em',
@@ -306,8 +305,10 @@ export const SettingHeader = styled(Typography)({
 })
 
 // ロビータイトル
-export const LobbyTitle = styled('p')({
-  color: lightBlue[700],
+export const LobbyTitleMobile = styled(Card)({
+  margin: 0,
+  color: grey[100],
+  background: indigo[400],
   fontSize: '2em',
   fontWeight: 'bold',
 });
@@ -319,26 +320,28 @@ export const OwnerIcon = styled(ManageAccountsIcon)({
 });
 
 // 参加プレイヤー一覧
-export const ParticipantList = styled('p')({
+export const ParticipantListMobile = styled('p')({
+  margin: '2%',
   color: grey[700],
-  fontSize: '1.5em',
+  fontSize: '2em',
   fontWeight: 'bold',
 });
 
 // ルームコードタグ
-export const RoomCodeTag = styled('p')({
+export const RoomCodeTagMobile = styled('p')({
+  marginLeft: '20%',
+  float: 'left',
   color: grey[700],
-  margin:0,
   fontSize: '1.5em',
   fontWeight: 'bold',
 });
 
 // ゲーム開始ボタン
-export const StartButton = styled(Button)({
+export const StartButtonMobile = styled(Button)({
   color: grey[700],
   background: blue[200],
   fontSize: '2em',
-  width: '75%',
+  width: '100%',
   'white-space': 'nowrap',
   '&:hover': {
     background: blue[100],
@@ -346,11 +349,11 @@ export const StartButton = styled(Button)({
 });
 
 // 戻るボタン
-export const BackButton = styled(Button)({
+export const BackButtonMobile = styled(Button)({
   color: grey[700],
   background: indigo[200],
   fontSize: '2em',
-  width: '75%',
+  width: '100%',
   'white-space': 'nowrap',
   '&:hover': {
     background: indigo[100],
