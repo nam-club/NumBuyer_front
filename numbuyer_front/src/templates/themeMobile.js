@@ -365,19 +365,20 @@ export const GameBack = styled('div')({
 });
 
 // メッセージボックス
-export const MessageBox = styled(Card)({
+export const MessageBoxMobile = styled(Card)({
   background: indigo[200],
+  margin: '0 5%',
 });
 
 // メッセージ本体
-export const NaviMessage = styled('p')({
-  fontSize: '1.5em',
+export const NaviMessageMobile = styled('p')({
+  fontSize: '1em',
   margin: 0,
 });
 
 // メッセージ本体（複数行））
-export const NaviMessages = styled('p')({
-  fontSize: '1.2em',
+export const NaviMessagesMobile = styled('p')({
+  fontSize: '0.8em',
   margin: 0,
 });
 
@@ -553,88 +554,82 @@ export const YesButton = styled(Button)({
 });
 
 // 残り時間表示エリア
-export const TimeArea = styled('div')({
+export const TimeAreaMobile = styled('div')({
   color: grey[50],
-  marginLeft: '12%',
-  marginRight: '2%',
+  margin: 0,
+  padding: 0,
 });
 
 // 残り時間タグ
 export const TimeTag = styled('p')({
-  margin:0,
+  margin: 0,
   fontSize: '1.5em',
 });
 
 // 残り時間値
-export const TimeValue = styled('p')({
-  margin:0,
-  fontSize: '4.5em',
+export const TimeValueMobile = styled('p')({
+  margin:  0,
+  padding: 0,
+  fontSize: '4em',
   fontWeight: 'bold',
 });
 
-// 勝利条件エリア
-export const GoalArea = styled('div')({
-  color: grey[50],
-  marginTop: 5,
-  marginRight: 10,
-  marginLeft: 50,
-});
-
 // 勝利条件タグ
-export const GoalTag = styled('p')({
+export const GoalTagMobile = styled('p')({
   margin: 0,
   padding: 0,
-  fontSize: '1.5em',
+  color: grey[50],
+  fontSize: '1.2em',
 });
 
 // 勝利条件メッセージ
-export const GoalMessage = styled('p')({
+export const GoalMessageMobile = styled('p')({
   margin: 0,
   padding: 0,
-  fontSize: '2em',
+  color: grey[50],
+  fontSize: '1.5em',
   fontWeight: 'bold',
 });
 
 // プレイヤー一覧エリア（自分）
-export const MyPlayerList = styled(Card)({
+export const MyPlayerListMobile = styled(Card)({
   background: yellow[100],
   color: grey[700],
-  marginTop: '1%',
-  marginRight: '10%',
-  marginLeft: '20%',
+  margin: '0 5%',
 });
 
 // プレイヤー一覧エリア（自分以外）
-export const PlayerList = styled(Card)({
+export const PlayerListMobile = styled(Card)({
   background: grey[50],
   color: grey[700],
-  marginTop: '1%',
-  marginRight: '10%',
-  marginLeft: '20%',
+  margin: '0 5%',
 });
 
 // プレイヤー名
-export const PlayerName = styled('p')({
-  fontSize: '1.5em',
+export const PlayerNameMobile = styled('p')({
+  fontSize: '1em',
   fontWeight: 100,
   margin: 0,
 });
 
 // プレイヤー情報
-export const PlayerInfo = styled('span')({
+export const PlayerInfoMobile = styled('span')({
   margin: 0,
-  fontSize: '1.5em',
+  padding: 0,
+  fontSize: '1em',
   fontWeight: 100,
 });
 
 // プレイヤー情報アイコン
-export const PlayerInfoIcon = styled('img')({
-  width: '8%',
+export const PlayerInfoIconMobile = styled('img')({
+  width: '15%',
+  marginTop: '2%',
 });
 
 // アビリティ情報（プレイヤー一覧）
-export const AbilityInfoCard = styled(Card) ({
+export const AbilityInfoCardMobile = styled(Card) ({
   'white-space': 'nowrap',
+  fontSize: '0.75em',
 });
 
 // ゲーム終了のモーダル

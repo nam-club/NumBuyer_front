@@ -9,8 +9,11 @@ import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
 
 import { useStyles, TimeArea, TimeTag, TimeValue } from '../theme';
+import { TimeAreaMobile, TimeValueMobile } from '../themeMobile';
 
 import Card from '@mui/material/Card';
+import { useMediaQuery } from "@mui/material";
+
 import { setValidAction } from '../../redux/msg/actions';
 
 const TimeComponent = (props) => {
@@ -21,6 +24,8 @@ const TimeComponent = (props) => {
 
     const [time, setTime] = React.useState(selector.game.time);
     const [showFlg, setShowFlg] = React.useState(false);
+
+    const matches = useMediaQuery("(min-width:520px)");
 
     // 画面表示用タイマー
     React.useEffect(() => {
@@ -176,10 +181,18 @@ const TimeComponent = (props) => {
     }, [selector.game.phase]);
 
     return (
-        <TimeArea>
-            <TimeTag>{selector.msg.lang.TIME}</TimeTag>
-            <TimeValue>{showFlg ? time : "　"}</TimeValue>
-        </TimeArea>
+        <div>
+        {matches ?
+            <TimeArea>
+                <TimeTag>{selector.msg.lang.TIME}</TimeTag>
+                <TimeValue>{showFlg ? time : "　"}</TimeValue>
+            </TimeArea>
+        :
+            <TimeAreaMobile>
+                <TimeValueMobile>{showFlg ? time : "　"}</TimeValueMobile>
+            </TimeAreaMobile>
+        }
+        </div>
     )
 }
 
