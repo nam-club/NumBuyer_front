@@ -479,13 +479,14 @@ export const UseAbilityButtonMobile = styled(Button) ({
 });
 
 // 項カード
-export const TermCard = styled(Button)({
+export const TermCardMobile = styled(Button)({
   background: yellow[200],
   color: grey[700],
   marginLeft: '1%',
   marginBottom: '1%',
   width: '5vw',
   height: '10vh',
+  flexShrink: 0,
   '&:hover': {
     background: yellow[100],
   },
@@ -497,9 +498,9 @@ export const CalcArea = styled(Card)({
 });
 
 // 折り返し表示用
-export const WrapDisplay = styled('div')({
+export const WrapDisplayMobile = styled('div')({
   display: 'flex',
-  flexWrap: 'wrap',
+  overflowX: 'scroll',
 });
 
 // 解答ボタン
