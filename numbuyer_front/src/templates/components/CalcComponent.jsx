@@ -7,7 +7,7 @@ import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
 import * as Constants from '../../constants';
 
 import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
-import { WrapDisplayMobile, TermCardMobile } from '../themeMobile';
+import { WrapDisplayMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
 
 import Card from '@mui/material/Card';
 import Grow from '@mui/material/Grow';
@@ -202,7 +202,8 @@ const CalcComponent = (props) => {
             </div>
             :
             <div>
-                <Card className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}>
+                <Card className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}
+                sx={{margin: '0 2%'}}>
                     <AreaTag align="left">{selector.msg.lang.YOUR_CARDS}</AreaTag>
                     {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                     ) &&
@@ -220,7 +221,7 @@ const CalcComponent = (props) => {
                     }
                 </Card>
                 {(selector.game.phase === Constants.CALCULATE_PH) &&
-                <CalcArea>
+                <CalcAreaMobile>
                     <AreaTag align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTag>
                         {calcs &&
                             <WrapDisplayMobile>
@@ -256,7 +257,7 @@ const CalcComponent = (props) => {
                     <CalcButton size="large" variant="contained" onClick={ansCalc}
                     disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
                         {selector.msg.lang.ANSWER_BTN}</CalcButton>
-                </CalcArea>
+                </CalcAreaMobile>
                 }
             </div>
             }

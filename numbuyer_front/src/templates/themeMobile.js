@@ -367,19 +367,19 @@ export const GameBack = styled('div')({
 // メッセージボックス
 export const MessageBoxMobile = styled(Card)({
   background: indigo[200],
-  margin: '0 5%',
+  margin: '2% 5%',
 });
 
 // メッセージ本体
 export const NaviMessageMobile = styled('p')({
   fontSize: '1em',
-  margin: 0,
+  margin: '2%',
 });
 
 // メッセージ本体（複数行））
 export const NaviMessagesMobile = styled('p')({
   fontSize: '0.8em',
-  margin: 0,
+  margin: '2%',
 });
 
 // 目標カード
@@ -493,7 +493,8 @@ export const TermCardMobile = styled(Button)({
 });
 
 // 計算エリア
-export const CalcArea = styled(Card)({
+export const CalcAreaMobile = styled(Card)({
+  margin: '2%',
   background: grey[50],
 });
 
@@ -715,7 +716,7 @@ export const AgainButton = styled(Button)({
     },
 });
 
-export const useStyles = makeStyles((theme) => ({
+export const useStylesMobile = makeStyles((theme) => ({
 
   // オークションエリア
   auction_root: {
@@ -818,13 +819,13 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   // 正解・不正解エフェクト
-  result_animation: {
+  result_animation_mobile: {
     position: 'absolute',
     top: '10%',
     left: 0,
     right: 0,
     margin: 'auto',
-    width: '25%',
+    width: '75%',
     padding: '5% 10%',
     zIndex: 100,
     fontSize: '4em',

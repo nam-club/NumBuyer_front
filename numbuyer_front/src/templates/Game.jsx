@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useStyles, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
-import { TimeTagMobile, GoalMessageMobile, TargetCardMobile } from './themeMobile';
+import { useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
@@ -27,6 +27,7 @@ import AucMobileComponent from './components/AucMobileComponent';
 
 const Game = () => {
     const classes = useStyles();
+    const mobileClasses = useStylesMobile();
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
@@ -224,17 +225,17 @@ const Game = () => {
             :
             <div>
                 {selector.game.aucResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: amber['A100'], color: grey[700]}} >
+                    <Card className={mobileClasses.result_animation_mobile} sx={{background: amber['A100'], color: grey[700], width: '100%'}}>
                         {selector.msg.lang.SUCCESS_BID}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: teal['A100'], color: grey[700]}} >
+                    <Card className={mobileClasses.result_animation_mobile} sx={{background: teal['A100'], color: grey[700], width: '100%'}}>
                         {selector.msg.lang.SUCCESS}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.FAILED &&
-                    <Card className={classes.result_animation} sx={{background: red['A100'], color: grey[700]}}>
+                    <Card className={mobileClasses.result_animation_mobile} sx={{background: red['A100'], color: grey[700], width: '100%'}}>
                         {selector.msg.lang.FAILED}
                     </Card>
                 }
@@ -322,7 +323,7 @@ const Game = () => {
                 </Grid>
                 <UseAbilityComponent/>
                 <CalcComponent calcBtnFlg={calcBtnFlg}/>
-                    <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
+                <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
                 <FinishModal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
