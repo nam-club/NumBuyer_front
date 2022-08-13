@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useStyles, GameBack, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
-import { TimeTagMobile, GoalMessageMobile } from './themeMobile';
+import { TimeTagMobile, GoalMessageMobile, TargetCardMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
@@ -23,6 +23,7 @@ import { blue, red, teal, amber, grey } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
 import AblNavigationComponent from './components/AblNavigationComponent';
+import AucMobileComponent from './components/AucMobileComponent';
 
 const Game = () => {
     const classes = useStyles();
@@ -308,23 +309,20 @@ const Game = () => {
                         )
                         &&
                             <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
-                                <TargetCard>
+                                <TargetCardMobile>
                                     <CardTag>{selector.msg.lang.TARGET}</CardTag>
                                     <CardValue>{targetCard}</CardValue>
-                                </TargetCard>
+                                </TargetCardMobile>
                             </Slide>
                         }
                     </Grid>
-                    <Grid item xs={8}>   
-                        {(player.abilities[0].trigger === Constants.ACT_TRG) || (player.abilities[1].trigger === Constants.ACT_TRG) ?
-                                    <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
-                        :
-                            <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
-                        }
+                    <Grid item xs={8}>
+                        <AucMobileComponent auctionCards={auctionCards}/>
                     </Grid>
                 </Grid>
                 <UseAbilityComponent/>
                 <CalcComponent calcBtnFlg={calcBtnFlg}/>
+                    <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
                 <FinishModal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

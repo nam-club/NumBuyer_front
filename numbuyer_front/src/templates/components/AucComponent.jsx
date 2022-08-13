@@ -7,6 +7,7 @@ import * as ConstantsMsg from '../../constantsMsg';
 
 import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
          AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, ErrorMessage } from '../theme';
+import { ChangeBidButtonMobile, BidButtonMobile, PassButtonMobile } from '../themeMobile';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../../redux/msg/actions';
 
@@ -17,11 +18,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { grey } from '@mui/material/colors';
+import { useMediaQuery } from "@mui/material";
 
 const AucComponent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
+    const matches = useMediaQuery("(min-width:520px)");
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [fee, setFee] = React.useState('0');
@@ -163,64 +166,110 @@ const AucComponent = (props) => {
     };
 
     return (
-        <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
-        sx={{marginLeft: "1%"}}>
-            <Grid container>
-                <Grid item xs={6}>
-                    <AreaTag align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.AUCTION}</AreaTag>
-                    {(props.auctionCards.length !== 0 && 
-                        !((selector.game.phase === Constants.READY_PH)
-                            || (selector.game.phase === Constants.GIVE_CARD_PH)
-                            || (selector.game.phase === Constants.SHOW_TAR_PH)))
-                    &&
-                        <WrapDisplay>
-                            {props.auctionCards.auctionCards.map((value, index) => (
-                                <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500} key={index}>
-                                    <AuctionCard variant="contained">
-                                        <CardValue>{value}</CardValue>
-                                    </AuctionCard>
-                                </Slide>
-                            ))}  
-                        </WrapDisplay>
-                    }
+        <div>
+        {matches ?
+            <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
+            sx={{marginLeft: "1%"}}>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <AreaTag align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.AUCTION}</AreaTag>
+                        {(props.auctionCards.length !== 0 && 
+                            !((selector.game.phase === Constants.READY_PH)
+                                || (selector.game.phase === Constants.GIVE_CARD_PH)
+                                || (selector.game.phase === Constants.SHOW_TAR_PH)))
+                        &&
+                            <WrapDisplay>
+                                {props.auctionCards.auctionCards.map((value, index) => (
+                                    <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500} key={index}>
+                                        <AuctionCard variant="contained">
+                                            <CardValue>{value}</CardValue>
+                                        </AuctionCard>
+                                    </Slide>
+                                ))}  
+                            </WrapDisplay>
+                        }
+                    </Grid>
+                    <Grid item xs={6}>
+                        {(selector.game.phase === Constants.AUCTION_PH) ?
+                            <div>
+                                <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
+                                <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
+                                id="standard-basic" value={fee} size="small"
+                                onChange={doChange} />
+                                <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
+                                <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
+                            </div>
+                        :   <AuctionArea></AuctionArea>
+                        }  
+                        {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&
+                            <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
+                        }
+                        <PassButton size="large" variant="contained"
+                        onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</PassButton>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
+                            <DialogContent align="center">
+                                <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
+                            </DialogContent>
+                            <DialogActions>
+                                <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                                <YesButton onClick={passAucCard} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
+                            </DialogActions>
+                        </Dialog>
+                        <BidButton size="large" variant="contained"
+                        onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</BidButton>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                    {(selector.game.phase === Constants.AUCTION_PH) ?
-                        <div>
-                            <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
-                            <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
-                            id="standard-basic" value={fee} size="small"
-                            onChange={doChange} />
-                            <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
-                            <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
-                        </div>
-                    :   <AuctionArea></AuctionArea>
-                    }  
+            </Card>
+        :
+        <div>
+            {(selector.game.phase === Constants.AUCTION_PH) ?
+            <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
+                sx={{margin: '2%'}}>
+                <div>
+                    <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
+                    <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
+                    id="standard-basic" value={fee} size="small"
+                    onChange={doChange} />
+                    <ChangeBidButtonMobile onClick={() => {changeBid('-')}}>-</ChangeBidButtonMobile>
+                    <ChangeBidButtonMobile onClick={() => {changeBid('+')}}>+</ChangeBidButtonMobile>
                     {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&
                         <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
                     }
-                    <PassButton size="large" variant="contained"
-                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</PassButton>
-                    <Dialog
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
-                        <DialogContent align="center">
-                            <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
-                        </DialogContent>
-                        <DialogActions>
-                            <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
-                            <YesButton onClick={passAucCard} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
-                        </DialogActions>
-                    </Dialog>
-                    <BidButton size="large" variant="contained"
-                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</BidButton>
-                </Grid>
-            </Grid>
-        </Card>
+                </div>
+                <div>
+                    <PassButtonMobile size="large" variant="contained"
+                    onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</PassButtonMobile>
+                    <BidButtonMobile size="large" variant="contained"
+                    onClick={bidAucCard} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.BID_BTN}</BidButtonMobile>
+                </div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
+                    <DialogContent align="center">
+                        <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
+                    </DialogContent>
+                    <DialogActions>
+                        <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                        <YesButton onClick={passAucCard} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
+                    </DialogActions>
+                </Dialog>
+            </Card>
+            :   
+            <div></div>
+            }
+        </div>
+        }
+        </div>
     )
 }
 

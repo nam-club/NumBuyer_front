@@ -383,7 +383,8 @@ export const NaviMessagesMobile = styled('p')({
 });
 
 // 目標カード
-export const TargetCard = styled(Card)({
+export const TargetCardMobile = styled(Card)({
+  marginLeft: '5%',
   background: teal['A100'],
   color: grey[700],
   'white-space': 'nowrap',
@@ -397,24 +398,23 @@ export const CardTag = styled('p')({
 });
 
 // 目標値
-export const CardValue = styled('p')({
+export const CardValueMobile = styled('p')({
   margin: 0,
-  fontSize: '4em',
+  fontSize: '3.5em',
   fontWeight: 'bold',
 });
 
 // オークションエリア
-export const AuctionArea = styled('div')({
+export const AuctionAreaMobile = styled('div')({
   padding: '10%',
 });
 
 // オークションカード
-export const AuctionCard = styled(Card)({
+export const AuctionCardMobile = styled(Card)({
   background: lightBlue[200],
   color: grey[700],
   marginLeft: '3%',
-  width: '5vw',
-  height: '10vh',
+  width: '25%',
   'white-space': 'nowrap',
 });
 
@@ -432,11 +432,11 @@ export const CoinField = styled(TextField)({
 });
 
 // 入札金額変更ボタン
-export const ChangeBidButton = styled(Button)({
-  margin: '3% 2%',
+export const ChangeBidButtonMobile = styled(Button)({
+  margin: '2%',
   padding: 0,
   fontSize: '1.5em',
-  width: '1%',
+  width: '2%',
   color: grey[100],
   background: cyan[200],
   fontWeight: 'bold',
@@ -447,10 +447,10 @@ export const ChangeBidButton = styled(Button)({
 });
 
 // 入札ボタン
-export const BidButton = styled(Button)({
+export const BidButtonMobile = styled(Button)({
   background: lightBlue[200],
   color: grey[700],
-  width: '25%',
+  width: '40%',
   margin: '2%',
   'white-space': 'nowrap',
   '&:hover': {
@@ -459,17 +459,16 @@ export const BidButton = styled(Button)({
 });
 
 // アビリティエリア
-export const AbilityArea = styled(Card)({
+export const AbilityAreaMobile = styled(Card)({
   background: grey[50],
   color: grey[700],
-  marginLeft: '2%',
+  margin: '2%',
   padding: '5%',
 });
 
 // エリアタグ
-export const AreaTag = styled('p')({
+export const AreaTagMobile = styled('p')({
   color: grey[700],
-  marginLeft: '2%',
   fontSize: '1.2em',
 });
 
@@ -517,10 +516,10 @@ export const CalcButton = styled(Button)({
 });
 
 // パスボタン
-export const PassButton = styled(Button)({
+export const PassButtonMobile = styled(Button)({
   background: grey[500],
   color: grey[50],
-  width: '25%',
+  width: '40%',
   margin: '2%',
   'white-space': 'nowrap',
   '&:hover': {
