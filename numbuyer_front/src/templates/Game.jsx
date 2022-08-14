@@ -223,7 +223,7 @@ const Game = () => {
                 </FinishModal>
             </div>
             :
-            <div>
+            <div sx={{'overscroll-behavior-y': 'none'}}>
                 {selector.game.aucResult === Constants.SUCCESS &&
                     <Card className={mobileClasses.result_animation_mobile} sx={{background: amber['A100'], color: grey[700], width: '100%'}}>
                         {selector.msg.lang.SUCCESS_BID}
