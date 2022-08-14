@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useStyles, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
-import { useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile } from './themeMobile';
+import { useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
@@ -223,7 +223,7 @@ const Game = () => {
                 </FinishModal>
             </div>
             :
-            <div sx={{'overscroll-behavior-y': 'none'}}>
+            <div sx={{'overflow': 'hidden'}}>
                 {selector.game.aucResult === Constants.SUCCESS &&
                     <Card className={mobileClasses.result_animation_mobile} sx={{background: amber['A100'], color: grey[700], width: '100%'}}>
                         {selector.msg.lang.SUCCESS_BID}
@@ -311,8 +311,8 @@ const Game = () => {
                         &&
                             <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                                 <TargetCardMobile>
-                                    <CardTag>{selector.msg.lang.TARGET}</CardTag>
-                                    <CardValue>{targetCard}</CardValue>
+                                    <CardTagMobile>{selector.msg.lang.TARGET}</CardTagMobile>
+                                    <CardValueMobile>{targetCard}</CardValueMobile>
                                 </TargetCardMobile>
                             </Slide>
                         }

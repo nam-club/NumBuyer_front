@@ -7,7 +7,7 @@ import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
 import * as Constants from '../../constants';
 
 import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
-import { WrapDisplayMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
+import { AreaTagMobile, WrapDisplayMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
 
 import Card from '@mui/material/Card';
 import Grow from '@mui/material/Grow';
@@ -203,8 +203,8 @@ const CalcComponent = (props) => {
             :
             <div>
                 <Card className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}
-                sx={{margin: '0 2%'}}>
-                    <AreaTag align="left">{selector.msg.lang.YOUR_CARDS}</AreaTag>
+                sx={{margin: '0 2%', padding: '1%'}}>
+                    <AreaTagMobile align="left">{selector.msg.lang.YOUR_CARDS}</AreaTagMobile>
                     {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                     ) &&
                         <WrapDisplayMobile>
@@ -222,7 +222,7 @@ const CalcComponent = (props) => {
                 </Card>
                 {(selector.game.phase === Constants.CALCULATE_PH) &&
                 <CalcAreaMobile>
-                    <AreaTag align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTag>
+                    <AreaTagMobile align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTagMobile>
                         {calcs &&
                             <WrapDisplayMobile>
                                 {calcs.map((value, index) => (

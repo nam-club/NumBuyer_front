@@ -400,7 +400,7 @@ export const AuctionArea = styled('div')({
 
 // オークションカード
 export const AuctionCard = styled(Card)({
-  background: lightBlue[200],
+  background: amber['A100'],
   color: grey[700],
   marginLeft: '3%',
   width: '5vw',

@@ -391,30 +391,32 @@ export const TargetCardMobile = styled(Card)({
 });
 
 // 目標タグ
-export const CardTag = styled('p')({
+export const CardTagMobile = styled('p')({
   margin:0,
   color: grey[700],
-  fontSize: '1.2em',
+  fontSize: '1em',
 });
 
 // 目標値
 export const CardValueMobile = styled('p')({
   margin: 0,
-  fontSize: '3.5em',
+  padding: 0,
+  fontSize: '3em',
   fontWeight: 'bold',
 });
 
 // オークションエリア
-export const AuctionAreaMobile = styled('div')({
-  padding: '10%',
+export const AuctionAreaMobile = styled(Card)({
+  padding: '1%',
 });
 
 // オークションカード
 export const AuctionCardMobile = styled(Card)({
-  background: lightBlue[200],
+  background: amber['A100'],
   color: grey[700],
   marginLeft: '3%',
   width: '25%',
+  height: '10vh',
   'white-space': 'nowrap',
 });
 
@@ -463,13 +465,13 @@ export const AbilityAreaMobile = styled(Card)({
   background: grey[50],
   color: grey[700],
   margin: '2%',
-  padding: '5%',
+  padding: '1%',
 });
 
 // エリアタグ
-export const AreaTagMobile = styled('p')({
+export const AreaTagMobile = styled('span')({
   color: grey[700],
-  fontSize: '1.2em',
+  fontSize: '1em',
 });
 
 // アビリティボタン（ゲーム中）
@@ -482,6 +484,7 @@ export const UseAbilityButtonMobile = styled(Button) ({
 export const TermCardMobile = styled(Button)({
   background: yellow[200],
   color: grey[700],
+  fontSize: '0.75em',
   marginLeft: '1%',
   marginBottom: '1%',
   width: '5vw',
@@ -495,6 +498,7 @@ export const TermCardMobile = styled(Button)({
 // 計算エリア
 export const CalcAreaMobile = styled(Card)({
   margin: '2%',
+  padding: '1%',
   background: grey[50],
 });
 
@@ -561,11 +565,11 @@ export const TimeAreaMobile = styled('div')({
 });
 
 // 残り時間タグ
-export const TimeTagMobile = styled('p')({
-  margin: '100% 70%',
+export const TimeTagMobile = styled('span')({
+  margin: '0 75%',
   padding: 0,
   color: grey[50],
-  fontSize: '1.5em',
+  fontSize: '1em',
 });
 
 // 残り時間値
@@ -577,7 +581,7 @@ export const TimeValueMobile = styled('p')({
 });
 
 // 勝利条件タグ
-export const GoalTagMobile = styled('p')({
+export const GoalTagMobile = styled('span')({
   margin: 0,
   padding: 0,
   color: grey[50],
@@ -589,7 +593,7 @@ export const GoalMessageMobile = styled('p')({
   margin: 0,
   padding: 0,
   color: grey[50],
-  fontSize: '1.5em',
+  fontSize: '1em',
   fontWeight: 'bold',
 });
 
@@ -801,6 +805,7 @@ export const useStylesMobile = makeStyles((theme) => ({
   hand: {
     background: grey[200],
     marginTop:'2%',
+    padding: '1%',
   },
   hand_animation: {
     background: grey[50],
