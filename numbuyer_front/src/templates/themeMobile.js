@@ -24,17 +24,17 @@ export const theme = createTheme({
 
 // メインロゴ
 export const MainLogoMobile = styled('img')({
-  width: '30%',
+  width: '25%',
 });
 
 // メインタイトル
 export const MainTitleMobile = styled('img')({
-  width: '75%',
+  width: '60%',
 });
 
 // トップ・ロビー画面の背景
 export const BackMobile = styled('div')({
-  paddingTop: '10%',
+  paddingTop: '5%',
 });
 
 // 言語設定ボタン
@@ -140,7 +140,7 @@ export const DetailMessage = styled(Typography)({
 
 // トップ・ロビー画面のメニュー
 export const MenuCardMobile = styled(Card)({
-  margin: '10% 12.5%',
+  margin: '2% 12.5% 5% 12.5%',
   width: '75%',
 });
 
@@ -151,7 +151,7 @@ export const InputField = styled(TextField)({
 
 // エラーメッセージ
 export const ErrorMessageMobile = styled('p')({
-  fontSize: '1.5em',
+  fontSize: '1em',
   margin: '5% 10%',
   color: red[600],
   background: red[100],
@@ -566,7 +566,6 @@ export const TimeAreaMobile = styled('div')({
 
 // 残り時間タグ
 export const TimeTagMobile = styled('span')({
-  margin: '0 75%',
   padding: 0,
   color: grey[50],
   fontSize: '1em',

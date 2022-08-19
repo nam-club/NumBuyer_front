@@ -40,13 +40,13 @@ const Lobby = () => {
             <Back>
                 {matches ? 
                 <div>
-                    <MainLogo src={logo}/>
-                    <MainTitle src={title}/>
+                    <div><MainLogo src={logo}/></div>
+                    <div><MainTitle src={title}/></div>
                 </div>
                 :
                 <div>
-                    <MainLogoMobile src={logo}/>
-                    <MainTitleMobile src={title}/>
+                    <div><MainLogoMobile src={logo}/></div>
+                    <div><MainTitleMobile src={title}/></div>
                 </div>
                 }
                 <PlayerListComponent/>

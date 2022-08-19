@@ -36,7 +36,7 @@ export const MainTitle = styled('img')({
 
 // トップ・ロビー画面の背景
 export const Back = styled('div')({
-  paddingTop: '10%',
+  paddingTop: '3%',
 });
 
 // 言語設定ボタン

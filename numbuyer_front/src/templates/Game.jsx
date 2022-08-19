@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { useStyles, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
+import { useStyles, Back, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import { useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile } from './themeMobile';
 
 import * as Constants from '../constants';
@@ -96,7 +96,7 @@ const Game = () => {
         <Typography component="div" align="center">
             <GlobalStyle />
             {matches ? 
-            <div>
+            <Back>
                 {selector.game.aucResult === Constants.SUCCESS &&
                     <Card className={classes.result_animation} sx={{background: amber['A100'], color: grey[700]}} >
                         {selector.msg.lang.SUCCESS_BID}
@@ -221,7 +221,7 @@ const Game = () => {
                         </FinishMenu>
                     </Fade>
                 </FinishModal>
-            </div>
+            </Back>
             :
             <div sx={{'overflow': 'hidden'}}>
                 {selector.game.aucResult === Constants.SUCCESS &&

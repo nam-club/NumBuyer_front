@@ -5,7 +5,7 @@ import { CTX } from '../../Socket';
 import * as Constants from '../../constants';
 
 import { AbilityArea, AreaTag, UseAbilityButton, SpeechBubble, ConfirmTitle, ConfirmMessage, PassButton, YesButton, ErrorMessage } from '../theme';
-import { AbilityAreaMobile, AreaTagMobile, UseAbilityButtonMobile } from '../themeMobile';
+import { AbilityAreaMobile, AreaTagMobile, UseAbilityButtonMobile, ErrorMessageMobile } from '../themeMobile';
 
 import { setAblErrMsgAction } from '../../redux/msg/actions';
 
@@ -437,10 +437,10 @@ const UseAbilityComponent = (props) => {
                         }
                     </Grid>
                 ))}
-                {selector.msg.ablErrMsg !== "" &&
-                    <ErrorMessage>{selector.msg.ablErrMsg}</ErrorMessage>
-                }
             </Grid>
+            {selector.msg.ablErrMsg !== "" &&
+                <ErrorMessageMobile>{selector.msg.ablErrMsg}</ErrorMessageMobile>
+            }
         </AbilityAreaMobile>
         }
         </div>

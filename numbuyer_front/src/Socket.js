@@ -478,10 +478,13 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
             // エラーがある時
             if(resObj.code) {
-                // 使用できないタイミングのエラー
+                // 使用できないタイミングのエラー（リロードアビリティ）
                 if(resObj.code === Constants.BAD_TIMING_RELOAD_ERR) {
                     dispatch(setAblErrMsgAction(selector.msg.lang.BAD_TIMING_ABILITY_AUC_ERR));
-                }  
+                // 使用できないタイミングのエラー（カタストロフィアビリティ）
+                }else if(resObj.code === Constants.NOT_MEET_TURN_CATASTROPHE_ERR) {
+                    dispatch(setAblErrMsgAction(selector.msg.lang.NOT_MEET_TURN_CATASTROPHE_ERR));
+                }
             }else {
                 updateAbility(resObj);
             }

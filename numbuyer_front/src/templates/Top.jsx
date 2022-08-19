@@ -416,8 +416,8 @@ const Top = () => {
             :
             <div>
                 <BackMobile>
-                    <MainLogoMobile src={logo}/>
-                    <MainTitleMobile src={title}/>
+                    <div><MainLogoMobile src={logo}/></div>
+                    <div><MainTitleMobile src={title}/></div>
                     <MenuCardMobile>
                         <CardContent>
                             <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name}

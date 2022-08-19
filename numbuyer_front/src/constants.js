@@ -216,3 +216,4 @@ export const INC_PASS = "incorrectWithPass";
 // レスポンスエラー
 export const NO_ROOM_ERR = "error.game.notFound"; // 存在しないルームID
 export const BAD_TIMING_RELOAD_ERR = "error.validation.ability.reload.invalidPhase"; // リロードアビリティはオークションフェーズに発動できない
+export const NOT_MEET_TURN_CATASTROPHE_ERR = "error.validation.ability.catastrophe.notMeetTurn"; // ゲーム開始から3ターン以内は発動できない（カタストロフィ）
