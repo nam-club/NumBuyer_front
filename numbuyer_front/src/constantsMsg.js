@@ -147,6 +147,8 @@ export const English = {
     LACK_ERR: "You don't have enough money.", // 所持金が足りない
     DOUBLE_ERR: "You cannot bid twice in a row.", // ２回連続入札
     BAD_TIMING_ABILITY_AUC_ERR: "This ability cannot be used during the auction phase.", // オークションフェーズに発動できないアビリティ
+    NOT_MEET_ABILITY_3TURN_ERR: "This ability cannot be activated for 3 turns from the start of the game.", // 最初の3ターン発動できないアビリティ
+
 
     // ナビゲーションメッセージ
     QUICK_MSG: 'The game will start automatically when all four players are together.',
@@ -334,7 +336,7 @@ export const Japanese = {
     LACK_ERR: "所持金が足りません。", // 所持金が足りない
     DOUBLE_ERR: "２回続けて入札はできません。", // ２回連続入札
     BAD_TIMING_ABILITY_AUC_ERR: "このアビリティはオークションフェーズに使用できません。", // オークションフェーズに発動できないアビリティ
-    NOT_MEET_TURN_CATASTROPHE_ERR: "カタストロフィはゲーム開始から3ターンの間は発動できません。", // カタストロフィは最初の3ターン発動できないアビリティ
+    NOT_MEET_ABILITY_3TURN_ERR: "このアビリティはゲーム開始から3ターンの間は発動できません。", // 最初の3ターン発動できないアビリティ
 
     // ナビゲーションメッセージ
     QUICK_MSG: '４人揃うと自動でゲームが始まります。',
@@ -523,6 +525,7 @@ export const Chinese = {
     LACK_ERR: "你没有足够的钱。", // 所持金が足りない
     DOUBLE_ERR: "您不能连续出价两次。", // ２回連続入札
     BAD_TIMING_ABILITY_AUC_ERR: "此能力不能在拍卖阶段使用。", // オークションフェーズに発動できないアビリティ
+    NOT_MEET_ABILITY_3TURN_ERR: "该能力在游戏开始后的3回合内无法发动。", // 最初の3ターン発動できないアビリティ
 
     // ナビゲーションメッセージ
     QUICK_MSG: '当所有四个玩家在一起时，游戏将自动开始。',

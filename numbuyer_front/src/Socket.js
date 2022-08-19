@@ -483,7 +483,7 @@ export default function Socket(props) {
                     dispatch(setAblErrMsgAction(selector.msg.lang.BAD_TIMING_ABILITY_AUC_ERR));
                 // 使用できないタイミングのエラー（カタストロフィアビリティ）
                 }else if(resObj.code === Constants.NOT_MEET_TURN_CATASTROPHE_ERR) {
-                    dispatch(setAblErrMsgAction(selector.msg.lang.NOT_MEET_TURN_CATASTROPHE_ERR));
+                    dispatch(setAblErrMsgAction(selector.msg.lang.NOT_MEET_ABILITY_3TURN_ERR));
                 }
             }else {
                 updateAbility(resObj);
