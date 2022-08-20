@@ -319,7 +319,7 @@ export const ParticipantList = styled('p')({
 // ルームコードタグ
 export const RoomCodeTag = styled('p')({
   color: grey[700],
-  margin:0,
+  marginTop: '2%',
   fontSize: '1.5em',
   fontWeight: 'bold',
 });

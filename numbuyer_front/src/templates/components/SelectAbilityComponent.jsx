@@ -19,8 +19,16 @@ import { useMediaQuery } from "@mui/material";
 const SelectAbilityComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-
     const matches = useMediaQuery("(min-width:520px)");
+    const [openTip, setOpenTip] = React.useState(false);
+
+    const handleCloseTip = () => {
+        setOpenTip(false);
+    };
+    
+    const handleClickButton = () => {
+        setOpenTip(true);
+    };
 
     return (
         <Typography component="div" align="center">
@@ -82,36 +90,54 @@ const SelectAbilityComponent = (props) => {
                             </Tooltip>
                         </Grid>
                         <Grid item xs={2}>
-                            <InfoIcon sx={{margin: '50% 10%'}} onClick={() => {
-                                console.log('あああ');
-                            }}/>
+                            <Tooltip
+                                arrow
+                                PopperProps={{
+                                disablePortal: true,
+                                }}
+                                onClose={handleCloseTip}
+                                open={openTip}
+                                disableFocusListener
+                                disableHoverListener
+                                title={
+                                <SpeechBubble>
+                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                </SpeechBubble>}>
+                                <InfoIcon sx={{margin: '50% 10%'}} onClick={handleClickButton}/>
+                            </Tooltip>
                         </Grid>
                     </Grid>
                     :
                     <Grid container key={value.abilityId}>
                         <Grid item xs={2}/>
                         <Grid item xs={8}>
-                            <Tooltip title={
-                                <SpeechBubble>
-                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                </SpeechBubble>} 
-                                placement="bottom">
-                                <AbilityButtonMobile
-                                    onClick={() => {
-                                        dispatch(setAbilityAction(value.abilityId));
-                                        props.update();
-                                        if(selector.players.player.abilities.length >= 2) {
-                                            dispatch(setValidAction({validFlg: false}));
-                                        }
-                                    }}>
-                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                                </AbilityButtonMobile>
-                            </Tooltip>
+                            <AbilityButtonMobile
+                                onClick={() => {
+                                    dispatch(setAbilityAction(value.abilityId));
+                                    props.update();
+                                    if(selector.players.player.abilities.length >= 2) {
+                                        dispatch(setValidAction({validFlg: false}));
+                                    }
+                                }}>
+                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                            </AbilityButtonMobile>
                         </Grid>
                         <Grid item xs={2}>
-                            <InfoIcon sx={{margin: '50% 10%'}} onClick={() => {
-                                console.log('あああ');
-                            }}/>
+                            <Tooltip
+                                arrow
+                                PopperProps={{
+                                disablePortal: true,
+                                }}
+                                onClose={handleCloseTip}
+                                open={openTip}
+                                disableFocusListener
+                                disableHoverListener
+                                title={
+                                <SpeechBubble>
+                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                </SpeechBubble>}>
+                                <InfoIcon sx={{margin: '50% 10%'}} onClick={handleClickButton}/>
+                            </Tooltip>
                         </Grid>
                     </Grid>
                 ))}

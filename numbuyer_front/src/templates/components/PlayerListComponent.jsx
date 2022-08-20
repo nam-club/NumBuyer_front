@@ -105,8 +105,8 @@ const PlayerListComponent = () => {
                             >
                                 <div>
                                 <CopyToClipBoard text={selector.room.roomId}>
-                                    <IconButton onClick={handleClickButton} sx={{paddingTop: '20%'}}>
-                                        <ContentCopyIcon />
+                                    <IconButton onClick={handleClickButton}>
+                                        <ContentCopyIcon onClick={handleClickButton}/>
                                     </IconButton>     
                                 </CopyToClipBoard>
                                 </div>
@@ -169,8 +169,12 @@ const PlayerListComponent = () => {
                     >
                         <span>
                         <CopyToClipBoard text={selector.room.roomId}>
-                            <IconButton sx={{color: grey[50], background: grey[600], marginTop: '6%'}} onClick={handleClickButton}>
-                                <ContentCopyIcon />
+                            <IconButton onClick={handleClickButton}
+                            sx={{color: grey[50], background: grey[600], marginTop: '6%', 
+                            '&:hover': {
+                                color: grey[50], background: grey[500]
+                            }}}>
+                                <ContentCopyIcon onClick={handleClickButton}/>
                             </IconButton>     
                         </CopyToClipBoard>
                         </span>
