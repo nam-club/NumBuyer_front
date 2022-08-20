@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX, leaveLobby } from '../../Socket';
-import { push } from 'connected-react-router';
 
-import { useStyles, MenuCard, LobbyTitle, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag } from '../theme';
+import { MenuCard, LobbyTitle, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag } from '../theme';
 import { MenuCardMobile, LobbyTitleMobile, ParticipantListMobile, StartButtonMobile, BackButtonMobile, RoomCodeTagMobile } from '../themeMobile';
 
 import NavigationComponent from './NavigationComponent';
@@ -12,14 +11,15 @@ import Grid from '@mui/material/Grid';
 import CardActions from '@mui/material/CardActions';
 import CopyToClipBoard from 'react-copy-to-clipboard';
 import IconButton      from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { setQuickAction } from '../../redux/room/actions';
 import { grey } from '@mui/material/colors';
 import { setLeaveLobbyAction } from '../../redux/game/actions';
-import { Card, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 const PlayerListComponent = () => {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { start } = React.useContext(CTX);
@@ -90,11 +90,29 @@ const PlayerListComponent = () => {
                         <RoomCodeTag>{selector.msg.lang.ROOM_ID + ' : ' + selector.room.roomId}</RoomCodeTag>
                     </Grid>
                     <Grid item xs={0.3}>
-                        <CopyToClipBoard text={selector.room.roomId}>
-                            <IconButton onClick={handleClickButton} sx={{paddingTop: '20%'}}>
-                                <ContentCopyIcon />
-                            </IconButton>     
-                        </CopyToClipBoard>
+                        <ClickAwayListener onClickAway={handleCloseTip}>
+                            <div>
+                            <Tooltip
+                                arrow
+                                PopperProps={{
+                                disablePortal: true,
+                                }}
+                                onClose={handleCloseTip}
+                                open={openTip}
+                                disableFocusListener
+                                disableHoverListener
+                                title={selector.msg.lang.COPY}
+                            >
+                                <div>
+                                <CopyToClipBoard text={selector.room.roomId}>
+                                    <IconButton onClick={handleClickButton} sx={{paddingTop: '20%'}}>
+                                        <ContentCopyIcon />
+                                    </IconButton>     
+                                </CopyToClipBoard>
+                                </div>
+                            </Tooltip>
+                            </div>
+                        </ClickAwayListener>
                     </Grid>
                     <Grid item xs={5} />
                 </Grid>
@@ -136,11 +154,29 @@ const PlayerListComponent = () => {
                     </BackButtonMobile>
                 </CardActions>
                 <RoomCodeTagMobile>{selector.msg.lang.ROOM_ID + ' : ' + selector.room.roomId}</RoomCodeTagMobile>
-                <CopyToClipBoard text={selector.room.roomId}>
-                    <IconButton sx={{color: grey[50], background: grey[600], marginTop: '6%'}} onClick={handleClickButton}>
-                        <ContentCopyIcon />
-                    </IconButton>     
-                </CopyToClipBoard>
+                <ClickAwayListener onClickAway={handleCloseTip}>
+                    <div>
+                    <Tooltip
+                        arrow
+                        PopperProps={{
+                        disablePortal: true,
+                        }}
+                        onClose={handleCloseTip}
+                        open={openTip}
+                        disableFocusListener
+                        disableHoverListener
+                        title={selector.msg.lang.COPY}
+                    >
+                        <span>
+                        <CopyToClipBoard text={selector.room.roomId}>
+                            <IconButton sx={{color: grey[50], background: grey[600], marginTop: '6%'}} onClick={handleClickButton}>
+                                <ContentCopyIcon />
+                            </IconButton>     
+                        </CopyToClipBoard>
+                        </span>
+                    </Tooltip>
+                    </div>
+                </ClickAwayListener>
             </MenuCardMobile>
         }
         </div>

@@ -12,7 +12,6 @@ import NavigationComponent from './NavigationComponent';
 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
 import { useMediaQuery } from "@mui/material";
@@ -25,6 +24,43 @@ const SelectAbilityComponent = (props) => {
 
     return (
         <Typography component="div" align="center">
+            {matches ?
+            <AbilityCard>
+                <NavigationComponent message={props.type} messages={[]} color={props.color} background={props.background} />
+                {props.abilities.map((value) => (
+                    selector.players.player.abilities.find((id) => {return id === value.abilityId}) 
+                    ?
+                    <Tooltip key={value.abilityId} title={
+                        <SpeechBubble>
+                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                        </SpeechBubble>}
+                    placement="bottom">
+                        <SelectedAbilityButton
+                            sx={[{background: props.btnColor, color: props.fcsTagColor}, 
+                                {'&:hover': {background: props.fcsColor}}]}>
+                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                        </SelectedAbilityButton>
+                    </Tooltip>
+                    :
+                    <Tooltip key={value.abilityId} title={
+                        <SpeechBubble>
+                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                        </SpeechBubble>} 
+                        placement="bottom">
+                        <AbilityButton
+                            onClick={() => {
+                                dispatch(setAbilityAction(value.abilityId));
+                                props.update();
+                                if(selector.players.player.abilities.length >= 2) {
+                                    dispatch(setValidAction({validFlg: false}));
+                                }
+                            }}>
+                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                        </AbilityButton>
+                    </Tooltip>
+                ))}
+            </AbilityCard>
+            :
             <AbilityCard>
                 <NavigationComponent message={props.type} messages={[]} color={props.color} background={props.background} />
                 {props.abilities.map((value) => (
@@ -38,27 +74,17 @@ const SelectAbilityComponent = (props) => {
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                 </SpeechBubble>}
                             placement="bottom">
-                                {matches ?
-                                <SelectedAbilityButton
-                                    sx={[{background: props.btnColor, color: props.fcsTagColor}, 
-                                        {'&:hover': {background: props.fcsColor}}]}>
-                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                                </SelectedAbilityButton>
-                                :
                                 <SelectedAbilityButtonMobile
                                     sx={[{background: props.btnColor, color: props.fcsTagColor}, 
                                         {'&:hover': {background: props.fcsColor}}]}>
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                 </SelectedAbilityButtonMobile>
-                                }
                             </Tooltip>
                         </Grid>
                         <Grid item xs={2}>
-                            {!matches && 
-                                <InfoIcon sx={{margin: '50% 10%'}} onClick={() => {
-                                    console.log('あああ');
-                                }}/>
-                            }
+                            <InfoIcon sx={{margin: '50% 10%'}} onClick={() => {
+                                console.log('あああ');
+                            }}/>
                         </Grid>
                     </Grid>
                     :
@@ -70,18 +96,6 @@ const SelectAbilityComponent = (props) => {
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                 </SpeechBubble>} 
                                 placement="bottom">
-                                {matches ?
-                                <AbilityButton
-                                    onClick={() => {
-                                        dispatch(setAbilityAction(value.abilityId));
-                                        props.update();
-                                        if(selector.players.player.abilities.length >= 2) {
-                                            dispatch(setValidAction({validFlg: false}));
-                                        }
-                                    }}>
-                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                                </AbilityButton>
-                                :
                                 <AbilityButtonMobile
                                     onClick={() => {
                                         dispatch(setAbilityAction(value.abilityId));
@@ -92,19 +106,17 @@ const SelectAbilityComponent = (props) => {
                                     }}>
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                 </AbilityButtonMobile>
-                                }
                             </Tooltip>
                         </Grid>
                         <Grid item xs={2}>
-                        {!matches && 
                             <InfoIcon sx={{margin: '50% 10%'}} onClick={() => {
                                 console.log('あああ');
                             }}/>
-                        }
                         </Grid>
                     </Grid>
                 ))}
             </AbilityCard>
+            }
         </Typography>
     );
 }
