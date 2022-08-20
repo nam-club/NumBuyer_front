@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AbilityCard, AbilityButton, SelectedAbilityButton, SpeechBubble } from '../theme';
-import { AbilityButtonMobile, SelectedAbilityButtonMobile } from '../themeMobile';
+import { AbilityButtonMobile, SelectedAbilityButtonMobile, SelectAbilityTooltipMobile } from '../themeMobile';
 
 
 import { setAbilityAction } from '../../redux/players/actions';
@@ -90,7 +90,7 @@ const SelectAbilityComponent = (props) => {
                             </Tooltip>
                         </Grid>
                         <Grid item xs={2}>
-                            <Tooltip
+                            <SelectAbilityTooltipMobile
                                 arrow
                                 PopperProps={{
                                 disablePortal: true,
@@ -99,12 +99,10 @@ const SelectAbilityComponent = (props) => {
                                 open={openTip}
                                 disableFocusListener
                                 disableHoverListener
-                                title={
-                                <SpeechBubble>
-                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                </SpeechBubble>}>
+                                placement={props.placement}
+                                title={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
                                 <InfoIcon sx={{margin: '50% 10%'}} onClick={handleClickButton}/>
-                            </Tooltip>
+                            </SelectAbilityTooltipMobile>
                         </Grid>
                     </Grid>
                     :
@@ -123,7 +121,7 @@ const SelectAbilityComponent = (props) => {
                             </AbilityButtonMobile>
                         </Grid>
                         <Grid item xs={2}>
-                            <Tooltip
+                            <SelectAbilityTooltipMobile
                                 arrow
                                 PopperProps={{
                                 disablePortal: true,
@@ -132,12 +130,10 @@ const SelectAbilityComponent = (props) => {
                                 open={openTip}
                                 disableFocusListener
                                 disableHoverListener
-                                title={
-                                <SpeechBubble>
-                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                </SpeechBubble>}>
+                                placement={props.placement}
+                                title={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
                                 <InfoIcon sx={{margin: '50% 10%'}} onClick={handleClickButton}/>
-                            </Tooltip>
+                            </SelectAbilityTooltipMobile>
                         </Grid>
                     </Grid>
                 ))}

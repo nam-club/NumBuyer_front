@@ -8,6 +8,7 @@ import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import TimelineContent from '@mui/lab/TimelineContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -225,6 +226,16 @@ export const SpeechBubble = styled('p')({
   fontSize: '1.5em',
 });
 
+export const SelectAbilityTooltipMobile = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))({
+  [`& .${tooltipClasses.tooltip}`]: {
+    maxWidth: '75%',
+    marginLeft: '10%',
+    fontSize: '1em'
+  },
+});
+
 // 確定ボタン
 export const ConfirmButtonMobile = styled(Button)({
   color: grey[100],
@@ -240,10 +251,10 @@ export const ConfirmButtonMobile = styled(Button)({
 });
 
 // アビリティタグ
-export const AbilityTag = styled('p')({
+export const AbilityTagMobile = styled('p')({
   color: grey[700],
-  margin:0,
-  fontSize: '1.2em',
+  margin:'0 5%',
+  fontSize: '1em',
 });
 
 
