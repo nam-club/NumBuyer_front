@@ -7,7 +7,7 @@ import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
 import * as Constants from '../../constants';
 
 import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
-import { AreaTagMobile, WrapDisplayMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
+import { AreaTagMobile, WrapCardMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
 
 import Card from '@mui/material/Card';
 import Grow from '@mui/material/Grow';
@@ -207,7 +207,7 @@ const CalcComponent = (props) => {
                     <AreaTagMobile align="left">{selector.msg.lang.YOUR_CARDS}</AreaTagMobile>
                     {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                     ) &&
-                        <WrapDisplayMobile>
+                        <WrapCardMobile>
                             {hands.map((value, index) => (
                                 <Grow in={fade} timeout={1000} key={index}>
                                     <TermCardMobile variant="contained"
@@ -217,14 +217,14 @@ const CalcComponent = (props) => {
                                     </TermCardMobile>
                                 </Grow>
                             ))}
-                        </WrapDisplayMobile>
+                        </WrapCardMobile>
                     }
                 </Card>
                 {(selector.game.phase === Constants.CALCULATE_PH) &&
                 <CalcAreaMobile>
                     <AreaTagMobile align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTagMobile>
                         {calcs &&
-                            <WrapDisplayMobile>
+                            <WrapCardMobile>
                                 {calcs.map((value, index) => (
                                     <Grow in={fade} timeout={1000} key={index}>
                                         <TermCardMobile variant="contained" 
@@ -234,7 +234,7 @@ const CalcComponent = (props) => {
                                         </TermCardMobile>
                                     </Grow>
                                 ))}
-                            </WrapDisplayMobile>
+                            </WrapCardMobile>
                         }
                     <PassButton size="large" variant="contained" onClick={handleClickOpen}
                         disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>

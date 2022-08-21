@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AbilityCard, AbilityButton, SelectedAbilityButton, SpeechBubble } from '../theme';
-import { AbilityButtonMobile, SelectedAbilityButtonMobile, SelectAbilityTooltipMobile } from '../themeMobile';
+import { AbilityButtonMobile, SelectedAbilityButtonMobile } from '../themeMobile';
 
 
 import { setAbilityAction } from '../../redux/players/actions';
@@ -14,22 +14,12 @@ import AbilityInfoIconComponent from './atoms/AbilityInfoIconComponent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
-import InfoIcon from '@mui/icons-material/Info';
 import { useMediaQuery } from "@mui/material";
 
 const SelectAbilityComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const matches = useMediaQuery("(min-width:520px)");
-    const [openTip, setOpenTip] = React.useState(false);
-
-    const handleCloseTip = () => {
-        setOpenTip(false);
-    };
-    
-    const handleClickButton = () => {
-        setOpenTip(true);
-    };
 
     return (
         <Typography component="div" align="center">

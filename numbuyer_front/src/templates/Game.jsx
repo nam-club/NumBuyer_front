@@ -239,7 +239,7 @@ const Game = () => {
                         {selector.msg.lang.FAILED}
                     </Card>
                 }
-                <Grid container sx={{marginBottom: '5%'}}>
+                <Grid container sx={{marginBottom: '5%', height: '25%'}}>
                     <Grid item xs={7}>
                         <NavigationComponent color={grey[50]} message={message} messages={messages} />
                         {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH ) &&
@@ -321,7 +321,9 @@ const Game = () => {
                         <AucMobileComponent auctionCards={auctionCards}/>
                     </Grid>
                 </Grid>
-                <UseAbilityComponent/>
+                {(player.abilities[0].trigger === Constants.ACT_TRG) &&
+                    <UseAbilityComponent/>
+                }
                 <CalcComponent calcBtnFlg={calcBtnFlg}/>
                 <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
                 <FinishModal

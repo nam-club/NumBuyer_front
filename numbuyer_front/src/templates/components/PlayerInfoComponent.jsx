@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import * as Constants from '../../constants';
-import PlayerInfoAbilityComponent from './PlayerInfoAbilityComponent';
+import PlayerInfoAbilityComponent from './organisms/PlayerInfoAbilityComponent';
 
 import { MyPlayerList, PlayerList, PlayerName, PlayerInfoIcon, PlayerInfo, AbilityInfoCard, SpeechBubble } from '../theme';
 import { MyPlayerListMobile, PlayerListMobile, PlayerNameMobile, PlayerInfoIconMobile, PlayerInfoMobile } from '../themeMobile';

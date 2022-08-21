@@ -226,12 +226,24 @@ export const SpeechBubble = styled('p')({
   fontSize: '1.5em',
 });
 
+// アビリティ説明用ツールチップ（アビリティ選択画面）
 export const SelectAbilityTooltipMobile = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))({
   [`& .${tooltipClasses.tooltip}`]: {
     maxWidth: '75%',
     marginLeft: '10%',
+    fontSize: '1em'
+  },
+});
+
+// アビリティ説明用ツールチップ（ゲーム画面プレイヤー情報）
+export const PlayerAbilityTooltipMobile = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))({
+  [`& .${tooltipClasses.tooltip}`]: {
+    maxWidth: '75%',
+    marginLeft: '45%',
     fontSize: '1em'
   },
 });
@@ -393,6 +405,12 @@ export const NaviMessagesMobile = styled('p')({
   margin: '2%',
 });
 
+// スクロール表示（メッセージ）
+export const WrapMessageMobile = styled('div')({
+  display: 'flex',
+  overflowY: 'scroll',
+});
+
 // 目標カード
 export const TargetCardMobile = styled(Card)({
   marginLeft: '5%',
@@ -513,8 +531,8 @@ export const CalcAreaMobile = styled(Card)({
   background: grey[50],
 });
 
-// 折り返し表示用
-export const WrapDisplayMobile = styled('div')({
+// スクロール表示（カード）
+export const WrapCardMobile = styled('div')({
   display: 'flex',
   overflowX: 'scroll',
 });
