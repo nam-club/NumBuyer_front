@@ -132,8 +132,7 @@ export const DetailMessage = styled(Typography)({
 
 // トップ・ロビー画面のメニュー
 export const MenuCard = styled(Card)({
-  marginRight: '20%',
-  marginLeft: '20%',
+  margin: '0 20%'
 });
 
 // 入力テキストボックス
@@ -285,8 +284,7 @@ export const JoinButton = styled(Button)({
 
 // 設定アイコン
 export const SettingIcon = styled(SettingsIcon)({
-  color: grey[50],
-  fontSize: '3em',
+  fontSize: '1.5em',
   margin: 0,
 });
 

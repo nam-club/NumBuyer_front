@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useStyles, Back, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
-import { useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile } from './themeMobile';
+import { useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile, 
+FinishModalMobile, FinishMenuMobile } from './themeMobile';
 
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
@@ -326,17 +327,17 @@ const Game = () => {
                 }
                 <CalcComponent calcBtnFlg={calcBtnFlg}/>
                 <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg}/>
-                <FinishModal
+                <FinishModalMobile
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 open={finishFlg}
                 >
                     <Fade in={finishFlg}>
-                        <FinishMenu>
+                        <FinishMenuMobile>
                             <RankingComponent />
-                        </FinishMenu>
+                        </FinishMenuMobile>
                     </Fade>
-                </FinishModal>
+                </FinishModalMobile>
             </div>
             }
         </Typography>

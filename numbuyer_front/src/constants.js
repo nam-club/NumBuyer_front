@@ -217,3 +217,7 @@ export const INC_PASS = "incorrectWithPass";
 export const NO_ROOM_ERR = "error.game.notFound"; // 存在しないルームID
 export const BAD_TIMING_RELOAD_ERR = "error.validation.ability.reload.invalidPhase"; // リロードアビリティはオークションフェーズに発動できない
 export const NOT_MEET_TURN_CATASTROPHE_ERR = "error.validation.ability.catastrophe.notMeetTurn"; // ゲーム開始から3ターン以内は発動できない（カタストロフィ）
+
+// 次期バージョンアップ用非表示コンテンツフラグ
+export const SETTING_BTN_FLG = false;
+export const PLAY_AGAIN_BTN_FLG = false;

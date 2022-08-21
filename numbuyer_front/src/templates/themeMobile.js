@@ -275,6 +275,7 @@ export const FriendModal = styled(Modal)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  overflow: 'scroll',
 });
 
 // フレンドマッチのメニュー
@@ -326,7 +327,6 @@ export const SettingHeader = styled(Typography)({
 
 // ロビータイトル
 export const LobbyTitleMobile = styled(Card)({
-  margin: 0,
   color: grey[100],
   background: indigo[400],
   fontSize: '2em',
@@ -667,25 +667,27 @@ export const AbilityInfoCardMobile = styled(Card) ({
 });
 
 // ゲーム終了のモーダル
-export const FinishModal = styled(Modal)({
+export const FinishModalMobile = styled(Modal)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  margin: '5%',
+  overflow: 'scroll',
 });
 
 // ゲーム終了のメニュー
-export const FinishMenu = styled('div')({
+export const FinishMenuMobile = styled('div')({
   background: grey[50],
   boxShadow: 5,
-  padding: theme.spacing(4, 12, 8),
+  padding: theme.spacing(4, 6, 4),
 });
 
 // ランキングタイトル
-export const RankingTitle = styled(Card)({
+export const RankingTitleMobile = styled(Card)({
   "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
   color: grey[50],
   background: amber[400],
-  fontSize: '4em',
+  fontSize: '2em',
   fontWeight: 500,
   margin: '3%',
   'white-space': 'nowrap',
@@ -701,10 +703,9 @@ export const Winner = styled('span')({
   'white-space': 'nowrap',
 });
 
-// 優勝者情報アイコン
-export const WinnerInfoIcon = styled('img')({
-  marginLeft: '5%',
-  marginRight: '1%',
+// リザルト情報アイコン
+export const ResultInfoIconMobile = styled('img')({
+  width: '25%'
 });
 
 // 敗北者

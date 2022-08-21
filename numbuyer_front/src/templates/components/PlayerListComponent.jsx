@@ -2,12 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX, leaveLobby } from '../../Socket';
 
-import { MenuCard, LobbyTitle, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag } from '../theme';
+import { MenuCard, SettingIcon, ParticipantList, OwnerIcon, StartButton, BackButton, RoomCodeTag, MenuModal, TopMenu } from '../theme';
 import { MenuCardMobile, LobbyTitleMobile, ParticipantListMobile, StartButtonMobile, BackButtonMobile, RoomCodeTagMobile } from '../themeMobile';
 
+import * as Constants from '../../constants';
 import NavigationComponent from './NavigationComponent';
+import SettingComponent from './SettingComponent';
 
 import Grid from '@mui/material/Grid';
+import Fade from '@mui/material/Fade';
 import CardActions from '@mui/material/CardActions';
 import CopyToClipBoard from 'react-copy-to-clipboard';
 import IconButton      from '@mui/material/IconButton';
@@ -25,7 +28,8 @@ const PlayerListComponent = () => {
     const { start } = React.useContext(CTX);
     const [owners, setOwners] = React.useState([]); // オーナー一覧
     const [members, setMembers] = React.useState([]); // オーナー以外のメンバー一覧
-    const [openTip, setOpenTip] = React.useState(false);
+    const [settingOpen, setSettingOpen] = React.useState(false); // 設定ボタンのモーダル
+    const [openTip, setOpenTip] = React.useState(false); // クリップボードコピー吹き出し
 
     const matches = useMediaQuery("(min-width:520px)");
 
@@ -36,11 +40,23 @@ const PlayerListComponent = () => {
         }
     }, [selector.players.players]);
 
+    // 設定モーダルを開く or 閉じる
+    const handleSettingOpen = () => {
+        setSettingOpen(!settingOpen);
+    };
+
+    // 設定モーダルを閉じる
+    const handleSettingClose = () => {
+        setSettingOpen(false);
+    };
+
+    // クリップボードコピー吹き出し閉じる
     const handleCloseTip = () => {
         setOpenTip(false);
     };
     
-    const handleClickButton = () => {
+    // クリップボードコピー吹き出し開く
+    const handleOpenTip = () => {
         setOpenTip(true);
     };
 
@@ -48,9 +64,20 @@ const PlayerListComponent = () => {
         <div>
         {matches ?
             <MenuCard>
-                <LobbyTitle>{selector.msg.lang.LOBBY}</LobbyTitle>
-                {selector.room.isQuickMatch && 
+                {selector.room.isQuickMatch &&
+                <div>
+                    {Constants.SETTING_BTN_FLG &&
+                    <Grid container>
+                        <Grid item xs={10} />
+                        <Grid item xs={2}>
+                            <IconButton>
+                                <SettingIcon onClick={handleSettingOpen} sx={{color: grey[600]}}/>
+                            </IconButton>
+                        </Grid>
+                    </Grid> 
+                    }
                     <NavigationComponent color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
+                </div>
                 }
                 {owners &&
                     owners.map((value) => (<ParticipantList key={value.playerName}>
@@ -105,8 +132,8 @@ const PlayerListComponent = () => {
                             >
                                 <div>
                                 <CopyToClipBoard text={selector.room.roomId}>
-                                    <IconButton onClick={handleClickButton}>
-                                        <ContentCopyIcon onClick={handleClickButton}/>
+                                    <IconButton>
+                                        <ContentCopyIcon onClick={handleOpenTip}/>
                                     </IconButton>     
                                 </CopyToClipBoard>
                                 </div>
@@ -169,12 +196,12 @@ const PlayerListComponent = () => {
                     >
                         <span>
                         <CopyToClipBoard text={selector.room.roomId}>
-                            <IconButton onClick={handleClickButton}
+                            <IconButton
                             sx={{color: grey[50], background: grey[600], marginTop: '6%', 
                             '&:hover': {
                                 color: grey[50], background: grey[500]
                             }}}>
-                                <ContentCopyIcon onClick={handleClickButton}/>
+                                <ContentCopyIcon onClick={handleOpenTip}/>
                             </IconButton>     
                         </CopyToClipBoard>
                         </span>
@@ -183,6 +210,28 @@ const PlayerListComponent = () => {
                 </ClickAwayListener>
             </MenuCardMobile>
         }
+        {(!matches && Constants.SETTING_BTN_FLG) &&
+            <IconButton
+            sx={{color: grey[50], background: grey[600],
+            '&:hover': {
+                color: grey[50], background: grey[500]
+            }}}>
+                <SettingIcon onClick={handleSettingOpen} sx={{color: grey[50]}}/>
+            </IconButton>
+        }
+        <MenuModal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={settingOpen}
+            onClose={handleSettingClose}
+            closeAfterTransition
+        >
+            <Fade in={settingOpen}>
+                <TopMenu>
+                    <SettingComponent/>
+                </TopMenu>
+            </Fade>
+        </MenuModal>
         </div>
     )
 }
