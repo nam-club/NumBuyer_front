@@ -76,7 +76,7 @@ export const setRankingAction = (rankingState) => {
     }
 }
 
-// ロビー画面でのアビリティ選択用
+// アビリティ追加（ロビー画面でのアビリティ選択用）
 export const SET_ABILITY = "SET_ABILITY";
 
 export const setAbilityAction = (abilityState) => {
@@ -88,7 +88,19 @@ export const setAbilityAction = (abilityState) => {
     }
 }
 
-// back側から返ってきたアビリティ情報を入れる用
+// アビリティ選択解除（ロビー画面でのアビリティ選択用）
+export const CANCEL_ABILITY = "CANCEL_ABILITY";
+
+export const cancelAbilityAction = (abilityState) => {
+    return {
+        type: "CANCEL_ABILITY",
+        payload: {
+            abilityId: abilityState
+        }
+    }
+}
+
+// アビリティ追加（back側から返ってきたアビリティ情報を入れる用）
 export const SET_RES_ABILITY = "SET_RES_ABILITY";
 
 export const setResAbilityAction = (abilityState) => {

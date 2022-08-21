@@ -32,9 +32,12 @@ export const PlayersReducer = (state = initialState.players, action) => {
                 state.player.abilities[1] = action.payload.abilities;
             }
             return state;
+        case Actions.CANCEL_ABILITY:
+            let cancelAbility = state.player.abilities.find((a) => {return a.abilityId === action.payload.abilityId});
+            state.player.abilities.splice(state.player.abilities.indexOf(cancelAbility));
+            return state;
         case Actions.SET_RES_ABILITY:
             state.player.abilities = action.payload.abilities;
-            console.log(state);
             return state;
         default:
             return state;

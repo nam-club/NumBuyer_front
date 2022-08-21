@@ -5,7 +5,7 @@ import { AbilityCard, AbilityButton, SelectedAbilityButton, SpeechBubble } from 
 import { AbilityButtonMobile, SelectedAbilityButtonMobile } from '../themeMobile';
 
 
-import { setAbilityAction } from '../../redux/players/actions';
+import { setAbilityAction, cancelAbilityAction } from '../../redux/players/actions';
 import { setValidAction } from '../../redux/msg/actions';
 
 import NavigationComponent from './NavigationComponent';
@@ -36,7 +36,14 @@ const SelectAbilityComponent = (props) => {
                     placement="bottom">
                         <SelectedAbilityButton
                             sx={[{background: props.btnColor, color: props.fcsTagColor}, 
-                                {'&:hover': {background: props.fcsColor}}]}>
+                                {'&:hover': {background: props.fcsColor}}]}
+                            onClick={() => {
+                                dispatch(cancelAbilityAction(value.abilityId));
+                                props.update();
+                                if(selector.players.player.abilities.length >= 2) {
+                                    dispatch(setValidAction({validFlg: false}));
+                                }
+                            }}>
                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                         </SelectedAbilityButton>
                     </Tooltip>
@@ -75,7 +82,14 @@ const SelectAbilityComponent = (props) => {
                             placement="bottom">
                                 <SelectedAbilityButtonMobile
                                     sx={[{background: props.btnColor, color: props.fcsTagColor}, 
-                                        {'&:hover': {background: props.fcsColor}}]}>
+                                        {'&:hover': {background: props.fcsColor}}]}
+                                    onClick={() => {
+                                        dispatch(cancelAbilityAction(value.abilityId));
+                                        props.update();
+                                        if(selector.players.player.abilities.length >= 2) {
+                                            dispatch(setValidAction({validFlg: false}));
+                                        }
+                                    }}>
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                 </SelectedAbilityButtonMobile>
                             </Tooltip>
