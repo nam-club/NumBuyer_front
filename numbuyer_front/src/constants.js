@@ -199,7 +199,7 @@ export const NEXT_TURN_PH = 'NEXT_TURN';
 export const END_PH = 'END';
 
 // 入力可能文字列 
-export const NAME_EXP = "[¥$=<>+*]+";
+export const NAME_EXP = "[¥$=<>+*/;'\"]+";
 export const BID_EXP = "[0-9]+";
 
 // 成功・失敗ステータス

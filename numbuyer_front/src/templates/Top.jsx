@@ -82,7 +82,7 @@ const Top = () => {
 
     // アビリティ選択モーダルを開く
     const handleAbilityOpen = () => {
-        if(name !== '' && !name.match(Constants.NAME_EXP)) {
+        if(name !== '' && !name.match(Constants.NAME_EXP) && name.length <= 15) {
             setAbilityOpen(true);
         }else {
             dispatch(setValidAction({validFlg: true}));
@@ -135,9 +135,9 @@ const Top = () => {
         setFriendOpen(false);
     };
 
-    // テキストボックス入力
+    // プレイヤー名の入力
     const doChange = (e) => {
-        if(!e.target.value.match(Constants.NAME_EXP)) {
+        if(!e.target.value.match(Constants.NAME_EXP) && e.target.value.length <= 15) {
             setName(e.target.value);
         }
         if(e.target.value !== '' && !e.target.value.match(Constants.NAME_EXP)) {
@@ -145,12 +145,23 @@ const Top = () => {
         }else {
             dispatch(setValidAction({validFlg: true}));
             if(e.target.value !== '') {
-                dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
-                dispatch(setErrMsgVarsAction([
-                    ConstantsMsg.English.SYMBOL_ERR,
-                    ConstantsMsg.Japanese.SYMBOL_ERR,
-                    ConstantsMsg.Chinese.SYMBOL_ERR
-                ]));
+                // 禁止文字を入力
+                if(e.target.value.match(Constants.NAME_EXP)) {
+                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.SYMBOL_ERR}));
+                    dispatch(setErrMsgVarsAction([
+                        ConstantsMsg.English.SYMBOL_ERR,
+                        ConstantsMsg.Japanese.SYMBOL_ERR,
+                        ConstantsMsg.Chinese.SYMBOL_ERR
+                    ]));
+                // 15文字より多い
+                }else if(e.target.value.length > 15) {
+                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.LENGTH_NAME_ERR}));
+                    dispatch(setErrMsgVarsAction([
+                        ConstantsMsg.English.LENGTH_NAME_ERR,
+                        ConstantsMsg.Japanese.LENGTH_NAME_ERR,
+                        ConstantsMsg.Chinese.LENGTH_NAME_ERR
+                    ]));
+                }
             }else {
                 dispatch(setErrMsgAction({errMsg: selector.msg.lang.NULL_NAME_ERR}));
                 dispatch(setErrMsgVarsAction([
@@ -191,7 +202,7 @@ const Top = () => {
 
     // クイックマッチ
     const clickQuick = () => {
-        if(name !== '' && !name.match(Constants.NAME_EXP)) {
+        if(name !== '' && !name.match(Constants.NAME_EXP) && name.length <= 15) {
             dispatch(setValidAction({validFlg: false}));
             dispatch(setPlayerNameAction(name));
             dispatch(setQuickAction(true));

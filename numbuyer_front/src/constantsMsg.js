@@ -138,6 +138,7 @@ export const English = {
     // エラーメッセージ
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
     SYMBOL_ERR: "You cannot enter that character.", // 禁止文字が入力されている
+    LENGTH_NAME_ERR: 'Enter a player name of 15 characters or less.', // プレイヤー名が15文字より多い
     NULL_ROOM_ID_ERR: "Please enter Room ID.", // ルームが未入力
     LENGTH_ROOM_ID_ERR: 'Please enter the room ID in 10 digits.', // ルームIDが10桁以外
     NOT_EXIST_ROOM_ERR: 'This room ID does not exist.', // 存在しないルームID
@@ -328,6 +329,7 @@ export const Japanese = {
     // エラーメッセージ
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
+    LENGTH_NAME_ERR: 'プレイヤー名は１５文字以下で入力してください。', // プレイヤー名が15文字より多い
     NULL_ROOM_ID_ERR: 'ルームIDを入力してください。', // ルームIDが未入力
     LENGTH_ROOM_ID_ERR: 'ルームIDは１０桁で入力してください。', // ルームIDが10桁以外
     NOT_EXIST_ROOM_ERR: '存在しないルームIDです。', // 存在しないルームID
@@ -338,7 +340,7 @@ export const Japanese = {
     LACK_ERR: "所持金が足りません。", // 所持金が足りない
     DOUBLE_ERR: "２回続けて入札はできません。", // ２回連続入札
     BAD_TIMING_ABILITY_AUC_ERR: "このアビリティはオークションフェーズに使用できません。", // オークションフェーズに発動できないアビリティ
-    NOT_MEET_ABILITY_3TURN_ERR: "このアビリティはゲーム開始から3ターンの間は発動できません。", // 最初の3ターン発動できないアビリティ
+    NOT_MEET_ABILITY_3TURN_ERR: "このアビリティはゲーム開始から３ターンの間は発動できません。", // 最初の3ターン発動できないアビリティ
 
     // ナビゲーションメッセージ
     QUICK_MSG: '４人揃うと自動でゲームが始まります。',
@@ -518,6 +520,7 @@ export const Chinese = {
     // エラーメッセージ
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力
     SYMBOL_ERR: '您不能输入该字符。', // 禁止文字が入力されている
+    LENGTH_NAME_ERR: '输入不超过１５个字符的玩家名称。', // プレイヤー名が15文字より多い
     NULL_ROOM_ID_ERR: '请输入房间号。', // ルームIDが未入力
     LENGTH_ROOM_ID_ERR: '请输入１０位数字的房间ID。', // ルームIDが10桁以外
     NOT_EXIST_ROOM_ERR: '此房间ID不存在。', // 存在しないルームID
