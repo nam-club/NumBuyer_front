@@ -9,6 +9,8 @@ import { AbilityAreaMobile, AreaTagMobile, UseAbilityButtonMobile, ErrorMessageM
 
 import { setAblErrMsgAction } from '../../redux/msg/actions';
 
+import AbilityInfoIconComponent from './atoms/AbilityInfoIconComponent';
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -64,8 +66,8 @@ const UseAbilityComponent = (props) => {
         <AbilityArea>
             <AreaTag align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.ABILITY_TAG}</AreaTag>
             <div align="center">
-                {abilities.map((value, index) => (
-                    <div key={index}>
+                {abilities.map((value) => (
+                    <div key={value.abilityId}>
                         {value.trigger === Constants.ACT_TRG &&
                         <div>
                             {value.status === Constants.USED_ST ?
@@ -260,80 +262,108 @@ const UseAbilityComponent = (props) => {
         <AbilityAreaMobile>
             <AreaTagMobile align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.ABILITY_TAG}</AreaTagMobile>
             <Grid container>
-                {abilities.map((value, index) => (
-                    <Grid item xs={6} key={index}>
+                {abilities.map((value) => (
+                    <Grid item xs={6} key={value.abilityId}>
                         {value.trigger === Constants.ACT_TRG &&
                         <div>
                             {value.status === Constants.USED_ST ?
-                            <UseAbilityButtonMobile size="large" variant="contained" disabled>
-                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                            </UseAbilityButtonMobile> 
+                            <Grid container>
+                                <Grid item xs={10}>
+                                    <UseAbilityButtonMobile size="large" variant="contained" disabled>
+                                        {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                    </UseAbilityButtonMobile> 
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <AbilityInfoIconComponent
+                                     comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                     placement="bottom" margin="25% 0" />
+                                </Grid>
+                            </Grid>
                             :
                             <div>
                                 {value.status !== Constants.UNUSED_ST ?
                                     <div>
-                                        {value.type === Constants.BST_TP ? 
-                                            <Tooltip key={value.abilityId} title={
-                                                <SpeechBubble>
-                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                </SpeechBubble>}
-                                            placement="bottom">
-                                                <UseAbilityButtonMobile size="large" variant="contained"
-                                                 sx={{ background: blue[300], cursor: 'default', boxShadow: 'none',
-                                                '&:hover': {background: blue[300], boxShadow: 'none'} }}>
-                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                </UseAbilityButtonMobile>
-                                            </Tooltip> : 
+                                        {value.type === Constants.BST_TP ?
+                                            <Grid container>
+                                                <Grid item xs={10}>
+                                                    <UseAbilityButtonMobile size="large" variant="contained"
+                                                    sx={{ background: blue[300], cursor: 'default', boxShadow: 'none',
+                                                    '&:hover': {background: blue[300], boxShadow: 'none'} }}>
+                                                        {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                    </UseAbilityButtonMobile>
+                                                </Grid>
+                                                <Grid item xs={2}>
+                                                    <AbilityInfoIconComponent
+                                                    comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                    placement="bottom" margin="25% 0" />
+                                                </Grid>
+                                            </Grid>
+                                            : 
                                             <div>
-                                                {value.type === Constants.ATK_TP ? 
-                                                    <Tooltip key={value.abilityId} title={
-                                                        <SpeechBubble>
-                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                        </SpeechBubble>}
-                                                    placement="bottom">
-                                                        <UseAbilityButtonMobile size="large" variant="contained"
-                                                         sx={{ background: red[300], cursor: 'default', boxShadow: 'none',
-                                                         '&:hover': {background: red[300], boxShadow: 'none'} }}>
-                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                        </UseAbilityButtonMobile>
-                                                    </Tooltip> :
+                                                {value.type === Constants.ATK_TP ?
+                                                    <Grid container>
+                                                        <Grid item xs={10}>
+                                                            <UseAbilityButtonMobile size="large" variant="contained"
+                                                            sx={{ background: red[300], cursor: 'default', boxShadow: 'none',
+                                                            '&:hover': {background: red[300], boxShadow: 'none'} }}>
+                                                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                            </UseAbilityButtonMobile>
+                                                        </Grid>
+                                                        <Grid item xs={2}>
+                                                            <AbilityInfoIconComponent
+                                                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                            placement="bottom" margin="25% 0" />
+                                                        </Grid>
+                                                    </Grid>
+                                                    :
                                                     <div>
-                                                        {value.type === Constants.RCV_TP ? 
-                                                            <Tooltip key={value.abilityId} title={
-                                                                <SpeechBubble>
-                                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                                </SpeechBubble>}
-                                                            placement="bottom">
-                                                                <UseAbilityButtonMobile size="large" variant="contained"
-                                                                 sx={{ background: teal[300], cursor: 'default', boxShadow: 'none',
-                                                                 '&:hover': {background: teal[300], boxShadow: 'none'} }}>
-                                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                                </UseAbilityButtonMobile>
-                                                            </Tooltip> :
+                                                        {value.type === Constants.RCV_TP ?
+                                                            <Grid container>
+                                                                <Grid item xs={10}>
+                                                                    <UseAbilityButtonMobile size="large" variant="contained"
+                                                                    sx={{ background: teal[300], cursor: 'default', boxShadow: 'none',
+                                                                    '&:hover': {background: teal[300], boxShadow: 'none'} }}>
+                                                                        {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                                    </UseAbilityButtonMobile>
+                                                                </Grid>
+                                                                <Grid item xs={2}>
+                                                                    <AbilityInfoIconComponent
+                                                                    comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                                    placement="bottom" margin="25% 0" />
+                                                                </Grid>
+                                                            </Grid>
+                                                            :
                                                             <div>
-                                                                {value.type === Constants.JAM_TP ? 
-                                                                    <Tooltip key={value.abilityId} title={
-                                                                        <SpeechBubble>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                                        </SpeechBubble>}
-                                                                    placement="bottom">
-                                                                        <UseAbilityButtonMobile size="large" variant="contained"
-                                                                         sx={{ background: yellow[300], color: grey[700], cursor: 'default', boxShadow: 'none',
-                                                                         '&:hover': {background: yellow[300], boxShadow: 'none'} }}>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                                        </UseAbilityButtonMobile>
-                                                                    </Tooltip> :
-                                                                    <Tooltip key={value.abilityId} title={
-                                                                        <SpeechBubble>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                                        </SpeechBubble>}
-                                                                    placement="bottom">
-                                                                        <UseAbilityButtonMobile size="large" variant="contained"
-                                                                         sx={{ background: grey[700], cursor: 'default', boxShadow: 'none',
-                                                                         '&:hover': {background: grey[700], boxShadow: 'none'} }}>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                                        </UseAbilityButtonMobile>
-                                                                    </Tooltip>
+                                                                {value.type === Constants.JAM_TP ?
+                                                                    <Grid container>
+                                                                        <Grid item xs={10}>
+                                                                            <UseAbilityButtonMobile size="large" variant="contained"
+                                                                            sx={{ background: yellow[300], color: grey[700], cursor: 'default', boxShadow: 'none',
+                                                                            '&:hover': {background: yellow[300], boxShadow: 'none'} }}>
+                                                                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                                            </UseAbilityButtonMobile>
+                                                                        </Grid>
+                                                                        <Grid item xs={2}>
+                                                                            <AbilityInfoIconComponent
+                                                                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                                            placement="bottom" margin="25% 0" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    :
+                                                                    <Grid container>
+                                                                        <Grid item xs={10}>
+                                                                            <UseAbilityButtonMobile size="large" variant="contained"
+                                                                            sx={{ background: grey[700], cursor: 'default', boxShadow: 'none',
+                                                                            '&:hover': {background: grey[700], boxShadow: 'none'} }}>
+                                                                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                                            </UseAbilityButtonMobile>
+                                                                        </Grid>
+                                                                        <Grid item xs={2}>
+                                                                            <AbilityInfoIconComponent
+                                                                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                                            placement="bottom" margin="25% 0" />
+                                                                        </Grid>
+                                                                    </Grid>
                                                                 }
                                                             </div>
                                                         }
@@ -343,68 +373,87 @@ const UseAbilityComponent = (props) => {
                                         }
                                     </div> : 
                                     <div>
-                                        {value.type === Constants.BST_TP ? 
-                                            <Tooltip key={value.abilityId} title={
-                                                <SpeechBubble>
-                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                </SpeechBubble>}
-                                            placement="bottom">
-                                                <UseAbilityButtonMobile size="large" variant="contained"
-                                                 sx={{ background: blue[300], '&:hover': {background: blue[200]} }}
-                                                 onClick={() => {handleClickOpen(value)}}>
-                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                </UseAbilityButtonMobile>
-                                            </Tooltip> : 
+                                        {value.type === Constants.BST_TP ?
+                                            <Grid container>
+                                                <Grid item xs={10}>
+                                                    <UseAbilityButtonMobile size="large" variant="contained"
+                                                    sx={{ background: blue[300], '&:hover': {background: blue[200]} }}
+                                                    onClick={() => {handleClickOpen(value)}}>
+                                                        {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                    </UseAbilityButtonMobile>
+                                                </Grid>
+                                                <Grid item xs={2}>
+                                                    <AbilityInfoIconComponent
+                                                    comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                    placement="bottom" margin="25% 0" />
+                                                </Grid>
+                                            </Grid>
+                                            : 
                                             <div>
-                                                {value.type === Constants.ATK_TP ? 
-                                                    <Tooltip key={value.abilityId} title={
-                                                        <SpeechBubble>
-                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                        </SpeechBubble>}
-                                                    placement="bottom">
-                                                        <UseAbilityButtonMobile size="large" variant="contained"
-                                                         sx={{ background: red[300], '&:hover': {background: red[200]} }}
-                                                         onClick={() => {handleClickOpen(value)}}>
-                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                        </UseAbilityButtonMobile>
-                                                    </Tooltip> :
+                                                {value.type === Constants.ATK_TP ?
+                                                    <Grid container>
+                                                        <Grid item xs={10}>
+                                                            <UseAbilityButtonMobile size="large" variant="contained"
+                                                            sx={{ background: red[300], '&:hover': {background: red[200]} }}
+                                                            onClick={() => {handleClickOpen(value)}}>
+                                                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                            </UseAbilityButtonMobile>
+                                                        </Grid>
+                                                        <Grid item xs={2}>
+                                                            <AbilityInfoIconComponent
+                                                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                            placement="bottom" margin="25% 0" />
+                                                        </Grid>
+                                                    </Grid>
+                                                    :
                                                     <div>
-                                                        {value.type === Constants.RCV_TP ? 
-                                                            <Tooltip key={value.abilityId} title={
-                                                                <SpeechBubble>
-                                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                                </SpeechBubble>}
-                                                            placement="bottom">
-                                                                <UseAbilityButtonMobile size="large" variant="contained"
-                                                                 sx={{ background: teal[300], '&:hover': {background: teal[200]} }}
-                                                                 onClick={() => {handleClickOpen(value)}}>
-                                                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                                </UseAbilityButtonMobile>
-                                                            </Tooltip> :
+                                                        {value.type === Constants.RCV_TP ?
+                                                            <Grid container>
+                                                                <Grid item xs={10}>
+                                                                    <UseAbilityButtonMobile size="large" variant="contained"
+                                                                    sx={{ background: teal[300], '&:hover': {background: teal[200]} }}
+                                                                    onClick={() => {handleClickOpen(value)}}>
+                                                                        {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                                    </UseAbilityButtonMobile>
+                                                                </Grid>
+                                                                <Grid item xs={2}>
+                                                                    <AbilityInfoIconComponent
+                                                                    comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                                    placement="bottom" margin="25% 0" />
+                                                                </Grid>
+                                                            </Grid>
+                                                            :
                                                             <div>
-                                                                {value.type === Constants.JAM_TP ? 
-                                                                    <Tooltip key={value.abilityId} title={
-                                                                        <SpeechBubble>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                                        </SpeechBubble>}
-                                                                    placement="bottom">
-                                                                        <UseAbilityButtonMobile size="large" variant="contained"
-                                                                         sx={{ background: yellow[300], color: grey[700], '&:hover': {background: yellow[200]} }}
-                                                                         onClick={() => {handleClickOpen(value)}}>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                                        </UseAbilityButtonMobile>
-                                                                    </Tooltip> :
-                                                                    <Tooltip key={value.abilityId} title={
-                                                                        <SpeechBubble>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
-                                                                        </SpeechBubble>}
-                                                                    placement="bottom">
-                                                                        <UseAbilityButtonMobile size="large" variant="contained"
-                                                                         sx={{ background: grey[700], '&:hover': {background: grey[600]} }}
-                                                                         onClick={() => {handleClickOpen(value)}}>
-                                                                            {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
-                                                                        </UseAbilityButtonMobile>
-                                                                    </Tooltip>
+                                                                {value.type === Constants.JAM_TP ?
+                                                                    <Grid container>
+                                                                        <Grid item xs={10}>
+                                                                            <UseAbilityButtonMobile size="large" variant="contained"
+                                                                            sx={{ background: yellow[300], color: grey[700], '&:hover': {background: yellow[200]} }}
+                                                                            onClick={() => {handleClickOpen(value)}}>
+                                                                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                                            </UseAbilityButtonMobile>
+                                                                        </Grid>
+                                                                        <Grid item xs={2}>
+                                                                            <AbilityInfoIconComponent
+                                                                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                                            placement="bottom" margin="25% 0" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    :
+                                                                    <Grid container>
+                                                                        <Grid item xs={10}>
+                                                                            <UseAbilityButtonMobile size="large" variant="contained"
+                                                                            sx={{ background: grey[700], '&:hover': {background: grey[600]} }}
+                                                                            onClick={() => {handleClickOpen(value)}}>
+                                                                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
+                                                                            </UseAbilityButtonMobile>
+                                                                        </Grid>
+                                                                        <Grid item xs={2}>
+                                                                            <AbilityInfoIconComponent
+                                                                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                                                            placement="bottom" margin="25% 0" />
+                                                                        </Grid>
+                                                                    </Grid>
                                                                 }
                                                             </div>
                                                         }

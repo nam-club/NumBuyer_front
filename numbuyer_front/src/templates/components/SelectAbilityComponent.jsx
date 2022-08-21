@@ -9,6 +9,7 @@ import { setAbilityAction } from '../../redux/players/actions';
 import { setValidAction } from '../../redux/msg/actions';
 
 import NavigationComponent from './NavigationComponent';
+import AbilityInfoIconComponent from './atoms/AbilityInfoIconComponent';
 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -90,19 +91,9 @@ const SelectAbilityComponent = (props) => {
                             </Tooltip>
                         </Grid>
                         <Grid item xs={2}>
-                            <SelectAbilityTooltipMobile
-                                arrow
-                                PopperProps={{
-                                disablePortal: true,
-                                }}
-                                onClose={handleCloseTip}
-                                open={openTip}
-                                disableFocusListener
-                                disableHoverListener
-                                placement={props.placement}
-                                title={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
-                                <InfoIcon sx={{margin: '50% 10%'}} onClick={handleClickButton}/>
-                            </SelectAbilityTooltipMobile>
+                            <AbilityInfoIconComponent
+                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                            placement={props.placement} margin="50% 10%" />
                         </Grid>
                     </Grid>
                     :
@@ -121,19 +112,9 @@ const SelectAbilityComponent = (props) => {
                             </AbilityButtonMobile>
                         </Grid>
                         <Grid item xs={2}>
-                            <SelectAbilityTooltipMobile
-                                arrow
-                                PopperProps={{
-                                disablePortal: true,
-                                }}
-                                onClose={handleCloseTip}
-                                open={openTip}
-                                disableFocusListener
-                                disableHoverListener
-                                placement={props.placement}
-                                title={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
-                                <InfoIcon sx={{margin: '50% 10%'}} onClick={handleClickButton}/>
-                            </SelectAbilityTooltipMobile>
+                            <AbilityInfoIconComponent
+                            comment={value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                            placement={props.placement} margin="50% 10%" />
                         </Grid>
                     </Grid>
                 ))}
