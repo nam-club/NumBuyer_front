@@ -20,7 +20,7 @@ const history = History.createBrowserHistory();
 export const store = createStore(history);
 
 ReactDOM.render(
-  <ThemeProvider theme={theme} sx={{'overscroll-behavior-y': 'none'}}>
+  <ThemeProvider theme={theme}>
     <Helmet bodyAttributes={{style: 'background-color : #64b5f6'}}/>
     <Provider store={store}>
       <ConnectedRouter history={history}>

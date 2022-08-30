@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
-        LangButton, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
+        LangIcon, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, TutorialIconMobile, MenuCardMobile,
         ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, FriendMenuMobile,
          ConfirmButtonMobile, CreateButtonMobile, JoinButtonMobile, AbilityTagMobile} from './themeMobile';
@@ -25,16 +25,23 @@ import SelectAbilityComponent from './components/SelectAbilityComponent';
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
 import Fade from '@mui/material/Fade';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { grey, amber, blue, teal, red } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
+import topImage from '../assets/topImage.png';
+import backImage from '../assets/backImage.png';
+import groundImage from '../assets/groundImage.png';
 
 const Top = () => {
     const dispatch = useDispatch();
@@ -44,6 +51,7 @@ const Top = () => {
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
     const [errMsg, setErrMsg] = React.useState('');
+    const [langOpen, setLangOpen] = React.useState(false); // 言語設定のモーダル
     const [tutorialOpen, setTutorialOpen] = React.useState(false); // チュートリアルのモーダル
     const [abilityOpen, setAbilityOpen] = React.useState(false); // アビリティ選択のモーダル
     const [friendOpen, setFriendOpen] = React.useState(false); // フレンドマッチのモーダル
@@ -69,6 +77,16 @@ const Top = () => {
     React.useEffect(() => {
         setErrMsg(selector.msg.errMsg);
     }, [selector.msg.errMsg]);
+
+    // 言語設定を開く or 閉じる
+    const handleLangOpen = () => {
+        setLangOpen(!langOpen);
+    };
+
+    // 言語設定を閉じる
+    const handleLangClose = () => {
+        setLangOpen(false);
+    };
 
     // チュートリアルを開く or 閉じる
     const handleTutorialOpen = () => {
@@ -264,40 +282,80 @@ const Top = () => {
         }
     }
 
+    // 言語選択
+    const changeLang = (value) => {
+        switch(value) {
+            case ConstantsMsg.English.LANGUAGE:
+                dispatch(setLangAction(ConstantsMsg.English));
+                setErrMsg(selector.msg.errMsgVars[0]);
+                break;
+            case ConstantsMsg.Japanese.LANGUAGE:
+                dispatch(setLangAction(ConstantsMsg.Japanese));
+                setErrMsg(selector.msg.errMsgVars[1]);
+                break;
+            case ConstantsMsg.Chinese.LANGUAGE:
+                dispatch(setLangAction(ConstantsMsg.Chinese));
+                setErrMsg(selector.msg.errMsgVars[2]);
+                break;
+            default:
+                break;
+        }
+        forceUpdate()
+    };
+
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
             {matches ? 
             <div>
-                <Back>
+                <Back sx={{backgroundImage: `url(${groundImage})`, paddingBottom: '25%'}}>
                     <Grid container>
-                        <Grid item xs={7}/>
-                        <Grid item xs={2}>
-                            <ButtonGroup variant="text" aria-label="text button group">
-                                <LangButton onClick={() => {
-                                    dispatch(setLangAction(ConstantsMsg.English));
-                                    setErrMsg(selector.msg.errMsgVars[0]);
-                                    forceUpdate();
-                                }}>{selector.msg.lang.LANG_EN}</LangButton>
-                                <LangButton onClick={() => {
-                                    dispatch(setLangAction(ConstantsMsg.Japanese));
-                                    setErrMsg(selector.msg.errMsgVars[1]);
-                                    forceUpdate();
-                                }}>{selector.msg.lang.LANG_JP}</LangButton>
-                                <LangButton onClick={() => {
-                                    dispatch(setLangAction(ConstantsMsg.Chinese));
-                                    setErrMsg(selector.msg.errMsgVars[2]);
-                                    forceUpdate();
-                                }}>{selector.msg.lang.LANG_CN}</LangButton>
-                            </ButtonGroup>
+                        <Grid item xs={8} />
+                        <Grid item xs={4}>
+                            <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                                <div>
+                                    <Button onClick={handleLangOpen}>
+                                        <LangIcon/>
+                                    </Button>
+                                    <Typography sx={{color: grey[50]}}>{selector.msg.lang.LANG}</Typography>
+                                </div>
+                                <div>
+                                    <Button onClick={handleTutorialOpen}>
+                                        <TutorialIcon/>
+                                    </Button>
+                                    <Typography sx={{color: grey[50]}}>{selector.msg.lang.TUTORIAL}</Typography>
+                                </div>
+                            </Box>
                         </Grid>
-                        <Grid item xs={1}>
-                            <Button onClick={handleTutorialOpen}>
-                                <TutorialIcon/>
-                            </Button>
-                        </Grid>
-                        <Grid item xs={2}/>
                     </Grid>
+                    <MenuModal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        open={langOpen}
+                        onClose={handleLangClose}
+                        closeAfterTransition
+                    >
+                        <Fade in={langOpen}>
+                            <TopMenu>
+                                <Typography component="div" align="center" sx={{fontSize: '2em'}}>
+                                    <NavigationComponent message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
+                                    <List component="nav">
+                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.English.LANGUAGE)}}>
+                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_EN} />
+                                        </ListItem>
+                                        <Divider />
+                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Japanese.LANGUAGE)}}>
+                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_JP} />
+                                        </ListItem>
+                                        <Divider />
+                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Chinese.LANGUAGE)}}>
+                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_CN} />
+                                        </ListItem>
+                                    </List>
+                                </Typography>
+                            </TopMenu>
+                        </Fade>
+                    </MenuModal>
                     <MenuModal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
@@ -325,11 +383,15 @@ const Top = () => {
                         </CardContent>
                         <CardActions>
                             <Grid item xs={6}>
-                                <QuickButton size="large" variant="contained"
-                                onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButton>
+                                <QuickButton size="large" variant="contained" 
+                                sx={{color: grey[50], backgroundImage: `url(${topImage})`, boxShadow: 6}}
+                                onClick={clickQuick}>
+                                    <span sx={{'text-shadow': '2px 4px 6px #808080'}}>{selector.msg.lang.QUICK_MATCH}</span>
+                                </QuickButton>
                             </Grid>
                             <Grid item xs={6}>
                                 <FriendButton size="large" variant="contained"
+                                sx={{color: grey[50], backgroundImage: `url(${backImage})`, boxShadow: 6}}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                             </Grid>
                         </CardActions>

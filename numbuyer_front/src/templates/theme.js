@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import TimelineContent from '@mui/lab/TimelineContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
+import GTranslateIcon from '@mui/icons-material/GTranslate';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -40,9 +41,10 @@ export const Back = styled('div')({
 });
 
 // 言語設定ボタン
-export const LangButton = styled(Button)({
-  fontSize: '1em',
+export const LangIcon = styled(GTranslateIcon)({
   color: grey[50],
+  fontSize: '3em',
+  margin: 0,
 });
 
 // チュートリアルアイコン

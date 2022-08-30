@@ -219,5 +219,5 @@ export const BAD_TIMING_RELOAD_ERR = "error.validation.ability.reload.invalidPha
 export const NOT_MEET_TURN_CATASTROPHE_ERR = "error.validation.ability.catastrophe.notMeetTurn"; // ゲーム開始から3ターン以内は発動できない（カタストロフィ）
 
 // 次期バージョンアップ用非表示コンテンツフラグ
-export const SETTING_BTN_FLG = false;
+export const SETTING_BTN_FLG = true;
 export const PLAY_AGAIN_BTN_FLG = false;
