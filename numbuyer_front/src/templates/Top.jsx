@@ -336,8 +336,8 @@ const Top = () => {
                         closeAfterTransition
                     >
                         <Fade in={langOpen}>
-                            <TopMenu>
-                                <Typography component="div" align="center" sx={{fontSize: '2em'}}>
+                            <TopMenu sx={{fontSize: '3em', width: '30%'}}>
+                                <Typography component="div" align="center" >
                                     <NavigationComponent message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
                                     <List component="nav">
                                         <ListItem button onClick={()=>{changeLang(ConstantsMsg.English.LANGUAGE)}}>
