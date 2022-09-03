@@ -25,10 +25,6 @@ import SelectAbilityComponent from './components/SelectAbilityComponent';
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';
 import Fade from '@mui/material/Fade';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
@@ -41,7 +37,7 @@ import logo from '../assets/logo.png';
 import title from '../assets/title.png';
 import topImage from '../assets/topImage.png';
 import backImage from '../assets/backImage.png';
-import groundImage from '../assets/groundImage.png';
+import LangComponent from './components/LangComponent';
 
 const Top = () => {
     const dispatch = useDispatch();
@@ -337,22 +333,7 @@ const Top = () => {
                     >
                         <Fade in={langOpen}>
                             <TopMenu sx={{fontSize: '3em', width: '30%'}}>
-                                <Typography component="div" align="center" >
-                                    <NavigationComponent message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
-                                    <List component="nav">
-                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.English.LANGUAGE)}}>
-                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_EN} />
-                                        </ListItem>
-                                        <Divider />
-                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Japanese.LANGUAGE)}}>
-                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_JP} />
-                                        </ListItem>
-                                        <Divider />
-                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Chinese.LANGUAGE)}}>
-                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_CN} />
-                                        </ListItem>
-                                    </List>
-                                </Typography>
+                                <LangComponent changeLang={changeLang} />
                             </TopMenu>
                         </Fade>
                     </MenuModal>
@@ -635,22 +616,7 @@ const Top = () => {
                     >
                         <Fade in={langOpen}>
                             <TopMenu sx={{fontSize: '3em', width: '75%'}}>
-                                <Typography component="div" align="center" >
-                                    <NavigationComponent message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
-                                    <List component="nav">
-                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.English.LANGUAGE)}}>
-                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_EN} />
-                                        </ListItem>
-                                        <Divider />
-                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Japanese.LANGUAGE)}}>
-                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_JP} />
-                                        </ListItem>
-                                        <Divider />
-                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Chinese.LANGUAGE)}}>
-                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_CN} />
-                                        </ListItem>
-                                    </List>
-                                </Typography>
+                                <LangComponent changeLang={changeLang} />
                             </TopMenu>
                         </Fade>
                     </MenuModal>
