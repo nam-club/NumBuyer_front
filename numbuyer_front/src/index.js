@@ -21,7 +21,7 @@ export const store = createStore(history);
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <Helmet bodyAttributes={{style: 'background-color : #64b5f6'}}/>
+    <Helmet bodyAttributes={{style: 'background: linear-gradient(25deg, #4682b4, #000000)'}}/>
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <App />

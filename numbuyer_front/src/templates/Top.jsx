@@ -308,7 +308,7 @@ const Top = () => {
             <GlobalStyle />
             {matches ? 
             <div>
-                <Back sx={{backgroundImage: `url(${groundImage})`, paddingBottom: '25%'}}>
+                <Back>
                     <Grid container>
                         <Grid item xs={8} />
                         <Grid item xs={4}>
