@@ -610,33 +610,50 @@ const Top = () => {
                             </Fade>
                         </AbilityModal>
                     </MenuCardMobile>
-                    <div>
-                        <LangButtonMobile onClick={() => {
-                            dispatch(setLangAction(ConstantsMsg.English));
-                            setErrMsg(selector.msg.errMsgVars[0]);
-                            forceUpdate();
-                        }}>
-                            {selector.msg.lang.LANG_EN}
-                        </LangButtonMobile>
-                        <LangButtonMobile onClick={() => {
-                            dispatch(setLangAction(ConstantsMsg.Japanese));
-                            setErrMsg(selector.msg.errMsgVars[1]);
-                            forceUpdate();
-                        }}>
-                            {selector.msg.lang.LANG_JP}
-                        </LangButtonMobile>
-                        <LangButtonMobile onClick={() => {
-                            dispatch(setLangAction(ConstantsMsg.Chinese));
-                            setErrMsg(selector.msg.errMsgVars[2]);
-                            forceUpdate();
-                        }}>
-                            {selector.msg.lang.LANG_CN}
-                        </LangButtonMobile>
-                    </div>
-                    <LangButtonMobile sx={{marginTop: '5%'}}
-                    onClick={handleTutorialOpen}>
-                        <TutorialIconMobile/>
-                    </LangButtonMobile>
+                    <Grid container>
+                        <Grid item xs={2} />
+                        <Grid item xs={4}>
+                            <LangButtonMobile onClick={handleLangOpen}>
+                                <LangIcon/>
+                            </LangButtonMobile>
+                            <Typography sx={{color: grey[50]}}>{selector.msg.lang.LANG}</Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <LangButtonMobile onClick={handleTutorialOpen}>
+                                <TutorialIcon/>
+                            </LangButtonMobile>
+                            <Typography sx={{color: grey[50]}}>{selector.msg.lang.TUTORIAL}</Typography>
+                        </Grid>
+                        <Grid item xs={2} />
+                    </Grid>
+                    <MenuModal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        open={langOpen}
+                        onClose={handleLangClose}
+                        closeAfterTransition
+                    >
+                        <Fade in={langOpen}>
+                            <TopMenu sx={{fontSize: '3em', width: '75%'}}>
+                                <Typography component="div" align="center" >
+                                    <NavigationComponent message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
+                                    <List component="nav">
+                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.English.LANGUAGE)}}>
+                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_EN} />
+                                        </ListItem>
+                                        <Divider />
+                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Japanese.LANGUAGE)}}>
+                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_JP} />
+                                        </ListItem>
+                                        <Divider />
+                                        <ListItem button onClick={()=>{changeLang(ConstantsMsg.Chinese.LANGUAGE)}}>
+                                            <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_CN} />
+                                        </ListItem>
+                                    </List>
+                                </Typography>
+                            </TopMenu>
+                        </Fade>
+                    </MenuModal>
                     <MenuModal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
