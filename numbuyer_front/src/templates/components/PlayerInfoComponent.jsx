@@ -49,36 +49,26 @@ const PlayerInfoComponent = (props) => {
                                  <Grid container>
                                     {props.myPlayer.firedAbilities.map((value, index) => (
                                         <Grid item xs={6}>
-                                                <div key={index}>
-                                                {value.type === Constants.BST_TP ? 
-                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} />    : 
-                                                    <div>
-                                                        {value.type === Constants.ATK_TP ? 
-                                                            <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
-                                                        :
-                                                            <div>
-                                                                {value.type === Constants.RCV_TP ? 
-                                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
-                                                                :
-                                                                    <div>
-                                                                        {value.type === Constants.JAM_TP ? 
-                                                                            <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
-                                                                        :
-                                                                            <div>
-                                                                                {value.type === Constants.CNF_TP ? 
-                                                                                    <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
-                                                                                :
-                                                                                    <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
-                                                                                }
-                                                                            </div>
-                                                                        }
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                }
-                                                </div>
+                                            <div key={index}>
+                                            {value.type === Constants.BST_TP && 
+                                                <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} />
+                                            } 
+                                            {value.type === Constants.ATK_TP && 
+                                                <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
+                                            }
+                                            {value.type === Constants.RCV_TP && 
+                                                <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
+                                            }
+                                            {value.type === Constants.JAM_TP && 
+                                                <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
+                                            }
+                                            {value.type === Constants.CNF_TP && 
+                                                <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
+                                            }
+                                            {value.type === Constants.NON_TP &&
+                                                <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
+                                            }
+                                            </div>
                                         </Grid>
                                     ))}
                                 </Grid>
@@ -117,34 +107,23 @@ const PlayerInfoComponent = (props) => {
                                     {value.firedAbilities.map((fa,faIndex) => (
                                         <Grid item xs={6}>
                                             <div key={faIndex}>
-                                            {fa.type === Constants.BST_TP ? 
+                                            {fa.type === Constants.BST_TP && 
                                                 <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} />
-                                            : 
-                                                <div>
-                                                    {fa.type === Constants.ATK_TP ? 
-                                                        <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
-                                                    :
-                                                        <div>
-                                                            {value.type === Constants.RCV_TP ? 
-                                                                <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
-                                                            :
-                                                                <div>
-                                                                    {fa.type === Constants.JAM_TP ? 
-                                                                        <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
-                                                                    :
-                                                                        <div>
-                                                                            {fa.type === Constants.CNF_TP ?
-                                                                                <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
-                                                                            :
-                                                                                <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
-                                                                            }
-                                                                        </div>
-                                                                    }
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    }
-                                                </div>
+                                            } 
+                                            {fa.type === Constants.ATK_TP && 
+                                                <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
+                                            }
+                                            {fa.type === Constants.RCV_TP && 
+                                                <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
+                                            }
+                                            {fa.type === Constants.JAM_TP && 
+                                                <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
+                                            }
+                                            {fa.type === Constants.CNF_TP &&
+                                                <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
+                                            }
+                                            {fa.type === Constants.NON_TP &&
+                                                <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
                                             }
                                             </div>
                                         </Grid>
@@ -174,33 +153,23 @@ const PlayerInfoComponent = (props) => {
                                     {props.myPlayer.firedAbilities.map((value, index) => (
                                         <Grid item xs={6}>
                                                 <div key={index}>
-                                                {value.type === Constants.BST_TP ? 
-                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} />    : 
-                                                    <div>
-                                                        {value.type === Constants.ATK_TP ? 
-                                                            <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
-                                                        :
-                                                            <div>
-                                                                {value.type === Constants.RCV_TP ? 
-                                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
-                                                                :
-                                                                    <div>
-                                                                        {value.type === Constants.JAM_TP ? 
-                                                                            <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
-                                                                        :
-                                                                            <div>
-                                                                                {value.type === Constants.CNF_TP ? 
-                                                                                    <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
-                                                                                :
-                                                                                    <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
-                                                                                }
-                                                                            </div>
-                                                                        }
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        }
-                                                    </div>
+                                                {value.type === Constants.BST_TP && 
+                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} /> 
+                                                }
+                                                {value.type === Constants.ATK_TP && 
+                                                    <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
+                                                }
+                                                {value.type === Constants.RCV_TP && 
+                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
+                                                }
+                                                {value.type === Constants.JAM_TP && 
+                                                    <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
+                                                }
+                                                {value.type === Constants.CNF_TP && 
+                                                    <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
+                                                }
+                                                {value.type === Constants.NON_TP &&
+                                                    <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
                                                 }
                                                 </div>
                                         </Grid>
@@ -247,34 +216,23 @@ const PlayerInfoComponent = (props) => {
                                 {value.firedAbilities.map((fa,faIndex) => (
                                     <Grid item xs={6}>
                                         <div key={faIndex}>
-                                        {fa.type === Constants.BST_TP ? 
+                                        {fa.type === Constants.BST_TP && 
                                             <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} />
-                                        : 
-                                            <div>
-                                                {fa.type === Constants.ATK_TP ? 
-                                                    <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
-                                                :
-                                                    <div>
-                                                        {value.type === Constants.RCV_TP ? 
-                                                            <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
-                                                        :
-                                                            <div>
-                                                                {fa.type === Constants.JAM_TP ? 
-                                                                    <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
-                                                                :
-                                                                    <div>
-                                                                        {fa.type === Constants.CNF_TP ?
-                                                                            <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
-                                                                        :
-                                                                            <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
-                                                                        }
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                }
-                                            </div>
+                                        }
+                                        {fa.type === Constants.ATK_TP && 
+                                            <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
+                                        }
+                                        {fa.type === Constants.RCV_TP && 
+                                            <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
+                                        }
+                                        {fa.type === Constants.JAM_TP && 
+                                            <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
+                                        }
+                                        {fa.type === Constants.CNF_TP &&
+                                            <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
+                                        }
+                                        {fa.type === Constants.NON_TP &&
+                                            <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
                                         }
                                         </div>
                                     </Grid>

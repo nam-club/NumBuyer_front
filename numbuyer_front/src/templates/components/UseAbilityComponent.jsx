@@ -71,9 +71,15 @@ const UseAbilityComponent = (props) => {
                         {value.trigger === Constants.ACT_TRG &&
                         <div>
                             {value.status === Constants.USED_ST ?
-                            <UseAbilityButton size="large" variant="contained" disabled>
-                                {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                            </UseAbilityButton> 
+                            <Tooltip key={value.abilityId} title={
+                                <SpeechBubble>
+                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
+                                </SpeechBubble>}
+                            placement="bottom">
+                                <UseAbilityButton size="large" variant="contained" disabled>
+                                    {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
+                                </UseAbilityButton> 
+                            </Tooltip>
                             :
                             <div>
                                 {value.status !== Constants.UNUSED_ST ?
