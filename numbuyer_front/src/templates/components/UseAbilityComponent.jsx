@@ -76,7 +76,7 @@ const UseAbilityComponent = (props) => {
                                 </SpeechBubble>}
                             placement="bottom">
                                 <UseAbilityButton 
-                                    sx={{backgroundImage: value.bgImage, color: value.tagColor}}
+                                    sx={{backgroundImage: value.bgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000'}}
                                     size="large" variant="contained" disabled>
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                 </UseAbilityButton> 
@@ -91,8 +91,8 @@ const UseAbilityComponent = (props) => {
                                             </SpeechBubble>}
                                         placement="bottom">
                                             <UseAbilityButton size="large" variant="contained"
-                                            sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor, cursor: 'default', boxShadow: 'none',
-                                            '&:hover': {backgroundImage: value.selectedBgImage, boxShadow: 'none', opacity: 0.8} }}>
+                                            sx={[{ backgroundImage: value.selectedBgImage, color: value.tagColor, cursor: 'default', 'text-shadow': '2px 4px 6px #000000', boxShadow: 6},
+                                            {'&:hover': {backgroundImage: value.selectedBgImage, opacity: 0.8, 'text-shadow': '2px 4px 6px #000000', boxShadow: 6}}]}>
                                                 {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                                 <br/> {value.remaining}{value.max}
                                             </UseAbilityButton>
@@ -105,7 +105,7 @@ const UseAbilityComponent = (props) => {
                                             </SpeechBubble>}
                                         placement="bottom">
                                             <UseAbilityButton size="large" variant="contained"
-                                                sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor }}
+                                                sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000' }}
                                                 onClick={() => {handleClickOpen(value)}}>
                                                 {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}<br/>
                                                 {value.remaining}{value.max}
@@ -153,7 +153,7 @@ const UseAbilityComponent = (props) => {
                             <Grid container>
                                 <Grid item xs={10}>
                                     <UseAbilityButtonMobile 
-                                        sx={{backgroundImage: value.bgImage, color: value.tagColor}}
+                                        sx={{backgroundImage: value.bgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000'}}
                                         size="large" variant="contained" disabled>
                                         {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                                     </UseAbilityButtonMobile> 
@@ -171,8 +171,8 @@ const UseAbilityComponent = (props) => {
                                         <Grid container>
                                             <Grid item xs={10}>
                                                 <UseAbilityButtonMobile size="large" variant="contained"
-                                                sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor, cursor: 'default', boxShadow: 'none',
-                                                '&:hover': {backgroundImage: value.selectedBgImage, boxShadow: 'none', opacity: 0.8} }}>
+                                                sx={[{ backgroundImage: value.selectedBgImage, color: value.tagColor, cursor: 'default', 'text-shadow': '2px 4px 6px #000000', boxShadow: 6},
+                                                {'&:hover': {backgroundImage: value.selectedBgImage, opacity: 0.8, 'text-shadow': '2px 4px 6px #000000', boxShadow: 6} }]}>
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
                                                 </UseAbilityButtonMobile>
                                             </Grid>
@@ -188,7 +188,7 @@ const UseAbilityComponent = (props) => {
                                         <Grid container>
                                             <Grid item xs={10}>
                                                 <UseAbilityButtonMobile size="large" variant="contained"
-                                                sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor }}
+                                                sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor , 'text-shadow': '2px 4px 6px #000000'}}
                                                 onClick={() => {handleClickOpen(value)}}>
                                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name + '　' + value.remaining}{value.max}
                                                 </UseAbilityButtonMobile>

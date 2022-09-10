@@ -12,7 +12,6 @@ import card from '../../assets/card.png';
 
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
 import { teal, red, blue, amber, grey } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
@@ -54,26 +53,7 @@ const PlayerInfoComponent = (props) => {
                             <Grid container>
                             {props.myPlayer.firedAbilities.map((value, index) => (
                                 <Grid item xs={6}>
-                                    <div key={index}>
-                                    {value.type === Constants.BST_TP && 
-                                        <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} />
-                                    } 
-                                    {value.type === Constants.ATK_TP && 
-                                        <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
-                                    }
-                                    {value.type === Constants.RCV_TP && 
-                                        <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
-                                    }
-                                    {value.type === Constants.JAM_TP && 
-                                        <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
-                                    }
-                                    {value.type === Constants.CNF_TP && 
-                                        <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
-                                    }
-                                    {value.type === Constants.NON_TP &&
-                                        <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
-                                    }
-                                    </div>
+                                    <PlayerInfoAbilityComponent key={index} ability={value} bgImage={value.selectedBgImage} color={value.tagColor} textShadow='2px 4px 6px #000000' />
                                 </Grid>
                             ))}
                             </Grid>
@@ -111,26 +91,7 @@ const PlayerInfoComponent = (props) => {
                                 <Grid container>
                                     {value.firedAbilities.map((fa,faIndex) => (
                                         <Grid item xs={6}>
-                                            <div key={faIndex}>
-                                            {fa.type === Constants.BST_TP && 
-                                                <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} />
-                                            } 
-                                            {fa.type === Constants.ATK_TP && 
-                                                <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
-                                            }
-                                            {fa.type === Constants.RCV_TP && 
-                                                <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
-                                            }
-                                            {fa.type === Constants.JAM_TP && 
-                                                <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
-                                            }
-                                            {fa.type === Constants.CNF_TP &&
-                                                <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
-                                            }
-                                            {fa.type === Constants.NON_TP &&
-                                                <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
-                                            }
-                                            </div>
+                                            <PlayerInfoAbilityComponent key={faIndex} ability={fa} bgImage={fa.selectedBgImage} color={fa.tagColor} textShadow='2px 4px 6px #000000' />
                                         </Grid>
                                     ))}
                                 </Grid>
@@ -157,26 +118,7 @@ const PlayerInfoComponent = (props) => {
                                  <Grid container>
                                     {props.myPlayer.firedAbilities.map((value, index) => (
                                         <Grid item xs={6}>
-                                                <div key={index}>
-                                                {value.type === Constants.BST_TP && 
-                                                    <PlayerInfoAbilityComponent ability={value} background={blue[300]} color={grey[50]} /> 
-                                                }
-                                                {value.type === Constants.ATK_TP && 
-                                                    <PlayerInfoAbilityComponent ability={value} background={red[300]} color={grey[50]} />
-                                                }
-                                                {value.type === Constants.RCV_TP && 
-                                                    <PlayerInfoAbilityComponent ability={value} background={teal[300]} color={grey[50]} /> 
-                                                }
-                                                {value.type === Constants.JAM_TP && 
-                                                    <PlayerInfoAbilityComponent ability={value} background={amber[300]} color={grey[700]} /> 
-                                                }
-                                                {value.type === Constants.CNF_TP && 
-                                                    <PlayerInfoAbilityComponent ability={value} background={grey[700]} color={grey[50]} />
-                                                }
-                                                {value.type === Constants.NON_TP &&
-                                                    <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
-                                                }
-                                                </div>
+                                            <PlayerInfoAbilityComponent key={index} ability={value} bgImage={value.selectedBgImage} color={value.tagColor} textShadow='2px 4px 6px #000000' />
                                         </Grid>
                                     ))}
                                 </Grid>
@@ -185,8 +127,8 @@ const PlayerInfoComponent = (props) => {
                         <div>
                             <Grid container>
                                 {myAbilities.map((value, index) => (
-                                    <Grid item xs={6} key={index}>
-                                        <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
+                                    <Grid item xs={6}>
+                                        <PlayerInfoAbilityComponent key={index} ability={value} background={grey[400]} color={grey[700]} />
                                     </Grid>
                                 ))}
                             </Grid>
@@ -220,26 +162,7 @@ const PlayerInfoComponent = (props) => {
                             <Grid container>
                                 {value.firedAbilities.map((fa,faIndex) => (
                                     <Grid item xs={6}>
-                                        <div key={faIndex}>
-                                        {fa.type === Constants.BST_TP && 
-                                            <PlayerInfoAbilityComponent ability={fa} background={blue[300]} color={grey[50]} />
-                                        }
-                                        {fa.type === Constants.ATK_TP && 
-                                            <PlayerInfoAbilityComponent ability={fa} background={red[300]} color={grey[50]} />
-                                        }
-                                        {fa.type === Constants.RCV_TP && 
-                                            <PlayerInfoAbilityComponent ability={fa} background={teal[300]} color={grey[50]} /> 
-                                        }
-                                        {fa.type === Constants.JAM_TP && 
-                                            <PlayerInfoAbilityComponent ability={fa} background={amber[300]} color={grey[700]} /> 
-                                        }
-                                        {fa.type === Constants.CNF_TP &&
-                                            <PlayerInfoAbilityComponent ability={fa} background={grey[700]} color={grey[50]} />
-                                        }
-                                        {fa.type === Constants.NON_TP &&
-                                            <PlayerInfoAbilityComponent ability={fa} background={grey[400]} color={grey[700]} />
-                                        }
-                                        </div>
+                                        <PlayerInfoAbilityComponent key={faIndex} ability={fa} bgImage={fa.selectedBgImage} color={fa.tagColor} textShadow='2px 4px 6px #000000' />
                                     </Grid>
                                 ))}
                             </Grid>

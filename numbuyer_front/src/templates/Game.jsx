@@ -60,6 +60,7 @@ const Game = () => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setMyPlayer(selector.players.players.find((my) => { return my.playerId === player.playerId }));
+        console.log(myPlayer);
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
@@ -122,37 +123,8 @@ const Game = () => {
                             message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                         }
                         {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am,index) => (
-                            <div key={index}>
-                                {am.type === Constants.BST_TP ?
-                                    <AblNavigationComponent background={blue[300]} color={grey[50]} message={am.message} effect={am.effect} />
-                                :
-                                <div>
-                                    {am.type === Constants.ATK_TP ?
-                                        <AblNavigationComponent background={red[300]} color={grey[50]} message={am.message} effect={am.effect} />
-                                    :
-                                    <div>
-                                        {am.type === Constants.RCV_TP ?
-                                            <AblNavigationComponent background={teal[300]} color={grey[50]} message={am.message} effect={am.effect} />
-                                        :
-                                        <div>
-                                            {am.type === Constants.JAM_TP ?
-                                                <AblNavigationComponent background={amber[300]} color={grey[600]} message={am.message} effect={am.effect} />
-                                            :
-                                            <div>
-                                                {am.type === Constants.CNF_TP ?
-                                                    <AblNavigationComponent background={grey[700]} color={grey[50]} message={am.message} effect={am.effect} />
-                                                :
-                                                    <AblNavigationComponent background={grey[100]} color={grey[700]} message={am.message} effect={am.effect} />
-                                                }
-                                            </div>
-                                            }
-                                        </div>
-                                        }
-                                    </div>
-                                    }
-                                </div>
-                                }
-                            </div>
+                            <AblNavigationComponent key={index}
+                            bgImage={am.messageImage} color={am.tagColor} message={am.message} effect={am.effect} />
                         ))}
                     </Grid>
                     <Grid item xs={3}>
@@ -248,37 +220,8 @@ const Game = () => {
                             message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                         }
                         {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am,index) => (
-                            <div key={index}>
-                                {am.type === Constants.BST_TP ?
-                                    <AblNavigationComponent background={blue[300]} color={grey[50]} message={am.message} effect={am.effect} />
-                                :
-                                <div>
-                                    {am.type === Constants.ATK_TP ?
-                                        <AblNavigationComponent background={red[300]} color={grey[50]} message={am.message} effect={am.effect} />
-                                    :
-                                    <div>
-                                        {am.type === Constants.RCV_TP ?
-                                            <AblNavigationComponent background={teal[300]} color={grey[50]} message={am.message} effect={am.effect} />
-                                        :
-                                        <div>
-                                            {am.type === Constants.JAM_TP ?
-                                                <AblNavigationComponent background={amber[300]} color={grey[600]} message={am.message} effect={am.effect} />
-                                            :
-                                            <div>
-                                                {am.type === Constants.CNF_TP ?
-                                                    <AblNavigationComponent background={grey[700]} color={grey[50]} message={am.message} effect={am.effect} />
-                                                :
-                                                    <AblNavigationComponent background={grey[100]} color={grey[700]} message={am.message} effect={am.effect} />
-                                                }
-                                            </div>
-                                            }
-                                        </div>
-                                        }
-                                    </div>
-                                    }
-                                </div>
-                                }
-                            </div>
+                            <AblNavigationComponent key={index}
+                            bgImage={am.messageImage} color={am.tagColor} message={am.message} effect={am.effect} />
                         ))}
                     </Grid>
                     <Grid item xs={5}>

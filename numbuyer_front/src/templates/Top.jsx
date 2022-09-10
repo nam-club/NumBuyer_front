@@ -36,8 +36,8 @@ import { useMediaQuery } from "@mui/material";
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
-import topImage from '../assets/topImage.png';
-import backImage from '../assets/backImage.png';
+import quickImage from '../assets/quickImage.png';
+import friendsImage from '../assets/friendsImage.png';
 
 const Top = () => {
     const dispatch = useDispatch();
@@ -365,14 +365,18 @@ const Top = () => {
                         <CardActions>
                             <Grid item xs={6}>
                                 <QuickButton size="large" variant="contained" 
-                                sx={{color: grey[50], backgroundImage: `url(${topImage})`, boxShadow: 6}}
+                                sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                'text-shadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={clickQuick}>
-                                    <span sx={{'text-shadow': '2px 4px 6px #808080'}}>{selector.msg.lang.QUICK_MATCH}</span>
+                                    <span>{selector.msg.lang.QUICK_MATCH}</span>
                                 </QuickButton>
                             </Grid>
                             <Grid item xs={6}>
                                 <FriendButton size="large" variant="contained"
-                                sx={{color: grey[50], backgroundImage: `url(${backImage})`, boxShadow: 6}}
+                                sx={[{color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
+                                'text-shadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${friendsImage})`, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                             </Grid>
                         </CardActions>

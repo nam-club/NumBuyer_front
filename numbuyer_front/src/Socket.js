@@ -137,7 +137,8 @@ export default function Socket(props) {
                 trigger: "",
                 display: [],
                 bgImage: null,
-                selectedBgImage: null
+                selectedBgImage: null,
+                tagColor: null,
             }
 
             // 関数の戻り値の格納オブジェクト
@@ -159,6 +160,7 @@ export default function Socket(props) {
             ability.display = resObject.display;
             ability.bgImage = resObject.bgImage;
             ability.selectedBgImage = resObject.selectedBgImage;
+            ability.tagColor = resObject.tagColor;
 
             return ability;
         };
@@ -309,10 +311,15 @@ export default function Socket(props) {
                             message: "", // 発動メッセージ
                             effect: "", // 発動アビリティ効果メッセージ
                             time: Constants.ABL_MSG_TIME, // メッセージ表示時間
+                            messageImage: null, // アビリティメッセージ背景
+                            tagColor: null, // アビリティメッセージ文字色
                         };
+                        let resObject; // 関数の返り値格納オブジェクト
+
                         abilities.push(setAbility(a));
                         // アビリティメッセージをセット
-                        ablDisplay = searchAbility(a.abilityId, "const").display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE});
+                        resObject = searchAbility(a.abilityId, "const");
+                        ablDisplay = resObject.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE});
                         ablMessage.type = a.type;
                         ablMessage.message = p.playerName + selector.msg.lang.FIRED_ABILITY_MSG1 +
                                             ablDisplay.name + selector.msg.lang.FIRED_ABILITY_MSG2;
@@ -326,6 +333,8 @@ export default function Socket(props) {
                             default:
                                 break;
                         }
+                        ablMessage.messageImage = resObject.messageImage;
+                        ablMessage.tagColor = resObject.tagColor;
                         ablMessages.push(ablMessage);
 
                         // 自分のアビリティにステータスを反映する

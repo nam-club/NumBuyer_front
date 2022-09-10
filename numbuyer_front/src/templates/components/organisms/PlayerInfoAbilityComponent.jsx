@@ -8,6 +8,7 @@ import { AbilityInfoCardMobile, PlayerAbilityTooltipMobile } from '../../themeMo
 import { Typography } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { useMediaQuery } from "@mui/material";
+import { grey } from '@mui/material/colors';
 
 const PlayerInfoAbilityComponent = (props) => {
     const selector = useSelector(state => state);
@@ -38,7 +39,7 @@ const PlayerInfoAbilityComponent = (props) => {
                     </SpeechBubble>}
                 placement="bottom">
                     <AbilityInfoCard size="large" variant="contained"
-                    sx={{ background: props.background, color: props.color }}>
+                    sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'text-shadow': props.textShadow }}>
                         {props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                     </AbilityInfoCard>
                 </Tooltip>
@@ -64,7 +65,7 @@ const PlayerInfoAbilityComponent = (props) => {
                     placement="left-end"
                     title={props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
                     <AbilityInfoCardMobile size="large" variant="contained"
-                    sx={{ background: props.background, color: props.color }}
+                    sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'text-shadow': props.textShadow }}
                     onClick={handleOpenTip}>
                         {props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                     </AbilityInfoCardMobile>

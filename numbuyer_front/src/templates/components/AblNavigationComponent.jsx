@@ -12,13 +12,13 @@ const AblNavigationComponent = (props) => {
     return (
         <div>
         {matches ?
-        <MessageBox sx={{background: props.background, color:props.color}}>
+        <MessageBox sx={{background: props.background, backgroundImage: props.bgImage, color:props.color}}>
             <NaviMessage>{props.message}</NaviMessage>
             <NaviMessages>{props.effect}</NaviMessages>
         </MessageBox>
         :
         <WrapMessageMobile>
-            <MessageBoxMobile sx={{background: props.background, color:props.color}}>
+            <MessageBoxMobile sx={{background: props.background, backgroundImage: props.bgImage, color:props.color}}>
                 <NaviMessageMobile>{props.message}</NaviMessageMobile>
                 <NaviMessagesMobile>{props.effect}</NaviMessagesMobile>
             </MessageBoxMobile>

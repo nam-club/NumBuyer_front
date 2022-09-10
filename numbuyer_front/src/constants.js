@@ -2,14 +2,19 @@ import { grey } from '@mui/material/colors';
 
 import fiBoost from './assets/fiBoost.png';
 import fiBoostMono from './assets/fiBoostMono.png';
+import fiBoostMessage from './assets/fiBoostMessage.png';
 import numViolence from './assets/numViolence.png';
 import numViolenceMono from './assets/numViolenceMono.png';
+import numViolenceMessage from './assets/numViolenceMessage.png';
 import reload from './assets/reload.png';
 import reloadMono from './assets/reloadMono.png';
+import reloadMessage from './assets/reloadMessage.png';
 import shutdown from './assets/shutdown.png';
 import shutdownMono from './assets/shutdownMono.png';
+import shutdownMessage from './assets/shutdownMessage.png';
 import catastrophe from './assets/catastrophe.png';
 import catastropheMono from './assets/catastropheMono.png';
+import catastropheMessage from './assets/catastropheMessage.png';
 
 // 初期プロパティ
 export const COIN = 100;
@@ -71,6 +76,7 @@ export const BST_ABILITIES = [
         bgImage: `url(${fiBoostMono})`,
         selectedBgImage: `url(${fiBoost})`,
         tagColor: grey[100],
+        messageImage: `url(${fiBoostMessage})`,
     },
 ]
 
@@ -100,6 +106,7 @@ export const ATK_ABILITIES = [
         ],
         bgImage: `url(${numViolenceMono})`,
         selectedBgImage: `url(${numViolence})`,
+        messageImage: `url(${numViolenceMessage})`,
         tagColor: grey[100],
     },
 ]
@@ -129,6 +136,7 @@ export const RCV_ABILITIES = [
         ],
         bgImage: `url(${reloadMono})`,
         selectedBgImage: `url(${reload})`,
+        messageImage: `url(${reloadMessage})`,
         tagColor: grey[100],
     },
 ]
@@ -159,7 +167,8 @@ export const JAM_ABILITIES = [
         ],
         bgImage: `url(${shutdownMono})`,
         selectedBgImage: `url(${shutdown})`,
-        tagColor: grey[800],
+        messageImage: `url(${shutdownMessage})`,
+        tagColor: grey[100],
     },
 ]
 
@@ -189,6 +198,7 @@ export const CNF_ABILITIES = [
         ],
         bgImage: `url(${catastropheMono})`,
         selectedBgImage: `url(${catastrophe})`,
+        messageImage: `url(${catastropheMessage})`,
         tagColor: grey[100],
     },
 ];
