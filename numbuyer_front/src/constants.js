@@ -1,3 +1,16 @@
+import { grey } from '@mui/material/colors';
+
+import fiBoost from './assets/fiBoost.png';
+import fiBoostMono from './assets/fiBoostMono.png';
+import numViolence from './assets/numViolence.png';
+import numViolenceMono from './assets/numViolenceMono.png';
+import reload from './assets/reload.png';
+import reloadMono from './assets/reloadMono.png';
+import shutdown from './assets/shutdown.png';
+import shutdownMono from './assets/shutdownMono.png';
+import catastrophe from './assets/catastrophe.png';
+import catastropheMono from './assets/catastropheMono.png';
+
 // 初期プロパティ
 export const COIN = 100;
 
@@ -55,6 +68,9 @@ export const BST_ABILITIES = [
                 fired_msg: ["5秒内回复, ", "额外获得5个金币！"],
             },
         ],
+        bgImage: `url(${fiBoostMono})`,
+        selectedBgImage: `url(${fiBoost})`,
+        tagColor: grey[100],
     },
 ]
 
@@ -82,6 +98,9 @@ export const ATK_ABILITIES = [
                 fired_msg: ["用于答题的卡牌数量最多，所以对手的卡牌随机减少了两张！"],
             },
         ],
+        bgImage: `url(${numViolenceMono})`,
+        selectedBgImage: `url(${numViolence})`,
+        tagColor: grey[100],
     },
 ]
 // アビリティ（回復系）
@@ -108,6 +127,9 @@ export const RCV_ABILITIES = [
                 fired_msg: ["支付了一半的硬币并重新绘制了所有的手！"],
             },
         ],
+        bgImage: `url(${reloadMono})`,
+        selectedBgImage: `url(${reload})`,
+        tagColor: grey[100],
     },
 ]
 
@@ -135,6 +157,9 @@ export const JAM_ABILITIES = [
                 fired_msg: ["答题阶段已结束！"],
             },
         ],
+        bgImage: `url(${shutdownMono})`,
+        selectedBgImage: `url(${shutdown})`,
+        tagColor: grey[800],
     },
 ]
 
@@ -162,6 +187,9 @@ export const CNF_ABILITIES = [
                 fired_msg: ["激活效果的玩家以外的金币减少了１０到５０金币！"],
             },
         ],
+        bgImage: `url(${catastropheMono})`,
+        selectedBgImage: `url(${catastrophe})`,
+        tagColor: grey[100],
     },
 ];
 

@@ -190,22 +190,8 @@ export const AbilityCard = styled(Card)({
   margin: '4%',
 });
 
-// アビリティボタン（未選択）
+// アビリティボタン
 export const AbilityButton = styled(Button)({
-  padding: '10%',
-  margin: '5%',
-  fontSize: '1em',
-  color: grey[800],
-  background: grey[200],
-  width: '75%',
-  'white-space': 'nowrap',
-  '&:hover': {
-    background: grey[100],
-  },
-});
-
-// アビリティボタン（選択）
-export const SelectedAbilityButton = styled(Button)({
   padding: '10%',
   margin: '5%',
   fontSize: '1em',

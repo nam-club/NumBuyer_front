@@ -10,6 +10,7 @@ const initialState = {
             playerName: "", // 自分のプレイヤー名
             cards: [], // 自分の手札
             coin: 0, // 自分の所持コイン
+            fluctCoin: '', // コインの変動
             isOwner: false, // ルームオーナー権限
             abilities: [], // アビリティ配列
         },

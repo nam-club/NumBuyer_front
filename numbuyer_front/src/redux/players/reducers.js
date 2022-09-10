@@ -18,6 +18,9 @@ export const PlayersReducer = (state = initialState.players, action) => {
         case Actions.SET_COIN:
             state.player.coin = action.payload.coin;
             return state;
+        case Actions.SET_FLUCT_COIN:
+            state.player.fluctCoin = action.payload.fluctCoin;
+            return state;
         case Actions.SET_OWNER:
             state.player.isOwner = action.payload.isOwner;
             return state;

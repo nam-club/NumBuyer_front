@@ -88,7 +88,6 @@ export const useAbility = function(value) {
 export default function Socket(props) {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    //console.log(socket);
 
     if(!socket) {
       socket = io(process.env.REACT_APP_SOCKET_URL);
@@ -137,7 +136,12 @@ export default function Socket(props) {
                 type: "",
                 trigger: "",
                 display: [],
+                bgImage: null,
+                selectedBgImage: null
             }
+
+            // 関数の戻り値の格納オブジェクト
+            let resObject = {};
 
             ability.abilityId = resAbility.abilityId;
             ability.status = resAbility.status;
@@ -150,7 +154,11 @@ export default function Socket(props) {
             }
             ability.type = resAbility.type;
             ability.trigger = resAbility.trigger;
-            ability.display = searchAbility(resAbility.abilityId, "const").display;
+
+            resObject = searchAbility(resAbility.abilityId, "const");
+            ability.display = resObject.display;
+            ability.bgImage = resObject.bgImage;
+            ability.selectedBgImage = resObject.selectedBgImage;
 
             return ability;
         };
@@ -171,6 +179,7 @@ export default function Socket(props) {
             let bstAbility, atkAbility, defAbility, jamAbility,  cnfAbility;
 
             switch(mode) {
+                // 定数定義のアビリティから検索
                 case "const":
                     bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
                     atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
@@ -178,6 +187,7 @@ export default function Socket(props) {
                     jamAbility = Constants.JAM_ABILITIES.find((a) => {return a.abilityId === id});
                     cnfAbility = Constants.CNF_ABILITIES.find((a) => {return a.abilityId === id});
                     break;
+                // プレイヤーが所持しているアビリティから検索
                 case "select":
                     bstAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
                     atkAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});

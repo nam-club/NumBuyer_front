@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AbilityCard, AbilityButton, SelectedAbilityButton, SpeechBubble } from '../theme';
-import { AbilityButtonMobile, SelectedAbilityButtonMobile } from '../themeMobile';
+import { AbilityCard, AbilityButton, SpeechBubble } from '../theme';
+import { AbilityButtonMobile } from '../themeMobile';
 
 
 import { setAbilityAction, cancelAbilityAction } from '../../redux/players/actions';
@@ -21,6 +21,8 @@ const SelectAbilityComponent = (props) => {
     const selector = useSelector(state => state);
     const matches = useMediaQuery("(min-width:520px)");
 
+    console.log(props.abilities);
+
     return (
         <Typography component="div" align="center">
             {matches ?
@@ -34,9 +36,9 @@ const SelectAbilityComponent = (props) => {
                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                         </SpeechBubble>}
                     placement="bottom">
-                        <SelectedAbilityButton
-                            sx={[{background: props.btnColor, color: props.fcsTagColor}, 
-                                {'&:hover': {background: props.fcsColor}}]}
+                        <AbilityButton
+                            sx={[{backgroundImage: value.selectedBgImage, color: value.tagColor}, 
+                                {'&:hover': {backgroundImage: value.selectedBgImage, opacity: 0.8}}]}
                             onClick={() => {
                                 dispatch(cancelAbilityAction(value.abilityId));
                                 props.update();
@@ -45,7 +47,7 @@ const SelectAbilityComponent = (props) => {
                                 }
                             }}>
                             {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                        </SelectedAbilityButton>
+                        </AbilityButton>
                     </Tooltip>
                     :
                     <Tooltip key={value.abilityId} title={
@@ -54,6 +56,8 @@ const SelectAbilityComponent = (props) => {
                         </SpeechBubble>} 
                         placement="bottom">
                         <AbilityButton
+                            sx={[{backgroundImage: value.bgImage, color: value.tagColor}, 
+                                {'&:hover': {backgroundImage: value.bgImage, opacity: 0.8}}]}
                             onClick={() => {
                                 dispatch(setAbilityAction(value.abilityId));
                                 props.update();
@@ -80,9 +84,9 @@ const SelectAbilityComponent = (props) => {
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}
                                 </SpeechBubble>}
                             placement="bottom">
-                                <SelectedAbilityButtonMobile
-                                    sx={[{background: props.btnColor, color: props.fcsTagColor}, 
-                                        {'&:hover': {background: props.fcsColor}}]}
+                                <AbilityButtonMobile
+                                    sx={[{backgroundImage: value.selectedBgImage, color: value.tagColor}, 
+                                        {'&:hover': {backgroundImage: value.selectedBgImage, opacity: 0.8}}]}
                                     onClick={() => {
                                         dispatch(cancelAbilityAction(value.abilityId));
                                         props.update();
@@ -91,7 +95,7 @@ const SelectAbilityComponent = (props) => {
                                         }
                                     }}>
                                     {value.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
-                                </SelectedAbilityButtonMobile>
+                                </AbilityButtonMobile>
                             </Tooltip>
                         </Grid>
                         <Grid item xs={2}>
@@ -105,6 +109,8 @@ const SelectAbilityComponent = (props) => {
                         <Grid item xs={2}/>
                         <Grid item xs={8}>
                             <AbilityButtonMobile
+                                sx={[{backgroundImage: value.bgImage, color: value.tagColor}, 
+                                    {'&:hover': {backgroundImage: value.bgImage, opacity: 0.8}}]}
                                 onClick={() => {
                                     dispatch(setAbilityAction(value.abilityId));
                                     props.update();
