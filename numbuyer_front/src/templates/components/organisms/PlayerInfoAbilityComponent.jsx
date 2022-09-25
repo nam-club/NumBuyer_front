@@ -8,7 +8,6 @@ import { AbilityInfoCardMobile, PlayerAbilityTooltipMobile } from '../../themeMo
 import { Typography } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { useMediaQuery } from "@mui/material";
-import { grey } from '@mui/material/colors';
 
 const PlayerInfoAbilityComponent = (props) => {
     const selector = useSelector(state => state);
@@ -27,7 +26,8 @@ const PlayerInfoAbilityComponent = (props) => {
         <Typography>
             {matches ?
             <div>
-            {props.ability.abilityId === Constants.PRV_ABILITY.abilityId ?
+            {(props.ability.abilityId === Constants.PRV_ABILITIES[0].abilityId || 
+              props.ability.abilityId === Constants.PRV_ABILITIES[1].abilityId) ?
                 <AbilityInfoCard size="large" variant="contained"
                 sx={{ background: props.background, color: props.color }}>
                     {props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
@@ -39,7 +39,7 @@ const PlayerInfoAbilityComponent = (props) => {
                     </SpeechBubble>}
                 placement="bottom">
                     <AbilityInfoCard size="large" variant="contained"
-                    sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'text-shadow': props.textShadow }}>
+                    sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'textShadow': props.textShadow }}>
                         {props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                     </AbilityInfoCard>
                 </Tooltip>
@@ -47,7 +47,8 @@ const PlayerInfoAbilityComponent = (props) => {
             </div>
             :
             <div>
-            {props.ability.abilityId === Constants.PRV_ABILITY.abilityId ?
+            {(props.ability.abilityId === Constants.PRV_ABILITIES[0].abilityId || 
+              props.ability.abilityId === Constants.PRV_ABILITIES[1].abilityId) ?
                 <AbilityInfoCardMobile size="large" variant="contained"
                 sx={{ background: props.background, color: props.color }}>
                     {props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
@@ -65,7 +66,7 @@ const PlayerInfoAbilityComponent = (props) => {
                     placement="left-end"
                     title={props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
                     <AbilityInfoCardMobile size="large" variant="contained"
-                    sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'text-shadow': props.textShadow }}
+                    sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'textShadow': props.textShadow }}
                     onClick={handleOpenTip}>
                         {props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name}
                     </AbilityInfoCardMobile>

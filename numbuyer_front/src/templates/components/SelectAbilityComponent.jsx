@@ -37,8 +37,8 @@ const SelectAbilityComponent = (props) => {
                         </SpeechBubble>}
                     placement="bottom">
                         <AbilityButton
-                            sx={[{backgroundImage: value.selectedBgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000', boxShadow: 6}, 
-                                {'&:hover': {backgroundImage: value.selectedBgImage, 'text-shadow': '1px 2px 3px #000000', opacity: 0.8}}]}
+                            sx={[{backgroundImage: value.selectedBgImage, color: value.tagColor, 'textShadow': '2px 4px 6px #000000', boxShadow: 6}, 
+                                {'&:hover': {backgroundImage: value.selectedBgImage, 'textShadow': '1px 2px 3px #000000', opacity: 0.8}}]}
                             onClick={() => {
                                 dispatch(cancelAbilityAction(value.abilityId));
                                 props.update();
@@ -56,8 +56,8 @@ const SelectAbilityComponent = (props) => {
                         </SpeechBubble>} 
                         placement="bottom">
                         <AbilityButton
-                            sx={[{backgroundImage: value.bgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000', boxShadow: 6}, 
-                                {'&:hover': {backgroundImage: value.bgImage, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                            sx={[{backgroundImage: value.bgImage, color: value.tagColor, 'textShadow': '2px 4px 6px #000000', boxShadow: 6}, 
+                                {'&:hover': {backgroundImage: value.bgImage, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                             onClick={() => {
                                 dispatch(setAbilityAction(value.abilityId));
                                 props.update();
@@ -85,8 +85,8 @@ const SelectAbilityComponent = (props) => {
                                 </SpeechBubble>}
                             placement="bottom">
                                 <AbilityButtonMobile
-                                    sx={[{backgroundImage: value.selectedBgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000', boxShadow: 6}, 
-                                        {'&:hover': {backgroundImage: value.selectedBgImage, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                    sx={[{backgroundImage: value.selectedBgImage, color: value.tagColor, 'textShadow': '2px 4px 6px #000000', boxShadow: 6}, 
+                                        {'&:hover': {backgroundImage: value.selectedBgImage, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                     onClick={() => {
                                         dispatch(cancelAbilityAction(value.abilityId));
                                         props.update();
@@ -109,8 +109,8 @@ const SelectAbilityComponent = (props) => {
                         <Grid item xs={2}/>
                         <Grid item xs={8}>
                             <AbilityButtonMobile
-                                sx={[{backgroundImage: value.bgImage, color: value.tagColor, 'text-shadow': '2px 4px 6px #000000', boxShadow: 6}, 
-                                    {'&:hover': {backgroundImage: value.bgImage, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                sx={[{backgroundImage: value.bgImage, color: value.tagColor, 'textShadow': '2px 4px 6px #000000', boxShadow: 6}, 
+                                    {'&:hover': {backgroundImage: value.bgImage, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={() => {
                                     dispatch(setAbilityAction(value.abilityId));
                                     props.update();

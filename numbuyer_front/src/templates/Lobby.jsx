@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import PlayerListComponent from './components/PlayerListComponent';
 
 import { MainLogo, MainTitle, Back, LobbyTitle } from './theme';
-import { MainLogoMobile, MainTitleMobile, LobbyTitleMobile } from './themeMobile';
+import { MainLogoMobile, MainTitleMobile } from './themeMobile';
 
 import GlobalStyle from "../globalStyles";
 import Typography from '@mui/material/Typography';

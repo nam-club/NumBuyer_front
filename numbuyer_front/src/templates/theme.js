@@ -1,7 +1,8 @@
+import * as Constants from '../constants';
+
 import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
-
 import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -157,7 +158,7 @@ export const QuickButton = styled(Button)({
   color: grey[700],
   background: blue[200],
   width: '75%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: blue[100],
   },
@@ -171,7 +172,7 @@ export const FriendButton = styled(Button)({
   color: grey[700],
   background: indigo[200],
   width: '75%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: indigo[100],
   },
@@ -196,7 +197,7 @@ export const AbilityButton = styled(Button)({
   margin: '5%',
   fontSize: '1em',
   width: '75%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 吹き出しコメント
@@ -209,7 +210,7 @@ export const ConfirmButton = styled(Button)({
   color: grey[100],
   width: '20%',
   margin: '10%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   fontSize: '2em',
   zIndex: 2,
   background: indigo[200],
@@ -246,7 +247,7 @@ export const CreateButton = styled(Button)({
   width: '50%',
   marginBottom: '10%',
   padding: '-20%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   fontSize: '2em',
   zIndex: 2,
   background: blue[200],
@@ -264,7 +265,7 @@ export const JoinButton = styled(Button)({
   marginLeft: '10%',
   padding: '-20%',
   fontSize: '2em',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   background: indigo[200],
   '&:hover': {
     background: indigo[100],
@@ -317,7 +318,7 @@ export const StartButton = styled(Button)({
   background: blue[200],
   fontSize: '2em',
   width: '75%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: blue[100],
   },
@@ -329,7 +330,7 @@ export const BackButton = styled(Button)({
   background: indigo[200],
   fontSize: '2em',
   width: '75%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: indigo[100],
   },
@@ -353,7 +354,7 @@ export const NaviMessage = styled('p')({
   margin: 0,
 });
 
-// メッセージ本体（複数行））
+// メッセージ本体（複数行）
 export const NaviMessages = styled('p')({
   fontSize: '1.2em',
   margin: 0,
@@ -363,7 +364,7 @@ export const NaviMessages = styled('p')({
 export const TargetCard = styled(Card)({
   background: teal['A100'],
   color: grey[700],
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 目標タグ
@@ -392,7 +393,7 @@ export const AuctionCard = styled(Card)({
   marginLeft: '3%',
   width: '5vw',
   height: '10vh',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 入札金額を入力してくださいメッセージ
@@ -417,7 +418,7 @@ export const ChangeBidButton = styled(Button)({
   color: grey[100],
   background: cyan[200],
   fontWeight: 'bold',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: cyan[100],
   },
@@ -429,7 +430,7 @@ export const BidButton = styled(Button)({
   color: grey[700],
   width: '25%',
   margin: '2%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: lightBlue[100],
   },
@@ -454,7 +455,7 @@ export const AreaTag = styled('p')({
 export const UseAbilityButton = styled(Button) ({
   width: '75%',
   margin: '2%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 項カード
@@ -488,7 +489,7 @@ export const CalcButton = styled(Button)({
   marginLeft: '20%',
   margin: '2%',
   width: '25%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
       background: yellow[100],
     },
@@ -500,7 +501,7 @@ export const PassButton = styled(Button)({
   color: grey[50],
   width: '25%',
   margin: '2%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: grey[500],
   },
@@ -524,7 +525,7 @@ export const YesButton = styled(Button)({
   color: grey[50],
   width: '25%',
   margin: '2%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
     background: indigo[100],
   },
@@ -612,7 +613,7 @@ export const PlayerInfoIcon = styled('img')({
 
 // アビリティ情報（プレイヤー一覧）
 export const AbilityInfoCard = styled(Card) ({
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // ゲーム終了のモーダル
@@ -637,7 +638,7 @@ export const RankingTitle = styled(Card)({
   fontSize: '4em',
   fontWeight: 500,
   margin: '3%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 優勝者
@@ -647,7 +648,7 @@ export const Winner = styled('span')({
   fontSize: '1.5em',
   fontWeight: 500,
   margin: 0,
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 優勝者情報アイコン
@@ -662,7 +663,7 @@ export const Loser = styled('span')({
   color: grey[700],
   fontSize: '1.5em',
   margin: 0,
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
 });
 
 // 敗北者情報アイコン
@@ -678,7 +679,7 @@ export const FinishButton = styled(Button)({
   fontSize: '2em',
   width: '75%',
   marginTop: '5%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
       background: indigo[100],
     },
@@ -691,7 +692,7 @@ export const AgainButton = styled(Button)({
   fontSize: '2em',
   width: '75%',
   marginTop: '3%',
-  'white-space': 'nowrap',
+  'whiteSpace': 'nowrap',
   '&:hover': {
       background: blue[100],
     },
@@ -728,7 +729,7 @@ export const useStyles = makeStyles((theme) => ({
     background: blue[300],
     width: '75%',
     margin: '2%',
-    'white-space': 'nowrap',
+    'whiteSpace': 'nowrap',
     '&:hover': {
       background: blue[200],
     },
@@ -739,7 +740,7 @@ export const useStyles = makeStyles((theme) => ({
     background: red[300],
     width: '75%',
     margin: '2%',
-    'white-space': 'nowrap',
+    'whiteSpace': 'nowrap',
     '&:hover': {
       background: red[200],
     },
@@ -750,7 +751,7 @@ export const useStyles = makeStyles((theme) => ({
     background: teal[300],
     width: '75%',
     margin: '2%',
-    'white-space': 'nowrap',
+    'whiteSpace': 'nowrap',
     '&:hover': {
       background: teal[200],
     },
@@ -761,7 +762,7 @@ export const useStyles = makeStyles((theme) => ({
     background: yellow[300],
     width: '75%',
     margin: '2%',
-    'white-space': 'nowrap',
+    'whiteSpace': 'nowrap',
     '&:hover': {
       background: teal[200],
     },
@@ -772,7 +773,7 @@ export const useStyles = makeStyles((theme) => ({
     background: grey[700],
     width: '75%',
     margin: '2%',
-    'white-space': 'nowrap',
+    'whiteSpace': 'nowrap',
     '&:hover': {
       background: grey[700],
     },
@@ -811,7 +812,7 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     fontSize: '4em',
     opacity: 0,
-    'white-space': 'nowrap',
+    'whiteSpace': 'nowrap',
     'animation-name': '$slide',
     'animation-duration': '1.5s',
     'animation-fill-mode': 'forwards',

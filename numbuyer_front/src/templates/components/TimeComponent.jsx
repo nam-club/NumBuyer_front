@@ -8,16 +8,14 @@ import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseActio
 import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
 
-import { useStyles, TimeArea, TimeTag, TimeValue } from '../theme';
+import { TimeArea, TimeTag, TimeValue } from '../theme';
 import { TimeAreaMobile, TimeValueMobile } from '../themeMobile';
 
-import Card from '@mui/material/Card';
 import { useMediaQuery } from "@mui/material";
 
 import { setValidAction } from '../../redux/msg/actions';
 
 const TimeComponent = (props) => {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { nextTurn, buy } = React.useContext(CTX);
@@ -48,14 +46,6 @@ const TimeComponent = (props) => {
             dispatch(setRemTimeFlgAction(false));
         }
     }, [selector.game.remTimeFlg]);
-
-    // ターゲットカード公開フェーズロジック
-    const showTarget = () => {
-        dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-        dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG +  props.targetCard));
-        dispatch(setTimeAction(selector.game.phaseTimes.showTarget));
-        setTime(selector.game.phaseTimes.showTarget);
-    }
 
     // 手札配布〜オークションカードオープンまでのフェーズ遷移アクション
     React.useEffect(() => {
@@ -140,7 +130,7 @@ const TimeComponent = (props) => {
                     dispatch(setTimeAction(selector.game.phaseTimes.calculateResult));
                     setTime(selector.game.phaseTimes.calculateResult);
                     setShowFlg(false);
-                    if(!selector.game.ansPlayers || selector.game.ansPlayers.length == 0) {
+                    if(!selector.game.ansPlayers || selector.game.ansPlayers.length === 0) {
                         dispatch(setMessageAction(selector.msg.lang.CALC_FINISH_MSG0));
                     }else {
                         let ansMessage = selector.msg.lang.CALC_FINISH_MSG1;
@@ -148,7 +138,7 @@ const TimeComponent = (props) => {
                         let loopNum = 1;
 
                         for(let ansPlayer of selector.game.ansPlayers) {
-                            if(loopNum != selector.game.ansPlayers.length) {
+                            if(loopNum !== selector.game.ansPlayers.length) {
                                 ansMessage += ansPlayer.playerName + ', ';
                             }else {
                                 ansMessage += ansPlayer.playerName;

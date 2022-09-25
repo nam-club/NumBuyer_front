@@ -27,6 +27,11 @@ export const getAblMessages = createSelector(
     state => state.ablMessages
 )
 
+export const getFluctParams = createSelector(
+    [gameSelector],
+    state => state.fluctParams
+)
+
 export const getTime = createSelector(
     [gameSelector],
     state => state.time

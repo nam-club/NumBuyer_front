@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
-     setRankingAction, setResAbilityAction} from './redux/players/actions';
+     setRankingAction, setResAbilityAction, setFluctCoinAction} from './redux/players/actions';
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction, setAblErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction, setLeaveLobbyAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction, setLeaveLobbyAction, setFluctParamsAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -13,6 +13,8 @@ import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
 import * as ConstantsMsg from './constantsMsg';
 import { setRoomAction } from './redux/room/actions';
+import { red, teal, amber, grey } from '@mui/material/colors';
+
 export const CTX = React.createContext();
 
 const io = require("socket.io-client");
@@ -298,11 +300,15 @@ export default function Socket(props) {
             console.log(msg);
             resObj = JSON.parse(msg);
 
+            console.log(resObj);
+
             let ablMessages = selector.game.ablMessages;
+            let fluctParams = selector.game.fluctParams;
 
             for(let p of resObj.players) {
-                let abilities = [];
-                let ablDisplay = {};
+                let abilities = []; // アビリティ配列
+                let ablDisplay = {}; // アビリティメッセージ用オブジェクト
+
                 // 発動アビリティをセット
                 if(p.firedAbilities.length > 0) {
                     for(let a of p.firedAbilities) {
@@ -313,6 +319,8 @@ export default function Socket(props) {
                             time: Constants.ABL_MSG_TIME, // メッセージ表示時間
                             messageImage: null, // アビリティメッセージ背景
                             tagColor: null, // アビリティメッセージ文字色
+                            triggerPlayerId: p.playerId, // 発動プレイヤー名
+                            abilityId: a.abilityId, // アビリティID
                         };
                         let resObject; // 関数の返り値格納オブジェクト
 
@@ -353,17 +361,100 @@ export default function Socket(props) {
                 }
             }
 
+                // 変動パラメータをセット
+                /*if(p.fluctuationParameters.length > 0) {
+                    let fluctParam ={
+                        name: "", // 変動が発生したプレイヤー名
+                        from: "", // 発動原因
+                        message: "", // 変動パラメータメッセージ
+                        time: Constants.FLUCT_PARAM_TIME, // メッセージ表示時間
+                        background: null, // 背景色
+                        color: null, // 文字色
+                    };
+                    fluctParam.name = p.playerName;
+
+                    switch(f.key) {
+                        case Constants.FLUCT_KEY_COIN:
+                            let coin = Number(f.value)
+                            if(coin < 0) {
+                                fluctParam.background = red['A100'];
+                                fluctParam.color = grey[700];
+                                fluctParam.message = coin + selector.msg.lang.COIN;
+                            }else if(coin > 0) {
+                                fluctParam.background = teal['A100'];
+                                fluctParam.color = grey[700];
+                                fluctParam.message = "+" + coin + selector.msg.lang.COIN;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch(f.trigger.type) {
+                        case Constants.FLUCT_TYPE_ABILITY:
+                            fluctParam.from = searchAbility(f.trigger.id, "const").display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name;
+                            break;
+                        default:
+                            break;
+                    }
+                    fluctParams.push(fluctParam);
+                    }*/
+
+            for(let p of resObj.players) {
+                // 変動パラメータ
+                if(p.fluctuationParameters.length > 0) {
+                    // アビリティメッセージに追加
+                    for(let f of p.fluctuationParameters) {
+                        let coin = Number(f.value);
+                        let fluctValue = '';
+                        if(coin !== 0) {
+                            if(coin < 0) {
+                                fluctValue = coin + selector.msg.lang.COIN;
+                            }else if(coin > 0) {
+                                fluctValue = "+" + coin + selector.msg.lang.COIN;
+                            }
+                            ablMessages = searchPushAblMsg(ablMessages, f.trigger.causedBy, f.trigger.id, p.playerName, fluctValue);
+                        }
+
+                        /*console.log(ablMessages);
+                        let i = 1;
+                        for(let a of ablMessages) {
+                            console.log(i);
+                            console.log(a.triggerPlayerId);
+                            console.log(f.trigger.causedBy);
+                            console.log(a.abilityId);
+                            console.log(f.trigger.id);
+                            if((a.triggerPlayerId === f.trigger.causedBy) && (a.abilityId === f.trigger.id)) {
+                                console.log("===アビリティメッセージを追加します＝＝＝");
+                                a.effect += (p.playerName + ':' + fluctValue + ' ');
+                                console.log(a.effect);
+                            }
+                            i++;
+                        }*/
+                    }
+                }
+            }
+
             // プレイヤー情報をstoreにセット
             dispatch(setPlayersAction(resObj.players));
-            console.log("アビリティメッセージをセット");
             // アビリティメッセージをstoreにセット
             dispatch(setAblMessagesAction(ablMessages.filter((a) => a.time > 0)));
             // アビリティエラーメッセージをリセット
             dispatch(setAblErrMsgAction(""));
+            // 変動パラメータをstoreにセット
+            dispatch(setFluctParamsAction(fluctParams.filter((f) => f.time > 0)));
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
         });
+
+        // アビリティメッセージ検索 & メッセージ追加
+        const searchPushAblMsg = (ablMessages, triggerPlayerId, abilityId, fluctPlayerName, fluctValue) => {
+            if(ablMessages.find((a) => {return (a.triggerPlayerId === triggerPlayerId) && (a.abilityId === abilityId)})) {
+                ablMessages.find((a) => {return (a.triggerPlayerId === triggerPlayerId) && (a.abilityId === abilityId)}).effect += (fluctPlayerName + ':' + fluctValue + ' ');
+            }
+            return ablMessages;
+        };
 
         // 自分の手札とコインをセット（更新）
         socket.on('game/player_info', function(msg) {

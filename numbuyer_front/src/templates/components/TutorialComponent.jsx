@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage, DetailMessage } from '../theme';
+import { SideBar, PageTitle, Caption, TimeItemName, TutorialBody, TutorialImage, TLButton, EmphasisMessage } from '../theme';
 import { PageTitleMobile, CaptionMobile, TLButtonMobile } from '../themeMobile';
 import * as ConstantsMsg from '../../constantsMsg';
 import * as Constants from '../../constants';

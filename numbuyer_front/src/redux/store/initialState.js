@@ -9,8 +9,8 @@ const initialState = {
             playerId: "", // 自分のプレイヤーID
             playerName: "", // 自分のプレイヤー名
             cards: [], // 自分の手札
+            cardNum: 0, // 手札の枚数
             coin: 0, // 自分の所持コイン
-            fluctCoin: '', // コインの変動
             isOwner: false, // ルームオーナー権限
             abilities: [], // アビリティ配列
         },
@@ -69,6 +69,7 @@ const initialState = {
         },
         aucResult: Constants.NONE, // 落札結果ステータス
         calcResult: Constants.NONE, // 計算結果ステータス
+        fluctParams: [], // 変動パラメータエフェクト表示用配列
         firedAbilities: [], // 発動アビリティ配列
         leaveLobbyFlg: false, // ロビー退出フラグ
         finishFlg: false, // ゲーム終了フラグ

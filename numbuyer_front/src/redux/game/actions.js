@@ -53,7 +53,6 @@ export const resetMessagesAction = () => {
 export const SET_ABL_MESSAGES = "SET_ABL_MESSAGES";
 
 export const setAblMessagesAction = (ablMessagesState) => {
-    console.log(ablMessagesState);
     return {
         type: "SET_ABL_MESSAGES",
         payload: {
@@ -67,6 +66,17 @@ export const RESET_ABL_MESSAGES = "RESET_ABL_MESSAGES";
 export const resetAblMessagesAction = () => {
     return {
         type: "RESET_ABL_MESSAGES"
+    }
+}
+
+export const SET_FLUCT_PARAMS = "SET_FLUCT_PARAMS";
+
+export const setFluctParamsAction = (fluctParamsState) => {
+    return {
+        type: "SET_FLUCT_PARAMS",
+        payload: {
+            fluctParams: fluctParamsState
+        }
     }
 }
 

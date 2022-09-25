@@ -6,15 +6,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
-import { persistStore } from 'redux-persist';
-import { PersistGate } from 'redux-persist/integration/react';
 import createStore from './redux/store/store';
 
 import { ConnectedRouter } from 'connected-react-router';
 import * as History from 'history';
 import { theme } from "./templates/theme";
 import { ThemeProvider } from '@mui/material/styles';
-import { blue } from '@mui/material/colors';
 
 const history = History.createBrowserHistory();
 export const store = createStore(history);

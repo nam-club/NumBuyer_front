@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { useStyles, ModalTitle, YesButton, SettingHeader } from '../theme';
+import { ModalTitle, YesButton, SettingHeader } from '../theme';
 
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -12,8 +12,6 @@ import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 
 const SettingComponent = () => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const [state, setState] = React.useState({
         multiplication: false,

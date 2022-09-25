@@ -11,6 +11,7 @@ import AucComponent from './components/AucComponent';
 import CalcComponent from './components/CalcComponent';
 import RankingComponent from './components/RankingComponent';
 import NavigationComponent from './components/NavigationComponent';
+import FluctParamComponent from './components/FluctParamComponent';
 import PlayerInfoComponent from './components/PlayerInfoComponent';
 import UseAbilityComponent from './components/UseAbilityComponent';
 
@@ -20,7 +21,7 @@ import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
-import { blue, red, teal, amber, grey } from '@mui/material/colors';
+import { red, teal, amber, grey } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
 import AblNavigationComponent from './components/AblNavigationComponent';
@@ -46,32 +47,29 @@ const Game = () => {
     const [message, setMessage] = React.useState(selector.game.message);
     const [messages, setMessages] = React.useState(selector.game.messages);
     const [ablMessages, setAblMessages] = React.useState(selector.game.ablMessages);
+    const [fluctParams, setFluctParams] = React.useState(selector.game.fluctParams);
 
     const matches = useMediaQuery("(min-width:520px)");
-
-    const transitionStyles = {
-        entering: { opacity: 1, transition: 'all 1s ease' },
-        entered: { opacity: 1 },
-        exiting: { opacity: 0, transition: 'all 1s ease' },
-        exited: { opacity: 0 },
-    }
 
     React.useEffect(() => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setMyPlayer(selector.players.players.find((my) => { return my.playerId === player.playerId }));
-        console.log(myPlayer);
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
         setAblMessages(selector.game.ablMessages);
+        setFluctParams(selector.game.fluctParams);
+        console.log("fluctParams:");
+        console.log(fluctParams);      
         setTargetCard(selector.game.targetCard);
         setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
     }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
-        selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.targetCard, selector.game.auctionCards,
+        selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.fluctParams,
+        selector.game.targetCard, selector.game.auctionCards,
         selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     React.useEffect(() => {
@@ -93,6 +91,19 @@ const Game = () => {
         }, 1000);
         return () => clearInterval(interval);
     }, [ablMessages]);
+
+    // 変動パラメータ表示時間管理
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            for(let f of fluctParams) {
+                if(f.time > 0) {
+                    f.time--;
+                }
+                console.log(f.name + " " + f.time);
+            }
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [fluctParams]);
 
     return (
         <Typography component="div" align="center">

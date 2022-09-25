@@ -53,17 +53,6 @@ export const setCoinAction = (playerState) => {
     }
 }
 
-export const SET_FLUCT_COIN = "SET_FLUCT_COIN";
-
-export const setFluctCoinAction = (playerState) => {
-    return {
-        type: "SET_FLUCT_COIN",
-        payload: {
-            fluctCoin: playerState
-        }
-    }
-}
-
 export const SET_OWNER = "SET_OWNER";
 
 export const setOwnerAction = (playerState) => {

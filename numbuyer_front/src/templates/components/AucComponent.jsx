@@ -31,13 +31,6 @@ const AucComponent = (props) => {
     const {bid} = React.useContext(CTX);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
 
-    const transitionStyles = {
-        entering: { opacity: 1, transition: 'all 1s ease' },
-        entered: { opacity: 1 },
-        exiting: { opacity: 0, transition: 'all 1s ease' },
-        exited: { opacity: 0 },
-    }
-
     React.useEffect(() => {
         console.log(selector.game.phase + "フェーズ");
         if(selector.game.phase === Constants.SHOW_AUC_PH) {

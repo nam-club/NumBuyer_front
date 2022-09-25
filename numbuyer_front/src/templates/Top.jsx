@@ -3,7 +3,7 @@ import React from 'react';
 import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
         FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
         LangIcon, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
-import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, TutorialIconMobile, MenuCardMobile,
+import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, MenuCardMobile,
         ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, FriendMenuMobile,
          ConfirmButtonMobile, CreateButtonMobile, JoinButtonMobile, AbilityTagMobile} from './themeMobile';
 
@@ -53,11 +53,11 @@ const Top = () => {
     const [friendOpen, setFriendOpen] = React.useState(false); // フレンドマッチのモーダル
 
     // アビリティ
-    const [bstAbilities, setBstAbilities] = React.useState(Constants.BST_ABILITIES);
-    const [atkAbilities, setAtkAbilities] = React.useState(Constants.ATK_ABILITIES);
-    const [rcvAbilities, setRcvAbilities] = React.useState(Constants.RCV_ABILITIES);
-    const [jamAbilities, setJamAbilities] = React.useState(Constants.JAM_ABILITIES);
-    const [cnfAbilities, setCnfAbilities] = React.useState(Constants.CNF_ABILITIES);
+    const [bstAbilities] = React.useState(Constants.BST_ABILITIES);
+    const [atkAbilities] = React.useState(Constants.ATK_ABILITIES);
+    const [rcvAbilities] = React.useState(Constants.RCV_ABILITIES);
+    const [jamAbilities] = React.useState(Constants.JAM_ABILITIES);
+    const [cnfAbilities] = React.useState(Constants.CNF_ABILITIES);
 
     const matches = useMediaQuery("(min-width:520px)");
 
@@ -366,8 +366,8 @@ const Top = () => {
                             <Grid item xs={6}>
                                 <QuickButton size="large" variant="contained" 
                                 sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
-                                'text-shadow': '2px 4px 6px #000000'},
-                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                'textShadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={clickQuick}>
                                     <span>{selector.msg.lang.QUICK_MATCH}</span>
                                 </QuickButton>
@@ -375,8 +375,8 @@ const Top = () => {
                             <Grid item xs={6}>
                                 <FriendButton size="large" variant="contained"
                                 sx={[{color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
-                                'text-shadow': '2px 4px 6px #000000'},
-                                {'&:hover': {backgroundImage: `url(${friendsImage})`, 'text-shadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                'textShadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                             </Grid>
                         </CardActions>

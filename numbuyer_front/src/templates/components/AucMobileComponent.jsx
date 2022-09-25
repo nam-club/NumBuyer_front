@@ -3,14 +3,13 @@ import { useSelector } from 'react-redux';
 
 import * as Constants from '../../constants';
 
-import { useStyles, WrapDisplay } from '../theme';
+import { WrapDisplay } from '../theme';
 import { AreaTagMobile, AuctionCardMobile, CardValueMobile } from '../themeMobile';
 
 import { grey } from '@mui/material/colors';
 import Slide from '@mui/material/Slide';
 
 const AucMobileComponent = (props) => {
-    const classes = useStyles();
     const selector = useSelector(state => state);
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ

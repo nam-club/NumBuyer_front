@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setCalcBtnAction, setMessageAction } from '../../redux/game/actions';
+import { setMessageAction } from '../../redux/game/actions';
 
 import * as Constants from '../../constants';
 
@@ -27,13 +27,6 @@ const CalcComponent = (props) => {
     const [calcs, setCalcs] = React.useState([]);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
     const {calculate} = React.useContext(CTX);
-
-    const transitionStyles = {
-        entering: { opacity: 1, transition: 'all 1s ease' },
-        entered: { opacity: 1 },
-        exiting: { opacity: 0, transition: 'all 1s ease' },
-        exited: { opacity: 0 },
-    }
 
     React.useEffect(() => {
         if(selector.game.phase === Constants.GIVE_CARD_PH) {
@@ -154,7 +147,7 @@ const CalcComponent = (props) => {
                                 <Grow in={fade} timeout={1000} key={index}>
                                     <TermCard variant="contained"
                                     onClick={() => selectHands(index, value)}
-                                    disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
+                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                         <CardValue>{value}</CardValue>
                                     </TermCard>
                                 </Grow>
@@ -212,7 +205,7 @@ const CalcComponent = (props) => {
                                 <Grow in={fade} timeout={1000} key={index}>
                                     <TermCardMobile variant="contained"
                                     onClick={() => selectHands(index, value)}
-                                    disabled={!(selector.game.phase == Constants.CALCULATE_PH)}>
+                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                         <CardValue>{value}</CardValue>
                                     </TermCardMobile>
                                 </Grow>

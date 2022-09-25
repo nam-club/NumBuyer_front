@@ -30,6 +30,7 @@ export const T_PAGE7 = "Finish Game";
 
 // メッセージ表示時間
 export const ABL_MSG_TIME = 10; // アビリティメッセージ表示時間
+export const FLUCT_PARAM_TIME = 5; // 変動パラメータ表示時間
 
 // アビリティステータス
 export const UNUSED_ST = 'unused'; // 効果未使用
@@ -181,19 +182,19 @@ export const CNF_ABILITIES = [
                 lang: "English",
                 name: "Catastrophe",
                 comment: "Decrease the coins of everyone other than yourself by 10/20/30/40/50 coins (Can only be activated once during the game, and cannot be activated for 3 turns from the start of the game)[Active Ability]",
-                fired_msg: ["Coins other than the player who activated the effect decreased by 10 to 50 coins!"],
+                fired_msg: [""],
             },
             {
                 lang: "Japanese",
                 name: "カタストロフィ",
                 comment: "自分以外の全員のコインを10/20/30/40/50コイン減らす(ゲーム中1回のみ発動可能でゲーム開始から3ターンは発動不可)[アクティブアビリティ]",
-                fired_msg: ["発動したプレイヤー以外のコインが１０〜５０コイン減った！"],
+                fired_msg: [""],
             },
             {
                 lang: "Chinese",
                 name: "灾难",
                 comment: "减少自己以外所有人的金币10/20/30/40/50金币（游戏中只能激活一次，游戏开始后3回合内不能激活）[主动技能]",
-                fired_msg: ["激活效果的玩家以外的金币减少了１０到５０金币！"],
+                fired_msg: [""],
             },
         ],
         bgImage: `url(${catastropheMono})`,
@@ -204,24 +205,42 @@ export const CNF_ABILITIES = [
 ];
 
 // アビリティ（非公開）
-export const PRV_ABILITY = 
-    {
-        abilityId: 'prv',
-        display: [
-            {
-                lang: "English",
-                name: "???",
-            },
-            {
-                lang: "Japanese",
-                name: "???",
-            },
-            {
-                lang: "Chinese",
-                name: "???",
-            },
-        ],
-    };
+export const PRV_ABILITIES = [
+        {
+            abilityId: 'prv_001',
+            display: [
+                {
+                    lang: "English",
+                    name: "???",
+                },
+                {
+                    lang: "Japanese",
+                    name: "???",
+                },
+                {
+                    lang: "Chinese",
+                    name: "???",
+                },
+            ],
+        },
+        {
+            abilityId: 'prv_002',
+            display: [
+                {
+                    lang: "English",
+                    name: "???",
+                },
+                {
+                    lang: "Japanese",
+                    name: "???",
+                },
+                {
+                    lang: "Chinese",
+                    name: "???",
+                },
+            ],
+        }
+    ];
 
 
 // フェーズ
@@ -255,6 +274,11 @@ export const INC_PASS = "incorrectWithPass";
 export const NO_ROOM_ERR = "error.game.notFound"; // 存在しないルームID
 export const BAD_TIMING_RELOAD_ERR = "error.validation.ability.reload.invalidPhase"; // リロードアビリティはオークションフェーズに発動できない
 export const NOT_MEET_TURN_CATASTROPHE_ERR = "error.validation.ability.catastrophe.notMeetTurn"; // ゲーム開始から3ターン以内は発動できない（カタストロフィ）
+
+// 変動パラメータ
+export const FLUCT_KEY_COIN = "fluctCoin";
+export const FLUCT_TYPE_ABILITY = "ability";
+export const FLUCT_TYPE_STAGE = "stage";
 
 // 次期バージョンアップ用非表示コンテンツフラグ
 export const SETTING_BTN_FLG = true;
