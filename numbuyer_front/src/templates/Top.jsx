@@ -38,6 +38,7 @@ import logo from '../assets/logo.png';
 import title from '../assets/title.png';
 import quickImage from '../assets/quickImage.png';
 import friendsImage from '../assets/friendsImage.png';
+import navigation from '../assets/navigation.png';
 
 const Top = () => {
     const dispatch = useDispatch();
@@ -426,7 +427,7 @@ const Top = () => {
                             <Fade in={abilityOpen}>
                                 <TopMenu>
                                     <Typography component="div" align="center">
-                                        <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                        <NavigationComponent backgroundImage={`url(${navigation})`} message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
                                         <Grid container>
                                             <Grid item xs={1} />
                                             <Grid item xs={2}>
@@ -491,21 +492,33 @@ const Top = () => {
                         <div>
                             <CardActions>
                                 <QuickButtonMobile size="large" variant="contained"
+                                sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
                             </CardActions>
                             <CardActions sx={{marginBottom: '10%'}}>
                                 <FriendButtonMobile size="large" variant="contained"
+                                sx={[{color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
                             </CardActions>
                         </div>
                         :
                         <div>
                             <CardActions>
-                                <QuickButtonMobile size="large" variant="contained" sx={{fontSize: '1.5em', padding: '5.5%'}}
+                                <QuickButtonMobile size="large" variant="contained"
+                                sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
                             </CardActions>
                             <CardActions sx={{marginBottom: '10%'}}>
-                                <FriendButtonMobile size="large" variant="contained" sx={{fontSize: '1.5em', padding: '5.5%'}}
+                                <FriendButtonMobile size="large" variant="contained"
+                                sx={[{color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'},
+                                {'&:hover': {backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
                             </CardActions>
                         </div>
@@ -550,7 +563,7 @@ const Top = () => {
                             <Fade in={abilityOpen}>
                                 <TopMenu>
                                     <Typography component="div" align="center">
-                                        <NavigationComponent message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                        <NavigationComponent backgroundImage={`url(${navigation})`} message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
                                         <Grid container>
                                             <Grid item xs={6}>
                                                 <SelectAbilityComponent background={blue[300]} color={grey[50]}

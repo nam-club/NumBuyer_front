@@ -11,14 +11,14 @@ const NavigationComponent = (props) => {
     return (
         <div>
         {matches ?
-        <MessageBox sx={{background:props.background, color:props.color}}>
+        <MessageBox sx={{background:props.background, backgroundImage:props.backgroundImage, color:props.color, 'textShadow': '2px 4px 6px #000000'}}>
             <NaviMessage>{props.message}</NaviMessage>
             {props.messages.length !==0 && props.messages.messages.map((value, index) => (
                 <NaviMessages key={index}>{value}</NaviMessages>))
             }
         </MessageBox>
         :
-        <MessageBoxMobile sx={{background:props.background, color:props.color}}>
+        <MessageBoxMobile sx={{background:props.background, backgroundImage:props.backgroundImage, color:props.color, 'textShadow': '2px 4px 6px #000000'}}>
             <NaviMessageMobile>{props.message}</NaviMessageMobile>
             {props.messages.length !==0 && props.messages.messages.map((value, index) => (
                 <NaviMessagesMobile key={index}>{value}</NaviMessagesMobile>))

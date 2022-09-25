@@ -22,6 +22,8 @@ import { grey } from '@mui/material/colors';
 import { setLeaveLobbyAction } from '../../redux/game/actions';
 import { useMediaQuery } from "@mui/material";
 
+import navigation from '../../assets/navigation.png';
+
 const PlayerListComponent = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
@@ -76,7 +78,7 @@ const PlayerListComponent = () => {
                         </Grid>
                     </Grid> 
                     }
-                    <NavigationComponent color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
+                    <NavigationComponent backgroundImage={`url(${navigation})`} color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
                 </div>
                 }
                 {owners &&
@@ -148,7 +150,7 @@ const PlayerListComponent = () => {
             <MenuCardMobile>
                 <LobbyTitleMobile>{selector.msg.lang.LOBBY}</LobbyTitleMobile>
                 {selector.room.isQuickMatch && 
-                    <NavigationComponent color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
+                    <NavigationComponent backgroundImage={`url(${navigation})`} color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
                 }
                 {owners &&
                     owners.map((value) => (<ParticipantListMobile key={value.playerName}>

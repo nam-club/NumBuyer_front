@@ -27,6 +27,7 @@ import { useMediaQuery } from "@mui/material";
 import AblNavigationComponent from './components/AblNavigationComponent';
 import AucMobileComponent from './components/AucMobileComponent';
 
+import navigation from '../assets/navigation.png';
 import successAnswer from '../assets/success_answer.png';
 import failedAnswer from '../assets/failed_answer.png';
 import successAuction from '../assets/success_auction.png';
@@ -132,9 +133,9 @@ const Game = () => {
                 <Grid container>
                     <Grid item xs={1} />
                     <Grid item xs={8}>
-                        <NavigationComponent color={grey[50]} message={message} messages={messages} />
+                        <NavigationComponent backgroundImage={`url(${navigation})`} color={grey[50]} message={message} messages={messages} />
                         {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH ) &&
-                            <AblNavigationComponent background={amber[500]} color={grey[50]} 
+                            <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]} 
                             message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                         }
                         {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am,index) => (
@@ -229,9 +230,9 @@ const Game = () => {
                 }
                 <Grid container sx={{marginBottom: '5%', height: '25%'}}>
                     <Grid item xs={7}>
-                        <NavigationComponent color={grey[50]} message={message} messages={messages} />
+                        <NavigationComponent backgroundImage={`url(${navigation})`} color={grey[50]} message={message} messages={messages} />
                         {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH ) &&
-                            <AblNavigationComponent background={amber[500]} color={grey[50]} 
+                            <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]} 
                             message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                         }
                         {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am,index) => (
