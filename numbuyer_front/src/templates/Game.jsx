@@ -27,6 +27,10 @@ import { useMediaQuery } from "@mui/material";
 import AblNavigationComponent from './components/AblNavigationComponent';
 import AucMobileComponent from './components/AucMobileComponent';
 
+import successAnswer from '../assets/success_answer.png';
+import failedAnswer from '../assets/failed_answer.png';
+import successAuction from '../assets/success_auction.png';
+
 const Game = () => {
     const classes = useStyles();
     const mobileClasses = useStylesMobile();
@@ -111,17 +115,17 @@ const Game = () => {
             {matches ? 
             <Back>
                 {selector.game.aucResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: amber['A100'], color: grey[700]}} >
+                    <Card className={classes.result_animation} sx={{backgroundImage: `url(${successAuction})`, 'textShadow': '2px 4px 6px #000000', color: grey[50]}} >
                         {selector.msg.lang.SUCCESS_BID}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.SUCCESS &&
-                    <Card className={classes.result_animation} sx={{background: teal['A100'], color: grey[700]}} >
+                    <Card className={classes.result_animation} sx={{backgroundImage: `url(${successAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50]}} >
                         {selector.msg.lang.SUCCESS}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.FAILED &&
-                    <Card className={classes.result_animation} sx={{background: red['A100'], color: grey[700]}}>
+                    <Card className={classes.result_animation} sx={{backgroundImage: `url(${failedAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50]}}>
                         {selector.msg.lang.FAILED}
                     </Card>
                 }
@@ -209,17 +213,17 @@ const Game = () => {
             :
             <div sx={{'overflow': 'hidden'}}>
                 {selector.game.aucResult === Constants.SUCCESS &&
-                    <Card className={mobileClasses.result_animation_mobile} sx={{background: amber['A100'], color: grey[700], width: '100%'}}>
+                    <Card className={mobileClasses.result_animation_mobile} sx={{backgroundImage: `url(${successAuction})`, 'textShadow': '2px 4px 6px #000000', color: grey[50], width: '100%'}}>
                         {selector.msg.lang.SUCCESS_BID}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.SUCCESS &&
-                    <Card className={mobileClasses.result_animation_mobile} sx={{background: teal['A100'], color: grey[700], width: '100%'}}>
+                    <Card className={mobileClasses.result_animation_mobile} sx={{backgroundImage: `url(${successAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50], width: '100%'}}>
                         {selector.msg.lang.SUCCESS}
                     </Card>
                 }
                 {selector.game.calcResult === Constants.FAILED &&
-                    <Card className={mobileClasses.result_animation_mobile} sx={{background: red['A100'], color: grey[700], width: '100%'}}>
+                    <Card className={mobileClasses.result_animation_mobile} sx={{backgroundImage: `url(${failedAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50], width: '100%'}}>
                         {selector.msg.lang.FAILED}
                     </Card>
                 }
