@@ -1,0 +1,107 @@
+{
+    "phase": "AUCTION_RESULT",
+    "players": [
+        {
+            "playerId": "ccnuspucj1cs7n6qfpc0",
+            "playerName": "あああ",
+            "coin": 0,
+            "cardNum": 10,
+            "fluctuationParameters": [
+                {
+                    "key": "fluctCoin",
+                    "value": "-30",
+                    "trigger": {
+                        "type": "ability",
+                        "id": "cnf_tmp_001",
+                        "causedBy": "ccnusvmcj1cs7n6qfpcg"
+                    }
+                },
+                {
+                    "key": "fluctCoin",
+                    "value": "0",
+                    "trigger": {
+                        "type": "ability",
+                        "id": "cnf_tmp_001",
+                        "causedBy": "ccnusnecj1cs7n6qfpbg"
+                    }
+                }
+            ],
+            "firedAbilities": [
+                {
+                    "abilityId": "cnf_tmp_001",
+                    "status": "used",
+                    "type": "confuse",
+                    "trigger": "active"
+                }
+            ]
+        },
+        {
+            "playerId": "ccnusvmcj1cs7n6qfpcg",
+            "playerName": "阿",
+            "coin": 0,
+            "cardNum": 10,
+            "fluctuationParameters": [
+                {
+                    "key": "fluctCoin",
+                    "value": "-30",
+                    "trigger": {
+                        "type": "ability",
+                        "id": "cnf_tmp_001",
+                        "causedBy": "ccnuspucj1cs7n6qfpc0"
+                    }
+                },
+                {
+                    "key": "fluctCoin",
+                    "value": "0",
+                    "trigger": {
+                        "type": "ability",
+                        "id": "cnf_tmp_001",
+                        "causedBy": "ccnusnecj1cs7n6qfpbg"
+                    }
+                }
+            ],
+            "firedAbilities": [
+                {
+                    "abilityId": "cnf_tmp_001",
+                    "status": "used",
+                    "type": "confuse",
+                    "trigger": "active"
+                }
+            ]
+        },
+        {
+            "playerId": "ccnusnecj1cs7n6qfpbg",
+            "playerName": "aaa",
+            "coin": 0,
+            "cardNum": 10,
+            "fluctuationParameters": [
+                {
+                    "key": "fluctCoin",
+                    "value": "-30",
+                    "trigger": {
+                        "type": "ability",
+                        "id": "cnf_tmp_001",
+                        "causedBy": "ccnuspucj1cs7n6qfpc0"
+                    }
+                },
+                {
+                    "key": "fluctCoin",
+                    "value": "0",
+                    "trigger": {
+                        "type": "ability",
+                        "id": "cnf_tmp_001",
+                        "causedBy": "ccnusvmcj1cs7n6qfpcg"
+                    }
+                }
+            ],
+            "firedAbilities": [
+                {
+                    "abilityId": "cnf_tmp_001",
+                    "status": "used",
+                    "type": "confuse",
+                    "trigger": "active"
+                }
+            ]
+        }
+    ]
+}

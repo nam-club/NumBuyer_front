@@ -581,6 +581,23 @@ export const TimeAreaMobile = styled('div')({
   padding: 0,
 });
 
+// ターン数タグ
+export const TurnTagMobile = styled('p')({
+  margin: 0,
+  padding: 0,
+  color: grey[50],
+  fontSize: '1em',
+});
+
+// 残り時間値
+export const TurnValueMobile = styled('span')({
+  margin: 0,
+  padding: 0,
+  color: grey[50],
+  fontSize: '1.5em',
+  fontWeight: 'bold',
+});
+
 // 残り時間タグ
 export const TimeTagMobile = styled('span')({
   padding: 0,
@@ -601,7 +618,7 @@ export const GoalTagMobile = styled('span')({
   margin: 0,
   padding: 0,
   color: grey[50],
-  fontSize: '1.2em',
+  fontSize: '1em',
 });
 
 // 勝利条件メッセージ
@@ -665,7 +682,6 @@ export const FinishModalMobile = styled(Modal)({
 
 // ゲーム終了のメニュー
 export const FinishMenuMobile = styled('div')({
-  background: grey[50],
   boxShadow: 5,
   padding: theme.spacing(4, 6, 4),
 });
@@ -712,29 +728,31 @@ export const LoserInfoIcon = styled('img')({
 });
 
 // ゲーム終了してTOP画面に戻るボタン
-export const FinishButton = styled(Button)({
-  color: grey[700],
+export const FinishButtonMobile = styled(Button)({
+  display: 'inline-block',
+  fontSize: '1.5em',
+  width: '100%',
+  marginTop: '10%',
+  color: grey[50],
   background: indigo[200],
-  fontSize: '2em',
-  width: '75%',
-  marginTop: '5%',
   'whiteSpace': 'nowrap',
   '&:hover': {
-      background: indigo[100],
-    },
+    background: indigo[100],
+  },
 });
 
 // もう一度遊ぶボタン
-export const AgainButton = styled(Button)({
-  color: grey[700],
+export const AgainButtonMobile = styled(Button)({
+  display: 'inline-block',
+  fontSize: '1.5em',
+  width: '100%',
+  marginTop: '10%',
+  color: grey[50],
   background: blue[200],
-  fontSize: '2em',
-  width: '75%',
-  marginTop: '3%',
   'whiteSpace': 'nowrap',
   '&:hover': {
-      background: blue[100],
-    },
+    background: blue[100],
+  },
 });
 
 export const useStylesMobile = makeStyles((theme) => ({

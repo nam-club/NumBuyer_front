@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import { RankingTitle, Winner, WinnerInfoIcon, Loser, LoserInfoIcon, FinishButton, AgainButton} from '../theme';
-import { ResultInfoIconMobile, RankingTitleMobile } from '../themeMobile';
+import { ResultInfoIconMobile, RankingTitleMobile, FinishButtonMobile, AgainButtonMobile } from '../themeMobile';
 
 import { CTX } from '../../Socket';
 import { setRankingAction } from '../../redux/players/actions';
@@ -24,7 +24,7 @@ import { useMediaQuery } from "@mui/material";
 
 import coin from '../../assets/coin.png';
 
-const RankingComponent = () => {
+const RankingComponent = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const { start } = React.useContext(CTX);
@@ -50,7 +50,7 @@ const RankingComponent = () => {
         <Typography component="div" align="center">
             {matches ?
             <div>
-                <RankingTitle align="center" elevation={0}>{selector.msg.lang.RANKING}</RankingTitle>
+                <RankingTitle sx={{backgroundImage: props.bgImage}} align="center" elevation={0}>{selector.msg.lang.RANKING}</RankingTitle>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     {selector.players.ranking && selector.players.ranking.map((value) => (
@@ -106,7 +106,7 @@ const RankingComponent = () => {
             </div>
             :
             <div>
-                <RankingTitleMobile align="center" elevation={0}>{selector.msg.lang.RANKING}</RankingTitleMobile>
+                <RankingTitleMobile sx={{backgroundImage: props.bgImage}} align="center" elevation={0}>{selector.msg.lang.RANKING}</RankingTitleMobile>
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                     {selector.players.ranking && selector.players.ranking.map((value) => (
@@ -148,15 +148,15 @@ const RankingComponent = () => {
                     </Table>
                 </TableContainer>
                 <div align="center">
-                    <FinishButton size="large" variant="contained" 
+                    <FinishButtonMobile size="large" variant="contained" 
                         onClick={() => {
                         finishGame('finish');
                         dispatch(setQuickAction(false));
                     }}>{selector.msg.lang.FINISH_BTN}
-                    </FinishButton>
+                    </FinishButtonMobile>
                     {(!selector.room.isQuickMatch && Constants.PLAY_AGAIN_BTN_FLG) &&
-                        <AgainButton size="large" variant="contained" 
-                        onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
+                        <AgainButtonMobile size="large" variant="contained" 
+                        onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButtonMobile>
                     }
                 </div>
             </div>

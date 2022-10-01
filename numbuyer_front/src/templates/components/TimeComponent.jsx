@@ -8,9 +8,10 @@ import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseActio
 import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
 
-import { TimeArea, TimeTag, TimeValue } from '../theme';
-import { TimeAreaMobile, TimeValueMobile } from '../themeMobile';
+import { TimeArea, TurnTag, TurnValue, TimeTag, TimeValue } from '../theme';
+import { TimeAreaMobile, TimeTagMobile, TimeValueMobile } from '../themeMobile';
 
+import Grid from '@mui/material/Grid';
 import { useMediaQuery } from "@mui/material";
 
 import { setValidAction } from '../../redux/msg/actions';
@@ -20,6 +21,7 @@ const TimeComponent = (props) => {
     const selector = useSelector(state => state);
     const { nextTurn, buy } = React.useContext(CTX);
 
+    const [turn, setTurn] = React.useState(selector.game.turn);
     const [time, setTime] = React.useState(selector.game.time);
     const [showFlg, setShowFlg] = React.useState(false);
 
@@ -40,12 +42,17 @@ const TimeComponent = (props) => {
 
     // 残り時間追加
     React.useEffect(() => {
-        console.log(selector.game.remainingTime)
         if(selector.game.remTimeFlg) {
             setTime(selector.game.remainingTime);
             dispatch(setRemTimeFlgAction(false));
         }
     }, [selector.game.remTimeFlg]);
+
+    // ターン数セット
+    React.useEffect(() => {
+        console.log(selector.game.turn)
+        setTurn(selector.game.turn);
+    }, [selector.game.turn]);
 
     // 手札配布〜オークションカードオープンまでのフェーズ遷移アクション
     React.useEffect(() => {
@@ -174,6 +181,7 @@ const TimeComponent = (props) => {
         <div>
         {matches ?
             <TimeArea>
+                <TurnTag>{selector.msg.lang.TURN} : <TurnValue>{turn}</TurnValue></TurnTag>
                 <TimeTag>{selector.msg.lang.TIME}</TimeTag>
                 <TimeValue>{showFlg ? time : "　"}</TimeValue>
             </TimeArea>

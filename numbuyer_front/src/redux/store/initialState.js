@@ -51,6 +51,7 @@ const initialState = {
             calculateResult: 0,
             nextTurn: 0
         },
+        turn: 1,
         message: "　", // ナビゲーション用メッセージ
         messages: [], // ナビゲーション用複数行メッセージ
         ablMessages: [], // アビリティ用メッセージ配列

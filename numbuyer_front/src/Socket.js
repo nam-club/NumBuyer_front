@@ -5,7 +5,7 @@ import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, set
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction, setAblErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction, setLeaveLobbyAction, setFluctParamsAction } from './redux/game/actions';
+  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction, setLeaveLobbyAction, setFluctParamsAction, setTurnAction } from './redux/game/actions';
 
  import { push } from 'connected-react-router';
 
@@ -281,6 +281,7 @@ export default function Socket(props) {
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
             resObj.auctionCards = changeCode(resObj.auctionCards, 'auction');
+            dispatch(setTurnAction(resObj.currentTurn));
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {
                 setGame(resObj, moveGame);
@@ -361,45 +362,6 @@ export default function Socket(props) {
                 }
             }
 
-                // 変動パラメータをセット
-                /*if(p.fluctuationParameters.length > 0) {
-                    let fluctParam ={
-                        name: "", // 変動が発生したプレイヤー名
-                        from: "", // 発動原因
-                        message: "", // 変動パラメータメッセージ
-                        time: Constants.FLUCT_PARAM_TIME, // メッセージ表示時間
-                        background: null, // 背景色
-                        color: null, // 文字色
-                    };
-                    fluctParam.name = p.playerName;
-
-                    switch(f.key) {
-                        case Constants.FLUCT_KEY_COIN:
-                            let coin = Number(f.value)
-                            if(coin < 0) {
-                                fluctParam.background = red['A100'];
-                                fluctParam.color = grey[700];
-                                fluctParam.message = coin + selector.msg.lang.COIN;
-                            }else if(coin > 0) {
-                                fluctParam.background = teal['A100'];
-                                fluctParam.color = grey[700];
-                                fluctParam.message = "+" + coin + selector.msg.lang.COIN;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-
-                    switch(f.trigger.type) {
-                        case Constants.FLUCT_TYPE_ABILITY:
-                            fluctParam.from = searchAbility(f.trigger.id, "const").display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).name;
-                            break;
-                        default:
-                            break;
-                    }
-                    fluctParams.push(fluctParam);
-                    }*/
-
             for(let p of resObj.players) {
                 // 変動パラメータ
                 if(p.fluctuationParameters.length > 0) {
@@ -415,22 +377,6 @@ export default function Socket(props) {
                             }
                             ablMessages = searchPushAblMsg(ablMessages, f.trigger.causedBy, f.trigger.id, p.playerName, fluctValue);
                         }
-
-                        /*console.log(ablMessages);
-                        let i = 1;
-                        for(let a of ablMessages) {
-                            console.log(i);
-                            console.log(a.triggerPlayerId);
-                            console.log(f.trigger.causedBy);
-                            console.log(a.abilityId);
-                            console.log(f.trigger.id);
-                            if((a.triggerPlayerId === f.trigger.causedBy) && (a.abilityId === f.trigger.id)) {
-                                console.log("===アビリティメッセージを追加します＝＝＝");
-                                a.effect += (p.playerName + ':' + fluctValue + ' ');
-                                console.log(a.effect);
-                            }
-                            i++;
-                        }*/
                     }
                 }
             }

@@ -20,6 +20,17 @@ export const setPhaseTimesAction = (phaseTimesState) => {
     }
 }
 
+export const SET_TURN = "SET_TURN";
+
+export const setTurnAction = (turnState) => {
+    return {
+        type: "SET_TURN",
+        payload: {
+            turn: turnState
+        }
+    }
+}
+
 export const SET_MESSAGE = "SET_MESSAGE";
 
 export const setMessageAction = (messageState) => {

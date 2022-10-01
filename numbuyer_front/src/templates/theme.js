@@ -538,16 +538,31 @@ export const TimeArea = styled('div')({
   marginRight: '2%',
 });
 
+// ターン数タグ
+export const TurnTag = styled('p')({
+  margin:0,
+  fontSize: '1em',
+});
+
+// 残り時間値
+export const TurnValue = styled('span')({
+  margin:0,
+  fontSize: '1.5em',
+  fontWeight: 'bold',
+});
+
 // 残り時間タグ
 export const TimeTag = styled('p')({
   margin:0,
-  fontSize: '1.5em',
+  padding:0,
+  fontSize: '1.2em',
 });
 
 // 残り時間値
 export const TimeValue = styled('p')({
   margin:0,
-  fontSize: '4.5em',
+  padding:0,
+  fontSize: '4em',
   fontWeight: 'bold',
 });
 
@@ -563,14 +578,14 @@ export const GoalArea = styled('div')({
 export const GoalTag = styled('p')({
   margin: 0,
   padding: 0,
-  fontSize: '1.5em',
+  fontSize: '1em',
 });
 
 // 勝利条件メッセージ
-export const GoalMessage = styled('p')({
+export const GoalMessage = styled('span')({
   margin: 0,
   padding: 0,
-  fontSize: '2em',
+  fontSize: '1.3em',
   fontWeight: 'bold',
 });
 
@@ -625,7 +640,6 @@ export const FinishModal = styled(Modal)({
 
 // ゲーム終了のメニュー
 export const FinishMenu = styled('div')({
-  background: grey[50],
   boxShadow: 5,
   padding: theme.spacing(4, 12, 8),
 });
@@ -635,6 +649,7 @@ export const RankingTitle = styled(Card)({
   "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
   color: grey[50],
   background: amber[400],
+  textShadow: '2px 4px 6px #000000',
   fontSize: '4em',
   fontWeight: 500,
   margin: '3%',
@@ -674,7 +689,7 @@ export const LoserInfoIcon = styled('img')({
 
 // ゲーム終了してTOP画面に戻るボタン
 export const FinishButton = styled(Button)({
-  color: grey[700],
+  color: grey[50],
   background: indigo[200],
   fontSize: '2em',
   width: '75%',
@@ -687,7 +702,7 @@ export const FinishButton = styled(Button)({
 
 // もう一度遊ぶボタン
 export const AgainButton = styled(Button)({
-  color: grey[700],
+  color: grey[50],
   background: blue[200],
   fontSize: '2em',
   width: '75%',
