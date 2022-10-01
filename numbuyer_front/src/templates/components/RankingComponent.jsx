@@ -98,7 +98,7 @@ const RankingComponent = (props) => {
                         dispatch(setQuickAction(false));
                     }}>{selector.msg.lang.FINISH_BTN}
                     </FinishButton>
-                    {!selector.room.isQuickMatch &&
+                    {(!selector.room.isQuickMatch && Constants.PLAY_AGAIN_BTN_FLG ) &&
                         <AgainButton size="large" variant="contained" 
                         onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
                     }

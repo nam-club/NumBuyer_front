@@ -281,5 +281,5 @@ export const FLUCT_TYPE_ABILITY = "ability";
 export const FLUCT_TYPE_STAGE = "stage";
 
 // 次期バージョンアップ用非表示コンテンツフラグ
-export const SETTING_BTN_FLG = true;
+export const SETTING_BTN_FLG = false;
 export const PLAY_AGAIN_BTN_FLG = false;

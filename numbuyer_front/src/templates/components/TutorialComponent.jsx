@@ -441,6 +441,7 @@ const TutorialComponent = () => {
                                     title={selector.msg.lang.DISTRIBUTION_MSG1}
                                     image={distribution1}
                                     texts={[
+                                        selector.msg.lang.DISTRIBUTION_MSG1_1,
                                         selector.msg.lang.DISTRIBUTION_MSG2,
                                         selector.msg.lang.DISTRIBUTION_MSG3,
                                         selector.msg.lang.DISTRIBUTION_MSG4
@@ -753,6 +754,7 @@ const TutorialComponent = () => {
                                     title={selector.msg.lang.DISTRIBUTION_MSG1}
                                     image={distribution1}
                                     texts={[
+                                        selector.msg.lang.DISTRIBUTION_MSG1_1,
                                         selector.msg.lang.DISTRIBUTION_MSG2,
                                         selector.msg.lang.DISTRIBUTION_MSG3,
                                         selector.msg.lang.DISTRIBUTION_MSG4
