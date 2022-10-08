@@ -73,11 +73,6 @@ const Top = () => {
     };
     const forceUpdate = useForceUpdate();
 
-    // ルーム数情報の取得（画面読み込み時）
-    React.useEffect(() => {
-        aggregate();
-    }, []);
-
     React.useEffect(() => {
         console.log(selector.room.totalRoomCount)
         console.log(selector.room.availableQMCount)
