@@ -57,6 +57,13 @@ export const TutorialIconMobile = styled(MenuBookIcon)({
   margin: 0,
 });
 
+// 情報メッセージ
+export const InfoMsgMobile = styled('p')({
+  margin:0,
+  padding:0,
+  fontSize: '0.75em'
+});
+
 // メニューモーダル
 export const MenuModal = styled(Modal)({
   display: 'flex',

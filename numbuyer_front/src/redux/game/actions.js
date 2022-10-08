@@ -1,54 +1,54 @@
 export const SET_PHASE = "SET_PHASE";
 
-export const setPhaseAction = (phaseState) => {
+export const setPhaseAction = (state) => {
     return {
         type: "SET_PHASE",
         payload: {
-            phase: phaseState
+            phase: state
         }
     }
 }
 
 export const SET_PHASE_TIMES = "SET_PHASE_TIMES";
 
-export const setPhaseTimesAction = (phaseTimesState) => {
+export const setPhaseTimesAction = (state) => {
     return {
         type: "SET_PHASE_TIMES",
         payload: {
-            phaseTimes: phaseTimesState
+            phaseTimes: state
         }
     }
 }
 
 export const SET_TURN = "SET_TURN";
 
-export const setTurnAction = (turnState) => {
+export const setTurnAction = (state) => {
     return {
         type: "SET_TURN",
         payload: {
-            turn: turnState
+            turn: state
         }
     }
 }
 
 export const SET_MESSAGE = "SET_MESSAGE";
 
-export const setMessageAction = (messageState) => {
+export const setMessageAction = (state) => {
     return {
         type: "SET_MESSAGE",
         payload: {
-            message: messageState
+            message: state
         }
     }
 }
 
 export const SET_MESSAGES = "SET_MESSAGES";
 
-export const setMessagesAction = (messagesState) => {
+export const setMessagesAction = (state) => {
     return {
         type: "SET_MESSAGES",
         payload: {
-            messages: messagesState
+            messages: state
         }
     }
 }
@@ -63,11 +63,11 @@ export const resetMessagesAction = () => {
 
 export const SET_ABL_MESSAGES = "SET_ABL_MESSAGES";
 
-export const setAblMessagesAction = (ablMessagesState) => {
+export const setAblMessagesAction = (state) => {
     return {
         type: "SET_ABL_MESSAGES",
         payload: {
-            ablMessages: ablMessagesState
+            ablMessages: state
         }
     }
 }
@@ -82,221 +82,221 @@ export const resetAblMessagesAction = () => {
 
 export const SET_FLUCT_PARAMS = "SET_FLUCT_PARAMS";
 
-export const setFluctParamsAction = (fluctParamsState) => {
+export const setFluctParamsAction = (state) => {
     return {
         type: "SET_FLUCT_PARAMS",
         payload: {
-            fluctParams: fluctParamsState
+            fluctParams: state
         }
     }
 }
 
 export const SET_TIME = "SET_TIME";
 
-export const setTimeAction = (timeState) => {
+export const setTimeAction = (state) => {
     return {
         type: "SET_TIME",
         payload: {
-            time: timeState
+            time: state
         }
     }
 }
 
 export const SET_REMAINING_TIME = "SET_REMAINING_TIME";
 
-export const setRemainingTimeAction = (remainingTimeState) => {
+export const setRemainingTimeAction = (state) => {
     return {
         type: "SET_REMAINING_TIME",
         payload: {
-            remainingTime: remainingTimeState
+            remainingTime: state
         }
     }
 }
 
 export const SET_REM_TIME_FLG = "SET_REM_TIME_FLG";
 
-export const setRemTimeFlgAction = (remTimeFlgState) => {
+export const setRemTimeFlgAction = (state) => {
     return {
         type: "SET_REM_TIME_FLG",
         payload: {
-            remTimeFlg: remTimeFlgState
+            remTimeFlg: state
         }
     }
 }
 
 export const SET_GOAL = "SET_GOAL";
 
-export const setGoalAction = (goalState) => {
+export const setGoalAction = (state) => {
     return {
         type: "SET_GOAL",
         payload: {
-            goalCoin: goalState
+            goalCoin: state
         }
     }
 }
 
 export const SET_TARGET = "SET_TARGET";
 
-export const setTargetAction = (targetState) => {
+export const setTargetAction = (state) => {
     return {
         type: "SET_TARGET",
         payload: {
-            targetCard: targetState
+            targetCard: state
         }
     }
 }
 
 export const SET_AUC_BTN = "SET_AUC_BTN";
 
-export const setAucBtnAction = (aucBtnState) => {
+export const setAucBtnAction = (state) => {
     return {
         type: "SET_AUC_BTN",
         payload: {
-            aucBtnFlg: aucBtnState
+            aucBtnFlg: state
         }
     }
 }
 
 export const SET_AUCTION = "SET_AUCTION";
 
-export const setAuctionAction = (auctionState) => {
+export const setAuctionAction = (state) => {
     return {
         type: "SET_AUCTION",
         payload: {
-            auctionCards: auctionState
+            auctionCards: state
         }
     }
 }
 
 export const SET_HIGHEST = "SET_HIGHEST";
 
-export const setHighestAction = (highestState) => {
+export const setHighestAction = (state) => {
     return {
         type: "SET_HIGHEST",
         payload: {
-            highestName: highestState.playerName,
-            highestBid: highestState.coin
+            highestName: state.playerName,
+            highestBid: state.coin
         }
     }
 }
 
 export const SET_AUC_RESULT = "SET_AUC_RESULT";
 
-export const setAucResultAction = (aucResultState) => {
+export const setAucResultAction = (state) => {
     return {
         type: "SET_AUC_RESULT",
         payload: {
-            aucResult: aucResultState,
+            aucResult: state,
         }
     }
 }
 
 export const SET_CALC_BTN = "SET_CALC_BTN";
 
-export const setCalcBtnAction = (calcBtnState) => {
+export const setCalcBtnAction = (state) => {
     return {
         type: "SET_CALC_BTN",
         payload: {
-            calcBtnFlg: calcBtnState
+            calcBtnFlg: state
         }
     }
 }
 
 export const SET_CALC_RESULT = "SET_CALC_RESULT";
 
-export const setCalcResultAction = (calcResultState) => {
+export const setCalcResultAction = (state) => {
     return {
         type: "SET_CALC_RESULT",
         payload: {
-            calcResult: calcResultState,
+            calcResult: state,
         }
     }
 }
 
 export const SET_ADDED_COIN = "SET_ADDED_COIN";
 
-export const setAddedCoinAction = (addedCoinState) => {
+export const setAddedCoinAction = (state) => {
     return {
         type: "SET_ADDED_COIN",
         payload: {
-            addedCoin: addedCoinState
+            addedCoin: state
         }
     }
 }
 
 export const SET_ANS_PLAYERS = "SET_ANS_PLAYERS";
 
-export const setAnsPlayersAction = (ansPlayersState) => {
+export const setAnsPlayersAction = (state) => {
     return {
         type: "SET_ANS_PLAYERS",
         payload: {
-            ansPlayers: ansPlayersState.ansPlayers
+            ansPlayers: state.ansPlayers
         }
     }
 }
 
 export const SET_FIRED_ABILITIES = "SET_FIRED_ABILITIES";
 
-export const setFiredAbilitiesAction = (firedAbilitiesState) => {
+export const setFiredAbilitiesAction = (state) => {
     return {
         type: "SET_FIRED_ABILITIES",
         payload: {
-            firedAbilities: firedAbilitiesState
+            firedAbilities: state
         }
     }
 }
 
 export const SET_LEAVE_LOBBY = "SET_LEAVE_LOBBY";
 
-export const setLeaveLobbyAction = (leaveLobbyState) => {
+export const setLeaveLobbyAction = (state) => {
     return {
         type: "SET_LEAVE_LOBBY",
         payload: {
-            leaveLobbyFlg: leaveLobbyState
+            leaveLobbyFlg: state
         }
     }
 }
 
 export const SET_FINISH_GAME = "SET_FINISH_GAME";
 
-export const setFinishGameAction = (finishGameState) => {
+export const setFinishGameAction = (state) => {
     return {
         type: "SET_FINISH_GAME",
         payload: {
-            finishFlg: finishGameState
+            finishFlg: state
         }
     }
 }
 
 export const SET_FIRST_TURN = "SET_FIRST_TURN";
 
-export const setFirstTurnAction = (firstTurnState) => {
+export const setFirstTurnAction = (state) => {
     return {
         type: "SET_FIRST_TURN",
         payload: {
-            firstTurnFlg: firstTurnState
+            firstTurnFlg: state
         }
     }
 }
 
 export const SET_TARGET_SKIP = "SET_TARGET_SKIP";
 
-export const setTargetSkipAction = (targetSkipState) => {
+export const setTargetSkipAction = (state) => {
     return {
         type: "SET_TARGET_SKIP",
         payload: {
-            targetSkipFlg: targetSkipState
+            targetSkipFlg: state
         }
     }
 }
 
 export const SET_HANDS_UPDATE = "SET_HANDS_UPDATE";
 
-export const setHandsUpdateAction = (handsUpdateState) => {
+export const setHandsUpdateAction = (state) => {
     return {
         type: "SET_HANDS_UPDATE",
         payload: {
-            handsUpdateFlg: handsUpdateState
+            handsUpdateFlg: state
         }
     }
 }
