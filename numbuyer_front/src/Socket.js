@@ -13,7 +13,6 @@ import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
 import * as ConstantsMsg from './constantsMsg';
 import { setAvailableQMCountAction, setRoomAction, setTotalRoomCountAction } from './redux/room/actions';
-import { red, teal, amber, grey } from '@mui/material/colors';
 
 export const CTX = React.createContext();
 
@@ -23,10 +22,6 @@ let socket;
 let resObj = ""; 
 
 /* ====== リクエストAPI ====== */
-
-export const aggregate = function() {
-    socket.emit('aggregate');
-};
 
 export const joinQuickMatch = function(value) {
     socket.emit('join/quick_match', JSON.stringify(value));
@@ -571,7 +566,7 @@ export default function Socket(props) {
 
 
     return (
-        <CTX.Provider value={{aggregate, joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
+        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
          start, nextTurn, bid, buy, calculate, useAbility}}>
             {props.children}
         </CTX.Provider>

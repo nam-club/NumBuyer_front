@@ -20,7 +20,6 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import { useMediaQuery } from "@mui/material";
 
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
-import whatIsNumBuyerMobile from '../../assets/what_is_numbuyer_mobile.png';
 import beforeGame1 from '../../assets/before_game1.png';
 import beforeGame2 from '../../assets/before_game2.png';
 import beforeGame3 from '../../assets/before_game3.png';
@@ -42,6 +41,28 @@ import useAbilities2 from '../../assets/use_abilities2.png';
 import useAbilities3 from '../../assets/use_abilities3.png';
 import useAbilities4 from '../../assets/use_abilities4.png';
 import endGame1 from '../../assets/end_game1.png';
+import whatIsNumBuyerMobile from '../../assets/what_is_numbuyer_mobile.png';
+import beforeGame1Mobile from '../../assets/before_game1_mobile.png';
+import beforeGame2Mobile from '../../assets/before_game2_mobile.png';
+import beforeGame3Mobile from '../../assets/before_game3_mobile.png';
+import beforeGame4Mobile from '../../assets/before_game4_mobile.png';
+import beforeGame5Mobile from '../../assets/before_game5_mobile.png';
+import distribution1Mobile from '../../assets/distribution1_mobile.png';
+import distribution2Mobile from '../../assets/distribution2_mobile.png';
+import distribution3Mobile from '../../assets/distribution3_mobile.png';
+import auction1Mobile from '../../assets/auction1_mobile.png';
+import auction2Mobile from '../../assets/auction2_mobile.png';
+import auction3Mobile from '../../assets/auction3_mobile.png';
+import auction4Mobile from '../../assets/auction4_mobile.png';
+import calculation1Mobile from '../../assets/calculation1_mobile.png';
+import calculation2Mobile from '../../assets/calculation2_mobile.png';
+import calculation3Mobile from '../../assets/calculation3_mobile.png';
+import calculation4Mobile from '../../assets/calculation4_mobile.png';
+import useAbilities1Mobile from '../../assets/use_abilities1_mobile.png';
+import useAbilities2Mobile from '../../assets/use_abilities2_mobile.png';
+import useAbilities3Mobile from '../../assets/use_abilities3_mobile.png';
+import useAbilities4Mobile from '../../assets/use_abilities4_mobile.png';
+import endGame1Mobile from '../../assets/end_game1_mobile.png';
 import { setTLColorAction, setTPageAction } from '../../redux/msg/actions';
 
 /** チュートリアル全体 */
@@ -263,19 +284,19 @@ const TutorialComponent = () => {
         }else {
             switch(page) {
                 case Constants.T_PAGE1:
-                    return '192%';
+                    return '240%';
                 case Constants.T_PAGE2:
-                    return '435%';
+                    return '654%';
                 case Constants.T_PAGE3:
-                    return '140%';
+                    return '282%';
                 case Constants.T_PAGE4:
-                    return '211%';
+                    return '423%';
                 case Constants.T_PAGE5:
-                    return '216%';
+                    return '412%';
                 case Constants.T_PAGE6:
-                    return '222%';
+                    return '404%';
                 case Constants.T_PAGE7:
-                    return '8%';
+                    return '1%';
                 default:
                     return  "0";
             }
@@ -699,7 +720,7 @@ const TutorialComponent = () => {
                             <Divider />
                             <TutorialSectionComponent
                                 title={selector.msg.lang.BEFORE_GAME_MSG1}
-                                image={beforeGame1}
+                                image={beforeGame1Mobile}
                                 texts={[
                                     selector.msg.lang.BEFORE_GAME_MSG2,
                                     selector.msg.lang.BEFORE_GAME_MSG3,
@@ -709,7 +730,7 @@ const TutorialComponent = () => {
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
                                 title={selector.msg.lang.BEFORE_GAME_MSG6}
-                                image={beforeGame2}
+                                image={beforeGame2Mobile}
                                 texts={[
                                     selector.msg.lang.BEFORE_GAME_MSG7,
                                     selector.msg.lang.BEFORE_GAME_MSG8,
@@ -719,7 +740,7 @@ const TutorialComponent = () => {
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
                                 title={selector.msg.lang.BEFORE_GAME_MSG9}
-                                image={beforeGame3}
+                                image={beforeGame3Mobile}
                                 texts={[
                                     selector.msg.lang.BEFORE_GAME_MSG10,
                                     selector.msg.lang.BEFORE_GAME_MSG11,
@@ -728,7 +749,7 @@ const TutorialComponent = () => {
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
                                 title={selector.msg.lang.BEFORE_GAME_MSG13}
-                                image={beforeGame4}
+                                image={beforeGame4Mobile}
                                 texts={[
                                     selector.msg.lang.BEFORE_GAME_MSG14,
                                     selector.msg.lang.BEFORE_GAME_MSG15,
@@ -738,7 +759,7 @@ const TutorialComponent = () => {
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
                                 title={selector.msg.lang.BEFORE_GAME_MSG18}
-                                image={beforeGame5}
+                                image={beforeGame5Mobile}
                                 texts={[
                                     selector.msg.lang.BEFORE_GAME_MSG19,
                                     selector.msg.lang.BEFORE_GAME_MSG20,
@@ -753,7 +774,7 @@ const TutorialComponent = () => {
                                 <Divider />
                                 <TutorialSectionComponent
                                     title={selector.msg.lang.DISTRIBUTION_MSG1}
-                                    image={distribution1}
+                                    image={distribution1Mobile}
                                     texts={[
                                         selector.msg.lang.DISTRIBUTION_MSG1_1,
                                         selector.msg.lang.DISTRIBUTION_MSG2,
@@ -763,7 +784,7 @@ const TutorialComponent = () => {
                                 </TutorialSectionComponent>
                                 <TutorialSectionComponent
                                     title={selector.msg.lang.DISTRIBUTION_MSG5}
-                                    image={distribution2}
+                                    image={distribution2Mobile}
                                     texts={[
                                         selector.msg.lang.DISTRIBUTION_MSG6,
                                         selector.msg.lang.DISTRIBUTION_MSG7
@@ -771,7 +792,7 @@ const TutorialComponent = () => {
                                 </TutorialSectionComponent>
                                 <TutorialSectionComponent
                                     title={selector.msg.lang.DISTRIBUTION_MSG8}
-                                    image={distribution3}
+                                    image={distribution3Mobile}
                                     texts={[
                                         selector.msg.lang.DISTRIBUTION_MSG9
                                     ]}>
@@ -784,14 +805,14 @@ const TutorialComponent = () => {
                                     <Divider />
                                     <TutorialSectionComponent
                                         title={selector.msg.lang.AUCTION_PHASE_MSG1}
-                                        image={auction1}
+                                        image={auction1Mobile}
                                         texts={[
                                             selector.msg.lang.AUCTION_PHASE_MSG2
                                         ]}>
                                     </TutorialSectionComponent>
                                     <TutorialSectionComponent
                                         title={selector.msg.lang.AUCTION_PHASE_MSG3}
-                                        image={auction2}
+                                        image={auction2Mobile}
                                         texts={[
                                             selector.msg.lang.AUCTION_PHASE_MSG4,
                                             selector.msg.lang.AUCTION_PHASE_MSG5,
@@ -801,14 +822,14 @@ const TutorialComponent = () => {
                                     </TutorialSectionComponent>
                                     <TutorialSectionComponent
                                         title={selector.msg.lang.AUCTION_PHASE_MSG8}
-                                        image={auction3}
+                                        image={auction3Mobile}
                                         texts={[
                                             selector.msg.lang.AUCTION_PHASE_MSG9
                                         ]}>
                                     </TutorialSectionComponent>
                                     <TutorialSectionComponent
                                         title={selector.msg.lang.AUCTION_PHASE_MSG10}
-                                        image={auction4}
+                                        image={auction4Mobile}
                                         texts={[
                                             selector.msg.lang.AUCTION_PHASE_MSG11
                                         ]}>
@@ -821,7 +842,7 @@ const TutorialComponent = () => {
                                         <Divider />
                                         <TutorialSectionComponent
                                             title={selector.msg.lang.CALCULATION_PHASE_MSG1}
-                                            image={calculation1}
+                                            image={calculation1Mobile}
                                             texts={[
                                                 selector.msg.lang.CALCULATION_PHASE_MSG2,
                                                 selector.msg.lang.CALCULATION_PHASE_MSG3,
@@ -829,21 +850,21 @@ const TutorialComponent = () => {
                                         </TutorialSectionComponent>
                                         <TutorialSectionComponent
                                             title={selector.msg.lang.CALCULATION_PHASE_MSG4}
-                                            image={calculation2}
+                                            image={calculation2Mobile}
                                             texts={[
                                                 selector.msg.lang.CALCULATION_PHASE_MSG5
                                             ]}>
                                         </TutorialSectionComponent>
                                         <TutorialSectionComponent
                                             title={selector.msg.lang.CALCULATION_PHASE_MSG6}
-                                            image={calculation3}
+                                            image={calculation3Mobile}
                                             texts={[
                                                 selector.msg.lang.CALCULATION_PHASE_MSG7
                                             ]}>
                                         </TutorialSectionComponent>
                                         <TutorialSectionComponent
                                             title={selector.msg.lang.CALCULATION_PHASE_MSG8}
-                                            image={calculation4}
+                                            image={calculation4Mobile}
                                             texts={[
                                                 selector.msg.lang.CALCULATION_PHASE_MSG9,
                                                 selector.msg.lang.CALCULATION_PHASE_MSG10
@@ -857,22 +878,22 @@ const TutorialComponent = () => {
                                             <Divider />
                                             <TutorialSectionComponent
                                                 title={selector.msg.lang.USE_ABILITIES_MSG1}
-                                                image={useAbilities1}
+                                                image={useAbilities1Mobile}
                                                 texts={[
-                                                    selector.msg.lang.USE_ABILITIES_MSG2,
+                                                    selector.msg.lang.USE_ABILITIES_MSG2_MOBILE,
                                                     selector.msg.lang.USE_ABILITIES_MSG3,
                                                 ]}>
                                             </TutorialSectionComponent>
                                             <TutorialSectionComponent
                                                 title={selector.msg.lang.USE_ABILITIES_MSG4}
-                                                image={useAbilities2}
+                                                image={useAbilities2Mobile}
                                                 texts={[
-                                                    selector.msg.lang.USE_ABILITIES_MSG5
+                                                    selector.msg.lang.USE_ABILITIES_MSG5_MOBILE
                                                 ]}>
                                             </TutorialSectionComponent>
                                             <TutorialSectionComponent
                                                 title={selector.msg.lang.USE_ABILITIES_MSG6}
-                                                image={useAbilities3}
+                                                image={useAbilities3Mobile}
                                                 texts={[
                                                     selector.msg.lang.USE_ABILITIES_MSG7,
                                                     selector.msg.lang.USE_ABILITIES_MSG8
@@ -880,7 +901,7 @@ const TutorialComponent = () => {
                                             </TutorialSectionComponent>
                                             <TutorialSectionComponent
                                                 title={selector.msg.lang.USE_ABILITIES_MSG9}
-                                                image={useAbilities4}
+                                                image={useAbilities4Mobile}
                                                 texts={[
                                                     selector.msg.lang.USE_ABILITIES_MSG10,
                                                     selector.msg.lang.USE_ABILITIES_MSG7,
@@ -895,7 +916,7 @@ const TutorialComponent = () => {
                                                 <Divider />
                                                 <TutorialSectionComponent
                                                     title={selector.msg.lang.END_GAME_MSG1}
-                                                    image={endGame1}
+                                                    image={endGame1Mobile}
                                                     texts={[
                                                         selector.msg.lang.END_GAME_MSG2,
                                                         selector.msg.lang.END_GAME_MSG3,
