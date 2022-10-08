@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton,
-        FriendButton, FriendModal, FriendMenu, CreateButton, JoinButton, ErrorMessage,
+import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton, FriendButton, FriendModal, FriendMenu, 
+        CreateButton, JoinButton, ErrorMessage, InfoMsg, InfoBoldMsg,
         LangIcon, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
-import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, MenuCardMobile,
+import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, MenuCardMobile, InfoMsgMobile,
         ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, FriendMenuMobile,
          ConfirmButtonMobile, CreateButtonMobile, JoinButtonMobile, AbilityTagMobile} from './themeMobile';
 
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
-import { CTX } from '../Socket';
+import { aggregate, CTX } from '../Socket';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -48,6 +48,8 @@ const Top = () => {
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
     const [errMsg, setErrMsg] = React.useState('');
+    const [roomCount, setRoomCount] = React.useState(selector.room.totalRoomCount);
+    const [qmCount, setQmCount] = React.useState(selector.room.availableQMCount);
     const [langOpen, setLangOpen] = React.useState(false); // 言語設定のモーダル
     const [tutorialOpen, setTutorialOpen] = React.useState(false); // チュートリアルのモーダル
     const [abilityOpen, setAbilityOpen] = React.useState(false); // アビリティ選択のモーダル
@@ -70,6 +72,14 @@ const Top = () => {
         }, []);
     };
     const forceUpdate = useForceUpdate();
+
+    React.useEffect(() => {
+        console.log(selector.room.totalRoomCount)
+        console.log(selector.room.availableQMCount)
+
+        setRoomCount(selector.room.totalRoomCount);
+        setQmCount(selector.room.availableQMCount);
+    }, [selector.room.totalRoomCount, selector.room.availableQMCount]);
 
     React.useEffect(() => {
         setErrMsg(selector.msg.errMsg);
@@ -381,6 +391,14 @@ const Top = () => {
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
                             </Grid>
                         </CardActions>
+                        <InfoMsg>
+                            {selector.msg.lang.TOTAL_ROOM_COUNT + ' : '}
+                            <InfoBoldMsg>{selector.room.totalRoomCount}</InfoBoldMsg>
+                        </InfoMsg>
+                        <InfoMsg>
+                            {selector.msg.lang.AVAILABLE_QM_COUNT + ' : '}
+                            <InfoBoldMsg>{selector.room.availableQMCount}</InfoBoldMsg>
+                        </InfoMsg>
                         <FriendModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
@@ -523,6 +541,14 @@ const Top = () => {
                             </CardActions>
                         </div>
                         }
+                        <InfoMsgMobile>
+                            {selector.msg.lang.TOTAL_ROOM_COUNT + ' : '}
+                            <InfoBoldMsg>{selector.room.totalRoomCount}</InfoBoldMsg>
+                        </InfoMsgMobile>
+                        <InfoMsgMobile>
+                            {selector.msg.lang.AVAILABLE_QM_COUNT + ' : '}
+                            <InfoBoldMsg>{selector.room.availableQMCount}</InfoBoldMsg>
+                        </InfoMsgMobile>
                         <FriendModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"

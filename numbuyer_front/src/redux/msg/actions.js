@@ -1,76 +1,76 @@
 export const SET_LANG = "SET_LANG";
 
-export const setLangAction = (langState) => {
+export const setLangAction = (state) => {
     return {
         type: "SET_LANG",
         payload: {
-            lang: langState
+            lang: state
         }
     }
 }
 
 export const SET_VALID = "SET_VALID";
 
-export const setValidAction = (validState) => {
+export const setValidAction = (state) => {
     return {
         type: "SET_VALID",
         payload: {
-            validFlg: validState.validFlg
+            validFlg: state.validFlg
         }
     }
 }
 
 export const SET_ERR_MSG = "SET_ERR_MSG";
 
-export const setErrMsgAction = (errMsgState) => {
+export const setErrMsgAction = (state) => {
     return {
         type: "SET_ERR_MSG",
         payload: {
-            errMsg: errMsgState.errMsg
+            errMsg: state.errMsg
         }
     }
 }
 
 export const SET_ERR_MSG_VARS = "SET_ERR_MSG_VARS";
 
-export const setErrMsgVarsAction = (errMsgVarsState) => {
+export const setErrMsgVarsAction = (state) => {
     return {
         type: "SET_ERR_MSG_VARS",
         payload: {
-            errMsgVars: errMsgVarsState
+            errMsgVars: state
         }
     }
 }
 
 export const SET_ABL_ERR_MSG = "SET_ABL_ERR_MSG";
 
-export const setAblErrMsgAction = (ablErrMsgState) => {
+export const setAblErrMsgAction = (state) => {
     return {
         type: "SET_ABL_ERR_MSG",
         payload: {
-            ablErrMsg: ablErrMsgState
+            ablErrMsg: state
         }
     }
 }
 
 export const SET_T_PAGE = "SET_T_PAGE";
 
-export const setTPageAction = (tPageState) => {
+export const setTPageAction = (state) => {
     return {
         type: "SET_T_PAGE",
         payload: {
-            tPage: tPageState
+            tPage: state
         }
     }
 }
 
 export const SET_TL_COLOR = "SET_TL_COLOR";
 
-export const setTLColorAction = (tlColorState) => {
+export const setTLColorAction = (state) => {
     return {
         type: "SET_TL_COLOR",
         payload: {
-            tlColor: tlColorState
+            tlColor: state
         }
     }
 }

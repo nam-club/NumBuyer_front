@@ -20,7 +20,7 @@ import Grid from '@mui/material/Grid';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Card from '@mui/material/Card';
-import { red, teal, amber, grey } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
 import AblNavigationComponent from './components/AblNavigationComponent';

@@ -20,6 +20,8 @@ const initialState = {
     room: {
         roomId: "", // ルームID
         isQuickMatch: false, // クイックマッチかどうか
+        totalRoomCount: 0, // 現在存在しているルーム数
+        availableQMCount: 0, // 現在参加可能なクイックマッチ数
     },
     msg: {
         lang: ConstantsMsg.English, // 言語

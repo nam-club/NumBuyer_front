@@ -12,7 +12,7 @@ import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetA
 import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
 import * as ConstantsMsg from './constantsMsg';
-import { setRoomAction } from './redux/room/actions';
+import { setAvailableQMCountAction, setRoomAction, setTotalRoomCountAction } from './redux/room/actions';
 import { red, teal, amber, grey } from '@mui/material/colors';
 
 export const CTX = React.createContext();
@@ -24,63 +24,52 @@ let resObj = "";
 
 /* ====== リクエストAPI ====== */
 
+export const aggregate = function() {
+    socket.emit('aggregate');
+};
+
 export const joinQuickMatch = function(value) {
-    console.log("quickMatch:")
-    console.log(value);
     socket.emit('join/quick_match', JSON.stringify(value));
 };
 
 export const createMatch = function(value) {
-    console.log("createMatch:")
-    console.log(value);
     socket.emit('create/match', JSON.stringify(value));
 };
 
 export const joinFriendMatch = function(value) {
-    console.log("joinFriendMatch:")
-    console.log(value);
     socket.emit('join/friend_match', JSON.stringify(value));
 };
 
 export const leaveLobby = function(value) {
-    console.log("leaveLobby:")
-    console.log(value);
     socket.emit('join/leave', JSON.stringify(value));
 };
 
 export const playersInfo = function(value) {
-    console.log(value);
     socket.emit('game/players_info', JSON.stringify(value));
 };
 
 export const start = function(value) {
-    console.log(value);
     socket.emit('game/start', JSON.stringify(value));
 };
 
 export const nextTurn = function(value) {
-    console.log(value);
     socket.emit('game/next_turn', JSON.stringify(value));
 };
 
 export const bid = function(value) {
-    console.log(value);
     socket.emit('game/bid', JSON.stringify(value));
 };
 
 export const buy = function(value) {
-    console.log(value);
     socket.emit('game/buy', JSON.stringify(value));
 };
 
 export const calculate = function(value) {
     changeCode(value.calculateCards, 'calculate');
-    console.log(value);
     socket.emit('game/calculate', JSON.stringify(value));
 };
 
 export const useAbility = function(value) {
-    console.log(value);
     socket.emit('game/ready_ability', JSON.stringify(value));
 };
 
@@ -92,7 +81,17 @@ export default function Socket(props) {
     const selector = useSelector(state => state);
 
     if(!socket) {
-      socket = io(process.env.REACT_APP_SOCKET_URL);
+        socket = io(process.env.REACT_APP_SOCKET_URL);
+
+        // 現在のルーム数情報を取得
+        socket.on('aggregate', function(msg) {
+            console.log("aggregate:")
+            console.log(msg);
+            resObj = JSON.parse(msg);
+
+            dispatch(setTotalRoomCountAction(resObj.totalRoomCount));
+            dispatch(setAvailableQMCountAction(resObj.availableQuickMatchCount));
+        });
 
         socket.on('game/join', async function(msg) {
             console.log("game/join:")
@@ -572,7 +571,7 @@ export default function Socket(props) {
 
 
     return (
-        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
+        <CTX.Provider value={{aggregate, joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
          start, nextTurn, bid, buy, calculate, useAbility}}>
             {props.children}
         </CTX.Provider>
