@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { MainLogo, MainTitle, Back, MenuCard, InputField, QuickButton, FriendButton, FriendModal, FriendMenu, 
-        CreateButton, JoinButton, ErrorMessage, InfoMsg, InfoBoldMsg,
+        CreateButton, JoinButton, ErrorMessage, InfoMsg, InfoBoldMsg, VerMsg,
         LangIcon, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag } from './theme';
 import { MainLogoMobile, MainTitleMobile, BackMobile, LangButtonMobile, MenuCardMobile, InfoMsgMobile,
-        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, FriendMenuMobile,
+        ErrorMessageMobile, QuickButtonMobile, FriendButtonMobile, FriendMenuMobile, VerMsgMobile,
          ConfirmButtonMobile, CreateButtonMobile, JoinButtonMobile, AbilityTagMobile} from './themeMobile';
 
 import * as Constants from '../constants';
@@ -361,8 +361,23 @@ const Top = () => {
                             </TopMenu>
                         </Fade>
                     </MenuModal>
-                    <MainLogo src={logo}/>
-                    <MainTitle src={title}/>
+                    <Grid container>
+                        <Grid item xs={3}/>
+                        <Grid item xs={6}>
+                            <Grid container>
+                                <Grid item xs={2}>
+                                    <MainLogo src={logo}/>
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <MainTitle src={title}/>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <VerMsg sx={{color: grey[50], fontSize: '1.5em'}}>( {Constants.VERSION} )</VerMsg>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={3}/>
+                    </Grid>
                     <MenuCard>
                         <CardContent>
                             <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name} 
@@ -494,7 +509,16 @@ const Top = () => {
             <div>
                 <BackMobile>
                     <div><MainLogoMobile src={logo}/></div>
-                    <div><MainTitleMobile src={title}/></div>
+                    
+                    <Grid container>
+                        <Grid item xs={2}/>
+                        <Grid item xs={8}>
+                            <MainTitleMobile src={title}/>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <VerMsgMobile sx={{color: grey[50], fontSize: '0.75em'}}>( {Constants.VERSION} )</VerMsgMobile>
+                        </Grid>
+                    </Grid>
                     <MenuCardMobile>
                         <CardContent>
                             <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name}

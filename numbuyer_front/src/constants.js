@@ -280,6 +280,9 @@ export const FLUCT_KEY_COIN = "fluctCoin";
 export const FLUCT_TYPE_ABILITY = "ability";
 export const FLUCT_TYPE_STAGE = "stage";
 
+// バージョン
+export const VERSION = 'Beta';
+
 // 次期バージョンアップ用非表示コンテンツフラグ
 export const SETTING_BTN_FLG = false;
 export const PLAY_AGAIN_BTN_FLG = false;

@@ -30,13 +30,18 @@ export const MainLogoMobile = styled('img')({
 
 // メインタイトル
 export const MainTitleMobile = styled('img')({
-  width: '60%',
+  width: '100%',
+});
+
+// バージョンメッセージ
+export const VerMsgMobile = styled('p')({
+  marginTop: '30%',
+  textAlign: 'left',
 });
 
 // トップ・ロビー画面の背景
 export const BackMobile = styled('div')({
   paddingTop: '5%',
-  
 });
 
 // 言語設定ボタン

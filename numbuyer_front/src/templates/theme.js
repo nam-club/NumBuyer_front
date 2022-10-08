@@ -26,14 +26,19 @@ export const theme = createTheme({
 
 // メインロゴ
 export const MainLogo = styled('img')({
-  width: '9%',
+  width: '85%',
 });
 
 // メインタイトル
 export const MainTitle = styled('img')({
-  width: '40%',
-  marginLeft: 20,
-  marginBottom: 30,
+  width: '100%',
+  marginTop: '5%',
+});
+
+// バージョンメッセージ
+export const VerMsg = styled('p')({
+  marginTop: '50%',
+  textAlign: 'left',
 });
 
 // トップ・ロビー画面の背景
