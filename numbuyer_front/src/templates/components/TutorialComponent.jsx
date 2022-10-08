@@ -20,6 +20,7 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import { useMediaQuery } from "@mui/material";
 
 import whatIsNumBuyer from '../../assets/what_is_numbuyer.png';
+import whatIsNumBuyerMobile from '../../assets/what_is_numbuyer_mobile.png';
 import beforeGame1 from '../../assets/before_game1.png';
 import beforeGame2 from '../../assets/before_game2.png';
 import beforeGame3 from '../../assets/before_game3.png';
@@ -601,7 +602,7 @@ const TutorialComponent = () => {
                     }
                 </TutorialBody>
             </Box>
-            :
+        :
             <Box sx={{ display: 'flex', marginTop: createMarginTop(selector.msg.tPage) }}>
                 <TutorialBody component="main">
                     {selector.msg.lang === ConstantsMsg.English ?
@@ -645,7 +646,7 @@ const TutorialComponent = () => {
                     {selector.msg.tPage === Constants.T_PAGE1 ?
                     <div>
                         <Divider />
-                        <TutorialImage src={whatIsNumBuyer}/>
+                        <TutorialImage src={whatIsNumBuyerMobile}/>
                         {selector.msg.lang === ConstantsMsg.English ?
                         <div>
                             <EmphasisMessage paragraph sx={{fontSize: "1.4em"}}>
