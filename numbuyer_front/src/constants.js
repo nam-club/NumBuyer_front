@@ -20,6 +20,11 @@ import catastropheMessage from './assets/catastropheMessage.png';
 export const CPU_MATCH = 'cpu';
 export const QUICK_MATCH = 'quick';
 
+// 言語
+export const ENGLISH = 'en';
+export const JAPANESE = 'ja';
+export const CHINESE = 'zh';
+
 // 初期プロパティ
 export const COIN = 100;
 

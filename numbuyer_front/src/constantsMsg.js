@@ -63,6 +63,7 @@ export const English = {
     RANKING: 'RANKING',
     FINISH_BTN: 'Finish Game',
     AGAIN_BTN: 'Play Again',
+    BACK_TOP_BTN: 'Back to Title',
 
     // チュートリアルメッセージ
     INTRODUCTION_MSG1: "NumBuyer is a title born from the two words Number and Buyer, and as the name implies, it is a new type of card game that combines a calculation card game with an auction element.",
@@ -144,6 +145,7 @@ export const English = {
     END_GAME_MSG3: "②Press this button to exit the room and return to the title screen.",
 
     // エラーメッセージ
+    NOT_FOUND_ERR: "Sorry, the page you're looking con not found.", // ページが見つからない
     NULL_NAME_ERR: "Please enter your name.", // 名前が未入力
     SYMBOL_ERR: "You cannot enter that character.", // 禁止文字が入力されている
     LENGTH_NAME_ERR: 'Enter a player name of 15 characters or less.', // プレイヤー名が15文字より多い
@@ -262,6 +264,7 @@ export const Japanese = {
     RANKING: 'ランキング',
     FINISH_BTN: 'ゲームをやめる',
     AGAIN_BTN: 'もう一度プレイする',
+    BACK_TOP_BTN: 'タイトル画面に戻る',
 
     // チュートリアルメッセージ
     INTRODUCTION_MSG1: 'NumBuyerとはNumber(数字)とBuyer(買い手)の二つの単語から生まれたタイトルであり、その名の通り計算カードゲームにオークション要素を組み合わせた新感覚のカードゲームです。',
@@ -343,6 +346,7 @@ export const Japanese = {
     END_GAME_MSG3: "②このボタンを押すと、ルームを抜けてタイトル画面に戻ります。",
 
     // エラーメッセージ
+    NOT_FOUND_ERR: "ページが見つかりませんでした。", // ページが見つからない
     NULL_NAME_ERR: '名前を入力してください。', // 名前が未入力
     SYMBOL_ERR: 'その文字は入力できません。', // 禁止文字が入力されている
     LENGTH_NAME_ERR: 'プレイヤー名は１５文字以下で入力してください。', // プレイヤー名が15文字より多い
@@ -461,6 +465,7 @@ export const Chinese = {
     RANKING: '排行',
     FINISH_BTN: '退出游戏',
     AGAIN_BTN: '再玩一遍',
+    BACK_TOP_BTN: '返回标题画面',
 
     // チュートリアルメッセージ
     INTRODUCTION_MSG1: 'NumBuyer是一个由Number和Buyer两个字诞生的称号，顾名思义，它是一种将计算卡牌游戏与拍卖元素相结合的新型卡牌游戏。',
@@ -542,6 +547,7 @@ export const Chinese = {
     END_GAME_MSG3: "②按此按钮退出房间并返回标题屏幕。",
 
     // エラーメッセージ
+    NOT_FOUND_ERR: "网页未找到。", // ページが見つからない
     NULL_NAME_ERR: '请输入你的名字。', // 名前が未入力
     SYMBOL_ERR: '您不能输入该字符。', // 禁止文字が入力されている
     LENGTH_NAME_ERR: '输入不超过１５个字符的玩家名称。', // プレイヤー名が15文字より多い

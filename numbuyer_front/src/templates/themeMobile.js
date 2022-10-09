@@ -749,6 +749,19 @@ export const AgainButtonMobile = styled(Button)({
   },
 });
 
+// TOP画面に戻るボタン
+export const BackToTopButtonMobile = styled(Button)({
+  color: grey[50],
+  background: indigo[200],
+  fontSize: '2em',
+  width: '75%',
+  margin: '5%',
+  'whiteSpace': 'nowrap',
+  '&:hover': {
+      background: indigo[100],
+    },
+});
+
 export const useStylesMobile = makeStyles((theme) => ({
 
   // オークションエリア

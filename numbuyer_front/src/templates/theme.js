@@ -714,6 +714,19 @@ export const AgainButton = styled(Button)({
     },
 });
 
+// TOP画面に戻るボタン
+export const BackToTopButton = styled(Button)({
+  color: grey[50],
+  background: indigo[200],
+  fontSize: '2em',
+  width: '25%',
+  margin: '5%',
+  'whiteSpace': 'nowrap',
+  '&:hover': {
+      background: indigo[100],
+    },
+});
+
 export const useStyles = makeStyles((theme) => ({
 
   // オークションエリア
