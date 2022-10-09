@@ -509,7 +509,6 @@ const Top = () => {
             <div>
                 <BackMobile>
                     <div><MainLogoMobile src={logo}/></div>
-                    
                     <Grid container>
                         <Grid item xs={2}/>
                         <Grid item xs={8}>
