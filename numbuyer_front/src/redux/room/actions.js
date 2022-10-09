@@ -9,6 +9,17 @@ export const setRoomAction = (state) => {
     }
 };
 
+export const SET_CPU = "SET_CPU";
+
+export const setCpuAction = (state) => {
+    return {
+        type: "SET_CPU",
+        payload: {
+            isCpuMatch: state
+        },
+    }
+};
+
 export const SET_QUICK = "SET_QUICK";
 
 export const setQuickAction = (state) => {

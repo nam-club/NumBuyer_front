@@ -21,8 +21,6 @@ const SelectAbilityComponent = (props) => {
     const selector = useSelector(state => state);
     const matches = useMediaQuery("(min-width:520px)");
 
-    console.log(props.abilities);
-
     return (
         <Typography component="div" align="center">
             {matches ?

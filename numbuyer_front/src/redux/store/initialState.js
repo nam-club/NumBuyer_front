@@ -19,6 +19,7 @@ const initialState = {
     },
     room: {
         roomId: "", // ルームID
+        isCpuMatch: false, // CPU対戦かどうか
         isQuickMatch: false, // クイックマッチかどうか
         totalRoomCount: 0, // 現在存在しているルーム数
         availableQMCount: 0, // 現在参加可能なクイックマッチ数

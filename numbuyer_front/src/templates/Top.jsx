@@ -15,7 +15,7 @@ import { aggregate, CTX } from '../Socket';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setPlayerNameAction } from '../redux/players/actions'
-import { setRoomAction, setQuickAction } from '../redux/room/actions';
+import { setRoomAction, setCpuAction, setQuickAction } from '../redux/room/actions';
 import { setLangAction, setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../redux/msg/actions';
 
 import TutorialComponent from './components/TutorialComponent';
@@ -43,7 +43,7 @@ import navigation from '../assets/navigation.png';
 const Top = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const {joinQuickMatch, createMatch, joinFriendMatch} = React.useContext(CTX);
+    const {joinCpuMatch, joinQuickMatch, createMatch, joinFriendMatch} = React.useContext(CTX);
 
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
@@ -139,6 +139,8 @@ const Top = () => {
         if(selector.players.player.abilities.length >= 2) {
             if(selector.room.isQuickMatch) {
                 joinQuickMatch({playerName: name, abilityIds: selector.players.player.abilities});
+            }else if(selector.room.isCpuMatch) {
+                joinCpuMatch({playerName: name, abilityIds: selector.players.player.abilities});
             }else {
                 setFriendOpen(true);
             }
@@ -226,11 +228,20 @@ const Top = () => {
     }
 
     // クイックマッチ
-    const clickQuick = () => {
+    const clickMatch = (mode) => {
         if(name !== '' && !name.match(Constants.NAME_EXP) && name.length <= 15) {
             dispatch(setValidAction({validFlg: false}));
             dispatch(setPlayerNameAction(name));
-            dispatch(setQuickAction(true));
+            switch(mode) {
+                case Constants.CPU_MATCH:
+                    dispatch(setCpuAction(true));
+                    dispatch(setQuickAction(false));
+                    break;
+                case Constants.QUICK_MATCH:
+                    dispatch(setCpuAction(false));
+                    dispatch(setQuickAction(true));
+                    break;
+            }
             handleAbilityOpen();
         }else {
             dispatch(setValidAction({validFlg: true}));
@@ -282,6 +293,8 @@ const Top = () => {
                 ConstantsMsg.Chinese.LENGTH_ROOM_ID_ERR
             ]));
         }else {
+            dispatch(setCpuAction(false));
+            dispatch(setQuickAction(true));
             dispatch(setValidAction({validFlg: false}));
             dispatch(setRoomAction({roomId: roomId}));
             dispatch(setPlayerNameAction(name));
@@ -389,21 +402,30 @@ const Top = () => {
                             }
                         </CardContent>
                         <CardActions>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <QuickButton size="large" variant="contained" 
                                 sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
                                 'textShadow': '2px 4px 6px #000000'},
                                 {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
-                                onClick={clickQuick}>
+                                onClick={()=>{clickMatch(Constants.QUICK_MATCH)}}>
                                     <span>{selector.msg.lang.QUICK_MATCH}</span>
                                 </QuickButton>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <FriendButton size="large" variant="contained"
                                 sx={[{color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
                                 'textShadow': '2px 4px 6px #000000'},
                                 {'&:hover': {backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButton>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <QuickButton size="large" variant="contained" 
+                                sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                onClick={()=>{clickMatch(Constants.CPU_MATCH)}}>
+                                    <span>{selector.msg.lang.CPU_MATCH}</span>
+                                </QuickButton>
                             </Grid>
                         </CardActions>
                         <InfoMsg>
@@ -536,7 +558,7 @@ const Top = () => {
                                 sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
                                 'textShadow': '2px 4px 6px #000000'},
                                 {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
-                                onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
+                                onClick={()=>{clickMatch(Constants.QUICK_MATCH)}}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
                             </CardActions>
                             <CardActions sx={{marginBottom: '10%'}}>
                                 <FriendButtonMobile size="large" variant="contained"
@@ -544,6 +566,13 @@ const Top = () => {
                                 'textShadow': '2px 4px 6px #000000'},
                                 {'&:hover': {backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
+                            </CardActions>
+                            <CardActions>
+                                <QuickButtonMobile size="large" variant="contained"
+                                sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                onClick={()=>{clickMatch(Constants.CPU_MATCH)}}>{selector.msg.lang.CPU_MATCH}</QuickButtonMobile>
                             </CardActions>
                         </div>
                         :
@@ -553,7 +582,7 @@ const Top = () => {
                                 sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
                                 'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'},
                                 {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
-                                onClick={clickQuick}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
+                                onClick={()=>{clickMatch(Constants.QUICK_MATCH)}}>{selector.msg.lang.QUICK_MATCH}</QuickButtonMobile>
                             </CardActions>
                             <CardActions sx={{marginBottom: '10%'}}>
                                 <FriendButtonMobile size="large" variant="contained"
@@ -561,6 +590,13 @@ const Top = () => {
                                 'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'},
                                 {'&:hover': {backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
                                 onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</FriendButtonMobile>
+                            </CardActions>
+                            <CardActions>
+                                <QuickButtonMobile size="large" variant="contained"
+                                sx={[{color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'},
+                                {'&:hover': {backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8}}]}
+                                onClick={()=>{clickMatch(Constants.CPU_MATCH)}}>{selector.msg.lang.CPU_MATCH}</QuickButtonMobile>
                             </CardActions>
                         </div>
                         }

@@ -8,7 +8,7 @@ import { ResultInfoIconMobile, RankingTitleMobile, FinishButtonMobile, AgainButt
 import { CTX } from '../../Socket';
 import { setRankingAction } from '../../redux/players/actions';
 import { setFinishGameAction, setMessageAction } from '../../redux/game/actions';
-import { setQuickAction } from '../../redux/room/actions';
+import { setCpuAction, setQuickAction } from '../../redux/room/actions';
 
 import * as Constants from '../../constants';
 
@@ -95,6 +95,7 @@ const RankingComponent = (props) => {
                     <FinishButton size="large" variant="contained" 
                         onClick={() => {
                         finishGame('finish');
+                        dispatch(setCpuAction(false));
                         dispatch(setQuickAction(false));
                     }}>{selector.msg.lang.FINISH_BTN}
                     </FinishButton>
@@ -151,6 +152,7 @@ const RankingComponent = (props) => {
                     <FinishButtonMobile size="large" variant="contained" 
                         onClick={() => {
                         finishGame('finish');
+                        dispatch(setCpuAction(false));
                         dispatch(setQuickAction(false));
                     }}>{selector.msg.lang.FINISH_BTN}
                     </FinishButtonMobile>

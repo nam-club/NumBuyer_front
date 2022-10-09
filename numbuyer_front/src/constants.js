@@ -16,6 +16,10 @@ import catastrophe from './assets/catastrophe.png';
 import catastropheMono from './assets/catastropheMono.png';
 import catastropheMessage from './assets/catastropheMessage.png';
 
+// ゲームモード
+export const CPU_MATCH = 'cpu';
+export const QUICK_MATCH = 'quick';
+
 // 初期プロパティ
 export const COIN = 100;
 

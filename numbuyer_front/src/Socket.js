@@ -23,6 +23,10 @@ let resObj = "";
 
 /* ====== リクエストAPI ====== */
 
+export const joinCpuMatch = function(value) {
+    socket.emit('join/cpu_match', JSON.stringify(value));
+};
+
 export const joinQuickMatch = function(value) {
     socket.emit('join/quick_match', JSON.stringify(value));
 };
@@ -118,7 +122,9 @@ export default function Socket(props) {
                     abilities.push(setAbility(a));
                 }
                 await dispatch(setResAbilityAction(abilities));
-                playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
+                if(!selector.room.isCpuMatch) {
+                    playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
+                }
             }
         });
 
@@ -224,17 +230,19 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
 
             setPlayers(resObj.players).then(()=>{
-                if(selector.game.leaveLobbyFlg === false) {
-                    // オーナーフラグを更新
-                    let player = selector.players.players.find((p) => {return p.playerId === selector.players.player.playerId});
-                    dispatch(setOwnerAction(player.isOwner));
-                    console.log(selector.players.player);
-                    dispatch(push('/Lobby'));
-                    console.log("ロビー画面に移動しました");
-                }else {
-                    dispatch(push('/'));
-                    console.log("トップ画面に移動しました");
-                    dispatch(setLeaveLobbyAction(false));
+                if(!selector.room.cpuMatch) {
+                    if(selector.game.leaveLobbyFlg === false) {
+                        // オーナーフラグを更新
+                        let player = selector.players.players.find((p) => {return p.playerId === selector.players.player.playerId});
+                        dispatch(setOwnerAction(player.isOwner));
+                        console.log(selector.players.player);
+                        dispatch(push('/Lobby'));
+                        console.log("ロビー画面に移動しました");
+                    }else {
+                        dispatch(push('/'));
+                        console.log("トップ画面に移動しました");
+                        dispatch(setLeaveLobbyAction(false));
+                    }
                 }
             });
         });
@@ -566,7 +574,7 @@ export default function Socket(props) {
 
 
     return (
-        <CTX.Provider value={{joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
+        <CTX.Provider value={{joinCpuMatch, joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
          start, nextTurn, bid, buy, calculate, useAbility}}>
             {props.children}
         </CTX.Provider>
