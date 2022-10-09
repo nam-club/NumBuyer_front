@@ -12,6 +12,7 @@ export const setRoomAction = (state) => {
 export const SET_CPU = "SET_CPU";
 
 export const setCpuAction = (state) => {
+    console.log(state);
     return {
         type: "SET_CPU",
         payload: {

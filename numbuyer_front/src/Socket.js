@@ -230,7 +230,8 @@ export default function Socket(props) {
             resObj = JSON.parse(msg);
 
             setPlayers(resObj.players).then(()=>{
-                if(!selector.room.cpuMatch) {
+                console.log(selector.room.isCpuMatch)
+                if(!selector.room.isCpuMatch) {
                     if(selector.game.leaveLobbyFlg === false) {
                         // オーナーフラグを更新
                         let player = selector.players.players.find((p) => {return p.playerId === selector.players.player.playerId});

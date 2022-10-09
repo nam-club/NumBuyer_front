@@ -171,32 +171,14 @@ export const ErrorMessageMobile = styled('p')({
   background: red[100],
 });
 
-// クイックマッチボタン
-export const QuickButtonMobile = styled(Button)({
-  display: 'inline-block',
-  fontSize: '2em',
-  width: '150%',
-  margin: '5% 10%',
-  color: grey[700],
-  background: blue[200],
-  'whiteSpace': 'nowrap',
-  '&:hover': {
-    background: blue[100],
-  },
-});
-
-// フレンドマッチボタン
-export const FriendButtonMobile = styled(Button)({
+// マッチボタン
+export const MatchButtonMobile = styled(Button)({
   display: 'inline-block',
   fontSize: '2em',
   width: '150%',
   margin: '0 10%',
   color: grey[700],
-  background: indigo[200],
   'whiteSpace': 'nowrap',
-  '&:hover': {
-    background: indigo[100],
-  },
 });
 
 // アビリティモーダル
