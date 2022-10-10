@@ -63,6 +63,9 @@ export const English = {
     RANKING: 'RANKING',
     FINISH_BTN: 'Finish Game',
     AGAIN_BTN: 'Play Again',
+    SHARE_GAME: 'Share Game Results',
+    TWITTER_MSG1: "http://twitter.com/share?url=https://numbuyer.nam-club.com/&text=Played NumBuyer and got ",
+    TWITTER_MSG2: " place! Let's all try it!&hashtags=numbuyer,NumBuyer,new_type_of_card_game",
     BACK_TOP_BTN: 'Back to Title',
 
     // チュートリアルメッセージ
@@ -264,6 +267,9 @@ export const Japanese = {
     RANKING: 'ランキング',
     FINISH_BTN: 'ゲームをやめる',
     AGAIN_BTN: 'もう一度プレイする',
+    SHARE_GAME: 'ゲームの結果を共有する',
+    TWITTER_MSG1: 'http://twitter.com/share?url=https://numbuyer.nam-club.com/&text=NumBuyerをプレイして',
+    TWITTER_MSG2: '位になったよ！みんなもやってみよう！&hashtags=numbuyer,NumBuyer,新感覚カードゲーム',
     BACK_TOP_BTN: 'タイトル画面に戻る',
 
     // チュートリアルメッセージ
@@ -464,7 +470,10 @@ export const Chinese = {
     COIN: '硬币',
     RANKING: '排行',
     FINISH_BTN: '退出游戏',
-    AGAIN_BTN: '再玩一遍',
+    AGAIN_BTN: '重新开始',
+    SHARE_GAME: '分享游戏结果',
+    TWITTER_MSG1: "http://twitter.com/share?url=https://numbuyer.nam-club.com/&text=玩过 NumBuyer 并获得第",
+    TWITTER_MSG2: "名！让我们都试试吧！&hashtags=numbuyer,NumBuyer,一种新型的纸牌游戏",
     BACK_TOP_BTN: '返回标题画面',
 
     // チュートリアルメッセージ
