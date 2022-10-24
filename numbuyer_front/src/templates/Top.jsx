@@ -251,18 +251,18 @@ const Top = () => {
     }
 
     // マッチ
-    const clickMatch = (mode) => {
+    const clickMatch = async (mode) => {
         if (name !== '' && !name.match(Constants.NAME_EXP) && name.length <= 15) {
             dispatch(setValidAction({ validFlg: false }));
             dispatch(setPlayerNameAction(name));
             switch (mode) {
                 case Constants.CPU_MATCH:
                     console.log("SINGLE PLAY")
-                    dispatch(setCpuAction(true));
+                    await dispatch(setCpuAction(true));
                     dispatch(setQuickAction(false));
                     break;
                 case Constants.QUICK_MATCH:
-                    dispatch(setCpuAction(false));
+                    await dispatch(setCpuAction(false));
                     dispatch(setQuickAction(true));
                     break;
             }

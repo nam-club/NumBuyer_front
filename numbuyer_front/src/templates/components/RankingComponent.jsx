@@ -35,13 +35,11 @@ const RankingComponent = (props) => {
     const { start } = React.useContext(CTX);
     const matches = useMediaQuery("(min-width:520px)");
 
-    const [myRank, setMyRank] = React.useState(0);
     const [twitterMsg, setTwitterMsg] = React.useState("");
 
     React.useEffect(() => {
         console.log(selector.players.ranking);
-        setMyRank(selector.players.ranking.find((r) => {return r.playerId === selector.players.player.playerId}));
-        setTwitterMsg(selector.msg.lang.TWITTER_MSG1 + myRank + selector.msg.lang.TWITTER_MSG2);
+        setTwitterMsg(selector.msg.lang.TWITTER_MSG1 + selector.players.ranking.find((r) => { return r.playerId === selector.players.player.playerId }).rank + selector.msg.lang.TWITTER_MSG2);
     }, [selector.players.ranking]);
 
     const finishGame = (mode) => {
@@ -68,10 +66,9 @@ const RankingComponent = (props) => {
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             {selector.players.ranking && selector.players.ranking.map((value) => (
-                                <TableBody>
+                                <TableBody key={value.playerId}>
                                     {value.rank === 1 ?
                                         <TableRow
-                                            key={value.rank}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">
@@ -86,7 +83,6 @@ const RankingComponent = (props) => {
                                             </TableCell>
                                         </TableRow> :
                                         <TableRow
-                                            key={value.rank}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">
@@ -158,10 +154,9 @@ const RankingComponent = (props) => {
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             {selector.players.ranking && selector.players.ranking.map((value) => (
-                                <TableBody>
+                                <TableBody key={value.playerId}>
                                     {value.rank === 1 ?
                                         <TableRow
-                                            key={value.rank}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">
@@ -176,7 +171,6 @@ const RankingComponent = (props) => {
                                             </TableCell>
                                         </TableRow> :
                                         <TableRow
-                                            key={value.rank}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">
@@ -224,7 +218,7 @@ const RankingComponent = (props) => {
                                         boxShadow: 2,
                                         background: grey[600],
                                         '&:hover': {
-                                          background: grey[500],
+                                            background: grey[500],
                                         },
                                     }} />
                             </Button>
@@ -243,7 +237,7 @@ const RankingComponent = (props) => {
                                         boxShadow: 2,
                                         background: grey[600],
                                         '&:hover': {
-                                          background: grey[500],
+                                            background: grey[500],
                                         },
                                     }} />
                             </Button>
