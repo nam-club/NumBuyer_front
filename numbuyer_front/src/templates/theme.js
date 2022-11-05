@@ -84,6 +84,12 @@ export const MenuModal = styled(Modal)({
   overflow: 'scroll',
 });
 
+// チュートリアルモーダル
+export const TutorialModal = styled(Modal)({
+  margin: '5%',
+  overflow: 'scroll',
+});
+
 // 設定やチュートリアルのメニュー
 export const TopMenu = styled('div')({
   background: grey[50],

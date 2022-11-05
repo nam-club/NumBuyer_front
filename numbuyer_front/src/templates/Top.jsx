@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-    MainLogo, MainTitle, Back, MenuCard, InputField, MatchButton, FriendModal, FriendMenu,
+    MainLogo, MainTitle, Back, MenuCard, InputField, MatchButton, TutorialModal, FriendModal, FriendMenu,
     CreateButton, JoinButton, ErrorMessage, InfoMsg, InfoBoldMsg, VerMsg,
     LangIcon, TutorialIcon, MenuModal, TopMenu, AbilityModal, ConfirmButton, AbilityTag
 } from './theme';
@@ -386,7 +386,7 @@ const Top = () => {
                             </Fade>
                         </MenuModal>
                         {/* チュートリアルモーダル */}
-                        <MenuModal
+                        <TutorialModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
                             open={tutorialOpen}
@@ -398,7 +398,7 @@ const Top = () => {
                                     <TutorialComponent />
                                 </TopMenu>
                             </Fade>
-                        </MenuModal>
+                        </TutorialModal>
                         <Grid container>
                             <Grid item xs={3} />
                             <Grid item xs={6}>
@@ -810,7 +810,7 @@ const Top = () => {
                             </Fade>
                         </MenuModal>
                         {/* チュートリアルモーダル */}
-                        <MenuModal
+                        <TutorialModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
                             open={tutorialOpen}
@@ -822,7 +822,7 @@ const Top = () => {
                                     <TutorialComponent />
                                 </TopMenu>
                             </Fade>
-                        </MenuModal>
+                        </TutorialModal>
                     </BackMobile>
                 </>
             }

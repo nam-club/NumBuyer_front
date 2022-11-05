@@ -261,52 +261,10 @@ const TutorialComponent = () => {
         }
     }
 
-    const createMarginTop = (page) => {
-        if(matches) {
-            switch(page) {
-                case Constants.T_PAGE1:
-                    return '18%';
-                case Constants.T_PAGE2:
-                    return '150%';
-                case Constants.T_PAGE3:
-                    return '47%';
-                case Constants.T_PAGE4:
-                    return '76%';
-                case Constants.T_PAGE5:
-                    return '74%';
-                case Constants.T_PAGE6:
-                    return '82%';
-                case Constants.T_PAGE7:
-                    return '0';
-                default:
-                    return  "0";
-            }
-        }else {
-            switch(page) {
-                case Constants.T_PAGE1:
-                    return '240%';
-                case Constants.T_PAGE2:
-                    return '654%';
-                case Constants.T_PAGE3:
-                    return '282%';
-                case Constants.T_PAGE4:
-                    return '423%';
-                case Constants.T_PAGE5:
-                    return '412%';
-                case Constants.T_PAGE6:
-                    return '404%';
-                case Constants.T_PAGE7:
-                    return '1%';
-                default:
-                    return  "0";
-            }
-        }
-    }
-
     return (
         <Typography component="div" align="center">
         {matches ? 
-            <Box sx={{ display: 'flex', marginTop: createMarginTop(selector.msg.tPage) }}>
+            <Box sx={{ display: 'flex', marginTop: 0 }}>
                 <SideBar component="nav">
                         {selector.msg.lang === ConstantsMsg.English ?
                         <div>
@@ -624,7 +582,7 @@ const TutorialComponent = () => {
                 </TutorialBody>
             </Box>
         :
-            <Box sx={{ display: 'flex', marginTop: createMarginTop(selector.msg.tPage) }}>
+            <Box sx={{ display: 'flex', padding: '2%' }}>
                 <TutorialBody component="main">
                     {selector.msg.lang === ConstantsMsg.English ?
                     <div>
