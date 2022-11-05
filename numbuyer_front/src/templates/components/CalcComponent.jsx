@@ -10,6 +10,7 @@ import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, Confi
 import { AreaTagMobile, WrapCardMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
 
 import Card from '@mui/material/Card';
+import Tabs from '@mui/material/Tabs';
 import Grow from '@mui/material/Grow';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -26,10 +27,10 @@ const CalcComponent = (props) => {
     const [hands, setHands] = React.useState([]);
     const [calcs, setCalcs] = React.useState([]);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
-    const {calculate} = React.useContext(CTX);
+    const { calculate } = React.useContext(CTX);
 
     React.useEffect(() => {
-        if(selector.game.phase === Constants.GIVE_CARD_PH) {
+        if (selector.game.phase === Constants.GIVE_CARD_PH) {
             setFade(false);
             setFade(true);
         }
@@ -38,7 +39,7 @@ const CalcComponent = (props) => {
     React.useEffect(() => {
         console.log("手札が更新されてるよ");
         setHands(selector.players.player.cards);
-        if(!(selector.game.phase === Constants.CALCULATE_PH)) {
+        if (!(selector.game.phase === Constants.CALCULATE_PH)) {
             calcs.length = 0;
         }
     }, [selector.players.player.cards]);
@@ -47,27 +48,27 @@ const CalcComponent = (props) => {
     const selectHands = (index, value) => {
         let errFlg = false;
         // 符号の時、calcsの末尾が符号または空だったら選択できないようにする。
-        if(value === '+' || value === '-' || value === '×' || value === '÷') {
-            if(calcs.length === 0) {
+        if (value === '+' || value === '-' || value === '×' || value === '÷') {
+            if (calcs.length === 0) {
                 errFlg = true;
-            }else {
-                let endCalc = calcs[calcs.length-1];
-                if(endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷') {
+            } else {
+                let endCalc = calcs[calcs.length - 1];
+                if (endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷') {
                     errFlg = true;
                 }
             }
-        // 数字の時、calcsの末尾が数字だったら選択できないようにする。
-        }else {
-            if(calcs.length !== 0) {
-                let endCalc = calcs[calcs.length-1];
-                if(!(endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
+            // 数字の時、calcsの末尾が数字だったら選択できないようにする。
+        } else {
+            if (calcs.length !== 0) {
+                let endCalc = calcs[calcs.length - 1];
+                if (!(endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
                     errFlg = true;
                 }
-            }else {
+            } else {
                 errFlg = false;
             }
         }
-        if(!errFlg) {
+        if (!errFlg) {
             const newHands = [...hands];
             newHands.splice(index, 1);
             setHands(newHands);
@@ -82,11 +83,11 @@ const CalcComponent = (props) => {
         const newCalcs = [...calcs];
 
         // 符号カードを戻す場合、一つ右の数字カードも戻す
-        if(value === '+' || value === '-' || value === '×' || value === '÷') {
+        if (value === '+' || value === '-' || value === '×' || value === '÷') {
             appendHands.push(value);
-            appendHands.push(calcs[index+1]);
+            appendHands.push(calcs[index + 1]);
             newCalcs.splice(index, 2);
-        }else {
+        } else {
             appendHands.push(value);
             newCalcs.splice(index, 1);
         }
@@ -94,41 +95,41 @@ const CalcComponent = (props) => {
         firstCalc = newCalcs[0];
 
         // 計算エリアの先頭が符号になるようだったら符号も手札に戻す
-        if(newCalcs.length >= 1) {
-            if(firstCalc === '+' || firstCalc === '-' || firstCalc === '×' || firstCalc === '÷') {
+        if (newCalcs.length >= 1) {
+            if (firstCalc === '+' || firstCalc === '-' || firstCalc === '×' || firstCalc === '÷') {
                 newCalcs.splice(0, 1);
                 appendHands.push(firstCalc)
             }
         }
-        
+
         setCalcs(newCalcs);
         setHands([...hands, ...appendHands]);
     }
 
     const ansCalc = () => {
-        let endCalc = calcs[calcs.length-1];
-        if(calcs.length === 0) {
+        let endCalc = calcs[calcs.length - 1];
+        if (calcs.length === 0) {
             dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG1));
-        }else if((endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
+        } else if ((endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
             dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG2));
-        }else {
+        } else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
-            calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: calculateCards, action: 'answer'});
+            calculate({ roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: calculateCards, action: 'answer' });
         }
     }
 
     const passCalc = () => {
         handleClose();
         calcs.length = 0;
-        calculate({roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass'});
+        calculate({ roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: null, action: 'pass' });
     }
 
     // ダイアログ表示
     const handleClickOpen = () => {
         setOpen(true);
     };
-    
+
     // ダイアログ閉じる
     const handleClose = () => {
         setOpen(false);
@@ -137,122 +138,134 @@ const CalcComponent = (props) => {
     return (
         <div>
             {matches ?
-            <div>
-                <Card className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}>
-                    <AreaTag align="left">{selector.msg.lang.YOUR_CARDS}</AreaTag>
-                    {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
-                    ) &&
-                        <WrapDisplay>
-                            {hands.map((value, index) => (
-                                <Grow in={fade} timeout={1000} key={index}>
-                                    <TermCard variant="contained"
-                                    onClick={() => selectHands(index, value)}
-                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                        <CardValue>{value}</CardValue>
-                                    </TermCard>
-                                </Grow>
-                            ))}
-                        </WrapDisplay>
-                    }
-                </Card>
-                <CalcArea>
-                    <AreaTag align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTag>
-                        {calcs &&
+                <div>
+                    <Card
+                        className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}>
+                        <AreaTag align="left">{selector.msg.lang.YOUR_CARDS}</AreaTag>
+                        {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
+                        ) &&
                             <WrapDisplay>
-                                {calcs.map((value, index) => (
+                                {hands.map((value, index) => (
                                     <Grow in={fade} timeout={1000} key={index}>
-                                        <TermCard variant="contained" 
-                                        onClick={() => selectCalcs(index, value)}
-                                        disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                        <TermCard variant="contained"
+                                            onClick={() => selectHands(index, value)}
+                                            disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                             <CardValue>{value}</CardValue>
                                         </TermCard>
                                     </Grow>
                                 ))}
                             </WrapDisplay>
                         }
-                    <PassButton size="large" variant="contained" onClick={handleClickOpen}
-                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
-                        {selector.msg.lang.PASS_BTN}</PassButton>
-                    <Dialog
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
-                        <DialogContent>
-                            <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
-                        </DialogContent>
-                        <DialogActions>
-                            <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
-                            <YesButton onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
-                        </DialogActions>
-                    </Dialog>
-                    <CalcButton size="large" variant="contained" onClick={ansCalc}
-                    disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
-                        {selector.msg.lang.ANSWER_BTN}</CalcButton>
-                </CalcArea>
-            </div>
-            :
-            <div>
-                <Card className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}
-                sx={{margin: '0 2%', padding: '1%'}}>
-                    <AreaTagMobile align="left">{selector.msg.lang.YOUR_CARDS}</AreaTagMobile>
-                    {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
-                    ) &&
-                        <WrapCardMobile>
-                            {hands.map((value, index) => (
-                                <Grow in={fade} timeout={1000} key={index}>
-                                    <TermCardMobile variant="contained"
-                                    onClick={() => selectHands(index, value)}
-                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                        <CardValue>{value}</CardValue>
-                                    </TermCardMobile>
-                                </Grow>
-                            ))}
-                        </WrapCardMobile>
-                    }
-                </Card>
-                {(selector.game.phase === Constants.CALCULATE_PH) &&
-                <CalcAreaMobile>
-                    <AreaTagMobile align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTagMobile>
+                    </Card>
+                    <CalcArea>
+                        <AreaTag align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTag>
                         {calcs &&
-                            <WrapCardMobile>
+                            <WrapDisplay>
                                 {calcs.map((value, index) => (
                                     <Grow in={fade} timeout={1000} key={index}>
-                                        <TermCardMobile variant="contained" 
-                                        onClick={() => selectCalcs(index, value)}
-                                        disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                        <TermCard variant="contained"
+                                            onClick={() => selectCalcs(index, value)}
+                                            disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
                                             <CardValue>{value}</CardValue>
-                                        </TermCardMobile>
+                                        </TermCard>
                                     </Grow>
                                 ))}
+                            </WrapDisplay>
+                        }
+                        <PassButton size="large" variant="contained" onClick={handleClickOpen}
+                            disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
+                            {selector.msg.lang.PASS_BTN}</PassButton>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
+                            <DialogContent>
+                                <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
+                            </DialogContent>
+                            <DialogActions>
+                                <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                                <YesButton onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
+                            </DialogActions>
+                        </Dialog>
+                        <CalcButton size="large" variant="contained" onClick={ansCalc}
+                            disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
+                            {selector.msg.lang.ANSWER_BTN}</CalcButton>
+                    </CalcArea>
+                </div>
+                :
+                <div>
+                    <Card
+                        className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}
+                        sx={{ margin: '0 2%', padding: '1%' }}>
+                        <AreaTagMobile align="left">{selector.msg.lang.YOUR_CARDS}</AreaTagMobile>
+                        {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
+                        ) &&
+                            <WrapCardMobile>
+                                <Tabs
+                                    variant="scrollable"
+                                    scrollButtons
+                                    allowScrollButtonsMobile>
+                                    {hands.map((value, index) => (
+                                        <Grow in={fade} timeout={1000} key={index}>
+                                            <TermCardMobile variant="contained"
+                                                onClick={() => selectHands(index, value)}
+                                                disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                <CardValue>{value}</CardValue>
+                                            </TermCardMobile>
+                                        </Grow>
+                                    ))}
+                                </Tabs>
                             </WrapCardMobile>
                         }
-                    <PassButton size="large" variant="contained" onClick={handleClickOpen}
-                        disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
-                        {selector.msg.lang.PASS_BTN}</PassButton>
-                    <Dialog
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
-                        <DialogContent>
-                            <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
-                        </DialogContent>
-                        <DialogActions>
-                            <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
-                            <YesButton onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
-                        </DialogActions>
-                    </Dialog>
-                    <CalcButton size="large" variant="contained" onClick={ansCalc}
-                    disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
-                        {selector.msg.lang.ANSWER_BTN}</CalcButton>
-                </CalcAreaMobile>
-                }
-            </div>
+                    </Card>
+                    {(selector.game.phase === Constants.CALCULATE_PH) &&
+                        <CalcAreaMobile>
+                            <AreaTagMobile align="left">{selector.msg.lang.CALCULATE_FIELD}</AreaTagMobile>
+                            {calcs &&
+                                <WrapCardMobile>
+                                    <Tabs
+                                        variant="scrollable"
+                                        scrollButtons
+                                        allowScrollButtonsMobile>
+                                        {calcs.map((value, index) => (
+                                            <Grow in={fade} timeout={1000} key={index}>
+                                                <TermCardMobile variant="contained"
+                                                    onClick={() => selectCalcs(index, value)}
+                                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                    <CardValue>{value}</CardValue>
+                                                </TermCardMobile>
+                                            </Grow>
+                                        ))}
+                                    </Tabs>
+                                </WrapCardMobile>
+                            }
+                            <PassButton size="large" variant="contained" onClick={handleClickOpen}
+                                disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
+                                {selector.msg.lang.PASS_BTN}</PassButton>
+                            <Dialog
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <ConfirmTitle id="alert-dialog-title">{selector.msg.lang.PASS_TITLE}</ConfirmTitle>
+                                <DialogContent>
+                                    <ConfirmMessage id="alert-dialog-description">{selector.msg.lang.PASS_MSG}</ConfirmMessage>
+                                </DialogContent>
+                                <DialogActions>
+                                    <PassButton onClick={handleClose}>{selector.msg.lang.NO_BTN}</PassButton>
+                                    <YesButton onClick={passCalc} autoFocus>{selector.msg.lang.YES_BTN}</YesButton>
+                                </DialogActions>
+                            </Dialog>
+                            <CalcButton size="large" variant="contained" onClick={ansCalc}
+                                disabled={!(selector.game.phase === Constants.CALCULATE_PH) || !props.calcBtnFlg}>
+                                {selector.msg.lang.ANSWER_BTN}</CalcButton>
+                        </CalcAreaMobile>
+                    }
+                </div>
             }
         </div>
     )
