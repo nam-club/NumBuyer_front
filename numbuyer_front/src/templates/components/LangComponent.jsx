@@ -18,7 +18,7 @@ const LangComponent = (props) => {
 
     return (
         <Typography component="div" align="center" >
-            <NavigationComponent backgroundImage={`url(${navigation})`} message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
+            <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' message={selector.msg.lang.LANG} color={grey[50]} messages={[]} />
             <List component="nav">
                 <ListItem button onClick={()=>{props.changeLang(ConstantsMsg.English.LANGUAGE)}}>
                     <ListItemText sx={{fontSize: '2em'}} primary={selector.msg.lang.LANG_EN} />

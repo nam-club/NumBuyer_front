@@ -40,10 +40,6 @@ import { useMediaQuery } from "@mui/material";
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
-import quickImage from '../assets/quickImage.png';
-import friendsImage from '../assets/friendsImage.png';
-import cpuImage from '../assets/cpuImage.png';
-import navigation from '../assets/navigation.png';
 
 const Top = () => {
     const dispatch = useDispatch();
@@ -350,6 +346,7 @@ const Top = () => {
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
+            {/* ウィンドウサイズがPC版 */}
             {matches ?
                 <>
                     <Back>
@@ -357,12 +354,14 @@ const Top = () => {
                             <Grid item xs={8} />
                             <Grid item xs={4}>
                                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                    {/* 言語設定ボタン */}
                                     <div>
                                         <Button onClick={handleLangOpen}>
                                             <LangIcon />
                                         </Button>
                                         <Typography sx={{ color: grey[50] }}>{selector.msg.lang.LANG}</Typography>
                                     </div>
+                                    {/* チュートリアルボタン */}
                                     <div>
                                         <Button onClick={handleTutorialOpen}>
                                             <TutorialIcon />
@@ -372,6 +371,7 @@ const Top = () => {
                                 </Box>
                             </Grid>
                         </Grid>
+                        {/* 言語設定モーダル */}
                         <MenuModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
@@ -385,6 +385,7 @@ const Top = () => {
                                 </TopMenu>
                             </Fade>
                         </MenuModal>
+                        {/* チュートリアルモーダル */}
                         <MenuModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
@@ -402,12 +403,15 @@ const Top = () => {
                             <Grid item xs={3} />
                             <Grid item xs={6}>
                                 <Grid container>
+                                    {/* ロゴ画像 */}
                                     <Grid item xs={2}>
                                         <MainLogo src={logo} />
                                     </Grid>
+                                    {/* タイトル画像 */}
                                     <Grid item xs={8}>
                                         <MainTitle src={title} />
                                     </Grid>
+                                    {/* バージョン情報 */}
                                     <Grid item xs={2}>
                                         <VerMsg sx={{ color: grey[50], fontSize: '1.5em' }}>( {Constants.VERSION} )</VerMsg>
                                     </Grid>
@@ -416,6 +420,7 @@ const Top = () => {
                             <Grid item xs={3} />
                         </Grid>
                         <MenuCard>
+                            {/* プレイヤー名入力エリア */}
                             <CardContent>
                                 <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name}
                                     inputProps={{ style: { fontSize: '3em', color: grey[600], marginTop: '2%', marginBottom: '-4%' } }}
@@ -426,46 +431,52 @@ const Top = () => {
                                 }
                             </CardContent>
                             <CardActions>
+                                {/* クイックマッチボタン */}
                                 <Grid item xs={4}>
                                     <MatchButton size="large" variant="contained"
                                         sx={[{
-                                            color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                            color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
                                             'textShadow': '2px 4px 6px #000000'
                                         },
-                                        { '&:hover': { backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                        { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                         onClick={() => { clickMatch(Constants.QUICK_MATCH) }}>
                                         <span>{selector.msg.lang.QUICK_MATCH}</span>
                                     </MatchButton>
                                 </Grid>
+                                {/* フレンドマッチボタン */}
                                 <Grid item xs={4}>
                                     <MatchButton size="large" variant="contained"
                                         sx={[{
-                                            color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
+                                            color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
                                             'textShadow': '2px 4px 6px #000000'
                                         },
-                                        { '&:hover': { backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                        { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                         onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</MatchButton>
                                 </Grid>
+                                {/* CPU対戦ボタン */}
                                 <Grid item xs={4}>
                                     <MatchButton size="large" variant="contained"
                                         sx={[{
-                                            color: grey[50], backgroundImage: `url(${cpuImage})`, boxShadow: 6,
+                                            color: grey[50], background: 'linear-gradient(25deg, #00ff7f, #000000)', boxShadow: 6,
                                             'textShadow': '2px 4px 6px #000000'
                                         },
-                                        { '&:hover': { backgroundImage: `url(${cpuImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                        { '&:hover': { background: 'linear-gradient(25deg, #b3ffd9, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                         onClick={() => { clickMatch(Constants.CPU_MATCH) }}>
                                         <span>{selector.msg.lang.CPU_MATCH}</span>
                                     </MatchButton>
                                 </Grid>
                             </CardActions>
+                            {/* 現在開かれているルーム数情報 */}
                             <InfoMsg>
                                 {selector.msg.lang.TOTAL_ROOM_COUNT + ' : '}
                                 <InfoBoldMsg>{selector.room.totalRoomCount}</InfoBoldMsg>
                             </InfoMsg>
+                            {/* 参加可能なクイックマッチのルーム数情報 */}
                             <InfoMsg>
                                 {selector.msg.lang.AVAILABLE_QM_COUNT + ' : '}
                                 <InfoBoldMsg>{selector.room.availableQMCount}</InfoBoldMsg>
                             </InfoMsg>
+                            {/* フレンドマッチのルーム作成 or 参加のモーダル */}
                             <FriendModal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
@@ -475,6 +486,7 @@ const Top = () => {
                             >
                                 <Fade in={friendOpen}>
                                     <FriendMenu>
+                                        {/* ルーム作成エリア */}
                                         <Typography component="div" align="center">
                                             {selector.msg.validFlg &&
                                                 <ErrorMessage>{errMsg}</ErrorMessage>
@@ -488,12 +500,14 @@ const Top = () => {
                                                 }}>{selector.msg.lang.CREATE_BTN}</CreateButton>
                                         </Typography>
                                         <Grid container>
+                                            {/* ルームコード入力エリア */}
                                             <Grid item xs={6}>
                                                 <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId}
                                                     inputProps={{ style: { fontSize: '3em', color: grey[600], marginTop: '2%' } }}
                                                     InputLabelProps={{ style: { fontSize: '3em' } }}
                                                     onChange={roomIdChange} />
                                             </Grid>
+                                            {/* 参加ボタン */}
                                             <Grid item xs={6}>
                                                 <JoinButton size="large" variant="contained"
                                                     onClick={() => { clickJoin(); }}>{selector.msg.lang.JOIN_BTN}</JoinButton>
@@ -502,6 +516,7 @@ const Top = () => {
                                     </FriendMenu>
                                 </Fade>
                             </FriendModal>
+                            {/* アビリティ選択モーダル */}
                             <AbilityModal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
@@ -512,7 +527,8 @@ const Top = () => {
                                 <Fade in={abilityOpen}>
                                     <TopMenu>
                                         <Typography component="div" align="center">
-                                            <NavigationComponent backgroundImage={`url(${navigation})`} message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                            <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                            {/* アビリティ一覧 */}
                                             <Grid container>
                                                 <Grid item xs={1} />
                                                 <Grid item xs={2}>
@@ -545,9 +561,11 @@ const Top = () => {
                                             {selector.msg.validFlg &&
                                                 <ErrorMessage>{errMsg}</ErrorMessage>
                                             }
+                                            {/* 確定ボタン */}
                                             <ConfirmButton size="large" variant="contained" onClick={() => confirmAbilities()}>
                                                 {selector.msg.lang.CONFIRM_BTN}
                                             </ConfirmButton>
+                                            {/* アビリティルール説明 */}
                                             <AbilityTag>{selector.msg.lang.ABILITY_EXP1}</AbilityTag>
                                             <AbilityTag>{selector.msg.lang.ABILITY_EXP2}</AbilityTag>
                                         </Typography>
@@ -559,18 +577,23 @@ const Top = () => {
                 </>
                 :
                 <>
+                {/* ウィンドウサイズがモバイル版 */}
                     <BackMobile>
+                        {/* ロゴ画像 */}
                         <div><MainLogoMobile src={logo} /></div>
                         <Grid container>
                             <Grid item xs={2} />
+                            {/* タイトル画像 */}
                             <Grid item xs={8}>
                                 <MainTitleMobile src={title} />
                             </Grid>
+                            {/* バージョン情報 */}
                             <Grid item xs={2}>
                                 <VerMsgMobile sx={{ color: grey[50], fontSize: '0.75em' }}>( {Constants.VERSION} )</VerMsgMobile>
                             </Grid>
                         </Grid>
                         <MenuCardMobile>
+                            {/* プレイヤー名入力エリア */}
                             <CardContent>
                                 <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name}
                                     sx={{ margin: '0 10%' }}
@@ -583,73 +606,84 @@ const Top = () => {
                             }
                             {selector.msg.lang === ConstantsMsg.English ?
                                 <div>
+                                {/* 英語の場合 */}
+                                    {/* クイックマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
-                                                color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                                color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
                                                 'textShadow': '2px 4px 6px #000000'
                                             },
-                                            { '&:hover': { backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={() => { clickMatch(Constants.QUICK_MATCH) }}>{selector.msg.lang.QUICK_MATCH}</MatchButtonMobile>
                                     </CardActions>
+                                    {/* フレンドマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
-                                                color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
+                                                color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
                                                 'textShadow': '2px 4px 6px #000000'
                                             },
-                                            { '&:hover': { backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</MatchButtonMobile>
                                     </CardActions>
+                                    {/* CPUマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
-                                                color: grey[50], backgroundImage: `url(${cpuImage})`, boxShadow: 6,
+                                                color: grey[50], background: 'linear-gradient(25deg, #00ff7f, #000000)', boxShadow: 6,
                                                 'textShadow': '2px 4px 6px #000000'
                                             },
-                                            { '&:hover': { backgroundImage: `url(${cpuImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            { '&:hover': { background: 'linear-gradient(25deg, #b3ffd9, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={() => { clickMatch(Constants.CPU_MATCH) }}>{selector.msg.lang.CPU_MATCH}</MatchButtonMobile>
                                     </CardActions>
                                 </div>
                                 :
                                 <div>
+                                {/* 英語以外の場合 */}
+                                    {/* クイックマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
-                                                color: grey[50], backgroundImage: `url(${quickImage})`, boxShadow: 6,
+                                                color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
                                                 'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'
                                             },
-                                            { '&:hover': { backgroundImage: `url(${quickImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={() => { clickMatch(Constants.QUICK_MATCH) }}>{selector.msg.lang.QUICK_MATCH}</MatchButtonMobile>
                                     </CardActions>
+                                    {/* フレンドマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
-                                                color: grey[50], backgroundImage: `url(${friendsImage})`, boxShadow: 6,
+                                                color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
                                                 'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'
                                             },
-                                            { '&:hover': { backgroundImage: `url(${friendsImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</MatchButtonMobile>
                                     </CardActions>
+                                    {/* CPUマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
-                                                color: grey[50], backgroundImage: `url(${cpuImage})`, boxShadow: 6,
+                                                color: grey[50], background: 'linear-gradient(25deg, #00ff7f, #000000)', boxShadow: 6,
                                                 'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'
                                             },
-                                            { '&:hover': { backgroundImage: `url(${cpuImage})`, 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            { '&:hover': { background: 'linear-gradient(25deg, #b3ffd9, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={() => { clickMatch(Constants.CPU_MATCH) }}>{selector.msg.lang.CPU_MATCH}</MatchButtonMobile>
                                     </CardActions>
                                 </div>
                             }
+                            {/* 現在開かれているルーム数情報 */}
                             <InfoMsgMobile>
                                 {selector.msg.lang.TOTAL_ROOM_COUNT + ' : '}
                                 <InfoBoldMsg>{selector.room.totalRoomCount}</InfoBoldMsg>
                             </InfoMsgMobile>
+                            {/* 現在参加可能なクイックマッチのルーム数情報 */}
                             <InfoMsgMobile>
                                 {selector.msg.lang.AVAILABLE_QM_COUNT + ' : '}
                                 <InfoBoldMsg>{selector.room.availableQMCount}</InfoBoldMsg>
                             </InfoMsgMobile>
+                            {/* フレンドマッチのルーム作成 or 参加モーダル */}
                             <FriendModal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
@@ -663,6 +697,7 @@ const Top = () => {
                                             {selector.msg.validFlg &&
                                                 <ErrorMessage>{errMsg}</ErrorMessage>
                                             }
+                                            {/* ルーム作成ボタン */}
                                             <CreateButtonMobile size="large" variant="contained"
                                                 onClick={() => {
                                                     dispatch(setValidAction({ validFlg: false }));
@@ -670,16 +705,19 @@ const Top = () => {
                                                     dispatch(setPlayerNameAction(name));
                                                     createMatch({ playerName: name, roomId: roomId, abilityIds: selector.players.player.abilities });
                                                 }}>{selector.msg.lang.CREATE_BTN}</CreateButtonMobile>
+                                            {/* ルームコード入力エリア */}
                                             <InputField variant="standard" label={selector.msg.lang.ROOM_ID} value={roomId}
                                                 inputProps={{ style: { fontSize: '3em', color: grey[600], paddingBottom: 0 } }}
                                                 InputLabelProps={{ style: { fontSize: '3em' } }}
                                                 onChange={roomIdChange} />
+                                            {/* ルーム参加ボタン */}
                                             <JoinButtonMobile size="large" variant="contained"
                                                 onClick={() => { clickJoin(); }}>{selector.msg.lang.JOIN_BTN}</JoinButtonMobile>
                                         </Typography>
                                     </FriendMenuMobile>
                                 </Fade>
                             </FriendModal>
+                            {/* アビリティ選択モーダル */}
                             <AbilityModal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
@@ -690,7 +728,9 @@ const Top = () => {
                                 <Fade in={abilityOpen}>
                                     <TopMenu>
                                         <Typography component="div" align="center">
-                                            <NavigationComponent backgroundImage={`url(${navigation})`} message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                            {/* ナビゲーションメッセージ */}
+                                            <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' message={selector.msg.lang.ABILITY} color={grey[50]} messages={[]} />
+                                            {/* アビリティ一覧 */}
                                             <Grid container>
                                                 <Grid item xs={6}>
                                                     <SelectAbilityComponent background={blue[300]} color={grey[50]}
@@ -725,9 +765,11 @@ const Top = () => {
                                             {selector.msg.validFlg &&
                                                 <ErrorMessage>{errMsg}</ErrorMessage>
                                             }
+                                            {/* 確定ボタン */}
                                             <ConfirmButtonMobile size="large" variant="contained" onClick={() => confirmAbilities()}>
                                                 {selector.msg.lang.CONFIRM_BTN}
                                             </ConfirmButtonMobile>
+                                            {/* アビリティルール説明 */}
                                             <AbilityTagMobile>{selector.msg.lang.ABILITY_EXP1}</AbilityTagMobile>
                                             <AbilityTagMobile>{selector.msg.lang.ABILITY_EXP2}</AbilityTagMobile>
                                         </Typography>
@@ -737,12 +779,14 @@ const Top = () => {
                         </MenuCardMobile>
                         <Grid container>
                             <Grid item xs={2} />
+                            {/* 言語設定ボタン */}
                             <Grid item xs={4}>
                                 <LangButtonMobile onClick={handleLangOpen}>
                                     <LangIcon />
                                 </LangButtonMobile>
                                 <Typography sx={{ color: grey[50] }}>{selector.msg.lang.LANG}</Typography>
                             </Grid>
+                            {/* チュートリアルボタン */}
                             <Grid item xs={4}>
                                 <LangButtonMobile onClick={handleTutorialOpen}>
                                     <TutorialIcon />
@@ -751,6 +795,7 @@ const Top = () => {
                             </Grid>
                             <Grid item xs={2} />
                         </Grid>
+                        {/* 言語設定モーダル */}
                         <MenuModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
@@ -764,6 +809,7 @@ const Top = () => {
                                 </TopMenu>
                             </Fade>
                         </MenuModal>
+                        {/* チュートリアルモーダル */}
                         <MenuModal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"

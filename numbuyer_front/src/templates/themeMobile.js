@@ -238,9 +238,9 @@ export const ConfirmButtonMobile = styled(Button)({
   'whiteSpace': 'nowrap',
   fontSize: '2em',
   zIndex: 2,
-  background: indigo[200],
+  background: 'linear-gradient(25deg, #9370db, #000000)',
   '&:hover': {
-    background: indigo[100],
+    background: 'linear-gradient(25deg, #ccb3ff, #000000)',
   },
 });
 

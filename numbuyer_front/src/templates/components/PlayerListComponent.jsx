@@ -78,7 +78,7 @@ const PlayerListComponent = () => {
                         </Grid>
                     </Grid> 
                     }
-                    <NavigationComponent backgroundImage={`url(${navigation})`} color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
+                    <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
                 </div>
                 }
                 {owners &&
@@ -150,7 +150,7 @@ const PlayerListComponent = () => {
             <MenuCardMobile>
                 <LobbyTitleMobile>{selector.msg.lang.LOBBY}</LobbyTitleMobile>
                 {selector.room.isQuickMatch && 
-                    <NavigationComponent backgroundImage={`url(${navigation})`} color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
+                    <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
                 }
                 {owners &&
                     owners.map((value) => (<ParticipantListMobile key={value.playerName}>

@@ -43,8 +43,8 @@ export const leaveLobby = function(value) {
     socket.emit('join/leave', JSON.stringify(value));
 };
 
-export const playersInfo = function(value) {
-    socket.emit('game/players_info', JSON.stringify(value));
+export const roomInfo = function(value) {
+    socket.emit('game/room_info', JSON.stringify(value));
 };
 
 export const start = function(value) {
@@ -123,7 +123,7 @@ export default function Socket(props) {
                 }
                 await dispatch(setResAbilityAction(abilities));
                 if(!selector.room.isCpuMatch) {
-                    playersInfo({roomId: resObj.roomId, playerId: resObj.playerId});
+                    roomInfo({roomId: resObj.roomId, playerId: resObj.playerId});
                 }
             }
         });
@@ -224,14 +224,13 @@ export default function Socket(props) {
         };
 
         // ゲーム開始前に全プレイヤーの情報をセットし、ロビー画面に移動
-        socket.on('game/players_info', function(msg) {
-            console.log("game/playersInfo:");
+        socket.on('game/room_info', function(msg) {
+            console.log("game/roomInfo:");
             console.log(msg);
             resObj = JSON.parse(msg);
 
             setPlayers(resObj.players).then(()=>{
-                console.log(selector.room.isCpuMatch)
-                if(!selector.room.isCpuMatch) {
+                if(resObj.gameMode !== Constants.CPU_MATCH) {
                     if(selector.game.leaveLobbyFlg === false) {
                         // オーナーフラグを更新
                         let player = selector.players.players.find((p) => {return p.playerId === selector.players.player.playerId});
@@ -321,7 +320,7 @@ export default function Socket(props) {
                             message: "", // 発動メッセージ
                             effect: "", // 発動アビリティ効果メッセージ
                             time: Constants.ABL_MSG_TIME, // メッセージ表示時間
-                            messageImage: null, // アビリティメッセージ背景
+                            bgColor: null, // アビリティメッセージ背景色
                             tagColor: null, // アビリティメッセージ文字色
                             triggerPlayerId: p.playerId, // 発動プレイヤー名
                             abilityId: a.abilityId, // アビリティID
@@ -345,7 +344,7 @@ export default function Socket(props) {
                             default:
                                 break;
                         }
-                        ablMessage.messageImage = resObject.messageImage;
+                        ablMessage.bgColor = resObject.bgColor;
                         ablMessage.tagColor = resObject.tagColor;
                         ablMessages.push(ablMessage);
 
@@ -575,7 +574,7 @@ export default function Socket(props) {
 
 
     return (
-        <CTX.Provider value={{joinCpuMatch, joinQuickMatch, createMatch, joinFriendMatch, playersInfo,
+        <CTX.Provider value={{joinCpuMatch, joinQuickMatch, createMatch, joinFriendMatch, roomInfo,
          start, nextTurn, bid, buy, calculate, useAbility}}>
             {props.children}
         </CTX.Provider>

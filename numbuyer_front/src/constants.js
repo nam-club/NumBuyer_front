@@ -1,4 +1,4 @@
-import { grey } from '@mui/material/colors';
+import { grey, amber, blue, teal, red } from '@mui/material/colors';
 
 import fiBoost from './assets/fiBoost.png';
 import fiBoostMono from './assets/fiBoostMono.png';
@@ -17,8 +17,9 @@ import catastropheMono from './assets/catastropheMono.png';
 import catastropheMessage from './assets/catastropheMessage.png';
 
 // ゲームモード
-export const CPU_MATCH = 'cpu';
-export const QUICK_MATCH = 'quick';
+export const QUICK_MATCH = 'QUICK_MATCH';
+export const FRIEND_MATCH = 'FRIEND_MATCH';
+export const CPU_MATCH = 'CPU_MATCH';
 
 // 言語
 export const ENGLISH = 'en';
@@ -84,8 +85,9 @@ export const BST_ABILITIES = [
             },
         ],
         bgImage: `url(${fiBoostMono})`,
+        bgColor: blue[300],
         selectedBgImage: `url(${fiBoost})`,
-        tagColor: grey[100],
+        tagColor: grey[50],
         messageImage: `url(${fiBoostMessage})`,
     },
 ]
@@ -115,9 +117,10 @@ export const ATK_ABILITIES = [
             },
         ],
         bgImage: `url(${numViolenceMono})`,
+        bgColor: red[300],
         selectedBgImage: `url(${numViolence})`,
         messageImage: `url(${numViolenceMessage})`,
-        tagColor: grey[100],
+        tagColor: grey[50],
     },
 ]
 // アビリティ（回復系）
@@ -145,9 +148,10 @@ export const RCV_ABILITIES = [
             },
         ],
         bgImage: `url(${reloadMono})`,
+        bgColor: teal[300],
         selectedBgImage: `url(${reload})`,
         messageImage: `url(${reloadMessage})`,
-        tagColor: grey[100],
+        tagColor: grey[50],
     },
 ]
 
@@ -176,9 +180,10 @@ export const JAM_ABILITIES = [
             },
         ],
         bgImage: `url(${shutdownMono})`,
+        bgColor: amber[300],
         selectedBgImage: `url(${shutdown})`,
         messageImage: `url(${shutdownMessage})`,
-        tagColor: grey[100],
+        tagColor: grey[50],
     },
 ]
 
@@ -207,9 +212,10 @@ export const CNF_ABILITIES = [
             },
         ],
         bgImage: `url(${catastropheMono})`,
+        bgColor: grey[700],
         selectedBgImage: `url(${catastrophe})`,
         messageImage: `url(${catastropheMessage})`,
-        tagColor: grey[100],
+        tagColor: grey[50],
     },
 ];
 
