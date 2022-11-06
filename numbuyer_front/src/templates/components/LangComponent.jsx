@@ -11,8 +11,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { grey } from '@mui/material/colors';
 
-import navigation from '../../assets/navigation.png';
-
 const LangComponent = (props) => {
     const selector = useSelector(state => state);
 

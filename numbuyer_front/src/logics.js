@@ -46,6 +46,8 @@ export const changeCode = (cards, type) => {
                     }
                 })
                 break;
+            default:
+                break;
         }
     }
 }

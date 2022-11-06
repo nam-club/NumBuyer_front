@@ -14,7 +14,7 @@ import {
 import * as Constants from '../constants';
 import * as ConstantsMsg from '../constantsMsg';
 
-import { aggregate, CTX } from '../Socket';
+import { CTX } from '../Socket';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -35,7 +35,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { grey, amber, blue, teal, red } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
 import logo from '../assets/logo.png';
@@ -49,8 +49,6 @@ const Top = () => {
     const [name, setName] = React.useState('');
     const [roomId, setRoomId] = React.useState('');
     const [errMsg, setErrMsg] = React.useState('');
-    const [roomCount, setRoomCount] = React.useState(selector.room.totalRoomCount);
-    const [qmCount, setQmCount] = React.useState(selector.room.availableQMCount);
     const [langOpen, setLangOpen] = React.useState(false); // 言語設定のモーダル
     const [tutorialOpen, setTutorialOpen] = React.useState(false); // チュートリアルのモーダル
     const [abilityOpen, setAbilityOpen] = React.useState(false); // アビリティ選択のモーダル
@@ -91,14 +89,6 @@ const Top = () => {
         }, []);
     };
     const forceUpdate = useForceUpdate();
-
-    React.useEffect(() => {
-        console.log(selector.room.totalRoomCount)
-        console.log(selector.room.availableQMCount)
-
-        setRoomCount(selector.room.totalRoomCount);
-        setQmCount(selector.room.availableQMCount);
-    }, [selector.room.totalRoomCount, selector.room.availableQMCount]);
 
     React.useEffect(() => {
         setErrMsg(selector.msg.errMsg);
@@ -532,27 +522,27 @@ const Top = () => {
                                             <Grid container>
                                                 <Grid item xs={1} />
                                                 <Grid item xs={2}>
-                                                    <SelectAbilityComponent background={blue[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #64b5f6, #000000)' color={grey[50]}
                                                         fontSize="1em" naviFontSize="1.5em"
                                                         type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
                                                 </Grid>
                                                 <Grid item xs={2}>
-                                                    <SelectAbilityComponent background={red[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #e57373, #000000)' color={grey[50]}
                                                         fontSize="1em" naviFontSize="1.5em"
                                                         type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
                                                 </Grid>
                                                 <Grid item xs={2}>
-                                                    <SelectAbilityComponent background={teal[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #4db6ac, #000000)' color={grey[50]}
                                                         fontSize="1em" naviFontSize="1.5em"
                                                         type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
                                                 </Grid>
                                                 <Grid item xs={2}>
-                                                    <SelectAbilityComponent background={amber[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #ffd54f, #000000)' color={grey[50]}
                                                         fontSize="1em" naviFontSize="1.5em"
                                                         type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
                                                 </Grid>
                                                 <Grid item xs={2}>
-                                                    <SelectAbilityComponent background={grey[700]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #616161, #000000)' color={grey[50]}
                                                         fontSize="1em" naviFontSize="1.5em"
                                                         type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
                                                 </Grid>
@@ -733,31 +723,31 @@ const Top = () => {
                                             {/* アビリティ一覧 */}
                                             <Grid container>
                                                 <Grid item xs={6}>
-                                                    <SelectAbilityComponent background={blue[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #64b5f6, #000000)' color={grey[50]}
                                                         fontSize="0.5em" naviFontSize="0.75em" placement="bottom"
                                                         type={selector.msg.lang.BST_TYPE} abilities={bstAbilities} update={forceUpdate} />
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <SelectAbilityComponent background={red[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #e57373, #000000)' color={grey[50]}
                                                         fontSize="0.5em" naviFontSize="0.75em" placement="left-end"
                                                         type={selector.msg.lang.ATK_TYPE} abilities={atkAbilities} update={forceUpdate} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container>
                                                 <Grid item xs={6}>
-                                                    <SelectAbilityComponent background={teal[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #4db6ac, #000000)' color={grey[50]}
                                                         fontSize="0.5em" naviFontSize="0.75em" placement="bottom"
                                                         type={selector.msg.lang.RCV_TYPE} abilities={rcvAbilities} update={forceUpdate} />
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <SelectAbilityComponent background={amber[300]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #ffd54f, #000000)' color={grey[50]}
                                                         fontSize="0.5em" naviFontSize="0.75em" placement="left-end"
                                                         type={selector.msg.lang.JAM_TYPE} abilities={jamAbilities} update={forceUpdate} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container>
                                                 <Grid item xs={6}>
-                                                    <SelectAbilityComponent background={grey[700]} color={grey[50]}
+                                                    <SelectAbilityComponent background='linear-gradient(25deg, #616161, #000000)' color={grey[50]}
                                                         fontSize="0.5em" naviFontSize="0.75em" placement="bottom"
                                                         type={selector.msg.lang.CNF_TYPE} abilities={cnfAbilities} update={forceUpdate} />
                                                 </Grid>

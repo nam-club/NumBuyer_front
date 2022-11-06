@@ -22,8 +22,6 @@ import { grey } from '@mui/material/colors';
 import { setLeaveLobbyAction } from '../../redux/game/actions';
 import { useMediaQuery } from "@mui/material";
 
-import navigation from '../../assets/navigation.png';
-
 const PlayerListComponent = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);

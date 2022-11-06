@@ -38,9 +38,8 @@ const RankingComponent = (props) => {
     const [twitterMsg, setTwitterMsg] = React.useState("");
 
     React.useEffect(() => {
-        console.log(selector.players.ranking);
         setTwitterMsg(selector.msg.lang.TWITTER_MSG1 + selector.players.ranking.find((r) => { return r.playerId === selector.players.player.playerId }).rank + selector.msg.lang.TWITTER_MSG2);
-    }, [selector.players.ranking]);
+    }, [selector.players.ranking, selector.players.player.playerId, selector.msg.lang.TWITTER_MSG1, selector.msg.lang.TWITTER_MSG2]);
 
     const finishGame = (mode) => {
         dispatch(setRankingAction([]));

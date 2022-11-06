@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
-     setRankingAction, setResAbilityAction, setFluctCoinAction} from './redux/players/actions';
+     setRankingAction, setResAbilityAction} from './redux/players/actions';
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction, setAblErrMsgAction } from './redux/msg/actions';
 import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
  setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
@@ -84,7 +84,6 @@ export default function Socket(props) {
 
         // 現在のルーム数情報を取得
         socket.on('aggregate', function(msg) {
-            console.log("aggregate:")
             console.log(msg);
             resObj = JSON.parse(msg);
 

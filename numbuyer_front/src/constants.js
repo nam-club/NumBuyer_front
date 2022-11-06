@@ -1,4 +1,4 @@
-import { grey, amber, blue, teal, red } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 import fiBoost from './assets/fiBoost.png';
 import fiBoostMono from './assets/fiBoostMono.png';
@@ -85,7 +85,7 @@ export const BST_ABILITIES = [
             },
         ],
         bgImage: `url(${fiBoostMono})`,
-        bgColor: blue[300],
+        bgColor: 'linear-gradient(25deg, #64b5f6, #000000)',
         selectedBgImage: `url(${fiBoost})`,
         tagColor: grey[50],
         messageImage: `url(${fiBoostMessage})`,
@@ -117,7 +117,7 @@ export const ATK_ABILITIES = [
             },
         ],
         bgImage: `url(${numViolenceMono})`,
-        bgColor: red[300],
+        bgColor: 'linear-gradient(25deg, #e57373, #000000)',
         selectedBgImage: `url(${numViolence})`,
         messageImage: `url(${numViolenceMessage})`,
         tagColor: grey[50],
@@ -148,7 +148,7 @@ export const RCV_ABILITIES = [
             },
         ],
         bgImage: `url(${reloadMono})`,
-        bgColor: teal[300],
+        bgColor: 'linear-gradient(25deg, #4db6ac, #000000)',
         selectedBgImage: `url(${reload})`,
         messageImage: `url(${reloadMessage})`,
         tagColor: grey[50],
@@ -180,7 +180,7 @@ export const JAM_ABILITIES = [
             },
         ],
         bgImage: `url(${shutdownMono})`,
-        bgColor: amber[300],
+        bgColor: 'linear-gradient(25deg, #ffd54f, #000000)',
         selectedBgImage: `url(${shutdown})`,
         messageImage: `url(${shutdownMessage})`,
         tagColor: grey[50],
@@ -212,7 +212,7 @@ export const CNF_ABILITIES = [
             },
         ],
         bgImage: `url(${catastropheMono})`,
-        bgColor: grey[700],
+        bgColor: 'linear-gradient(25deg, #616161, #000000)',
         selectedBgImage: `url(${catastrophe})`,
         messageImage: `url(${catastropheMessage})`,
         tagColor: grey[50],

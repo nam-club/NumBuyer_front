@@ -5,17 +5,10 @@ import { styled } from '@mui/material/styles';
 import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import TimelineContent from '@mui/lab/TimelineContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContentText from '@mui/material/DialogContentText';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import { Typography } from '@mui/material';
 
 export const theme = createTheme({
   typography: {
@@ -69,34 +62,6 @@ export const InfoMsgMobile = styled('p')({
   fontSize: '0.75em'
 });
 
-// メニューモーダル
-export const MenuModal = styled(Modal)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: '5%',
-  overflow: 'scroll',
-});
-
-// 設定やチュートリアルのメニュー
-export const TopMenu = styled('div')({
-  background: grey[50],
-  boxShadow: 5,
-});
-
-// モーダルタイトル
-export const ModalTitle = styled('p')({
-  color: grey[700],
-  fontSize: '3em',
-  fontWeight: 'bold',
-});
-
-// サイドバー
-export const SideBar = styled(Box)({
-  width: '20%',
-  flexShrink: { sm: 0 }
-});
-
 // ページタイトル
 export const PageTitleMobile = styled(Button)({
   fontSize: '1.5em',
@@ -127,40 +92,10 @@ export const TLButtonMobile = styled(Button)({
   },
 });
 
-// チュートリアル本文
-export const TutorialBody = styled(Box)({
-  flexGrow: 1,
-  p: 3,
-  width: '70%',
-  color: grey[700]
-});
-
-// チュートリアルのイメージ画像
-export const TutorialImage = styled('img')({
-  width: '40%',
-  marginTop: '2%',
-});
-
-// チュートリアルの強調部分の説明
-export const EmphasisMessage = styled(Typography)({
-  marginTop: '2%',
-  marginBottom: '1%',
-});
-
-// チュートリアルの詳細説明
-export const DetailMessage = styled(Typography)({
-  fontSize: '1em',
-});
-
 // トップ・ロビー画面のメニュー
 export const MenuCardMobile = styled(Card)({
   margin: '2% 12.5% 5% 12.5%',
   width: '75%',
-});
-
-// 入力テキストボックス
-export const InputField = styled(TextField)({
-  zIndex: 1,
 });
 
 // エラーメッセージ
@@ -189,11 +124,6 @@ export const AbilityModal = styled(Modal)({
   overflow: 'scroll',
 });
 
-// アビリティカード
-export const AbilityCard = styled(Card)({
-  margin: '4%',
-});
-
 // アビリティボタン
 export const AbilityButtonMobile = styled(Button)({
   padding: '10%',
@@ -201,11 +131,6 @@ export const AbilityButtonMobile = styled(Button)({
   fontSize: '1em',
   width: '100%',
   'whiteSpace': 'nowrap',
-});
-
-// 吹き出しコメント
-export const SpeechBubble = styled('p')({
-  fontSize: '1.5em',
 });
 
 // アビリティ説明用ツールチップ（アビリティ選択画面）
@@ -251,15 +176,6 @@ export const AbilityTagMobile = styled('p')({
   fontSize: '1em',
 });
 
-
-// フレンドマッチのモーダル
-export const FriendModal = styled(Modal)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  overflow: 'scroll',
-});
-
 // フレンドマッチのメニュー
 export const FriendMenuMobile = styled('div')({
   background: grey[50],
@@ -295,30 +211,12 @@ export const JoinButtonMobile = styled(Button)({
   },
 });
 
-// 設定アイコン
-export const SettingIcon = styled(SettingsIcon)({
-  color: grey[50],
-  fontSize: '3em',
-  margin: 0,
-});
-
-export const SettingHeader = styled(Typography)({
-  marginTop: '10%',
-  marginBottom: 0,
-})
-
 // ロビータイトル
 export const LobbyTitleMobile = styled(Card)({
   color: grey[100],
   background: indigo[400],
   fontSize: '2em',
   fontWeight: 'bold',
-});
-
-// オーナー一覧
-export const OwnerIcon = styled(ManageAccountsIcon)({
-  color: lightBlue['A700'],
-  marginTop: 0,
 });
 
 // 参加プレイヤー一覧
@@ -360,13 +258,6 @@ export const BackButtonMobile = styled(Button)({
   '&:hover': {
     background: indigo[100],
   },
-});
-
-// ゲーム画面の背景
-export const GameBack = styled('div')({
-  background: blue[200],
-  paddingTop: '2%',
-  paddingBottom: '20%',
 });
 
 // メッセージボックス
@@ -429,19 +320,6 @@ export const AuctionCardMobile = styled(Card)({
   width: '25%',
   height: '10vh',
   'whiteSpace': 'nowrap',
-});
-
-// 入札金額を入力してくださいメッセージ
-export const BidMessage = styled('p')({
-  color: grey[600],
-  margin: 0,
-});
-
-// 入札金額入力ボックス
-export const CoinField = styled(TextField)({
-  color: grey[600],
-  width: '25%',
-  margin: 0,
 });
 
 // 入札金額変更ボタン
@@ -519,19 +397,6 @@ export const WrapCardMobile = styled('div')({
   overflowX: 'scroll',
 });
 
-// 解答ボタン
-export const CalcButton = styled(Button)({
-  background: yellow[200],
-  color: grey[700],
-  marginLeft: '20%',
-  margin: '2%',
-  width: '25%',
-  'whiteSpace': 'nowrap',
-  '&:hover': {
-      background: yellow[100],
-    },
-});
-
 // パスボタン
 export const PassButtonMobile = styled(Button)({
   background: grey[500],
@@ -541,30 +406,6 @@ export const PassButtonMobile = styled(Button)({
   'whiteSpace': 'nowrap',
   '&:hover': {
     background: grey[500],
-  },
-});
-
-// 確認ダイアログタイトル
-export const ConfirmTitle = styled(DialogTitle)({
-  fontSize: '2em',
-  color: grey[700],
-});
-
-// 確認ダイアログメッセージ
-export const ConfirmMessage = styled(DialogContentText)({
-  fontSize: '1.2em',
-  color: grey[700],
-});
-
-// YESボタン
-export const YesButton = styled(Button)({
-  background: indigo[200],
-  color: grey[50],
-  width: '25%',
-  margin: '2%',
-  'whiteSpace': 'nowrap',
-  '&:hover': {
-    background: indigo[100],
   },
 });
 
@@ -641,7 +482,7 @@ export const PlayerListMobile = styled(Card)({
 // プレイヤー名
 export const PlayerNameMobile = styled('p')({
   fontSize: '1em',
-  fontWeight: 100,
+  fontWeight: 'bold',
   margin: 0,
 });
 
@@ -691,34 +532,9 @@ export const RankingTitleMobile = styled(Card)({
   'whiteSpace': 'nowrap',
 });
 
-// 優勝者
-export const Winner = styled('span')({
-  "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
-  color: amber[500],
-  fontSize: '1.5em',
-  fontWeight: 500,
-  margin: 0,
-  'whiteSpace': 'nowrap',
-});
-
 // リザルト情報アイコン
 export const ResultInfoIconMobile = styled('img')({
   width: '25%'
-});
-
-// 敗北者
-export const Loser = styled('span')({
-  "fontFamily": "\"Ubuntu Condensed\", \"Teko\", \"Mplus 1p\", \"sans-serif\"",
-  color: grey[700],
-  fontSize: '1.5em',
-  margin: 0,
-  'whiteSpace': 'nowrap',
-});
-
-// 敗北者情報アイコン
-export const LoserInfoIcon = styled('img')({
-  marginLeft: '5%',
-  marginRight: '1%',
 });
 
 // ゲーム終了してTOP画面に戻るボタン
@@ -770,7 +586,6 @@ export const useStylesMobile = makeStyles((theme) => ({
     background: grey[300],
     position: 'relative',
     top: 0,
-    animation: '$kiran 0.5s linear 1',
     '&:hover': {
       'animation-play-state': 'paused',
     },

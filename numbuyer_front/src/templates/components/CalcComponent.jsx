@@ -34,14 +34,14 @@ const CalcComponent = (props) => {
             setFade(false);
             setFade(true);
         }
+        if (selector.game.phase !== Constants.CALCULATE_PH) {
+            setCalcs([]);
+        }
     }, [selector.game.phase]);
 
     React.useEffect(() => {
         console.log("手札が更新されてるよ");
         setHands(selector.players.player.cards);
-        if (!(selector.game.phase === Constants.CALCULATE_PH)) {
-            calcs.length = 0;
-        }
     }, [selector.players.player.cards]);
 
     // 手札から計算エリアに出すカードを選択
@@ -205,6 +205,7 @@ const CalcComponent = (props) => {
                         ) &&
                             <WrapCardMobile>
                                 <Tabs
+                                    value='99'
                                     variant="scrollable"
                                     scrollButtons
                                     allowScrollButtonsMobile>
@@ -227,6 +228,7 @@ const CalcComponent = (props) => {
                             {calcs &&
                                 <WrapCardMobile>
                                     <Tabs
+                                        value='99'
                                         variant="scrollable"
                                         scrollButtons
                                         allowScrollButtonsMobile>

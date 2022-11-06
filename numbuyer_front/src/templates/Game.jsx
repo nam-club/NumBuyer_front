@@ -62,8 +62,8 @@ const Game = () => {
     React.useEffect(() => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
-        setMyPlayer(selector.players.players.find((my) => { return my.playerId === player.playerId }));
-        setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== player.playerId }));
+        setMyPlayer(selector.players.players.find((my) => { return my.playerId === selector.players.player.playerId }));
+        setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== selector.players.player.playerId }));
         setTurn(selector.game.turn);
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
@@ -76,7 +76,7 @@ const Game = () => {
         setFinishFlg(selector.game.finishFlg);
     }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
     selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.fluctParams,
-    selector.game.targetCard, selector.game.auctionCards,
+    selector.game.targetCard, selector.game.auctionCards, selector.game.turn,
     selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
     React.useEffect(() => {
@@ -246,10 +246,10 @@ const Game = () => {
                         <Grid item xs={5}>
                             <TurnTagMobile>{selector.msg.lang.TURN} : <TurnValueMobile>{turn}</TurnValueMobile></TurnTagMobile>
                             <Grid container>
-                                <Grid xs={2}>
+                                <Grid item xs={2}>
                                     <TimeTagMobile>{selector.msg.lang.TIME}</TimeTagMobile>
                                 </Grid>
-                                <Grid xs={10}>
+                                <Grid item xs={10}>
                                     <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
                                         roomId={roomId} playerId={player.playerId} />
                                 </Grid>

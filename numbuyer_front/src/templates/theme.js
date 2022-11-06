@@ -1,5 +1,3 @@
-import * as Constants from '../constants';
-
 import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
@@ -617,7 +615,7 @@ export const PlayerList = styled(Card)({
 // プレイヤー名
 export const PlayerName = styled('p')({
   fontSize: '1.5em',
-  fontWeight: 100,
+  fontWeight: 'bold',
   margin: 0,
 });
 
@@ -741,7 +739,6 @@ export const useStyles = makeStyles((theme) => ({
     background: grey[300],
     position: 'relative',
     top: 0,
-    animation: '$kiran 0.5s linear 1',
     '&:hover': {
       'animation-play-state': 'paused',
     },
