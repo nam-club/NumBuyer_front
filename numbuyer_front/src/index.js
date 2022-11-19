@@ -16,6 +16,14 @@ import { ThemeProvider } from '@mui/material/styles';
 const history = History.createBrowserHistory();
 export const store = createStore(history);
 
+if (process.env.NODE_ENV !== "development") {
+  console.log = () => {};
+  console.info = () => {};
+  console.debug = () => {};
+  console.warn = () => {};
+  console.error = () => {};
+}
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Helmet bodyAttributes={{style: 'background: linear-gradient(25deg, #4682b4, #000000)'}}/>

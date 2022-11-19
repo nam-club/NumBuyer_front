@@ -10,6 +10,7 @@ import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, 
 import { ChangeBidButtonMobile, BidButtonMobile, PassButtonMobile } from '../themeMobile';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../../redux/msg/actions';
+import { setPreCardsAction } from '../../redux/players/actions';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -104,6 +105,7 @@ const AucComponent = (props) => {
                     // 問題なし
                     if(fee > selector.game.highestBid) {
                         dispatch(setValidAction({validFlg: false}));
+                        dispatch(setPreCardsAction(selector.players.player.cards));
                         bid({roomId: selector.room.roomId, playerId: selector.players.player.playerId, coin: Number(fee), action: 'bid'});
                         setFee('');
                     // 現在の最高入札額以下を入力していないか

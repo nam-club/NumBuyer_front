@@ -31,6 +31,7 @@ export const setPlayerNameAction = (state) => {
     }
 }
 
+// 現在の手札としてカードをセット
 export const SET_CARDS = "SET_CARDS";
 
 export const setCardsAction = (state) => {
@@ -38,6 +39,18 @@ export const setCardsAction = (state) => {
         type: "SET_CARDS",
         payload: {
             cards: state
+        }
+    }
+}
+
+// 1つ前の状態の手札としてカードをセット
+export const SET_PRE_CARDS = "SET_PRE_CARDS";
+
+export const setPreCardsAction = (state) => {
+    return {
+        type: "SET_PRE_CARDS",
+        payload: {
+            preCards: state
         }
     }
 }

@@ -8,7 +8,8 @@ const initialState = {
         player: {
             playerId: "", // 自分のプレイヤーID
             playerName: "", // 自分のプレイヤー名
-            cards: [], // 自分の手札
+            cards: [], // 自分の現在の手札
+            preCards: [], // 自分の1つ前の状態の手札
             cardNum: 0, // 手札の枚数
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限

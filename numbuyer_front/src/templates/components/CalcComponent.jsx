@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
 import { setMessageAction } from '../../redux/game/actions';
+import { setPreCardsAction } from '../../redux/players/actions';
 
 import * as Constants from '../../constants';
 
@@ -42,6 +43,15 @@ const CalcComponent = (props) => {
 
     React.useEffect(() => {
         console.log("手札が更新されてるよ");
+        /*let reserveHands = []; // 手札に加えるための準備用配列
+        for(let card of selector.players.player.cards) {
+            if(selector.players.player.preCards.find((preCard) => {return preCard.id === card.id})) {
+                reserveHands.push({id: card.id, value: card.value, newFlg: false});
+            }else {
+                reserveHands.push({id: card.id, value: card.value, newFlg: true});
+            }
+        }
+        setHands(reserveHands);*/
         setHands(selector.players.player.cards);
     }, [selector.players.player.cards]);
 
@@ -109,13 +119,17 @@ const CalcComponent = (props) => {
 
     const ansCalc = () => {
         let endCalc = calcs[calcs.length - 1];
+        // 計算に使うカードを何も選択されていない
         if (calcs.length === 0) {
             dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG1));
+        // 最後が符号カードで終わっている
         } else if ((endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
             dispatch(setMessageAction(selector.msg.lang.CALC_ERR_MSG2));
+        // 問題なし
         } else {
             let calculateCards = calcs.slice();
             calcs.length = 0;
+            dispatch(setPreCardsAction(selector.players.player.cards));
             calculate({ roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: calculateCards, action: 'answer' });
         }
     }

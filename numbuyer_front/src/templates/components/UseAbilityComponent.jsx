@@ -8,6 +8,7 @@ import { AbilityArea, AreaTag, UseAbilityButton, SpeechBubble, ConfirmTitle, Con
 import { AbilityAreaMobile, AreaTagMobile, UseAbilityButtonMobile, ErrorMessageMobile } from '../themeMobile';
 
 import { setAblErrMsgAction } from '../../redux/msg/actions';
+import { setPreCardsAction } from '../../redux/players/actions';
 
 import AbilityInfoIconComponent from './atoms/AbilityInfoIconComponent';
 
@@ -52,6 +53,7 @@ const UseAbilityComponent = (props) => {
     const useAbilityAction = () => {
         handleClose();
         dispatch(setAblErrMsgAction(""));
+        dispatch(setPreCardsAction(selector.players.player.cards));
         useAbility({
             roomId: selector.room.roomId,
             playerId: selector.players.player.playerId,

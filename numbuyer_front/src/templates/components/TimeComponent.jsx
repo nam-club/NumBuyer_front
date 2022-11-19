@@ -4,6 +4,7 @@ import { CTX } from '../../Socket';
 
 import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction,
     setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
+import { setPreCardsAction } from '../../redux/players/actions';
 
 import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
@@ -14,6 +15,7 @@ import { TimeAreaMobile, TimeValueMobile } from '../themeMobile';
 import { useMediaQuery } from "@mui/material";
 
 import { setValidAction } from '../../redux/msg/actions';
+import { setCardsAction } from '../../redux/players/actions';
 
 const TimeComponent = (props) => {
     const dispatch = useDispatch();
@@ -143,6 +145,7 @@ const TimeComponent = (props) => {
                 }
                 break;
             case Constants.NEXT_TURN_PH:
+                dispatch(setPreCardsAction(selector.players.player.cards));
                 nextTurn({roomId: props.roomId, playerId: props.playerId});
                 setTime(selector.game.phaseTimes.ready);
                 break;

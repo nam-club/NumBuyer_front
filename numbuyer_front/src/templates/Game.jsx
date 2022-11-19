@@ -285,7 +285,7 @@ const Game = () => {
                             <AucMobileComponent auctionCards={auctionCards} />
                         </Grid>
                     </Grid>
-                    {(player.abilities[0].trigger === Constants.ACT_TRG) &&
+                    {(player.abilities[0].trigger === Constants.ACT_TRG || (player.abilities[1].trigger === Constants.ACT_TRG)) &&
                         <UseAbilityComponent />
                     }
                     <CalcComponent calcBtnFlg={calcBtnFlg} />
