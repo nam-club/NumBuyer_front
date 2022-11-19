@@ -28,6 +28,7 @@ const CalcComponent = (props) => {
     const [calcs, setCalcs] = React.useState([]);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
     const { calculate } = React.useContext(CTX);
+    const [tab, setTab] = React.useState(false);
 
     React.useEffect(() => {
         if (selector.game.phase === Constants.GIVE_CARD_PH) {
@@ -205,7 +206,7 @@ const CalcComponent = (props) => {
                         ) &&
                             <WrapCardMobile>
                                 <Tabs
-                                    value='99'
+                                    value={tab}
                                     variant="scrollable"
                                     scrollButtons
                                     allowScrollButtonsMobile>
@@ -228,7 +229,7 @@ const CalcComponent = (props) => {
                             {calcs &&
                                 <WrapCardMobile>
                                     <Tabs
-                                        value='99'
+                                        value={tab}
                                         variant="scrollable"
                                         scrollButtons
                                         allowScrollButtonsMobile>

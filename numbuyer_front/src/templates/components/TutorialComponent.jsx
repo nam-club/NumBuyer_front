@@ -371,44 +371,45 @@ const TutorialComponent = () => {
                                     selector.msg.lang.BEFORE_GAME_MSG2,
                                     selector.msg.lang.BEFORE_GAME_MSG3,
                                     selector.msg.lang.BEFORE_GAME_MSG4,
-                                    selector.msg.lang.BEFORE_GAME_MSG5
+                                    selector.msg.lang.BEFORE_GAME_MSG5,
+                                    selector.msg.lang.BEFORE_GAME_MSG6,
                                 ]}>
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
-                                title={selector.msg.lang.BEFORE_GAME_MSG6}
+                                title={selector.msg.lang.BEFORE_GAME_MSG7}
                                 image={beforeGame2}
                                 texts={[
-                                    selector.msg.lang.BEFORE_GAME_MSG7,
                                     selector.msg.lang.BEFORE_GAME_MSG8,
+                                    selector.msg.lang.BEFORE_GAME_MSG9,
                                     selector.msg.lang.ABILITY_EXP1,
                                     selector.msg.lang.ABILITY_EXP2
                                 ]}>
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
-                                title={selector.msg.lang.BEFORE_GAME_MSG9}
+                                title={selector.msg.lang.BEFORE_GAME_MSG10}
                                 image={beforeGame3}
                                 texts={[
-                                    selector.msg.lang.BEFORE_GAME_MSG10,
                                     selector.msg.lang.BEFORE_GAME_MSG11,
-                                    selector.msg.lang.BEFORE_GAME_MSG12
+                                    selector.msg.lang.BEFORE_GAME_MSG12,
+                                    selector.msg.lang.BEFORE_GAME_MSG13
                                 ]}>
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
-                                title={selector.msg.lang.BEFORE_GAME_MSG13}
+                                title={selector.msg.lang.BEFORE_GAME_MSG14}
                                 image={beforeGame4}
                                 texts={[
-                                    selector.msg.lang.BEFORE_GAME_MSG14,
                                     selector.msg.lang.BEFORE_GAME_MSG15,
                                     selector.msg.lang.BEFORE_GAME_MSG16,
-                                    selector.msg.lang.BEFORE_GAME_MSG17
+                                    selector.msg.lang.BEFORE_GAME_MSG17,
+                                    selector.msg.lang.BEFORE_GAME_MSG18
                                 ]}>
                             </TutorialSectionComponent>
                             <TutorialSectionComponent
-                                title={selector.msg.lang.BEFORE_GAME_MSG18}
+                                title={selector.msg.lang.BEFORE_GAME_MSG19}
                                 image={beforeGame5}
                                 texts={[
-                                    selector.msg.lang.BEFORE_GAME_MSG19,
                                     selector.msg.lang.BEFORE_GAME_MSG20,
+                                    selector.msg.lang.BEFORE_GAME_MSG21,
                                     selector.msg.lang.BEFORE_GAME_MSG15
                                 ]}>
                             </TutorialSectionComponent>
