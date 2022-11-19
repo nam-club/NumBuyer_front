@@ -28,8 +28,6 @@ import { useMediaQuery } from "@mui/material";
 import AblNavigationComponent from './components/AblNavigationComponent';
 import AucMobileComponent from './components/AucMobileComponent';
 
-import successAnswer from '../assets/success_answer.png';
-import failedAnswer from '../assets/failed_answer.png';
 import successAuction from '../assets/success_auction.png';
 
 const Game = () => {
@@ -123,12 +121,22 @@ const Game = () => {
                         </Card>
                     }
                     {selector.game.calcResult === Constants.SUCCESS &&
-                        <Card className={classes.result_animation} sx={{ backgroundImage: `url(${successAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50] }} >
+                        <Card className={classes.result_animation} 
+                            sx={{
+                                color: grey[50], background: 'linear-gradient(25deg, #1de9b6, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            }}
+                        >
                             {selector.msg.lang.SUCCESS}
                         </Card>
                     }
                     {selector.game.calcResult === Constants.FAILED &&
-                        <Card className={classes.result_animation} sx={{ backgroundImage: `url(${failedAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50] }}>
+                        <Card className={classes.result_animation}
+                            sx={{
+                                color: grey[50], background: 'linear-gradient(25deg, #ff1744, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            }}
+                        >
                             {selector.msg.lang.FAILED}
                         </Card>
                     }
@@ -222,12 +230,22 @@ const Game = () => {
                         </Card>
                     }
                     {selector.game.calcResult === Constants.SUCCESS &&
-                        <Card className={mobileClasses.result_animation_mobile} sx={{ backgroundImage: `url(${successAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50], width: '100%' }}>
+                        <Card className={mobileClasses.result_animation_mobile} 
+                            sx={{
+                                color: grey[50], background: 'linear-gradient(25deg, #1de9b6, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            }}
+                        >
                             {selector.msg.lang.SUCCESS}
                         </Card>
                     }
                     {selector.game.calcResult === Constants.FAILED &&
-                        <Card className={mobileClasses.result_animation_mobile} sx={{ backgroundImage: `url(${failedAnswer})`, 'textShadow': '2px 4px 6px #000000', color: grey[50], width: '100%' }}>
+                        <Card className={mobileClasses.result_animation_mobile}
+                            sx={{
+                                color: grey[50], background: 'linear-gradient(25deg, #ff1744, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            }}
+                        >
                             {selector.msg.lang.FAILED}
                         </Card>
                     }

@@ -102,6 +102,11 @@ const RankingComponent = (props) => {
                     </TableContainer>
                     <div align="center">
                         <FinishButton size="large" variant="contained"
+                            sx={[{
+                                color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            },
+                            { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                             onClick={() => {
                                 finishGame('finish');
                                 dispatch(setCpuAction(false));
@@ -110,6 +115,11 @@ const RankingComponent = (props) => {
                         </FinishButton>
                         {(!selector.room.isQuickMatch && Constants.PLAY_AGAIN_BTN_FLG) &&
                             <AgainButton size="large" variant="contained"
+                                sx={[{
+                                    color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                                    'textShadow': '2px 4px 6px #000000'
+                                },
+                                { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                 onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButton>
                         }
                     </div>
@@ -190,6 +200,11 @@ const RankingComponent = (props) => {
                     </TableContainer>
                     <div align="center">
                         <FinishButtonMobile size="large" variant="contained"
+                            sx={[{
+                                color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            },
+                            { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                             onClick={() => {
                                 finishGame('finish');
                                 dispatch(setCpuAction(false));
@@ -198,6 +213,11 @@ const RankingComponent = (props) => {
                         </FinishButtonMobile>
                         {(!selector.room.isQuickMatch && Constants.PLAY_AGAIN_BTN_FLG) &&
                             <AgainButtonMobile size="large" variant="contained"
+                                sx={[{
+                                    color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                                    'textShadow': '2px 4px 6px #000000'
+                                },
+                                { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                 onClick={() => finishGame('again')}>{selector.msg.lang.AGAIN_BTN}</AgainButtonMobile>
                         }
                     </div>

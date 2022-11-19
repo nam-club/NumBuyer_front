@@ -93,6 +93,11 @@ const PlayerListComponent = () => {
                     <Grid container>
                         <Grid item xs={4}>
                             <BackButton size="large" variant="contained"
+                            sx={[{
+                                color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            },
+                            { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                             onClick={async () => {
                                 dispatch(setLeaveLobbyAction(true));
                                 await leaveLobby({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
@@ -104,6 +109,11 @@ const PlayerListComponent = () => {
                         {(selector.players.player && selector.players.players && selector.players.player.isOwner &&
                         selector.players.players.length > 1) &&
                             <StartButton size="large" variant="contained"
+                            sx={[{
+                                color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                                'textShadow': '2px 4px 6px #000000'
+                            },
+                            { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                             onClick={() => {
                                 start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
                             }}>{selector.msg.lang.START_BTN}</StartButton>
@@ -146,7 +156,7 @@ const PlayerListComponent = () => {
             </MenuCard>
         :
             <MenuCardMobile>
-                <LobbyTitleMobile>{selector.msg.lang.LOBBY}</LobbyTitleMobile>
+                <LobbyTitleMobile sx={{background: 'linear-gradient(25deg, #9370db, #000000)'}}>{selector.msg.lang.LOBBY}</LobbyTitleMobile>
                 {selector.room.isQuickMatch && 
                     <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={selector.msg.lang.QUICK_MSG} messages={[]} />
                 }
@@ -163,6 +173,11 @@ const PlayerListComponent = () => {
                     {(selector.players.player && selector.players.players && selector.players.player.isOwner &&
                     selector.players.players.length > 1) &&
                         <StartButtonMobile size="large" variant="contained"
+                        sx={[{
+                            color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                            'textShadow': '2px 4px 6px #000000'
+                        },
+                        { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                         onClick={() => {
                             start({roomId: selector.room.roomId, playerId: selector.players.player.playerId})
                         }}>
@@ -172,6 +187,11 @@ const PlayerListComponent = () => {
                 </CardActions>
                 <CardActions>
                     <BackButtonMobile size="large" variant="contained"
+                    sx={[{
+                        color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                        'textShadow': '2px 4px 6px #000000'
+                    },
+                    { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                     onClick={async () => {
                         dispatch(setLeaveLobbyAction(true));
                         await leaveLobby({roomId: selector.room.roomId, playerId: selector.players.player.playerId});

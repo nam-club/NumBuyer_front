@@ -44,7 +44,7 @@ const Lobby = () => {
                         </Grid>
                         <Grid item xs={3}/>
                     </Grid>
-                    <LobbyTitle sx={{margin: '0 20%'}}>{selector.msg.lang.LOBBY}</LobbyTitle>
+                    <LobbyTitle sx={{margin: '0 20%', background: 'linear-gradient(25deg, #9370db, #000000)'}}>{selector.msg.lang.LOBBY}</LobbyTitle>
                 </div>
                 :
                 <div>

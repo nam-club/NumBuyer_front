@@ -482,6 +482,11 @@ const Top = () => {
                                                 <ErrorMessage>{errMsg}</ErrorMessage>
                                             }
                                             <CreateButton size="large" variant="contained"
+                                                sx={[{
+                                                    color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                                                    'textShadow': '2px 4px 6px #000000'
+                                                },
+                                                { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                                 onClick={() => {
                                                     dispatch(setValidAction({ validFlg: false }));
                                                     dispatch(setRoomAction({ roomId: roomId }));
@@ -500,6 +505,11 @@ const Top = () => {
                                             {/* 参加ボタン */}
                                             <Grid item xs={6}>
                                                 <JoinButton size="large" variant="contained"
+                                                    sx={[{
+                                                        color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                                                        'textShadow': '2px 4px 6px #000000'
+                                                    },
+                                                    { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                                     onClick={() => { clickJoin(); }}>{selector.msg.lang.JOIN_BTN}</JoinButton>
                                             </Grid>
                                         </Grid>
@@ -689,6 +699,11 @@ const Top = () => {
                                             }
                                             {/* ルーム作成ボタン */}
                                             <CreateButtonMobile size="large" variant="contained"
+                                                sx={[{
+                                                    color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                                                    'textShadow': '2px 4px 6px #000000'
+                                                },
+                                                { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                                 onClick={() => {
                                                     dispatch(setValidAction({ validFlg: false }));
                                                     dispatch(setRoomAction({ roomId: roomId }));
@@ -702,6 +717,11 @@ const Top = () => {
                                                 onChange={roomIdChange} />
                                             {/* ルーム参加ボタン */}
                                             <JoinButtonMobile size="large" variant="contained"
+                                                sx={[{
+                                                    color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                                                    'textShadow': '2px 4px 6px #000000'
+                                                },
+                                                { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                                 onClick={() => { clickJoin(); }}>{selector.msg.lang.JOIN_BTN}</JoinButtonMobile>
                                         </Typography>
                                     </FriendMenuMobile>
