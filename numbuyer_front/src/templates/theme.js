@@ -463,7 +463,7 @@ export const UseAbilityButton = styled(Button) ({
   'whiteSpace': 'nowrap',
 });
 
-// 項カード
+// 項カード（通常）
 export const TermCard = styled(Button)({
   background: yellow[200],
   color: grey[700],
@@ -473,6 +473,22 @@ export const TermCard = styled(Button)({
   height: '10vh',
   '&:hover': {
     background: yellow[100],
+  },
+});
+
+// 項カード（新しく入手したカード）
+export const NewTermCard = styled(Button)({
+  background: blue[200],
+  color: grey[700],
+  marginLeft: '1%',
+  marginBottom: '1%',
+  width: '5vw',
+  height: '10vh',
+  cursor: 'default',
+  'box-shadow': 'none',
+  '&:hover': {
+    background: blue[200],
+    'box-shadow': 'none',
   },
 });
 

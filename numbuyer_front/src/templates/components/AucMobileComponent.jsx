@@ -15,7 +15,6 @@ const AucMobileComponent = (props) => {
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
 
     React.useEffect(() => {
-        console.log(selector.game.phase + "フェーズ");
         if(selector.game.phase === Constants.SHOW_AUC_PH) {
             setFade(false);
             setFade(true);

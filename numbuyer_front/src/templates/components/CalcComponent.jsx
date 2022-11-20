@@ -7,8 +7,8 @@ import { setPreCardsAction } from '../../redux/players/actions';
 
 import * as Constants from '../../constants';
 
-import { AreaTag, CalcArea, CardValue, TermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
-import { AreaTagMobile, WrapCardMobile, TermCardMobile, CalcAreaMobile } from '../themeMobile';
+import { AreaTag, CalcArea, CardValue, TermCard, NewTermCard, CalcButton, ConfirmTitle, ConfirmMessage, PassButton, YesButton, useStyles, WrapDisplay } from '../theme';
+import { AreaTagMobile, WrapCardMobile, TermCardMobile, NewTermCardMobile, CalcAreaMobile } from '../themeMobile';
 
 import Card from '@mui/material/Card';
 import Tabs from '@mui/material/Tabs';
@@ -43,28 +43,36 @@ const CalcComponent = (props) => {
 
     React.useEffect(() => {
         console.log("手札が更新されてるよ");
-        /*let reserveHands = []; // 手札に加えるための準備用配列
+        let reserveHands = []; // 手札に加えるための準備用配列
+        console.time('手札差分チェック');
         for(let card of selector.players.player.cards) {
-            if(selector.players.player.preCards.find((preCard) => {return preCard.id === card.id})) {
+            if((selector.game.turn === 1) && ((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))) {
                 reserveHands.push({id: card.id, value: card.value, newFlg: false});
             }else {
-                reserveHands.push({id: card.id, value: card.value, newFlg: true});
+                if(selector.players.player.preCards.find((preCard) => {return preCard.id === card.id})) {
+                    reserveHands.push({id: card.id, value: card.value, newFlg: false});
+                }else {
+                    reserveHands.push({id: card.id, value: card.value, newFlg: true});
+                }
             }
         }
-        setHands(reserveHands);*/
-        setHands(selector.players.player.cards);
+        console.timeEnd('手札差分チェック');
+        console.log(reserveHands);
+        setHands(reserveHands);
+        dispatch(setPreCardsAction(selector.players.player.cards));
+        //setHands(selector.players.player.cards);
     }, [selector.players.player.cards]);
 
     // 手札から計算エリアに出すカードを選択
-    const selectHands = (index, value) => {
+    const selectHands = (index, card) => {
         let errFlg = false;
         // 符号の時、calcsの末尾が符号または空だったら選択できないようにする。
-        if (value === '+' || value === '-' || value === '×' || value === '÷') {
+        if (card.value === '+' || card.value === '-' || card.value === '×' || card.value === '÷') {
             if (calcs.length === 0) {
                 errFlg = true;
             } else {
                 let endCalc = calcs[calcs.length - 1];
-                if (endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷') {
+                if (endCalc.value === '+' || endCalc.value === '-' || endCalc.value === '×' || endCalc.value === '÷') {
                     errFlg = true;
                 }
             }
@@ -72,7 +80,7 @@ const CalcComponent = (props) => {
         } else {
             if (calcs.length !== 0) {
                 let endCalc = calcs[calcs.length - 1];
-                if (!(endCalc === '+' || endCalc === '-' || endCalc === '×' || endCalc === '÷')) {
+                if (!(endCalc.value === '+' || endCalc.value === '-' || endCalc.value === '×' || endCalc.value === '÷')) {
                     errFlg = true;
                 }
             } else {
@@ -83,23 +91,23 @@ const CalcComponent = (props) => {
             const newHands = [...hands];
             newHands.splice(index, 1);
             setHands(newHands);
-            setCalcs([...calcs, value]);
+            setCalcs([...calcs, card]);
         }
     }
 
     // 計算エリアから手札に戻すカードを選択
-    const selectCalcs = (index, value) => {
+    const selectCalcs = (index, card) => {
         let firstCalc; // 計算エリアの先頭のカード
         let appendHands = []; // 手札に追加するカード配列
         const newCalcs = [...calcs];
 
         // 符号カードを戻す場合、一つ右の数字カードも戻す
-        if (value === '+' || value === '-' || value === '×' || value === '÷') {
-            appendHands.push(value);
+        if (card.value === '+' || card.value === '-' || card.value === '×' || card.value === '÷') {
+            appendHands.push(card.value);
             appendHands.push(calcs[index + 1]);
             newCalcs.splice(index, 2);
         } else {
-            appendHands.push(value);
+            appendHands.push(card.value);
             newCalcs.splice(index, 1);
         }
 
@@ -107,7 +115,7 @@ const CalcComponent = (props) => {
 
         // 計算エリアの先頭が符号になるようだったら符号も手札に戻す
         if (newCalcs.length >= 1) {
-            if (firstCalc === '+' || firstCalc === '-' || firstCalc === '×' || firstCalc === '÷') {
+            if (firstCalc.value === '+' || firstCalc.value === '-' || firstCalc.value === '×' || firstCalc.value === '÷') {
                 newCalcs.splice(0, 1);
                 appendHands.push(firstCalc)
             }
@@ -130,7 +138,12 @@ const CalcComponent = (props) => {
             let calculateCards = calcs.slice();
             calcs.length = 0;
             dispatch(setPreCardsAction(selector.players.player.cards));
-            calculate({ roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCards: calculateCards, action: 'answer' });
+            // カード配列からIDのみを取り出す
+            let cardIds = [];
+            for(let card of calculateCards) {
+                cardIds.push(card.id);
+            }
+            calculate({ roomId: selector.room.roomId, playerId: selector.players.player.playerId, calculateCardIds: cardIds, action: 'answer' });
         }
     }
 
@@ -162,11 +175,22 @@ const CalcComponent = (props) => {
                             <WrapDisplay>
                                 {hands.map((value, index) => (
                                     <Grow in={fade} timeout={1000} key={index}>
-                                        <TermCard variant="contained"
-                                            onClick={() => selectHands(index, value)}
-                                            disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                            <CardValue>{value}</CardValue>
-                                        </TermCard>
+                                        {(selector.game.phase === Constants.CALCULATE_PH) || (!value.newFlg) ?
+                                            <TermCard variant="contained"
+                                                onClick={() => selectHands(index, value)}
+                                                disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                <CardValue>{value.value}</CardValue>
+                                            </TermCard>
+                                        :
+                                            <NewTermCard variant="contained"
+                                                onClick={() => {
+                                                    if(selector.game.phase === Constants.CALCULATE_PH) {
+                                                        selectHands(index, value)
+                                                    }
+                                                }}>
+                                                <CardValue>{value.value}</CardValue>
+                                            </NewTermCard>
+                                        }
                                     </Grow>
                                 ))}
                             </WrapDisplay>
@@ -178,11 +202,19 @@ const CalcComponent = (props) => {
                             <WrapDisplay>
                                 {calcs.map((value, index) => (
                                     <Grow in={fade} timeout={1000} key={index}>
-                                        <TermCard variant="contained"
-                                            onClick={() => selectCalcs(index, value)}
-                                            disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                            <CardValue>{value}</CardValue>
-                                        </TermCard>
+                                        {(selector.game.phase === Constants.CALCULATE_PH) || (!value.newFlg) ?
+                                            <TermCard variant="contained"
+                                                onClick={() => selectCalcs(index, value)}
+                                                disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                <CardValue>{value.value}</CardValue>
+                                            </TermCard>
+                                        :
+                                            <NewTermCard variant="contained"
+                                                onClick={() => selectCalcs(index, value)}
+                                                disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                <CardValue>{value.value}</CardValue>
+                                            </NewTermCard>
+                                        }
                                     </Grow>
                                 ))}
                             </WrapDisplay>
@@ -226,11 +258,22 @@ const CalcComponent = (props) => {
                                     allowScrollButtonsMobile>
                                     {hands.map((value, index) => (
                                         <Grow in={fade} timeout={1000} key={index}>
-                                            <TermCardMobile variant="contained"
-                                                onClick={() => selectHands(index, value)}
-                                                disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                                <CardValue>{value}</CardValue>
-                                            </TermCardMobile>
+                                            {(selector.game.phase === Constants.CALCULATE_PH) || (!value.newFlg) ?
+                                                <TermCardMobile variant="contained"
+                                                    onClick={() => selectHands(index, value)}
+                                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                    <CardValue>{value.value}</CardValue>
+                                                </TermCardMobile>
+                                            :
+                                                <NewTermCardMobile variant="contained"
+                                                    onClick={() => {
+                                                        if(selector.game.phase === Constants.CALCULATE_PH) {
+                                                            selectHands(index, value)
+                                                        }
+                                                    }}>
+                                                    <CardValue>{value.value}</CardValue>
+                                                </NewTermCardMobile>
+                                            }
                                         </Grow>
                                     ))}
                                 </Tabs>
@@ -249,11 +292,19 @@ const CalcComponent = (props) => {
                                         allowScrollButtonsMobile>
                                         {calcs.map((value, index) => (
                                             <Grow in={fade} timeout={1000} key={index}>
-                                                <TermCardMobile variant="contained"
-                                                    onClick={() => selectCalcs(index, value)}
-                                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
-                                                    <CardValue>{value}</CardValue>
-                                                </TermCardMobile>
+                                                {(selector.game.phase === Constants.CALCULATE_PH) || (!value.newFlg) ?
+                                                    <TermCardMobile variant="contained"
+                                                        onClick={() => selectCalcs(index, value)}
+                                                        disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                        <CardValue>{value.value}</CardValue>
+                                                    </TermCardMobile>
+                                                :
+                                                    <NewTermCardMobile variant="contained"
+                                                        onClick={() => selectCalcs(index, value)}
+                                                        disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                        <CardValue>{value.value}</CardValue>
+                                                    </NewTermCardMobile>
+                                                }
                                             </Grow>
                                         ))}
                                     </Tabs>

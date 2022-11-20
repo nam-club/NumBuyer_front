@@ -18,6 +18,8 @@ export const store = createStore(history);
 
 if (process.env.NODE_ENV !== "development") {
   console.log = () => {};
+  console.time = () => {};
+  console.timeEnd = () => {};
   console.info = () => {};
   console.debug = () => {};
   console.warn = () => {};

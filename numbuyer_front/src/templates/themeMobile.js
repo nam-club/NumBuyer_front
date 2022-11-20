@@ -369,7 +369,7 @@ export const UseAbilityButtonMobile = styled(Button) ({
   'whiteSpace': 'nowrap',
 });
 
-// 項カード
+// 項カード（通常）
 export const TermCardMobile = styled(Button)({
   background: yellow[200],
   color: grey[700],
@@ -381,6 +381,23 @@ export const TermCardMobile = styled(Button)({
   flexShrink: 0,
   '&:hover': {
     background: yellow[100],
+  },
+});
+
+// 項カード（新しく入手したカード）
+export const NewTermCardMobile = styled(Button)({
+  background: blue[200],
+  color: grey[700],
+  fontSize: '0.75em',
+  marginLeft: '1%',
+  marginBottom: '1%',
+  width: '5vw',
+  height: '10vh',
+  flexShrink: 0,
+  'box-shadow': 'none',
+  '&:hover': {
+    background: blue[200],
+    'box-shadow': 'none',
   },
 });
 

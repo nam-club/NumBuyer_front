@@ -33,7 +33,6 @@ const AucComponent = (props) => {
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
 
     React.useEffect(() => {
-        console.log(selector.game.phase + "フェーズ");
         if(selector.game.phase === Constants.SHOW_AUC_PH) {
             setFade(false);
             setFade(true);

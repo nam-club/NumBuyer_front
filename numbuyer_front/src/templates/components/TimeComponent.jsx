@@ -2,8 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CTX } from '../../Socket';
 
-import { setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction,
-    setFirstTurnAction, setRemTimeFlgAction } from '../../redux/game/actions';
+import {
+    setMessageAction, setMessagesAction, resetMessagesAction, setPhaseAction, setTimeAction,
+    setFirstTurnAction, setRemTimeFlgAction
+} from '../../redux/game/actions';
 import { setPreCardsAction } from '../../redux/players/actions';
 
 import { arrayOutput } from '../../logics';
@@ -23,6 +25,7 @@ const TimeComponent = (props) => {
     const { nextTurn, buy } = React.useContext(CTX);
 
     const [turn, setTurn] = React.useState(selector.game.turn);
+    const [phase, setPhase] = React.useState(selector.game.phase);
     const [time, setTime] = React.useState(selector.game.time);
     const [showFlg, setShowFlg] = React.useState(false);
 
@@ -30,12 +33,13 @@ const TimeComponent = (props) => {
 
     // 画面表示用タイマー
     React.useEffect(() => {
+        console.log("time:" + time);
         const interval = setInterval(() => {
             setTime(t => {
-                if(t<=0) {
+                if (t <= 0) {
                     return 0;
                 }
-                return t-1;
+                return t - 1;
             });
         }, 1000);
         return () => clearInterval(interval);
@@ -43,7 +47,7 @@ const TimeComponent = (props) => {
 
     // 残り時間追加
     React.useEffect(() => {
-        if(selector.game.remTimeFlg) {
+        if (selector.game.remTimeFlg) {
             setTime(selector.game.remainingTime);
             dispatch(setRemTimeFlgAction(false));
         }
@@ -51,12 +55,12 @@ const TimeComponent = (props) => {
 
     // ターン数セット
     React.useEffect(() => {
-        console.log(selector.game.turn)
         setTurn(selector.game.turn);
     }, [selector.game.turn]);
 
     const handlePhase = () => {
-        switch(selector.game.phase) {
+        console.log(selector.game.phase + "フェーズ");
+        switch (selector.game.phase) {
             case Constants.READY_PH:
                 dispatch(resetMessagesAction());
                 dispatch(setPhaseAction(Constants.GIVE_CARD_PH));
@@ -66,20 +70,20 @@ const TimeComponent = (props) => {
                 break;
             case Constants.GIVE_CARD_PH:
                 // 初回ターンフラグを解除（2ターン目以降のアニメーション用）
-                if(selector.game.firstTurnFlg) {
+                if (selector.game.firstTurnFlg) {
                     dispatch(setFirstTurnAction(false));
                 }
                 // 正解者がいない場合はターゲットカード表示フェーズをスキップ
-                if(selector.game.targetSkipFlg) {
+                if (selector.game.targetSkipFlg) {
                     dispatch(setPhaseAction(Constants.SHOW_AUC_PH));
                     dispatch(setMessageAction(arrayOutput(props.auctionCards.auctionCards) + selector.msg.lang.SHOW_AUC_MSG));
                     dispatch(setTimeAction(selector.game.phaseTimes.auction));
                     setTime(selector.game.phaseTimes.showAuction);
-                }else {
+                } else {
                     dispatch(setPhaseAction(Constants.SHOW_TAR_PH));
-                    if(selector.msg.lang.LANGUAGE === 'Japanese') {
+                    if (selector.msg.lang.LANGUAGE === 'Japanese') {
                         dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG1 + props.targetCard + selector.msg.lang.SHOW_TAR_MSG2));
-                    }else {
+                    } else {
                         dispatch(setMessageAction(selector.msg.lang.SHOW_TAR_MSG + props.targetCard));
                     }
                     dispatch(setTimeAction(selector.game.phaseTimes.showTarget));
@@ -100,7 +104,8 @@ const TimeComponent = (props) => {
                 break;
             case Constants.AUC_RESULT_PH:
                 // コインとカード情報の更新
-                buy({roomId: selector.room.roomId, playerId: selector.players.player.playerId});
+                console.log("オークション結果フェーズだよ");
+                buy({ roomId: selector.room.roomId, playerId: selector.players.player.playerId });
                 dispatch(setValidAction(false));
                 break;
             case Constants.CALCULATE_PH:
@@ -113,17 +118,17 @@ const TimeComponent = (props) => {
                 dispatch(setTimeAction(selector.game.phaseTimes.calculateResult));
                 setTime(selector.game.phaseTimes.calculateResult);
                 setShowFlg(false);
-                if(!selector.game.ansPlayers || selector.game.ansPlayers.length === 0) {
+                if (!selector.game.ansPlayers || selector.game.ansPlayers.length === 0) {
                     dispatch(setMessageAction(selector.msg.lang.CALC_FINISH_MSG0));
-                }else {
+                } else {
                     let ansMessage = selector.msg.lang.CALC_FINISH_MSG1;
                     let ansMessages = []; // 各プレイヤーの獲得コインとカードのメッセージ
                     let loopNum = 1;
 
-                    for(let ansPlayer of selector.game.ansPlayers) {
-                        if(loopNum !== selector.game.ansPlayers.length) {
+                    for (let ansPlayer of selector.game.ansPlayers) {
+                        if (loopNum !== selector.game.ansPlayers.length) {
                             ansMessage += ansPlayer.playerName + ', ';
-                        }else {
+                        } else {
                             ansMessage += ansPlayer.playerName;
                         }
                         loopNum++
@@ -131,9 +136,9 @@ const TimeComponent = (props) => {
 
                     ansMessage += selector.msg.lang.CALC_FINISH_MSG2;
 
-                    for(let ansPlayer of selector.game.ansPlayers) {
+                    for (let ansPlayer of selector.game.ansPlayers) {
                         let resultMsg = ansPlayer.playerName + selector.msg.lang.CALC_FINISH_MSG3_1
-                            + ansPlayer.addedCoin.total + selector.msg.lang.CALC_FINISH_MSG3_2 
+                            + ansPlayer.addedCoin.total + selector.msg.lang.CALC_FINISH_MSG3_2
                             + ansPlayer.addedCoin.cardNumBonus + selector.msg.lang.CALC_FINISH_MSG3_3;
                         ansMessages.push(resultMsg);
                     }
@@ -146,7 +151,7 @@ const TimeComponent = (props) => {
                 break;
             case Constants.NEXT_TURN_PH:
                 dispatch(setPreCardsAction(selector.players.player.cards));
-                nextTurn({roomId: props.roomId, playerId: props.playerId});
+                nextTurn({ roomId: props.roomId, playerId: props.playerId });
                 setTime(selector.game.phaseTimes.ready);
                 break;
             default:
@@ -156,25 +161,32 @@ const TimeComponent = (props) => {
 
     // 手札配布〜オークションカードオープンまでのフェーズ遷移アクション
     React.useEffect(() => {
-        console.log("time:" + time);
-        if (time === 0) {
-            handlePhase();
+        if (selector.game.phase === Constants.READY_PH || selector.game.phase === Constants.GIVE_CARD_PH || selector.game.phase === Constants.SHOW_TAR_PH) {
+            if (time === 0) {
+                handlePhase();
+                setPhase(selector.game.phase);
+            }
+        } else {
+            if (phase !== selector.game.phase) {
+                handlePhase();
+                setPhase(selector.game.phase);
+            }
         }
-        }, [time, selector.game.phase]);
+    }, [time, selector.game.phase]);
 
     return (
         <div>
-        {matches ?
-            <TimeArea>
-                <TurnTag>{selector.msg.lang.TURN} : <TurnValue>{turn}</TurnValue></TurnTag>
-                <TimeTag>{selector.msg.lang.TIME}</TimeTag>
-                <TimeValue>{showFlg ? time : "　"}</TimeValue>
-            </TimeArea>
-        :
-            <TimeAreaMobile>
-                <TimeValueMobile>{showFlg ? time : "　"}</TimeValueMobile>
-            </TimeAreaMobile>
-        }
+            {matches ?
+                <TimeArea>
+                    <TurnTag>{selector.msg.lang.TURN} : <TurnValue>{turn}</TurnValue></TurnTag>
+                    <TimeTag>{selector.msg.lang.TIME}</TimeTag>
+                    <TimeValue>{showFlg ? time : "　"}</TimeValue>
+                </TimeArea>
+                :
+                <TimeAreaMobile>
+                    <TimeValueMobile>{showFlg ? time : "　"}</TimeValueMobile>
+                </TimeAreaMobile>
+            }
         </div>
     )
 }

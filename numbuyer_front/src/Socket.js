@@ -60,11 +60,11 @@ export const bid = function(value) {
 };
 
 export const buy = function(value) {
+    console.log("落札したよ");
     socket.emit('game/buy', JSON.stringify(value));
 };
 
 export const calculate = function(value) {
-    changeCode(value.calculateCards, 'calculate');
     socket.emit('game/calculate', JSON.stringify(value));
 };
 
@@ -262,7 +262,7 @@ export default function Socket(props) {
             dispatch(setCardsAction(object.cards));
             dispatch(setCoinAction(object.coin));
             dispatch(setTargetAction(object.targetCard));
-            dispatch(setAuctionAction(object.auctionCards));
+            dispatch(setAuctionAction(object.auctionCardValues));
             dispatch(setPhaseAction(Constants.READY_PH));
             dispatch(setTimeAction(selector.game.phaseTimes.ready));
             callback();
@@ -281,7 +281,7 @@ export default function Socket(props) {
 
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
-            resObj.auctionCards = changeCode(resObj.auctionCards, 'auction');
+            resObj.auctionCardValues = changeCode(resObj.auctionCardValues, 'auction');
             dispatch(setTurnAction(resObj.currentTurn));
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
             if(selector.game.phase === '') {
@@ -291,7 +291,7 @@ export default function Socket(props) {
                 dispatch(setCardsAction(resObj.cards));
                 dispatch(setCoinAction(resObj.coin));
                 dispatch(setTargetAction(resObj.targetCard));
-                dispatch(setAuctionAction(resObj.auctionCards));
+                dispatch(setAuctionAction(resObj.auctionCardValues));
                 dispatch(setTimeAction(selector.game.phaseTimes.ready));
             }
         });
@@ -441,7 +441,7 @@ export default function Socket(props) {
                 dispatch(setMessageAction(selector.msg.lang.AUC_RESULT_MSG0));
             }else {
                 // オークションカード配列の中身を表示
-                let aucMessage = arrayOutput(resObj.auctionCards);
+                let aucMessage = arrayOutput(resObj.auctionCardValues);
                 // 誰がいくらで落札したかを表示
                 if(selector.msg.lang.LANGUAGE === 'Chinese') {
                     dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.coin

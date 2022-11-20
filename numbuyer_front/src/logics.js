@@ -21,28 +21,28 @@ export const changeCode = (cards, type) => {
         switch(type) {
             case 'display':
                 cards.forEach((card, index) => {
-                    if(card === '*') {
-                        cards[index] = '×';
-                    }else if(card === '/') {
-                        cards[index] = '÷';
+                    if(card.value === '*') {
+                        cards[index].value = '×';
+                    }else if(card.value === '/') {
+                        cards[index].value = '÷';
                     }
                 })
                 break;
             case 'auction':
                 cards.forEach((card, index) => {
-                    if(card === '*') {
-                        cards[index] = '×';
+                    if(card.value === '*') {
+                        cards[index].value = '×';
                     }else if(card === '/') {
-                        cards[index] = '÷';
+                        cards[index].value = '÷';
                     }
                 })
                 return cards;
             case 'calculate':
                 cards.forEach((card, index) => {
-                    if(card === '×') {
-                        cards[index] = '*';
-                    }else if(card === '÷') {
-                        cards[index] = '/';
+                    if(card.value === '×') {
+                        cards[index].value = '*';
+                    }else if(card.value === '÷') {
+                        cards[index].value = '/';
                     }
                 })
                 break;
