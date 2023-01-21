@@ -389,7 +389,7 @@ const Top = () => {
                                 </TopMenu>
                             </Fade>
                         </TutorialModal>
-                        <Grid container>
+                        <Grid container alignItems="center">
                             <Grid item xs={3} />
                             <Grid item xs={6}>
                                 <Grid container>
@@ -422,38 +422,40 @@ const Top = () => {
                             </CardContent>
                             <CardActions>
                                 {/* クイックマッチボタン */}
-                                <Grid item xs={4}>
-                                    <MatchButton size="large" variant="contained"
-                                        sx={[{
-                                            color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
-                                            'textShadow': '2px 4px 6px #000000'
-                                        },
-                                        { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
-                                        onClick={() => { clickMatch(Constants.QUICK_MATCH) }}>
-                                        <span>{selector.msg.lang.QUICK_MATCH}</span>
-                                    </MatchButton>
-                                </Grid>
-                                {/* フレンドマッチボタン */}
-                                <Grid item xs={4}>
-                                    <MatchButton size="large" variant="contained"
-                                        sx={[{
-                                            color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
-                                            'textShadow': '2px 4px 6px #000000'
-                                        },
-                                        { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
-                                        onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</MatchButton>
-                                </Grid>
-                                {/* CPU対戦ボタン */}
-                                <Grid item xs={4}>
-                                    <MatchButton size="large" variant="contained"
-                                        sx={[{
-                                            color: grey[50], background: 'linear-gradient(25deg, #00ff7f, #000000)', boxShadow: 6,
-                                            'textShadow': '2px 4px 6px #000000'
-                                        },
-                                        { '&:hover': { background: 'linear-gradient(25deg, #b3ffd9, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
-                                        onClick={() => { clickMatch(Constants.CPU_MATCH) }}>
-                                        <span>{selector.msg.lang.CPU_MATCH}</span>
-                                    </MatchButton>
+                                <Grid container alignItems="center">
+                                    <Grid item xs={4}>
+                                        <MatchButton size="large" variant="contained"
+                                            sx={[{
+                                                color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
+                                                'textShadow': '2px 4px 6px #000000'
+                                            },
+                                            { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            onClick={() => { clickMatch(Constants.QUICK_MATCH) }}>
+                                            <span>{selector.msg.lang.QUICK_MATCH}</span>
+                                        </MatchButton>
+                                    </Grid>
+                                    {/* フレンドマッチボタン */}
+                                    <Grid item xs={4}>
+                                        <MatchButton size="large" variant="contained"
+                                            sx={[{
+                                                color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
+                                                'textShadow': '2px 4px 6px #000000'
+                                            },
+                                            { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</MatchButton>
+                                    </Grid>
+                                    {/* CPU対戦ボタン */}
+                                    <Grid item xs={4}>
+                                        <MatchButton size="large" variant="contained"
+                                            sx={[{
+                                                color: grey[50], background: 'linear-gradient(25deg, #00ff7f, #000000)', boxShadow: 6,
+                                                'textShadow': '2px 4px 6px #000000'
+                                            },
+                                            { '&:hover': { background: 'linear-gradient(25deg, #b3ffd9, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
+                                            onClick={() => { clickMatch(Constants.CPU_MATCH) }}>
+                                            <span>{selector.msg.lang.CPU_MATCH}</span>
+                                        </MatchButton>
+                                    </Grid>
                                 </Grid>
                             </CardActions>
                             {/* 現在開かれているルーム数情報 */}
@@ -577,7 +579,7 @@ const Top = () => {
                 </>
                 :
                 <>
-                {/* ウィンドウサイズがモバイル版 */}
+                    {/* ウィンドウサイズがモバイル版 */}
                     <BackMobile>
                         {/* ロゴ画像 */}
                         <div><MainLogoMobile src={logo} /></div>
@@ -606,7 +608,7 @@ const Top = () => {
                             }
                             {selector.msg.lang === ConstantsMsg.English ?
                                 <div>
-                                {/* 英語の場合 */}
+                                    {/* 英語の場合 */}
                                     {/* クイックマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
@@ -640,7 +642,7 @@ const Top = () => {
                                 </div>
                                 :
                                 <div>
-                                {/* 英語以外の場合 */}
+                                    {/* 英語以外の場合 */}
                                     {/* クイックマッチボタン */}
                                     <CardActions>
                                         <MatchButtonMobile size="large" variant="contained"
