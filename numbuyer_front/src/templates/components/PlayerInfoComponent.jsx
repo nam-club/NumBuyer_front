@@ -101,74 +101,80 @@ const PlayerInfoComponent = (props) => {
                 </div>
                 :
                 <div>
-                    {props.myPlayer &&
-                        <MyPlayerListMobile>
-                            <Grid container>
-                                <Grid item xs={6}>
-                                    <PlayerNameMobile>{props.myPlayer.playerName}</PlayerNameMobile>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <PlayerInfoIconMobile src={card} /><PlayerInfoMobile>{props.myPlayer.cardNum}　</PlayerInfoMobile>
-                                    <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
-                                </Grid>
+                    <Grid container>
+                        {props.myPlayer &&
+                            <Grid item xs={3}>
+                                <MyPlayerListMobile>
+                                    <Grid container>
+                                        <Grid item xs={6}>
+                                            <PlayerNameMobile>{props.myPlayer.playerName}</PlayerNameMobile>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <PlayerInfoIconMobile src={card} /><PlayerInfoMobile>{props.myPlayer.cardNum}　</PlayerInfoMobile>
+                                            <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
+                                        </Grid>
+                                    </Grid>
+                                    {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
+                                        <div>
+                                            <Grid container>
+                                                {props.myPlayer.firedAbilities.map((value) => (
+                                                    <Grid item xs={6} key={value.abilityId}>
+                                                        <PlayerInfoAbilityComponent ability={value} bgImage={value.selectedBgImage} color={value.tagColor} textShadow='2px 4px 6px #000000' />
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                        :
+                                        <div>
+                                            <Grid container>
+                                                {myAbilities.map((value) => (
+                                                    <Grid item xs={6} key={value.abilityId}>
+                                                        <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                    }
+                                </MyPlayerListMobile>
                             </Grid>
-                            {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
-                                <div>
-                                    <Grid container>
-                                        {props.myPlayer.firedAbilities.map((value) => (
-                                            <Grid item xs={6} key={value.abilityId}>
-                                                <PlayerInfoAbilityComponent ability={value} bgImage={value.selectedBgImage} color={value.tagColor} textShadow='2px 4px 6px #000000' />
-                                            </Grid>
-                                        ))}
+                        }
+                        {props.players && props.players.map((value) => (
+                            <Grid item xs={3}>
+                            <PlayerListMobile key={value.playerId}>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
                                     </Grid>
-                                </div>
-                                :
-                                <div>
-                                    <Grid container>
-                                        {myAbilities.map((value) => (
-                                            <Grid item xs={6} key={value.abilityId}>
-                                                <PlayerInfoAbilityComponent ability={value} background={grey[400]} color={grey[700]} />
-                                            </Grid>
-                                        ))}
+                                    <Grid item xs={6}>
+                                        <PlayerInfoIconMobile src={card} /><PlayerInfoMobile>{value.cardNum}　</PlayerInfoMobile>
+                                        <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
                                     </Grid>
-                                </div>
-                            }
-                        </MyPlayerListMobile>
-                    }
-                    {props.players && props.players.map((value) => (
-                        <PlayerListMobile key={value.playerId}>
-                            <Grid container>
-                                <Grid item xs={6}>
-                                    <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
                                 </Grid>
-                                <Grid item xs={6}>
-                                    <PlayerInfoIconMobile src={card} /><PlayerInfoMobile>{value.cardNum}　</PlayerInfoMobile>
-                                    <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
-                                </Grid>
+                                {(!value.firedAbilities || value.firedAbilities.length === 0) ?
+                                    <div>
+                                        <Grid container>
+                                            {prvAbilities.map((pa) => (
+                                                <Grid item xs={6} key={pa.abilityId}>
+                                                    <PlayerInfoAbilityComponent ability={pa} background={grey[400]} color={grey[700]} />
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </div>
+                                    :
+                                    <div>
+                                        <Grid container>
+                                            {value.firedAbilities.map((fa) => (
+                                                <Grid item xs={6} key={fa.abilityId}>
+                                                    <PlayerInfoAbilityComponent ability={fa} bgImage={fa.selectedBgImage} color={fa.tagColor} textShadow='2px 4px 6px #000000' />
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </div>
+                                }
+                            </PlayerListMobile>
                             </Grid>
-                            {(!value.firedAbilities || value.firedAbilities.length === 0) ?
-                                <div>
-                                    <Grid container>
-                                        {prvAbilities.map((pa) => (
-                                            <Grid item xs={6} key={pa.abilityId}>
-                                                <PlayerInfoAbilityComponent ability={pa} background={grey[400]} color={grey[700]} />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
-                                :
-                                <div>
-                                    <Grid container>
-                                        {value.firedAbilities.map((fa) => (
-                                            <Grid item xs={6} key={fa.abilityId}>
-                                                <PlayerInfoAbilityComponent ability={fa} bgImage={fa.selectedBgImage} color={fa.tagColor} textShadow='2px 4px 6px #000000' />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
-                            }
-                        </PlayerListMobile>
-                    ))}
+                        ))}
+                    </Grid>
                 </div>
             }
         </Typography>

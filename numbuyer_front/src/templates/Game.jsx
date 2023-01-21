@@ -249,38 +249,28 @@ const Game = () => {
                             {selector.msg.lang.FAILED}
                         </Card>
                     }
-                    <Grid container sx={{ marginBottom: '5%', height: '25%' }}>
-                        <Grid item xs={7}>
-                            <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={message} messages={messages} />
-                            {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
-                                <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]}
-                                    message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
-                            }
-                            {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
-                                <AblNavigationComponent key={index}
-                                background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
-                            ))}
-                        </Grid>
-                        <Grid item xs={5}>
-                            <TurnTagMobile>{selector.msg.lang.TURN} : <TurnValueMobile>{turn}</TurnValueMobile></TurnTagMobile>
-                            <Grid container>
-                                <Grid item xs={2}>
-                                    <TimeTagMobile>{selector.msg.lang.TIME}</TimeTagMobile>
-                                </Grid>
-                                <Grid item xs={10}>
-                                    <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
-                                        roomId={roomId} playerId={player.playerId} />
-                                </Grid>
-                            </Grid>
-                            {selector.msg.lang.LANGUAGE === 'Japanese'
-                                ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>
-                                : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
-                            }
-                            <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
-                        </Grid>
-                    </Grid>
+                    <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={message} messages={messages} />
                     <Grid container>
+                    {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
                         <Grid item xs={4}>
+                            <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]}
+                                message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
+                        </Grid>
+                    }
+                    {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
+                        <Grid item xs={4}>
+                            <AblNavigationComponent key={index}
+                            background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
+                        </Grid>
+                    ))}
+                    </Grid>
+                    {selector.msg.lang.LANGUAGE === 'Japanese'
+                        ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>
+                        : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
+                    }
+                    <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
+                    <Grid container sx={{ marginBottom: '5%', height: '25%' }}>
+                        <Grid item xs={3}>
                             {(targetCard !== '　'
                                 && (
                                     !((selector.game.phase === Constants.READY_PH) || (selector.game.phase === Constants.GIVE_CARD_PH))
@@ -299,13 +289,24 @@ const Game = () => {
                                 </Slide>
                             }
                         </Grid>
-                        <Grid item xs={8}>
-                            <AucMobileComponent auctionCards={auctionCards} />
+                        <Grid item xs={4}>
+                            {(player.abilities[0].trigger === Constants.ACT_TRG || (player.abilities[1].trigger === Constants.ACT_TRG)) &&
+                                <UseAbilityComponent />
+                            }
+                        </Grid>
+                        <Grid item xs={5}>
+                            <TurnTagMobile>{selector.msg.lang.TURN} : <TurnValueMobile>{turn}</TurnValueMobile></TurnTagMobile>
+                            <Grid container>
+                                <Grid item xs={2}>
+                                    <TimeTagMobile>{selector.msg.lang.TIME}</TimeTagMobile>
+                                </Grid>
+                                <Grid item xs={10}>
+                                    <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
+                                        roomId={roomId} playerId={player.playerId} />
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    {(player.abilities[0].trigger === Constants.ACT_TRG || (player.abilities[1].trigger === Constants.ACT_TRG)) &&
-                        <UseAbilityComponent />
-                    }
                     <CalcComponent calcBtnFlg={calcBtnFlg} />
                     <AucComponent auctionCards={auctionCards} aucBtnFlg={aucBtnFlg} />
                     <FinishModalMobile

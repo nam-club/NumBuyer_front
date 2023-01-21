@@ -7,7 +7,7 @@ import * as ConstantsMsg from '../../constantsMsg';
 
 import { useStyles, AuctionCard, CardValue, BidMessage, CoinField, AuctionArea, ChangeBidButton, BidButton, PassButton, YesButton,
          AreaTag, WrapDisplay, ConfirmTitle, ConfirmMessage, ErrorMessage } from '../theme';
-import { ChangeBidButtonMobile, BidButtonMobile, PassButtonMobile } from '../themeMobile';
+import { ChangeBidButtonMobile, AreaTagMobile, AuctionCardMobile, CardValueMobile, BidButtonMobile, PassButtonMobile } from '../themeMobile';
 import { setAucBtnAction } from '../../redux/game/actions';
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction } from '../../redux/msg/actions';
 import { setPreCardsAction } from '../../redux/players/actions';
@@ -225,17 +225,33 @@ const AucComponent = (props) => {
             {(selector.game.phase === Constants.AUCTION_PH) ?
             <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
                 sx={{margin: '2%'}}>
-                <div>
-                    <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
-                    <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
-                    id="standard-basic" value={fee} size="small"
-                    onChange={doChange} />
-                    <ChangeBidButtonMobile onClick={() => {changeBid('-')}}>-</ChangeBidButtonMobile>
-                    <ChangeBidButtonMobile onClick={() => {changeBid('+')}}>+</ChangeBidButtonMobile>
-                    {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&
-                        <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
-                    }
-                </div>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <AreaTagMobile align="left" sx={{margin: '2%', color: grey[50]}}>{selector.msg.lang.AUCTION}</AreaTagMobile>
+                        <WrapDisplay>
+                            {props.auctionCards.auctionCards.map((value, index) => (
+                                <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500} key={index}>
+                                    <AuctionCardMobile variant="contained">
+                                        <CardValueMobile>{value}</CardValueMobile>
+                                    </AuctionCardMobile>
+                                </Slide>
+                            ))}  
+                        </WrapDisplay>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <div>
+                            <BidMessage>{selector.msg.lang.BID_MSG}</BidMessage>
+                            <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
+                            id="standard-basic" value={fee} size="small"
+                            onChange={doChange} />
+                            <ChangeBidButtonMobile onClick={() => {changeBid('-')}}>-</ChangeBidButtonMobile>
+                            <ChangeBidButtonMobile onClick={() => {changeBid('+')}}>+</ChangeBidButtonMobile>
+                            {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&
+                                <ErrorMessage>{selector.msg.errMsg}</ErrorMessage>
+                            }
+                        </div>
+                    </Grid>
+                </Grid>
                 <div>
                     <PassButtonMobile size="large" variant="contained"
                     onClick={handleClickOpen} disabled={!(selector.game.phase === Constants.AUCTION_PH) || !props.aucBtnFlg}>{selector.msg.lang.PASS_BTN}</PassButtonMobile>
