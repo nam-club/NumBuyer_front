@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useStyles, Back, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import {
     useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile, TurnTagMobile, TurnValueMobile,
-    FinishModalMobile, FinishMenuMobile
+    FinishModalMobile, FinishMenuMobile, MessageBoxMobile, NaviMessageMobile
 } from './themeMobile';
 
 import * as Constants from '../constants';
@@ -27,6 +27,7 @@ import { useMediaQuery } from "@mui/material";
 
 import AblNavigationComponent from './components/AblNavigationComponent';
 import AucMobileComponent from './components/AucMobileComponent';
+import Skeleton from '@mui/material/Skeleton';
 
 import successAuction from '../assets/success_auction.png';
 
@@ -250,19 +251,22 @@ const Game = () => {
                         </Card>
                     }
                     <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={message} messages={messages} />
-                    <Grid container>
-                    {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
-                        <Grid item xs={4}>
-                            <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]}
-                                message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
-                        </Grid>
+                    {((selector.game.highestBid <= 0 || selector.game.phase !== Constants.AUCTION_PH) && ablMessages.length <= 0) &&
+                        <Skeleton variant="rect" width={'100%'} height={50} />
                     }
-                    {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
-                        <Grid item xs={4}>
-                            <AblNavigationComponent key={index}
-                            background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
-                        </Grid>
-                    ))}
+                    <Grid container>
+                        {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
+                            <Grid item xs={4}>
+                                <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]}
+                                    message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
+                            </Grid>
+                        }
+                        {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
+                            <Grid item xs={4}>
+                                <AblNavigationComponent key={index}
+                                background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
+                            </Grid>
+                        ))}
                     </Grid>
                     {selector.msg.lang.LANGUAGE === 'Japanese'
                         ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>

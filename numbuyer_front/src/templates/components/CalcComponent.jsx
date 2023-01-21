@@ -26,6 +26,8 @@ const CalcComponent = (props) => {
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [hands, setHands] = React.useState([]);
+    const [hands1, setHands1] = React.useState([]);
+    const [hands2, setHands2] = React.useState([]);
     const [calcs, setCalcs] = React.useState([]);
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
     const { calculate } = React.useContext(CTX);
@@ -59,8 +61,10 @@ const CalcComponent = (props) => {
         console.timeEnd('手札差分チェック');
         console.log(reserveHands);
         setHands(reserveHands);
+        let middle = Math.floor(reserveHands.length / 2);
+        setHands1(reserveHands.slice(0, middle));
+        setHands2(reserveHands.slice(middle));
         dispatch(setPreCardsAction(selector.players.player.cards));
-        //setHands(selector.players.player.cards);
     }, [selector.players.player.cards]);
 
     // 手札から計算エリアに出すカードを選択
@@ -91,6 +95,9 @@ const CalcComponent = (props) => {
             const newHands = [...hands];
             newHands.splice(index, 1);
             setHands(newHands);
+            let middle = Math.floor(newHands.length / 2);
+            setHands1(newHands.slice(0, middle));
+            setHands2(newHands.slice(middle));
             setCalcs([...calcs, card]);
         }
     }
@@ -101,13 +108,15 @@ const CalcComponent = (props) => {
         let appendHands = []; // 手札に追加するカード配列
         const newCalcs = [...calcs];
 
+        console.log("===============");
+        console.log(card);
         // 符号カードを戻す場合、一つ右の数字カードも戻す
         if (card.value === '+' || card.value === '-' || card.value === '×' || card.value === '÷') {
-            appendHands.push(card.value);
+            appendHands.push(card);
             appendHands.push(calcs[index + 1]);
             newCalcs.splice(index, 2);
         } else {
-            appendHands.push(card.value);
+            appendHands.push(card);
             newCalcs.splice(index, 1);
         }
 
@@ -122,7 +131,11 @@ const CalcComponent = (props) => {
         }
 
         setCalcs(newCalcs);
-        setHands([...hands, ...appendHands]);
+        let newHands = [...hands, ...appendHands]
+        setHands(newHands);
+        let middle = Math.floor(newHands.length / 2);
+        setHands1(newHands.slice(0, middle));
+        setHands2(newHands.slice(middle));
     }
 
     const ansCalc = () => {
@@ -250,13 +263,14 @@ const CalcComponent = (props) => {
                         <AreaTagMobile align="left">{selector.msg.lang.YOUR_CARDS}</AreaTagMobile>
                         {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                         ) &&
+                            <>
                             <WrapCardMobile>
                                 <Tabs
                                     value={tab}
                                     variant="scrollable"
                                     scrollButtons
                                     allowScrollButtonsMobile>
-                                    {hands.map((value, index) => (
+                                    {hands1.map((value, index) => (
                                         <Grow in={fade} timeout={1000} key={index}>
                                             {(selector.game.phase === Constants.CALCULATE_PH) || (!value.newFlg) ?
                                                 <TermCardMobile variant="contained"
@@ -278,6 +292,35 @@ const CalcComponent = (props) => {
                                     ))}
                                 </Tabs>
                             </WrapCardMobile>
+                            <WrapCardMobile>
+                                <Tabs
+                                    value={tab}
+                                    variant="scrollable"
+                                    scrollButtons
+                                    allowScrollButtonsMobile>
+                                    {hands2.map((value, index) => (
+                                        <Grow in={fade} timeout={1000} key={index}>
+                                            {(selector.game.phase === Constants.CALCULATE_PH) || (!value.newFlg) ?
+                                                <TermCardMobile variant="contained"
+                                                    onClick={() => selectHands(index+Math.floor(hands1.length), value)}
+                                                    disabled={!(selector.game.phase === Constants.CALCULATE_PH)}>
+                                                    <CardValue>{value.value}</CardValue>
+                                                </TermCardMobile>
+                                            :
+                                                <NewTermCardMobile variant="contained"
+                                                    onClick={() => {
+                                                        if(selector.game.phase === Constants.CALCULATE_PH) {
+                                                            selectHands(index+Math.floor(hands1.length), value)
+                                                        }
+                                                    }}>
+                                                    <CardValue>{value.value}</CardValue>
+                                                </NewTermCardMobile>
+                                            }
+                                        </Grow>
+                                    ))}
+                                </Tabs>
+                            </WrapCardMobile>
+                            </>
                         }
                     </Card>
                     {(selector.game.phase === Constants.CALCULATE_PH) &&
