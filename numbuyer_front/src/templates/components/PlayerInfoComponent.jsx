@@ -105,13 +105,13 @@ const PlayerInfoComponent = (props) => {
                         {props.myPlayer &&
                             <Grid item xs={3}>
                                 <MyPlayerListMobile>
+                                    <PlayerNameMobile>{props.myPlayer.playerName}</PlayerNameMobile>
                                     <Grid container>
                                         <Grid item xs={6}>
-                                            <PlayerNameMobile>{props.myPlayer.playerName}</PlayerNameMobile>
+                                            <PlayerInfoIconMobile src={card} /><PlayerInfoMobile> {props.myPlayer.cardNum}</PlayerInfoMobile>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <PlayerInfoIconMobile src={card} /><PlayerInfoMobile>{props.myPlayer.cardNum}　</PlayerInfoMobile>
-                                            <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
+                                            <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile> {props.myPlayer.coin}</PlayerInfoMobile>
                                         </Grid>
                                     </Grid>
                                     {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
@@ -141,13 +141,13 @@ const PlayerInfoComponent = (props) => {
                         {props.players && props.players.map((value) => (
                             <Grid item xs={3}>
                             <PlayerListMobile key={value.playerId}>
+                                <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
                                 <Grid container>
                                     <Grid item xs={6}>
-                                        <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
+                                        <PlayerInfoIconMobile src={card} /><PlayerInfoMobile> {value.cardNum}</PlayerInfoMobile>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <PlayerInfoIconMobile src={card} /><PlayerInfoMobile>{value.cardNum}　</PlayerInfoMobile>
-                                        <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
+                                        <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile> {value.coin}</PlayerInfoMobile>
                                     </Grid>
                                 </Grid>
                                 {(!value.firedAbilities || value.firedAbilities.length === 0) ?

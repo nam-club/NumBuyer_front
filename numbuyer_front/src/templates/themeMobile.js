@@ -431,6 +431,10 @@ export const TimeAreaMobile = styled('div')({
   color: grey[50],
   margin: 0,
   padding: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100%',
 });
 
 // ターン数タグ
@@ -458,10 +462,10 @@ export const TimeTagMobile = styled('span')({
 });
 
 // 残り時間値
-export const TimeValueMobile = styled('p')({
+export const TimeValueMobile = styled('span')({
   margin:  0,
   padding: 0,
-  fontSize: '4em',
+  fontSize: '3.5em',
   fontWeight: 'bold',
 });
 
@@ -474,7 +478,7 @@ export const GoalTagMobile = styled('span')({
 });
 
 // 勝利条件メッセージ
-export const GoalMessageMobile = styled('p')({
+export const GoalMessageMobile = styled('span')({
   margin: 0,
   padding: 0,
   color: grey[50],
@@ -513,8 +517,7 @@ export const PlayerInfoMobile = styled('span')({
 
 // プレイヤー情報アイコン
 export const PlayerInfoIconMobile = styled('img')({
-  width: '15%',
-  marginTop: '2%',
+  width: '20%',
 });
 
 // アビリティ情報（プレイヤー一覧）

@@ -12,9 +12,9 @@ import { arrayOutput } from '../../logics';
 import * as Constants from '../../constants';
 
 import { TimeArea, TurnTag, TurnValue, TimeTag, TimeValue } from '../theme';
-import { TimeAreaMobile, TimeValueMobile } from '../themeMobile';
+import { TurnTagMobile, TimeAreaMobile, TimeTagMobile, TimeValueMobile } from '../themeMobile';
 
-import { useMediaQuery } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 
 import { setValidAction } from '../../redux/msg/actions';
 import { setCardsAction } from '../../redux/players/actions';
@@ -179,12 +179,19 @@ const TimeComponent = (props) => {
             {matches ?
                 <TimeArea>
                     <TurnTag>{selector.msg.lang.TURN} : <TurnValue>{turn}</TurnValue></TurnTag>
-                    <TimeTag>{selector.msg.lang.TIME}</TimeTag>
+                    <TimeTag>{showFlg ? selector.msg.lang.TIME : "　"}</TimeTag>
                     <TimeValue>{showFlg ? time : "　"}</TimeValue>
                 </TimeArea>
                 :
                 <TimeAreaMobile>
-                    <TimeValueMobile>{showFlg ? time : "　"}</TimeValueMobile>
+                    <Grid container sx={{display: 'flex', alignItems: 'center', height: '100%',}}>
+                        <Grid item xs={5}>
+                            <TimeTagMobile>{showFlg ? selector.msg.lang.TIME : "　"}</TimeTagMobile>
+                        </Grid>
+                        <Grid item xs={7}>
+                            <TimeValueMobile>{showFlg ? time : "　"}</TimeValueMobile>
+                        </Grid>
+                    </Grid>
                 </TimeAreaMobile>
             }
         </div>

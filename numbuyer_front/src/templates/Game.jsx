@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useStyles, Back, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import {
     useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile, TurnTagMobile, TurnValueMobile,
-    FinishModalMobile, FinishMenuMobile, MessageBoxMobile, NaviMessageMobile
+    FinishModalMobile, FinishMenuMobile, MessageBoxMobile, NaviMessageMobile, GoalTagMobile
 } from './themeMobile';
 
 import * as Constants from '../constants';
@@ -268,6 +268,7 @@ const Game = () => {
                             </Grid>
                         ))}
                     </Grid>
+                    <GoalTagMobile>{selector.msg.lang.WIN_CONDITIONS} : </GoalTagMobile>
                     {selector.msg.lang.LANGUAGE === 'Japanese'
                         ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>
                         : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
@@ -300,15 +301,8 @@ const Game = () => {
                         </Grid>
                         <Grid item xs={5}>
                             <TurnTagMobile>{selector.msg.lang.TURN} : <TurnValueMobile>{turn}</TurnValueMobile></TurnTagMobile>
-                            <Grid container>
-                                <Grid item xs={2}>
-                                    <TimeTagMobile>{selector.msg.lang.TIME}</TimeTagMobile>
-                                </Grid>
-                                <Grid item xs={10}>
-                                    <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
-                                        roomId={roomId} playerId={player.playerId} />
-                                </Grid>
-                            </Grid>
+                            <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
+                                roomId={roomId} playerId={player.playerId} />
                         </Grid>
                     </Grid>
                     <CalcComponent calcBtnFlg={calcBtnFlg} />

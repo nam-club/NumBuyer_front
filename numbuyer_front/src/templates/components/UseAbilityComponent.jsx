@@ -27,12 +27,14 @@ const UseAbilityComponent = (props) => {
     const [open, setOpen] = React.useState(false); // ダイアログ用フラグ
 
     const [abilities, setAbilities] = React.useState(selector.players.player.abilities); // 所持アビリティ
+    const [ablLength, setAblLength] = React.useState(abilities.length); // 所持アビリティの数
     const [useAbilityId, setUseAbilityId] = React.useState(null); // 使用するアビリティID
 
     const matches = useMediaQuery("(min-width:520px)");
 
     React.useEffect(() => {
         setAbilities(selector.players.player.abilities);
+        setAblLength(abilities.length);
     }, [selector.players.player.abilities]);
 
     
@@ -148,7 +150,7 @@ const UseAbilityComponent = (props) => {
             <AreaTagMobile align="left" sx={{marginTop: 0, marginBottom: 0}}>{selector.msg.lang.ABILITY_TAG}</AreaTagMobile>
             <Grid container>
                 {abilities.map((value) => (
-                    <Grid item xs={6} key={value.abilityId}>
+                    <Grid item xs={12/ablLength} key={value.abilityId}>
                         {value.trigger === Constants.ACT_TRG &&
                         <div>
                             {value.status === Constants.USED_ST ?
