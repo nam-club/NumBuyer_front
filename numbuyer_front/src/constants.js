@@ -26,6 +26,21 @@ export const ENGLISH = 'en';
 export const JAPANESE = 'ja';
 export const CHINESE = 'zh';
 
+export const FONT_SIZES = [
+    {
+        lang: "English",
+        fontSize: '1em'
+    },
+    {
+        lang: "Japanese",
+        fontSize: '0.8em'
+    },
+    {
+        lang: "Chinese",
+        fontSize: '0.8em'
+    }
+];
+
 // 初期プロパティ
 export const COIN = 100;
 
@@ -221,41 +236,41 @@ export const CNF_ABILITIES = [
 
 // アビリティ（非公開）
 export const PRV_ABILITIES = [
-        {
-            abilityId: 'prv_001',
-            display: [
-                {
-                    lang: "English",
-                    name: "???",
-                },
-                {
-                    lang: "Japanese",
-                    name: "???",
-                },
-                {
-                    lang: "Chinese",
-                    name: "???",
-                },
-            ],
-        },
-        {
-            abilityId: 'prv_002',
-            display: [
-                {
-                    lang: "English",
-                    name: "???",
-                },
-                {
-                    lang: "Japanese",
-                    name: "???",
-                },
-                {
-                    lang: "Chinese",
-                    name: "???",
-                },
-            ],
-        }
-    ];
+    {
+        abilityId: 'prv_001',
+        display: [
+            {
+                lang: "English",
+                name: "???",
+            },
+            {
+                lang: "Japanese",
+                name: "???",
+            },
+            {
+                lang: "Chinese",
+                name: "???",
+            },
+        ],
+    },
+    {
+        abilityId: 'prv_002',
+        display: [
+            {
+                lang: "English",
+                name: "???",
+            },
+            {
+                lang: "Japanese",
+                name: "???",
+            },
+            {
+                lang: "Chinese",
+                name: "???",
+            },
+        ],
+    }
+];
 
 
 // フェーズ

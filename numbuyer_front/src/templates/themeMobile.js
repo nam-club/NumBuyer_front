@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 
 import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
@@ -317,9 +318,16 @@ export const AuctionCardMobile = styled(Card)({
   background: amber['A100'],
   color: grey[700],
   marginLeft: '3%',
-  width: '25%',
-  height: '10vh',
+  width: '30%',
+  height: '8vh',
   'whiteSpace': 'nowrap',
+});
+
+// 入札金額入力ボックス
+export const CoinFieldMobile = styled(TextField)({
+  color: grey[600],
+  width: '75%',
+  margin: 0,
 });
 
 // 入札金額変更ボタン

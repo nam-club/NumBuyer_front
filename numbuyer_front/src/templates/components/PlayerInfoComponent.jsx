@@ -101,7 +101,7 @@ const PlayerInfoComponent = (props) => {
                 </div>
                 :
                 <div>
-                    <Grid container>
+                    <Grid container sx={{marginBottom: '2%'}}>
                         {props.myPlayer &&
                             <Grid item xs={3}>
                                 <MyPlayerListMobile>

@@ -288,7 +288,7 @@ const Game = () => {
                                 &&
                                 <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                                     <TargetCardMobile>
-                                        <CardTagMobile>{selector.msg.lang.TARGET}</CardTagMobile>
+                                        <CardTagMobile sx={{fontSize: Constants.FONT_SIZES.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).fontSize}}>{selector.msg.lang.TARGET}</CardTagMobile>
                                         <CardValueMobile>{targetCard}</CardValueMobile>
                                     </TargetCardMobile>
                                 </Slide>
