@@ -62,7 +62,13 @@ const Game = () => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setMyPlayer(selector.players.players.find((my) => { return my.playerId === selector.players.player.playerId }));
+        console.log("========");
+        console.log(myPlayer);
+        console.log("========");
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== selector.players.player.playerId }));
+        console.log("========");
+        console.log(otherPlayers);
+        console.log("========");
         setTurn(selector.game.turn);
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
@@ -274,7 +280,7 @@ const Game = () => {
                         : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
                     }
                     <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
-                    <Grid container sx={{ marginBottom: '5%', height: '25%' }}>
+                    <Grid container sx={{ marginBottom: '5%', height: '25%', display: 'flex', alignItems: 'center' }}>
                         <Grid item xs={3}>
                             {(targetCard !== '　'
                                 && (
@@ -294,12 +300,12 @@ const Game = () => {
                                 </Slide>
                             }
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={5}>
                             {(player.abilities[0].trigger === Constants.ACT_TRG || (player.abilities[1].trigger === Constants.ACT_TRG)) &&
                                 <UseAbilityComponent />
                             }
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={4}>
                             <TurnTagMobile>{selector.msg.lang.TURN} : <TurnValueMobile>{turn}</TurnValueMobile></TurnTagMobile>
                             <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}
                                 roomId={roomId} playerId={player.playerId} />

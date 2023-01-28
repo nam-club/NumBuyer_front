@@ -177,7 +177,7 @@ const UseAbilityComponent = (props) => {
                                                                 <UseAbilityButtonMobile size="large" variant="contained"
                                                                     sx={[{ backgroundImage: value.selectedBgImage, color: value.tagColor, cursor: 'default', 'textShadow': '2px 4px 6px #000000', boxShadow: 6, fontSize: Constants.FONT_SIZES.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).fontSize },
                                                                     { '&:hover': { backgroundImage: value.selectedBgImage, opacity: 0.8, 'textShadow': '2px 4px 6px #000000', boxShadow: 6, fontSize: Constants.FONT_SIZES.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).fontSize } }]}>
-                                                                    {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name + '　' + value.remaining}{value.max}
+                                                                    {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name}<br />{value.remaining}{value.max}
                                                                 </UseAbilityButtonMobile>
                                                             </Grid>
                                                             <Grid item xs={2}>
@@ -194,7 +194,7 @@ const UseAbilityComponent = (props) => {
                                                                 <UseAbilityButtonMobile size="large" variant="contained"
                                                                     sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor, 'textShadow': '2px 4px 6px #000000', fontSize: Constants.FONT_SIZES.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).fontSize }}
                                                                     onClick={() => { handleClickOpen(value) }}>
-                                                                    {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name + '　' + value.remaining}{value.max}
+                                                                    {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name}<br />{value.remaining}{value.max}
                                                                 </UseAbilityButtonMobile>
                                                             </Grid>
                                                             <Grid item xs={2}>

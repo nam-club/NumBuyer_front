@@ -14,6 +14,8 @@ const initialState = {
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限
             abilities: [], // アビリティ配列
+            fluctCoin: 0, // 変動コイン
+            fluctCard: 0, // 変動カード枚数
         },
         players: [], // プレイヤー一覧
         ranking: [], // ランキング

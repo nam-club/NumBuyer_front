@@ -108,10 +108,12 @@ const PlayerInfoComponent = (props) => {
                                     <PlayerNameMobile>{props.myPlayer.playerName}</PlayerNameMobile>
                                     <Grid container>
                                         <Grid item xs={6}>
-                                            <PlayerInfoIconMobile src={card} /><PlayerInfoMobile> {props.myPlayer.cardNum}</PlayerInfoMobile>
+                                            <PlayerInfoIconMobile src={card} />
+                                            <PlayerInfoMobile>{props.myPlayer.cardNum}</PlayerInfoMobile>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile> {props.myPlayer.coin}</PlayerInfoMobile>
+                                            <PlayerInfoIconMobile src={coin} />
+                                            <PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
                                         </Grid>
                                     </Grid>
                                     {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?

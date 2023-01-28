@@ -275,7 +275,7 @@ export const NaviMessageMobile = styled('p')({
 
 // メッセージ本体（複数行））
 export const NaviMessagesMobile = styled('p')({
-  fontSize: '0.8em',
+  fontSize: '0.75em',
   margin: '2%',
 });
 
