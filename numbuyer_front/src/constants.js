@@ -54,8 +54,12 @@ export const T_PAGE6 = "Use Ability";
 export const T_PAGE7 = "Finish Game";
 
 // メッセージ表示時間
-export const ABL_MSG_TIME = 10; // アビリティメッセージ表示時間
-export const FLUCT_PARAM_TIME = 5; // 変動パラメータ表示時間
+export const ABL_MSG_TIME = 5; // アビリティメッセージ表示時間
+export const FLUCT_PARAM_TIME = 2; // 変動パラメータ表示時間
+
+// 変動パラメータ
+export const FLUCT_COIN = 'fluctCoin'; // 変動コイン
+export const FLUCT_CARD = 'fluctCard'; // 変動カード
 
 // アビリティステータス
 export const UNUSED_ST = 'unused'; // 効果未使用

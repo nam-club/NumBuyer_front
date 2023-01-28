@@ -9,6 +9,7 @@ import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetA
 
  import { push } from 'connected-react-router';
 
+import Queue from './class/Queue';
 import { arrayOutput, changeCode } from './logics';
 import * as Constants from './constants';
 import * as ConstantsMsg from './constantsMsg';
@@ -78,6 +79,7 @@ export const useAbility = function(value) {
 export default function Socket(props) {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
+    const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues);
 
     if(!socket) {
         socket = io(process.env.REACT_APP_SOCKET_URL);
@@ -366,8 +368,11 @@ export default function Socket(props) {
             for(let p of resObj.players) {
                 // 変動パラメータ
                 if(p.fluctuationParameters.length > 0) {
-                    // アビリティメッセージに追加
+                    // 変動パラメータキューに追加
                     for(let f of p.fluctuationParameters) {
+                        console.log(fluctQueues.find((f) => {return f.queue.playerId === p.playerId}));
+                        fluctQueues.find((f) => {return f.queue.playerId === p.playerId}).enqueue({key: f.key, value: f.value});
+                        // アビリティメッセージに追加
                         let coin = Number(f.value);
                         let fluctValue = '';
                         if(coin !== 0) {
@@ -384,6 +389,9 @@ export default function Socket(props) {
 
             // プレイヤー情報をstoreにセット
             dispatch(setPlayersAction(resObj.players));
+            // 変動パラメータをstoreにセット
+            console.log(fluctQueues);
+            dispatch(setAblMessagesAction(fluctQueues));
             // アビリティメッセージをstoreにセット
             dispatch(setAblMessagesAction(ablMessages.filter((a) => a.time > 0)));
             // アビリティエラーメッセージをリセット

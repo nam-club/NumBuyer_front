@@ -1,5 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setFluctQueuesAction } from '../redux/game/actions';
 
 import { useStyles, Back, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import {
@@ -7,6 +9,7 @@ import {
     FinishModalMobile, FinishMenuMobile, MessageBoxMobile, NaviMessageMobile, GoalTagMobile
 } from './themeMobile';
 
+import { Queue } from '../class/Queue';
 import * as Constants from '../constants';
 import TimeComponent from './components/TimeComponent';
 import AucComponent from './components/AucComponent';
@@ -35,6 +38,7 @@ const Game = () => {
     const classes = useStyles();
     const mobileClasses = useStylesMobile();
     const selector = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const [fade, setFade] = React.useState(false); // フェードイン用フラグ
     const [targetCard, setTargetCard] = React.useState(selector.game.targetCard);
@@ -55,6 +59,8 @@ const Game = () => {
     const [messages, setMessages] = React.useState(selector.game.messages);
     const [ablMessages, setAblMessages] = React.useState(selector.game.ablMessages);
     const [fluctParams, setFluctParams] = React.useState(selector.game.fluctParams);
+    const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues); // 変動パラメータ用キュー
+    
 
     const matches = useMediaQuery("(min-width:520px)");
 
@@ -117,6 +123,23 @@ const Game = () => {
         return () => clearInterval(interval);
     }, [fluctParams]);
 
+    /** キューのセットと監視 */
+    React.useEffect(() => {
+        for(let p of selector.players.players) {
+            fluctQueues.push(new Queue(p.playerId));
+        }
+        dispatch(setFluctQueuesAction(fluctQueues));
+        const interval = setInterval(operateQueue, 5000);
+    }, []);
+
+    const operateQueue = () => {
+        for(let q of fluctQueues) {
+            if(q.queue.fluctParams.length !== 0) {
+                q.dequeue();
+            }
+        }
+    }
+
     return (
         <Typography component="div" align="center">
             <GlobalStyle />
@@ -128,7 +151,7 @@ const Game = () => {
                         </Card>
                     }
                     {selector.game.calcResult === Constants.SUCCESS &&
-                        <Card className={classes.result_animation} 
+                        <Card className={classes.result_animation}
                             sx={{
                                 color: grey[50], background: 'linear-gradient(25deg, #1de9b6, #000000)', boxShadow: 6,
                                 'textShadow': '2px 4px 6px #000000'
@@ -237,7 +260,7 @@ const Game = () => {
                         </Card>
                     }
                     {selector.game.calcResult === Constants.SUCCESS &&
-                        <Card className={mobileClasses.result_animation_mobile} 
+                        <Card className={mobileClasses.result_animation_mobile}
                             sx={{
                                 color: grey[50], background: 'linear-gradient(25deg, #1de9b6, #000000)', boxShadow: 6,
                                 'textShadow': '2px 4px 6px #000000'
@@ -270,7 +293,7 @@ const Game = () => {
                         {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
                             <Grid item xs={4}>
                                 <AblNavigationComponent key={index}
-                                background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
+                                    background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
                             </Grid>
                         ))}
                     </Grid>
@@ -279,7 +302,7 @@ const Game = () => {
                         ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>
                         : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
                     }
-                    <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
+                    <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} fluctQueues={fluctQueues} />
                     <Grid container sx={{ marginBottom: '5%', height: '25%', display: 'flex', alignItems: 'center' }}>
                         <Grid item xs={3}>
                             {(targetCard !== '　'
@@ -294,7 +317,7 @@ const Game = () => {
                                 &&
                                 <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500}>
                                     <TargetCardMobile>
-                                        <CardTagMobile sx={{fontSize: Constants.FONT_SIZES.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).fontSize}}>{selector.msg.lang.TARGET}</CardTagMobile>
+                                        <CardTagMobile sx={{ fontSize: Constants.FONT_SIZES.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).fontSize }}>{selector.msg.lang.TARGET}</CardTagMobile>
                                         <CardValueMobile>{targetCard}</CardValueMobile>
                                     </TargetCardMobile>
                                 </Slide>

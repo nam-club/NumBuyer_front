@@ -14,8 +14,6 @@ const initialState = {
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限
             abilities: [], // アビリティ配列
-            fluctCoin: 0, // 変動コイン
-            fluctCard: 0, // 変動カード枚数
         },
         players: [], // プレイヤー一覧
         ranking: [], // ランキング
@@ -77,6 +75,7 @@ const initialState = {
         aucResult: Constants.NONE, // 落札結果ステータス
         calcResult: Constants.NONE, // 計算結果ステータス
         fluctParams: [], // 変動パラメータエフェクト表示用配列
+        fluctQueues: [], // 変動パラメータ表示用キューマップ
         firedAbilities: [], // 発動アビリティ配列
         leaveLobbyFlg: false, // ロビー退出フラグ
         finishFlg: false, // ゲーム終了フラグ

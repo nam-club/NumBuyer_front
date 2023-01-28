@@ -91,6 +91,17 @@ export const setFluctParamsAction = (state) => {
     }
 }
 
+export const SET_FLUCT_QUEUES = "SET_FLUCT_QUEUES";
+
+export const setFluctQueuesAction = (state) => {
+    return {
+        type: "SET_FLUCT_QUEUES",
+        payload: {
+            fluctQueues: state
+        }
+    }
+}
+
 export const SET_TIME = "SET_TIME";
 
 export const setTimeAction = (state) => {

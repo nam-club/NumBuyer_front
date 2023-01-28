@@ -36,6 +36,9 @@ export const GameReducer = (state = initialState.game, action) => {
         case Actions.SET_FLUCT_PARAMS:
             state.fluctParams = action.payload.fluctParams;
             return state;
+        case Actions.SET_FLUCT_QUEUES:
+            state.fluctQueues = action.payload.fluctQueues;
+            return state;
         case Actions.SET_TIME:
             return {
                 ...state,

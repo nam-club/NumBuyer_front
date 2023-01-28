@@ -110,10 +110,16 @@ const PlayerInfoComponent = (props) => {
                                         <Grid item xs={6}>
                                             <PlayerInfoIconMobile src={card} />
                                             <PlayerInfoMobile>{props.myPlayer.cardNum}</PlayerInfoMobile>
+                                            {(props.fluctQueues.length>0 && props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_CARD})) &&
+                                                <PlayerInfoMobile>{props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_CARD})}</PlayerInfoMobile>
+                                            }
                                         </Grid>
                                         <Grid item xs={6}>
                                             <PlayerInfoIconMobile src={coin} />
                                             <PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
+                                            {(props.fluctQueues.length>0 && props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_CARD})) &&
+                                                <PlayerInfoMobile>{props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_COIN})}</PlayerInfoMobile>
+                                            }
                                         </Grid>
                                     </Grid>
                                     {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
