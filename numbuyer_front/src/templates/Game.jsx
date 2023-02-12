@@ -80,13 +80,14 @@ const Game = () => {
         setMessages(selector.game.messages);
         setAblMessages(selector.game.ablMessages);
         setFluctParams(selector.game.fluctParams);
+        setFluctQueues(selector.game.fluctQueues);
         setTargetCard(selector.game.targetCard);
         setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
     }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
-    selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.fluctParams,
+    selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.fluctParams, selector.game.fluctQueues,
     selector.game.targetCard, selector.game.auctionCards, selector.game.turn,
     selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 

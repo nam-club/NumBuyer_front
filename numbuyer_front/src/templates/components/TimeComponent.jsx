@@ -106,7 +106,7 @@ const TimeComponent = (props) => {
                 // コインとカード情報の更新
                 console.log("オークション結果フェーズだよ");
                 buy({ roomId: selector.room.roomId, playerId: selector.players.player.playerId });
-                dispatch(setValidAction(false));
+                dispatch(setValidAction({validFlg: false}));
                 break;
             case Constants.CALCULATE_PH:
                 dispatch(setTimeAction(selector.game.phaseTimes.calculate));

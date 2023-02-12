@@ -19,12 +19,14 @@ const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);
     const [myAbilities, setMyAbilities] = React.useState([]); // 自分の所持アビリティ
     const prvAbilities = Constants.PRV_ABILITIES; // 非公開アビリティ
+    const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues); // 差分パラメータ配列
 
     const matches = useMediaQuery("(min-width:520px)");
 
     React.useEffect(() => {
         setMyAbilities(selector.players.player.abilities);
-    }, [selector.players.player.abilities]);
+        setFluctQueues(selector.game.fluctQueues);
+    }, [selector.players.player.abilities, selector.game.fluctQueues]);
 
     React.useEffect(() => {
         // 発動アビリティが1つの時に片方を「???」にする
@@ -34,6 +36,18 @@ const PlayerInfoComponent = (props) => {
             }
         }
     }, [props.players]);
+
+    const getFluctValue = (playerId, key) => {
+        let fluctParam;
+        let fluctValue = "";
+        if(fluctQueues.length>0) {
+            fluctParam = fluctQueues.find((f) => {return f.queue.playerId === playerId}).queue.fluctParams.find((p) => {return p.key === key});
+            if(fluctParam) {
+                fluctValue = fluctParam.value;
+            }
+        }
+        return fluctValue;
+    }
 
     return (
         <Typography>
@@ -110,16 +124,12 @@ const PlayerInfoComponent = (props) => {
                                         <Grid item xs={6}>
                                             <PlayerInfoIconMobile src={card} />
                                             <PlayerInfoMobile>{props.myPlayer.cardNum}</PlayerInfoMobile>
-                                            {(props.fluctQueues.length>0 && props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_CARD})) &&
-                                                <PlayerInfoMobile>{props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_CARD})}</PlayerInfoMobile>
-                                            }
+                                            <PlayerInfoMobile>{getFluctValue(props.myPlayer.playerId, Constants.FLUCT_CARD)}</PlayerInfoMobile>
                                         </Grid>
                                         <Grid item xs={6}>
                                             <PlayerInfoIconMobile src={coin} />
                                             <PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
-                                            {(props.fluctQueues.length>0 && props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_CARD})) &&
-                                                <PlayerInfoMobile>{props.fluctQueues.find((f) => {return f.queue.playerId === props.myPlayer.playerId}).queue.fluctParams.find((p) => {return p.key === Constants.FLUCT_COIN})}</PlayerInfoMobile>
-                                            }
+                                            <PlayerInfoMobile>{getFluctValue(props.myPlayer.playerId, Constants.FLUCT_COIN)}</PlayerInfoMobile>
                                         </Grid>
                                     </Grid>
                                     {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
@@ -152,10 +162,14 @@ const PlayerInfoComponent = (props) => {
                                 <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
                                 <Grid container>
                                     <Grid item xs={6}>
-                                        <PlayerInfoIconMobile src={card} /><PlayerInfoMobile> {value.cardNum}</PlayerInfoMobile>
+                                        <PlayerInfoIconMobile src={card} />
+                                        <PlayerInfoMobile>{value.cardNum}</PlayerInfoMobile>
+                                        <PlayerInfoMobile>{getFluctValue(value.playerId, Constants.FLUCT_CARD)}</PlayerInfoMobile>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <PlayerInfoIconMobile src={coin} /><PlayerInfoMobile> {value.coin}</PlayerInfoMobile>
+                                        <PlayerInfoIconMobile src={coin} />
+                                        <PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
+                                        <PlayerInfoMobile>{getFluctValue(value.playerId, Constants.FLUCT_COIN)}</PlayerInfoMobile>
                                     </Grid>
                                 </Grid>
                                 {(!value.firedAbilities || value.firedAbilities.length === 0) ?

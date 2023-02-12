@@ -1,13 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
-     setRankingAction, setResAbilityAction} from './redux/players/actions';
+import {
+    setPlayersAction, setCardsAction, setCoinAction, setPlayerIdAction, setOwnerAction,
+    setRankingAction, setResAbilityAction
+} from './redux/players/actions';
 import { setValidAction, setErrMsgAction, setErrMsgVarsAction, setAblErrMsgAction } from './redux/msg/actions';
-import { setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
- setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
-  setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction, setLeaveLobbyAction, setFluctParamsAction, setTurnAction } from './redux/game/actions';
+import {
+    setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
+    setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
+    setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction,
+    setFluctQueuesAction, setLeaveLobbyAction, setFluctParamsAction, setTurnAction
+} from './redux/game/actions';
 
- import { push } from 'connected-react-router';
+import { push } from 'connected-react-router';
 
 import Queue from './class/Queue';
 import { arrayOutput, changeCode } from './logics';
@@ -20,56 +25,56 @@ export const CTX = React.createContext();
 const io = require("socket.io-client");
 let socket;
 
-let resObj = ""; 
+let resObj = "";
 
 /* ====== リクエストAPI ====== */
 
-export const joinCpuMatch = function(value) {
+export const joinCpuMatch = function (value) {
     socket.emit('join/cpu_match', JSON.stringify(value));
 };
 
-export const joinQuickMatch = function(value) {
+export const joinQuickMatch = function (value) {
     socket.emit('join/quick_match', JSON.stringify(value));
 };
 
-export const createMatch = function(value) {
+export const createMatch = function (value) {
     socket.emit('create/match', JSON.stringify(value));
 };
 
-export const joinFriendMatch = function(value) {
+export const joinFriendMatch = function (value) {
     socket.emit('join/friend_match', JSON.stringify(value));
 };
 
-export const leaveLobby = function(value) {
+export const leaveLobby = function (value) {
     socket.emit('join/leave', JSON.stringify(value));
 };
 
-export const roomInfo = function(value) {
+export const roomInfo = function (value) {
     socket.emit('game/room_info', JSON.stringify(value));
 };
 
-export const start = function(value) {
+export const start = function (value) {
     socket.emit('game/start', JSON.stringify(value));
 };
 
-export const nextTurn = function(value) {
+export const nextTurn = function (value) {
     socket.emit('game/next_turn', JSON.stringify(value));
 };
 
-export const bid = function(value) {
+export const bid = function (value) {
     socket.emit('game/bid', JSON.stringify(value));
 };
 
-export const buy = function(value) {
+export const buy = function (value) {
     console.log("落札したよ");
     socket.emit('game/buy', JSON.stringify(value));
 };
 
-export const calculate = function(value) {
+export const calculate = function (value) {
     socket.emit('game/calculate', JSON.stringify(value));
 };
 
-export const useAbility = function(value) {
+export const useAbility = function (value) {
     socket.emit('game/ready_ability', JSON.stringify(value));
 };
 
@@ -81,11 +86,11 @@ export default function Socket(props) {
     const selector = useSelector(state => state);
     const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues);
 
-    if(!socket) {
+    if (!socket) {
         socket = io(process.env.REACT_APP_SOCKET_URL);
 
         // 現在のルーム数情報を取得
-        socket.on('aggregate', function(msg) {
+        socket.on('aggregate', function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
 
@@ -93,24 +98,24 @@ export default function Socket(props) {
             dispatch(setAvailableQMCountAction(resObj.availableQuickMatchCount));
         });
 
-        socket.on('game/join', async function(msg) {
+        socket.on('game/join', async function (msg) {
             console.log("game/join:")
             console.log(msg)
             resObj = JSON.parse(msg);
 
             // レスポンスエラー
-            if(resObj.code) {
+            if (resObj.code) {
                 // 存在しないルームコード
-                if(resObj.code === Constants.NO_ROOM_ERR) {
-                    dispatch(setValidAction({validFlg: true}));
-                    dispatch(setErrMsgAction({errMsg: selector.msg.lang.NOT_EXIST_ROOM_ERR}));
+                if (resObj.code === Constants.NO_ROOM_ERR) {
+                    dispatch(setValidAction({ validFlg: true }));
+                    dispatch(setErrMsgAction({ errMsg: selector.msg.lang.NOT_EXIST_ROOM_ERR }));
                     dispatch(setErrMsgVarsAction([
                         ConstantsMsg.English.NOT_EXIST_ROOM_ERR,
                         ConstantsMsg.Japanese.NOT_EXIST_ROOM_ERR,
                         ConstantsMsg.Chinese.NOT_EXIST_ROOM_ERR
                     ]));
                 }
-            }else {
+            } else {
                 // プレイヤーIDをセット
                 dispatch(setPlayerIdAction(resObj.playerId));
                 // ルームIDをセット
@@ -119,12 +124,12 @@ export default function Socket(props) {
                 dispatch(setOwnerAction(resObj.isOwner));
                 // アビリティをセット
                 let abilities = [];
-                for(let a of resObj.abilities) {
+                for (let a of resObj.abilities) {
                     abilities.push(setAbility(a));
                 }
                 await dispatch(setResAbilityAction(abilities));
-                if(!selector.room.isCpuMatch) {
-                    roomInfo({roomId: resObj.roomId, playerId: resObj.playerId});
+                if (!selector.room.isCpuMatch) {
+                    roomInfo({ roomId: resObj.roomId, playerId: resObj.playerId });
                 }
             }
         });
@@ -149,10 +154,10 @@ export default function Socket(props) {
 
             ability.abilityId = resAbility.abilityId;
             ability.status = resAbility.status;
-            if(resAbility.remaining < 0) {
+            if (resAbility.remaining < 0) {
                 ability.max = "";
                 ability.remaining = "";
-            }else {
+            } else {
                 ability.max = "/" + resAbility.remaining;
                 ability.remaining = resAbility.remaining;
             }
@@ -172,74 +177,74 @@ export default function Socket(props) {
         const updateAbility = (resAbility) => {
             let ability = searchAbility(resAbility.abilityId, "select");
             ability.status = resAbility.status;
-            if(resAbility.remaining < 0) {
+            if (resAbility.remaining < 0) {
                 ability.remaining = "";
-            }else {
+            } else {
                 ability.remaining = resAbility.remaining;
             }
         };
 
         // アビリティ検索
         const searchAbility = (id, mode) => {
-            let bstAbility, atkAbility, defAbility, jamAbility,  cnfAbility;
+            let bstAbility, atkAbility, defAbility, jamAbility, cnfAbility;
 
-            switch(mode) {
+            switch (mode) {
                 // 定数定義のアビリティから検索
                 case "const":
-                    bstAbility = Constants.BST_ABILITIES.find((a) => {return a.abilityId === id});
-                    atkAbility = Constants.ATK_ABILITIES.find((a) => {return a.abilityId === id});
-                    defAbility = Constants.RCV_ABILITIES.find((a) => {return a.abilityId === id});
-                    jamAbility = Constants.JAM_ABILITIES.find((a) => {return a.abilityId === id});
-                    cnfAbility = Constants.CNF_ABILITIES.find((a) => {return a.abilityId === id});
+                    bstAbility = Constants.BST_ABILITIES.find((a) => { return a.abilityId === id });
+                    atkAbility = Constants.ATK_ABILITIES.find((a) => { return a.abilityId === id });
+                    defAbility = Constants.RCV_ABILITIES.find((a) => { return a.abilityId === id });
+                    jamAbility = Constants.JAM_ABILITIES.find((a) => { return a.abilityId === id });
+                    cnfAbility = Constants.CNF_ABILITIES.find((a) => { return a.abilityId === id });
                     break;
                 // プレイヤーが所持しているアビリティから検索
                 case "select":
-                    bstAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
-                    atkAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
-                    defAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
-                    jamAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
-                    cnfAbility = selector.players.player.abilities.find((a) => {return a.abilityId === id});
+                    bstAbility = selector.players.player.abilities.find((a) => { return a.abilityId === id });
+                    atkAbility = selector.players.player.abilities.find((a) => { return a.abilityId === id });
+                    defAbility = selector.players.player.abilities.find((a) => { return a.abilityId === id });
+                    jamAbility = selector.players.player.abilities.find((a) => { return a.abilityId === id });
+                    cnfAbility = selector.players.player.abilities.find((a) => { return a.abilityId === id });
                     break;
                 default:
                     return {}
             }
 
-            if(bstAbility) {
+            if (bstAbility) {
                 return bstAbility;
-            }else if(atkAbility) {
+            } else if (atkAbility) {
                 return atkAbility;
-            }else if(defAbility) {
+            } else if (defAbility) {
                 return defAbility;
-            }else if(jamAbility) {
+            } else if (jamAbility) {
                 return jamAbility;
-            }else if(cnfAbility) {
+            } else if (cnfAbility) {
                 return cnfAbility;
             }
         };
 
         const setPlayers = (value) => {
-            return new Promise((resolve, reject)=>{
+            return new Promise((resolve, reject) => {
                 dispatch(setPlayersAction(value));
                 resolve();
             })
         };
 
         // ゲーム開始前に全プレイヤーの情報をセットし、ロビー画面に移動
-        socket.on('game/room_info', function(msg) {
+        socket.on('game/room_info', function (msg) {
             console.log("game/roomInfo:");
             console.log(msg);
             resObj = JSON.parse(msg);
 
-            setPlayers(resObj.players).then(()=>{
-                if(resObj.gameMode !== Constants.CPU_MATCH) {
-                    if(selector.game.leaveLobbyFlg === false) {
+            setPlayers(resObj.players).then(() => {
+                if (resObj.gameMode !== Constants.CPU_MATCH) {
+                    if (selector.game.leaveLobbyFlg === false) {
                         // オーナーフラグを更新
-                        let player = selector.players.players.find((p) => {return p.playerId === selector.players.player.playerId});
+                        let player = selector.players.players.find((p) => { return p.playerId === selector.players.player.playerId });
                         dispatch(setOwnerAction(player.isOwner));
                         console.log(selector.players.player);
                         dispatch(push('/Lobby'));
                         console.log("ロビー画面に移動しました");
-                    }else {
+                    } else {
                         dispatch(push('/'));
                         console.log("トップ画面に移動しました");
                         dispatch(setLeaveLobbyAction(false));
@@ -248,14 +253,14 @@ export default function Socket(props) {
             });
         });
 
-        socket.on('game/start', function(msg) {
+        socket.on('game/start', function (msg) {
             console.log("game/start:");
             console.log(msg);
             resObj = JSON.parse(msg);
             console.log(resObj);
             dispatch(setPhaseTimesAction(resObj.phaseTimes));
             dispatch(setGoalAction(resObj.goalCoin));
-            nextTurn({roomId: resObj.roomId, playerId: selector.players.player.playerId});
+            nextTurn({ roomId: resObj.roomId, playerId: selector.players.player.playerId });
         });
 
         // ゲームに必要な情報をセット
@@ -274,9 +279,9 @@ export default function Socket(props) {
         const moveGame = () => {
             dispatch(push('/Game'));
         };
-        
+
         // 次のターンに遷移
-        socket.on('game/next_turn', function(msg) {
+        socket.on('game/next_turn', function (msg) {
             console.log("game/next_turn:")
             console.log(msg);
             resObj = JSON.parse(msg);
@@ -286,10 +291,10 @@ export default function Socket(props) {
             resObj.auctionCardValues = changeCode(resObj.auctionCardValues, 'auction');
             dispatch(setTurnAction(resObj.currentTurn));
             // ロビー画面（フェーズが始まっていない状態）の場合のみ、ゲーム画面に遷移
-            if(selector.game.phase === '') {
+            if (selector.game.phase === '') {
                 setGame(resObj, moveGame);
-            // ゲーム中の場合は必要情報をセットのみ
-            }else {
+                // ゲーム中の場合は必要情報をセットのみ
+            } else {
                 dispatch(setCardsAction(resObj.cards));
                 dispatch(setCoinAction(resObj.coin));
                 dispatch(setTargetAction(resObj.targetCard));
@@ -299,7 +304,7 @@ export default function Socket(props) {
         });
 
         // フェーズ遷移時の情報更新
-        socket.on('game/update_state', function(msg) {
+        socket.on('game/update_state', function (msg) {
             console.log("game/update_state:");
             console.log(msg);
             resObj = JSON.parse(msg);
@@ -309,13 +314,13 @@ export default function Socket(props) {
             let ablMessages = selector.game.ablMessages;
             let fluctParams = selector.game.fluctParams;
 
-            for(let p of resObj.players) {
+            for (let p of resObj.players) {
                 let abilities = []; // アビリティ配列
                 let ablDisplay = {}; // アビリティメッセージ用オブジェクト
 
                 // 発動アビリティをセット
-                if(p.firedAbilities.length > 0) {
-                    for(let a of p.firedAbilities) {
+                if (p.firedAbilities.length > 0) {
+                    for (let a of p.firedAbilities) {
                         let ablMessage = {
                             type: "", // 発動アビリティタイプ
                             message: "", // 発動メッセージ
@@ -331,11 +336,11 @@ export default function Socket(props) {
                         abilities.push(setAbility(a));
                         // アビリティメッセージをセット
                         resObject = searchAbility(a.abilityId, "const");
-                        ablDisplay = resObject.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE});
+                        ablDisplay = resObject.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE });
                         ablMessage.type = a.type;
                         ablMessage.message = p.playerName + selector.msg.lang.FIRED_ABILITY_MSG1 +
-                                            ablDisplay.name + selector.msg.lang.FIRED_ABILITY_MSG2;
-                        switch(ablDisplay.fired_msg.length) {
+                            ablDisplay.name + selector.msg.lang.FIRED_ABILITY_MSG2;
+                        switch (ablDisplay.fired_msg.length) {
                             case 1:
                                 ablMessage.effect = ablDisplay.fired_msg[0];
                                 break;
@@ -350,35 +355,37 @@ export default function Socket(props) {
                         ablMessages.push(ablMessage);
 
                         // 自分のアビリティにステータスを反映する
-                        if(p.playerId === selector.players.player.playerId) {
+                        if (p.playerId === selector.players.player.playerId) {
                             let pAbilities = selector.players.player.abilities;
-                            for(let pa of pAbilities) {
-                                if(pa.abilityId === a.abilityId) {
+                            for (let pa of pAbilities) {
+                                if (pa.abilityId === a.abilityId) {
                                     pa.status = a.status;
                                 }
                             }
                         }
                     }
                     p.firedAbilities = abilities;
-                }else {
+                } else {
                     p.firedAbilities.length = 0;
                 }
             }
 
-            for(let p of resObj.players) {
+            for (let p of resObj.players) {
                 // 変動パラメータ
-                if(p.fluctuationParameters.length > 0) {
+                if (p.fluctuationParameters.length > 0) {
                     // 変動パラメータキューに追加
-                    for(let f of p.fluctuationParameters) {
-                        console.log(fluctQueues.find((f) => {return f.queue.playerId === p.playerId}));
-                        fluctQueues.find((f) => {return f.queue.playerId === p.playerId}).enqueue({key: f.key, value: f.value});
+                    for (let f of p.fluctuationParameters) {
+                        console.log("===fluctQueues===");
+                        console.log(fluctQueues);
+                        console.log(fluctQueues.find((q) => { return q.queue.playerId === p.playerId }));
+                        fluctQueues.find((q) => { return q.queue.playerId === p.playerId }).enqueue({ key: f.key, value: f.value });
                         // アビリティメッセージに追加
                         let coin = Number(f.value);
                         let fluctValue = '';
-                        if(coin !== 0) {
-                            if(coin < 0) {
+                        if (coin !== 0) {
+                            if (coin < 0) {
                                 fluctValue = coin + selector.msg.lang.COIN;
-                            }else if(coin > 0) {
+                            } else if (coin > 0) {
                                 fluctValue = "+" + coin + selector.msg.lang.COIN;
                             }
                             ablMessages = searchPushAblMsg(ablMessages, f.trigger.causedBy, f.trigger.id, p.playerName, fluctValue);
@@ -391,7 +398,7 @@ export default function Socket(props) {
             dispatch(setPlayersAction(resObj.players));
             // 変動パラメータをstoreにセット
             console.log(fluctQueues);
-            dispatch(setAblMessagesAction(fluctQueues));
+            dispatch(setFluctQueuesAction(fluctQueues));
             // アビリティメッセージをstoreにセット
             dispatch(setAblMessagesAction(ablMessages.filter((a) => a.time > 0)));
             // アビリティエラーメッセージをリセット
@@ -405,14 +412,14 @@ export default function Socket(props) {
 
         // アビリティメッセージ検索 & メッセージ追加
         const searchPushAblMsg = (ablMessages, triggerPlayerId, abilityId, fluctPlayerName, fluctValue) => {
-            if(ablMessages.find((a) => {return (a.triggerPlayerId === triggerPlayerId) && (a.abilityId === abilityId)})) {
-                ablMessages.find((a) => {return (a.triggerPlayerId === triggerPlayerId) && (a.abilityId === abilityId)}).effect += (fluctPlayerName + ':' + fluctValue + ' ');
+            if (ablMessages.find((a) => { return (a.triggerPlayerId === triggerPlayerId) && (a.abilityId === abilityId) })) {
+                ablMessages.find((a) => { return (a.triggerPlayerId === triggerPlayerId) && (a.abilityId === abilityId) }).effect += (fluctPlayerName + ':' + fluctValue + ' ');
             }
             return ablMessages;
         };
 
         // 自分の手札とコインをセット（更新）
-        socket.on('game/player_info', function(msg) {
+        socket.on('game/player_info', function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 手札を更新
@@ -424,10 +431,10 @@ export default function Socket(props) {
         });
 
         // 誰がいくら入札したかをメッセージに表示する
-        socket.on('game/bid', function(msg) {
+        socket.on('game/bid', function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
-            if(resObj.remainingTime) {
+            if (resObj.remainingTime) {
                 // 残り時間を再設定
                 dispatch(setRemainingTimeAction(resObj.remainingTime));
                 dispatch(setRemTimeFlgAction(true));
@@ -439,22 +446,22 @@ export default function Socket(props) {
         });
 
         // 誰が何円で落札したか
-        socket.on('game/buy_notify', function(msg) {
+        socket.on('game/buy_notify', function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
 
             // 全員がパスをした場合
-            if(resObj.isPassAll) {
+            if (resObj.isPassAll) {
                 // 誰も入札しなかったと表示
                 dispatch(setMessageAction(selector.msg.lang.AUC_RESULT_MSG0));
-            }else {
+            } else {
                 // オークションカード配列の中身を表示
                 let aucMessage = arrayOutput(resObj.auctionCardValues);
                 // 誰がいくらで落札したかを表示
-                if(selector.msg.lang.LANGUAGE === 'Chinese') {
+                if (selector.msg.lang.LANGUAGE === 'Chinese') {
                     dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + resObj.coin
                         + selector.msg.lang.AUC_RESULT_MSG2 + aucMessage + selector.msg.lang.AUC_RESULT_MSG3));
-                }else {
+                } else {
                     dispatch(setMessageAction(resObj.playerName + selector.msg.lang.AUC_RESULT_MSG1 + aucMessage
                         + selector.msg.lang.AUC_RESULT_MSG2 + resObj.coin + selector.msg.lang.AUC_RESULT_MSG3));
                 }
@@ -462,19 +469,19 @@ export default function Socket(props) {
         });
 
         // 落札したプレイヤーのコインとカード情報を更新する
-        socket.on('game/buy_update', async function(msg) {
+        socket.on('game/buy_update', async function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 画面表示用に掛け算と割り算を変換
             changeCode(resObj.cards, 'display');
 
             // 落札成功アニメーション
-            if(resObj.isSuccessed) {
+            if (resObj.isSuccessed) {
                 dispatch(setAucResultAction(Constants.SUCCESS));
             }
 
             // 最高入札額をリセット
-            dispatch(setHighestAction({playerName: '', coin: 0}));
+            dispatch(setHighestAction({ playerName: '', coin: 0 }));
             // 返された所持コインをセット
             dispatch(setCoinAction(resObj.coin));
             // 返された手札をセット
@@ -490,11 +497,11 @@ export default function Socket(props) {
             }, 1500);
         });
 
-        socket.on('game/calculate_result', async function(msg) {
+        socket.on('game/calculate_result', async function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg)
 
-            if(resObj.actionResult === Constants.CORRECT) {
+            if (resObj.actionResult === Constants.CORRECT) {
                 // 正解アニメーション
                 dispatch(setCalcResultAction(Constants.SUCCESS));
                 console.log(selector.game.calcResult);
@@ -502,13 +509,13 @@ export default function Socket(props) {
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG1));
                 // ANSWERボタン、PASSボタンを押せないようにする（二度回答させない）
                 dispatch(setCalcBtnAction(false));
-            }else if(resObj.actionResult === Constants.INCORRECT) {
+            } else if (resObj.actionResult === Constants.INCORRECT) {
                 // 不正解アニメーション
                 dispatch(setCalcResultAction(Constants.FAILED));
                 console.log(selector.game.calcResult);
                 // 不正解メッセージを表示
                 dispatch(setMessageAction(selector.msg.lang.CALC_RESULT_MSG0));
-            }else if(resObj.actionResult === Constants.INC_PASS) {
+            } else if (resObj.actionResult === Constants.INC_PASS) {
                 // 不正解アニメーション
                 dispatch(setCalcResultAction(Constants.FAILED));
                 console.log(selector.game.calcResult);
@@ -519,10 +526,10 @@ export default function Socket(props) {
             }
 
             // パス状態
-            if(resObj.actionResult === Constants.PASS) {
+            if (resObj.actionResult === Constants.PASS) {
                 // ボタンを押せないようにする
                 dispatch(setCalcBtnAction(false));
-            }else {
+            } else {
                 await setTimeout(() => {
                     dispatch(setCalcResultAction(Constants.NONE));
                 }, 1500);
@@ -537,25 +544,25 @@ export default function Socket(props) {
             }
         });
 
-        socket.on('game/ready_ability', function(msg) {
+        socket.on('game/ready_ability', function (msg) {
             console.log("game/ready_ability:");
             console.log(msg);
             resObj = JSON.parse(msg);
             // エラーがある時
-            if(resObj.code) {
+            if (resObj.code) {
                 // 使用できないタイミングのエラー（リロードアビリティ）
-                if(resObj.code === Constants.BAD_TIMING_RELOAD_ERR) {
+                if (resObj.code === Constants.BAD_TIMING_RELOAD_ERR) {
                     dispatch(setAblErrMsgAction(selector.msg.lang.BAD_TIMING_ABILITY_AUC_ERR));
-                // 使用できないタイミングのエラー（カタストロフィアビリティ）
-                }else if(resObj.code === Constants.NOT_MEET_TURN_CATASTROPHE_ERR) {
+                    // 使用できないタイミングのエラー（カタストロフィアビリティ）
+                } else if (resObj.code === Constants.NOT_MEET_TURN_CATASTROPHE_ERR) {
                     dispatch(setAblErrMsgAction(selector.msg.lang.NOT_MEET_ABILITY_3TURN_ERR));
                 }
-            }else {
+            } else {
                 updateAbility(resObj);
             }
         });
 
-        socket.on('game/correct_players', function(msg) {
+        socket.on('game/correct_players', function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             // 返された正解者をセット
@@ -563,14 +570,14 @@ export default function Socket(props) {
             // ANSWERボタン、PASSボタンを押せるように戻す（パスを押した時用）
             dispatch(setCalcBtnAction(true));
             // 正解者がいない場合はターゲットスキップフラグを立てる
-            if(!resObj.existsCorrect) {
+            if (!resObj.existsCorrect) {
                 dispatch(setTargetSkipAction(true));
-            }else {
+            } else {
                 dispatch(setTargetSkipAction(false));
             }
         });
 
-        socket.on('game/finish_game', function(msg) {
+        socket.on('game/finish_game', function (msg) {
             console.log(msg);
             resObj = JSON.parse(msg);
             dispatch(setMessageAction(''));
@@ -581,8 +588,10 @@ export default function Socket(props) {
 
 
     return (
-        <CTX.Provider value={{joinCpuMatch, joinQuickMatch, createMatch, joinFriendMatch, roomInfo,
-         start, nextTurn, bid, buy, calculate, useAbility}}>
+        <CTX.Provider value={{
+            joinCpuMatch, joinQuickMatch, createMatch, joinFriendMatch, roomInfo,
+            start, nextTurn, bid, buy, calculate, useAbility
+        }}>
             {props.children}
         </CTX.Provider>
     )
