@@ -33,6 +33,7 @@ import AucMobileComponent from './components/AucMobileComponent';
 import Skeleton from '@mui/material/Skeleton';
 
 import successAuction from '../assets/success_auction.png';
+import { setPlayersAction } from '../redux/players/actions';
 
 const Game = () => {
     const classes = useStyles();
@@ -58,8 +59,6 @@ const Game = () => {
     const [message, setMessage] = React.useState(selector.game.message);
     const [messages, setMessages] = React.useState(selector.game.messages);
     const [ablMessages, setAblMessages] = React.useState(selector.game.ablMessages);
-    const [fluctParams, setFluctParams] = React.useState(selector.game.fluctParams);
-    const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues); // 変動パラメータ用キュー
     
 
     const matches = useMediaQuery("(min-width:520px)");
@@ -68,26 +67,18 @@ const Game = () => {
         setPlayer(selector.players.player);
         setRoomId(selector.room.roomId);
         setMyPlayer(selector.players.players.find((my) => { return my.playerId === selector.players.player.playerId }));
-        console.log("========");
-        console.log(myPlayer);
-        console.log("========");
         setOtherPlayers(selector.players.players.filter((other) => { return other.playerId !== selector.players.player.playerId }));
-        console.log("========");
-        console.log(otherPlayers);
-        console.log("========");
         setTurn(selector.game.turn);
         setMessage(selector.game.message);
         setMessages(selector.game.messages);
         setAblMessages(selector.game.ablMessages);
-        setFluctParams(selector.game.fluctParams);
-        setFluctQueues(selector.game.fluctQueues);
         setTargetCard(selector.game.targetCard);
         setAuctionCards(selector.game.auctionCards);
         setAucBtnFlg(selector.game.aucBtnFlg);
         setCalcBtnFlg(selector.game.calcBtnFlg);
         setFinishFlg(selector.game.finishFlg);
     }, [selector.players.player, selector.players.player.cards, selector.players.players, selector.room.roomId,
-    selector.game.message, selector.game.messages, selector.game.ablMessages, selector.game.fluctParams, selector.game.fluctQueues,
+    selector.game.message, selector.game.messages, selector.game.ablMessages,
     selector.game.targetCard, selector.game.auctionCards, selector.game.turn,
     selector.game.aucBtnFlg, selector.game.calcBtnFlg, selector.game.finishFlg]);
 
@@ -111,34 +102,51 @@ const Game = () => {
         return () => clearInterval(interval);
     }, [ablMessages]);
 
-    // 変動パラメータ表示時間管理
+    // 変動パラメータキューのセットと監視
     React.useEffect(() => {
-        const interval = setInterval(() => {
-            for (let f of fluctParams) {
-                if (f.time > 0) {
-                    f.time--;
-                }
-                console.log(f.name + " " + f.time);
-            }
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [fluctParams]);
-
-    /** キューのセットと監視 */
-    React.useEffect(() => {
+        let fluctQueues = selector.game.fluctQueues;
         for(let p of selector.players.players) {
             fluctQueues.push(new Queue(p.playerId));
         }
         dispatch(setFluctQueuesAction(fluctQueues));
-        const interval = setInterval(operateQueue, 5000);
+
+        const interval = setInterval(operateQueue, 3000);
     }, []);
 
+    // キューのセット & 先頭を削除
     const operateQueue = () => {
-        for(let q of fluctQueues) {
-            if(q.queue.fluctParams.length !== 0) {
-                q.dequeue();
+        let mPlayer = selector.players.players.find((my) => {return my.playerId === player.playerId});
+        let oPlayers = selector.players.players.filter((other) => {return other.playerId !== player.playerId});
+
+        mPlayer.fluctCard = getFluctParam(myPlayer.playerId, Constants.FLUCT_CARD);
+        mPlayer.fluctCoin = getFluctParam(myPlayer.playerId, Constants.FLUCT_COIN);
+        setMyPlayer(mPlayer);
+        console.log(myPlayer);
+
+        for(let p of oPlayers) {
+            console.log("プレイヤーID:" + p.playerId);
+            p.fluctCard = getFluctParam(p.playerId, Constants.FLUCT_CARD);
+            p.fluctCoin = getFluctParam(p.playerId, Constants.FLUCT_COIN);
+            console.log(p);
+        }
+        setOtherPlayers(oPlayers);
+    }
+
+    // 該当プレイヤーの差分パラメータを取り出し
+    const getFluctParam = (playerId, key) => {
+        let fluctValue;
+        let fluctParam = {code: '?', value: ''};
+
+        if (selector.game.fluctQueues.length > 0) {
+            let fq = selector.game.fluctQueues.find((f) => { return f.queue.playerId === playerId });
+            fluctValue = fq.queue.fluctParams.find((p) => { return p.key === key });
+            if (fluctValue) {
+                fluctParam = {code: fluctValue.value.slice(0, 1), value: fluctValue.value};
+                fq.dequeue();
             }
         }
+
+        return fluctParam;
     }
 
     return (
@@ -303,7 +311,7 @@ const Game = () => {
                         ? <GoalMessageMobile>{selector.game.goalCoin + selector.msg.lang.COIN + selector.msg.lang.WIN_MSG}</GoalMessageMobile>
                         : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
                     }
-                    <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} fluctQueues={fluctQueues} />
+                    <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
                     <Grid container sx={{ marginBottom: '5%', height: '25%', display: 'flex', alignItems: 'center' }}>
                         <Grid item xs={3}>
                             {(targetCard !== '　'

@@ -14,6 +14,14 @@ const initialState = {
             coin: 0, // 自分の所持コイン
             isOwner: false, // ルームオーナー権限
             abilities: [], // アビリティ配列
+            fluctCard: { // 差分カード
+                code: '?',
+                value: '',
+            },
+            fluctCoin: { // 差分コイン
+                code: '?',
+                value: '',
+            },
         },
         players: [], // プレイヤー一覧
         ranking: [], // ランキング

@@ -528,6 +528,26 @@ export const PlayerInfoIconMobile = styled('img')({
   width: '20%',
 });
 
+// 差分パラメータ（プラス）
+export const FluctPlusMobile = styled('span')({
+  margin: 0,
+  padding: 0,
+  fontSize: '1em',
+  fontWeight: 100,
+  color: blue[500],
+  //background: 'linear-gradient(25deg, #1976d2, #000000)'
+});
+
+// 差分パラメータ（マイナス）
+export const FluctMinusMobile = styled('span')({
+  margin: 0,
+  padding: 0,
+  fontSize: '1em',
+  fontWeight: 100,
+  color: red[500],
+  //background: 'linear-gradient(25deg, #ff1744, #000000)'
+});
+
 // アビリティ情報（プレイヤー一覧）
 export const AbilityInfoCardMobile = styled(Card) ({
   'whiteSpace': 'nowrap',

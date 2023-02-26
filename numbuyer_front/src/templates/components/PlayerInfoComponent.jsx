@@ -5,7 +5,7 @@ import * as Constants from '../../constants';
 import PlayerInfoAbilityComponent from './organisms/PlayerInfoAbilityComponent';
 
 import { MyPlayerList, PlayerList, PlayerName, PlayerInfoIcon, PlayerInfo } from '../theme';
-import { MyPlayerListMobile, PlayerListMobile, PlayerNameMobile, PlayerInfoIconMobile, PlayerInfoMobile } from '../themeMobile';
+import { MyPlayerListMobile, PlayerListMobile, PlayerNameMobile, PlayerInfoIconMobile, PlayerInfoMobile, FluctPlusMobile, FluctMinusMobile } from '../themeMobile';
 
 import coin from '../../assets/coin.png';
 import card from '../../assets/card.png';
@@ -19,14 +19,12 @@ const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);
     const [myAbilities, setMyAbilities] = React.useState([]); // 自分の所持アビリティ
     const prvAbilities = Constants.PRV_ABILITIES; // 非公開アビリティ
-    const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues); // 差分パラメータ配列
 
     const matches = useMediaQuery("(min-width:520px)");
 
     React.useEffect(() => {
         setMyAbilities(selector.players.player.abilities);
-        setFluctQueues(selector.game.fluctQueues);
-    }, [selector.players.player.abilities, selector.game.fluctQueues]);
+    }, [selector.players.player.abilities]);
 
     React.useEffect(() => {
         // 発動アビリティが1つの時に片方を「???」にする
@@ -37,17 +35,7 @@ const PlayerInfoComponent = (props) => {
         }
     }, [props.players]);
 
-    const getFluctValue = (playerId, key) => {
-        let fluctParam;
-        let fluctValue = "";
-        if(fluctQueues.length>0) {
-            fluctParam = fluctQueues.find((f) => {return f.queue.playerId === playerId}).queue.fluctParams.find((p) => {return p.key === key});
-            if(fluctParam) {
-                fluctValue = fluctParam.value;
-            }
-        }
-        return fluctValue;
-    }
+
 
     return (
         <Typography>
@@ -115,7 +103,7 @@ const PlayerInfoComponent = (props) => {
                 </div>
                 :
                 <div>
-                    <Grid container sx={{marginBottom: '2%'}}>
+                    <Grid container sx={{ marginBottom: '2%' }}>
                         {props.myPlayer &&
                             <Grid item xs={3}>
                                 <MyPlayerListMobile>
@@ -124,12 +112,22 @@ const PlayerInfoComponent = (props) => {
                                         <Grid item xs={6}>
                                             <PlayerInfoIconMobile src={card} />
                                             <PlayerInfoMobile>{props.myPlayer.cardNum}</PlayerInfoMobile>
-                                            <PlayerInfoMobile>{getFluctValue(props.myPlayer.playerId, Constants.FLUCT_CARD)}</PlayerInfoMobile>
+                                            {(props.myPlayer.fluctCard && props.myPlayer.fluctCard.code === '+') &&
+                                                <FluctPlusMobile> {props.myPlayer.fluctCard.value}</FluctPlusMobile>
+                                            }
+                                            {(props.myPlayer.fluctCard && props.myPlayer.fluctCard.code === '-') &&
+                                                <FluctMinusMobile> {props.myPlayer.fluctCard.value}</FluctMinusMobile>
+                                            }
                                         </Grid>
                                         <Grid item xs={6}>
                                             <PlayerInfoIconMobile src={coin} />
                                             <PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
-                                            <PlayerInfoMobile>{getFluctValue(props.myPlayer.playerId, Constants.FLUCT_COIN)}</PlayerInfoMobile>
+                                            {(props.myPlayer.fluctCoin && props.myPlayer.fluctCoin.code === '+') &&
+                                                <FluctPlusMobile> {props.myPlayer.fluctCoin.value}</FluctPlusMobile>
+                                            }
+                                            {(props.myPlayer.fluctCoin && props.myPlayer.fluctCoin.code === '-') &&
+                                                <FluctMinusMobile> {props.myPlayer.fluctCoin.value}</FluctMinusMobile>
+                                            }
                                         </Grid>
                                     </Grid>
                                     {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
@@ -158,42 +156,52 @@ const PlayerInfoComponent = (props) => {
                         }
                         {props.players && props.players.map((value) => (
                             <Grid item xs={3}>
-                            <PlayerListMobile key={value.playerId}>
-                                <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
-                                <Grid container>
-                                    <Grid item xs={6}>
-                                        <PlayerInfoIconMobile src={card} />
-                                        <PlayerInfoMobile>{value.cardNum}</PlayerInfoMobile>
-                                        <PlayerInfoMobile>{getFluctValue(value.playerId, Constants.FLUCT_CARD)}</PlayerInfoMobile>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <PlayerInfoIconMobile src={coin} />
-                                        <PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
-                                        <PlayerInfoMobile>{getFluctValue(value.playerId, Constants.FLUCT_COIN)}</PlayerInfoMobile>
-                                    </Grid>
-                                </Grid>
-                                {(!value.firedAbilities || value.firedAbilities.length === 0) ?
-                                    <div>
-                                        <Grid container>
-                                            {prvAbilities.map((pa) => (
-                                                <Grid item xs={6} key={pa.abilityId}>
-                                                    <PlayerInfoAbilityComponent ability={pa} background={grey[400]} color={grey[700]} />
-                                                </Grid>
-                                            ))}
+                                <PlayerListMobile key={value.playerId}>
+                                    <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
+                                    <Grid container>
+                                        <Grid item xs={6}>
+                                            <PlayerInfoIconMobile src={card} />
+                                            <PlayerInfoMobile>{value.cardNum}</PlayerInfoMobile>
+                                            {(value.fluctCard && value.fluctCard.code === '+') &&
+                                                <FluctPlusMobile> {value.fluctCard.value}</FluctPlusMobile>
+                                            }
+                                            {(value.fluctCard && value.fluctCard.code === '-') &&
+                                                <FluctMinusMobile> {value.fluctCard.value}</FluctMinusMobile>
+                                            }
                                         </Grid>
-                                    </div>
-                                    :
-                                    <div>
-                                        <Grid container>
-                                            {value.firedAbilities.map((fa) => (
-                                                <Grid item xs={6} key={fa.abilityId}>
-                                                    <PlayerInfoAbilityComponent ability={fa} bgImage={fa.selectedBgImage} color={fa.tagColor} textShadow='2px 4px 6px #000000' />
-                                                </Grid>
-                                            ))}
+                                        <Grid item xs={6}>
+                                            <PlayerInfoIconMobile src={coin} />
+                                            <PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
+                                            {(value.fluctCoin && value.fluctCoin.code === '+') &&
+                                                <FluctPlusMobile> {value.fluctCoin.value}</FluctPlusMobile>
+                                            }
+                                            {(value.fluctCoin && value.fluctCoin.code === '-') &&
+                                                <FluctMinusMobile> {value.fluctCoin.value}</FluctMinusMobile>
+                                            }
                                         </Grid>
-                                    </div>
-                                }
-                            </PlayerListMobile>
+                                    </Grid>
+                                    {(!value.firedAbilities || value.firedAbilities.length === 0) ?
+                                        <div>
+                                            <Grid container>
+                                                {prvAbilities.map((pa) => (
+                                                    <Grid item xs={6} key={pa.abilityId}>
+                                                        <PlayerInfoAbilityComponent ability={pa} background={grey[400]} color={grey[700]} />
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                        :
+                                        <div>
+                                            <Grid container>
+                                                {value.firedAbilities.map((fa) => (
+                                                    <Grid item xs={6} key={fa.abilityId}>
+                                                        <PlayerInfoAbilityComponent ability={fa} bgImage={fa.selectedBgImage} color={fa.tagColor} textShadow='2px 4px 6px #000000' />
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                    }
+                                </PlayerListMobile>
                             </Grid>
                         ))}
                     </Grid>

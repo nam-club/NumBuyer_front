@@ -9,7 +9,7 @@ import {
     setPhaseAction, setPhaseTimesAction, setRemainingTimeAction, setTargetAction, setAuctionAction, setMessageAction,
     setAnsPlayersAction, setHighestAction, setAucBtnAction, setCalcBtnAction, setTimeAction, setGoalAction, setCalcResultAction,
     setFinishGameAction, setAucResultAction, setTargetSkipAction, setRemTimeFlgAction, setAblMessagesAction, setHandsUpdateAction,
-    setFluctQueuesAction, setLeaveLobbyAction, setFluctParamsAction, setTurnAction
+    setFluctQueuesAction, setLeaveLobbyAction, setTurnAction
 } from './redux/game/actions';
 
 import { push } from 'connected-react-router';
@@ -84,7 +84,7 @@ export const useAbility = function (value) {
 export default function Socket(props) {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
-    const [fluctQueues, setFluctQueues] = React.useState(selector.game.fluctQueues);
+    const fluctQueues = selector.game.fluctQueues;
 
     if (!socket) {
         socket = io(process.env.REACT_APP_SOCKET_URL);
@@ -312,7 +312,6 @@ export default function Socket(props) {
             console.log(resObj);
 
             let ablMessages = selector.game.ablMessages;
-            let fluctParams = selector.game.fluctParams;
 
             for (let p of resObj.players) {
                 let abilities = []; // アビリティ配列
@@ -375,9 +374,6 @@ export default function Socket(props) {
                 if (p.fluctuationParameters.length > 0) {
                     // 変動パラメータキューに追加
                     for (let f of p.fluctuationParameters) {
-                        console.log("===fluctQueues===");
-                        console.log(fluctQueues);
-                        console.log(fluctQueues.find((q) => { return q.queue.playerId === p.playerId }));
                         fluctQueues.find((q) => { return q.queue.playerId === p.playerId }).enqueue({ key: f.key, value: f.value });
                         // アビリティメッセージに追加
                         let coin = Number(f.value);
@@ -403,8 +399,6 @@ export default function Socket(props) {
             dispatch(setAblMessagesAction(ablMessages.filter((a) => a.time > 0)));
             // アビリティエラーメッセージをリセット
             dispatch(setAblErrMsgAction(""));
-            // 変動パラメータをstoreにセット
-            dispatch(setFluctParamsAction(fluctParams.filter((f) => f.time > 0)));
             console.log(resObj.phase);
             // フェーズ情報をstoreにセット
             dispatch(setPhaseAction(resObj.phase));
