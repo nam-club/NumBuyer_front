@@ -582,11 +582,13 @@ const Top = () => {
                     {/* ウィンドウサイズがモバイル版 */}
                     <BackMobile>
                         {/* ロゴ画像 */}
-                        <div><MainLogoMobile src={logo} /></div>
                         <Grid container>
                             <Grid item xs={2} />
+                            <Grid item xs={1} >
+                                <div><MainLogoMobile src={logo} /></div>
+                            </Grid>
                             {/* タイトル画像 */}
-                            <Grid item xs={8}>
+                            <Grid item xs={7}>
                                 <MainTitleMobile src={title} />
                             </Grid>
                             {/* バージョン情報 */}

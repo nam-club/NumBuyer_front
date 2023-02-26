@@ -18,7 +18,8 @@ export const theme = createTheme({
 
 // メインロゴ
 export const MainLogoMobile = styled('img')({
-  width: '25%',
+  width: '92%',
+  marginRight: '8%',
 });
 
 // メインタイトル
@@ -34,7 +35,7 @@ export const VerMsgMobile = styled('p')({
 
 // トップ・ロビー画面の背景
 export const BackMobile = styled('div')({
-  paddingTop: '5%',
+  paddingTop: '15%',
 });
 
 // 言語設定ボタン
