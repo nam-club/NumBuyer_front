@@ -30,13 +30,12 @@ export const MainLogo = styled('img')({
 // メインタイトル
 export const MainTitle = styled('img')({
   width: '100%',
-  marginTop: '5%',
 });
 
 // バージョンメッセージ
-export const VerMsg = styled('p')({
-  marginTop: '50%',
+export const VerMsg = styled('div')({
   textAlign: 'left',
+  marginBottom: '12%',
 });
 
 // トップ・ロビー画面の背景

@@ -28,9 +28,9 @@ export const MainTitleMobile = styled('img')({
 });
 
 // バージョンメッセージ
-export const VerMsgMobile = styled('p')({
-  marginTop: '30%',
+export const VerMsgMobile = styled('div')({
   textAlign: 'left',
+  marginBottom: '12%',
 });
 
 // トップ・ロビー画面の背景
