@@ -47,14 +47,14 @@ export const Back = styled('div')({
 // 言語設定ボタン
 export const LangIcon = styled(GTranslateIcon)({
   color: grey[50],
-  fontSize: '3em',
+  fontSize: '2.8em',
   margin: 0,
 });
 
 // チュートリアルアイコン
 export const TutorialIcon = styled(MenuBookIcon)({
   color: grey[50],
-  fontSize: '3em',
+  fontSize: '2.8em',
   margin: 0,
 });
 
