@@ -29,7 +29,7 @@ export const MainTitleMobile = styled('img')({
 
 // バージョンメッセージ
 export const VerMsgMobile = styled('div')({
-  textAlign: 'left',
+  textAlign: 'right',
   marginBottom: '12%',
 });
 
