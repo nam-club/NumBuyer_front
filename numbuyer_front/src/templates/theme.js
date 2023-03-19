@@ -645,6 +645,7 @@ export const PlayerInfo = styled('span')({
 // プレイヤー情報アイコン
 export const PlayerInfoIcon = styled('img')({
   width: '8%',
+  height: '20%',
 });
 
 // アビリティ情報（プレイヤー一覧）

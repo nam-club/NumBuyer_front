@@ -173,7 +173,7 @@ const Top = () => {
 
     // プレイヤー名の入力
     const doChange = (e) => {
-        if (!e.target.value.match(Constants.NAME_EXP) && e.target.value.length <= 15) {
+        if (!e.target.value.match(Constants.NAME_EXP) && e.target.value.length <= Constants.NAME_LEN) {
             setName(e.target.value);
         }
         if (e.target.value !== '' && !e.target.value.match(Constants.NAME_EXP)) {
@@ -190,7 +190,7 @@ const Top = () => {
                         ConstantsMsg.Chinese.SYMBOL_ERR
                     ]));
                     // 15文字より多い
-                } else if (e.target.value.length > 15) {
+                } else if (e.target.value.length > Constants.NAME_LEN) {
                     dispatch(setErrMsgAction({ errMsg: selector.msg.lang.LENGTH_NAME_ERR }));
                     dispatch(setErrMsgVarsAction([
                         ConstantsMsg.English.LENGTH_NAME_ERR,

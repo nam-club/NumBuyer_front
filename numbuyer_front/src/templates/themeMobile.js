@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 
 import { grey, yellow, amber, blue, lightBlue, indigo, teal, cyan, red } from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
@@ -494,23 +494,15 @@ export const GoalMessageMobile = styled('span')({
   fontWeight: 'bold',
 });
 
-// プレイヤー一覧エリア（自分）
-export const MyPlayerListMobile = styled(Card)({
-  background: yellow[100],
-  color: grey[700],
-  margin: '0 5%',
-});
-
-// プレイヤー一覧エリア（自分以外）
+// プレイヤー一覧エリア
 export const PlayerListMobile = styled(Card)({
   background: grey[50],
   color: grey[700],
-  margin: '0 5%',
+  margin: '0 1%',
 });
 
 // プレイヤー名
-export const PlayerNameMobile = styled('p')({
-  fontSize: '1em',
+export const PlayerNameMobile = styled(Typography)({
   fontWeight: 'bold',
   margin: 0,
 });
@@ -526,6 +518,9 @@ export const PlayerInfoMobile = styled('span')({
 // プレイヤー情報アイコン
 export const PlayerInfoIconMobile = styled('img')({
   width: '20%',
+  height: '50%',
+  margin: '0 10%',
+  paddingBottom: 0
 });
 
 // 差分パラメータ（プラス）

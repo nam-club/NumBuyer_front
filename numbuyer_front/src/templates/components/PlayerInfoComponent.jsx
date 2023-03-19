@@ -5,15 +5,16 @@ import * as Constants from '../../constants';
 import PlayerInfoAbilityComponent from './organisms/PlayerInfoAbilityComponent';
 
 import { MyPlayerList, PlayerList, PlayerName, PlayerInfoIcon, PlayerInfo } from '../theme';
-import { MyPlayerListMobile, PlayerListMobile, PlayerNameMobile, PlayerInfoIconMobile, PlayerInfoMobile, FluctPlusMobile, FluctMinusMobile } from '../themeMobile';
+import { PlayerListMobile, PlayerNameMobile, PlayerInfoIconMobile, PlayerInfoMobile, FluctPlusMobile, FluctMinusMobile } from '../themeMobile';
 
 import coin from '../../assets/coin.png';
 import card from '../../assets/card.png';
 
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { grey } from '@mui/material/colors';
+import { grey, yellow } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
+import { makeStyles } from '@material-ui/core/styles';
 
 const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);
@@ -21,6 +22,14 @@ const PlayerInfoComponent = (props) => {
     const prvAbilities = Constants.PRV_ABILITIES; // 非公開アビリティ
 
     const matches = useMediaQuery("(min-width:520px)");
+
+    const useStyles = makeStyles((theme) => ({
+        name: {
+          fontSize: 'calc(0.05vw + 0.7em)', // 親要素の幅に合わせて文字サイズを変更する
+        },
+      }));
+
+    const classes = useStyles();
 
     React.useEffect(() => {
         setMyAbilities(selector.players.player.abilities);
@@ -34,8 +43,6 @@ const PlayerInfoComponent = (props) => {
             }
         }
     }, [props.players]);
-
-
 
     return (
         <Typography>
@@ -103,13 +110,13 @@ const PlayerInfoComponent = (props) => {
                 </div>
                 :
                 <div>
-                    <Grid container sx={{ marginBottom: '2%' }}>
+                    <Grid container>
                         {props.myPlayer &&
                             <Grid item xs={3}>
-                                <MyPlayerListMobile>
-                                    <PlayerNameMobile>{props.myPlayer.playerName}</PlayerNameMobile>
+                                <PlayerListMobile sx={{ background: yellow[100] }}>
+                                    <PlayerNameMobile noWrap className={classes.name} variant='p'>{props.myPlayer.playerName}</PlayerNameMobile>
                                     <Grid container>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                                             <PlayerInfoIconMobile src={card} />
                                             <PlayerInfoMobile>{props.myPlayer.cardNum}</PlayerInfoMobile>
                                             {(props.myPlayer.fluctCard && props.myPlayer.fluctCard.code === '+') &&
@@ -119,8 +126,8 @@ const PlayerInfoComponent = (props) => {
                                                 <FluctMinusMobile> {props.myPlayer.fluctCard.value}</FluctMinusMobile>
                                             }
                                         </Grid>
-                                        <Grid item xs={6}>
-                                            <PlayerInfoIconMobile src={coin} />
+                                        <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                            <PlayerInfoIconMobile src={coin} sx={{ marginBottom: '20%' }} />
                                             <PlayerInfoMobile>{props.myPlayer.coin}</PlayerInfoMobile>
                                             {(props.myPlayer.fluctCoin && props.myPlayer.fluctCoin.code === '+') &&
                                                 <FluctPlusMobile> {props.myPlayer.fluctCoin.value}</FluctPlusMobile>
@@ -151,15 +158,15 @@ const PlayerInfoComponent = (props) => {
                                             </Grid>
                                         </div>
                                     }
-                                </MyPlayerListMobile>
+                                </PlayerListMobile>
                             </Grid>
                         }
                         {props.players && props.players.map((value) => (
                             <Grid item xs={3}>
                                 <PlayerListMobile key={value.playerId}>
-                                    <PlayerNameMobile>{value.playerName}</PlayerNameMobile>
+                                    <PlayerNameMobile noWrap className={classes.name} variant='p'>{value.playerName}</PlayerNameMobile>
                                     <Grid container>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                                             <PlayerInfoIconMobile src={card} />
                                             <PlayerInfoMobile>{value.cardNum}</PlayerInfoMobile>
                                             {(value.fluctCard && value.fluctCard.code === '+') &&
@@ -169,8 +176,8 @@ const PlayerInfoComponent = (props) => {
                                                 <FluctMinusMobile> {value.fluctCard.value}</FluctMinusMobile>
                                             }
                                         </Grid>
-                                        <Grid item xs={6}>
-                                            <PlayerInfoIconMobile src={coin} />
+                                        <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                            <PlayerInfoIconMobile src={coin} sx={{ marginBottom: '20%' }} />
                                             <PlayerInfoMobile>{value.coin}</PlayerInfoMobile>
                                             {(value.fluctCoin && value.fluctCoin.code === '+') &&
                                                 <FluctPlusMobile> {value.fluctCoin.value}</FluctPlusMobile>
