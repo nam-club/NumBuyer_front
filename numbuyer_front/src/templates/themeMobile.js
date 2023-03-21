@@ -152,7 +152,7 @@ export const PlayerAbilityTooltipMobile = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.tooltip}`]: {
     maxWidth: '75%',
     marginLeft: '45%',
-    fontSize: '1em'
+    fontSize: '0.8em'
   },
 });
 
@@ -269,13 +269,13 @@ export const MessageBoxMobile = styled(Card)({
 
 // メッセージ本体
 export const NaviMessageMobile = styled('p')({
-  fontSize: '1em',
+  fontSize: '0.75em',
   margin: '2%',
 });
 
 // メッセージ本体（複数行））
 export const NaviMessagesMobile = styled('p')({
-  fontSize: '0.75em',
+  fontSize: '0.7em',
   margin: '2%',
 });
 
@@ -311,6 +311,7 @@ export const CardValueMobile = styled('p')({
 // オークションエリア
 export const AuctionAreaMobile = styled(Card)({
   padding: '1%',
+  margin: '0 1%'
 });
 
 // オークションカード
@@ -319,7 +320,7 @@ export const AuctionCardMobile = styled(Card)({
   color: grey[700],
   marginLeft: '3%',
   width: '30%',
-  height: '8vh',
+  height: '50%',
   'whiteSpace': 'nowrap',
 });
 
@@ -334,7 +335,7 @@ export const CoinFieldMobile = styled(TextField)({
 export const ChangeBidButtonMobile = styled(Button)({
   margin: '2%',
   padding: 0,
-  fontSize: '1.5em',
+  fontSize: '1em',
   width: '2%',
   color: grey[100],
   background: cyan[200],
@@ -411,7 +412,7 @@ export const NewTermCardMobile = styled(Button)({
 
 // 計算エリア
 export const CalcAreaMobile = styled(Card)({
-  margin: '2%',
+  margin: '0 1%',
   padding: '1%',
   background: grey[50],
 });
@@ -626,6 +627,7 @@ export const useStylesMobile = makeStyles((theme) => ({
   // オークションエリア
   auction_root: {
     padding: 10,
+    margin: '0 1%',
     background: grey[300],
     position: 'relative',
     top: 0,

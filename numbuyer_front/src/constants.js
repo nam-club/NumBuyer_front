@@ -33,11 +33,11 @@ export const FONT_SIZES = [
     },
     {
         lang: "Japanese",
-        fontSize: '0.8em'
+        fontSize: '0.7em'
     },
     {
         lang: "Chinese",
-        fontSize: '0.8em'
+        fontSize: '0.7em'
     }
 ];
 

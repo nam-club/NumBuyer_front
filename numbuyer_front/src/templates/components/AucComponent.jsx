@@ -190,8 +190,8 @@ const AucComponent = (props) => {
                                 <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
                                 id="standard-basic" value={fee} size="small"
                                 onChange={doChange} />
-                                <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
-                                <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
+                                <ChangeBidButton onClick={() => {changeBid('ー')}}>-</ChangeBidButton>
+                                <ChangeBidButton onClick={() => {changeBid('＋')}}>+</ChangeBidButton>
                             </div>
                         :   <AuctionArea></AuctionArea>
                         }  
@@ -224,10 +224,9 @@ const AucComponent = (props) => {
         <div>
             {(selector.game.phase === Constants.AUCTION_PH) ?
             <Card className={classes.auction_root + ' ' + (selector.game.phase === Constants.AUCTION_PH ? classes.auction_root_animation : '')}
-                sx={{margin: '2%'}}>
+                sx={{margin: '1%'}}>
                 <Grid container>
                     <Grid item xs={5}>
-                        <AreaTagMobile align="left" sx={{margin: '2%', color: grey[50]}}>{selector.msg.lang.AUCTION}</AreaTagMobile>
                         <WrapDisplay>
                             {props.auctionCards.auctionCards.map((value, index) => (
                                 <Slide direction="down" in={fade} mountOnEnter unmountOnExit timeout={1500} key={index}>
@@ -248,8 +247,8 @@ const AucComponent = (props) => {
                                 onChange={doChange} />
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <ChangeBidButtonMobile onClick={() => {changeBid('+')}}>+</ChangeBidButtonMobile>
-                                    <ChangeBidButtonMobile onClick={() => {changeBid('-')}}>-</ChangeBidButtonMobile>
+                                    <ChangeBidButtonMobile onClick={() => {changeBid('＋')}}>+</ChangeBidButtonMobile>
+                                    <ChangeBidButtonMobile onClick={() => {changeBid('ー')}}>-</ChangeBidButtonMobile>
                                 </Grid>
                             </Grid>
                             {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&

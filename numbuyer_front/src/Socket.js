@@ -376,7 +376,7 @@ export default function Socket(props) {
                     for (let f of p.fluctuationParameters) {
                         fluctQueues.find((q) => { return q.queue.playerId === p.playerId }).enqueue({ key: f.key, value: f.value });
                         // アビリティメッセージに追加
-                        let coin = Number(f.value);
+                        /*let coin = Number(f.value);
                         let fluctValue = '';
                         if (coin !== 0) {
                             if (coin < 0) {
@@ -385,7 +385,7 @@ export default function Socket(props) {
                                 fluctValue = "+" + coin + selector.msg.lang.COIN;
                             }
                             ablMessages = searchPushAblMsg(ablMessages, f.trigger.causedBy, f.trigger.id, p.playerName, fluctValue);
-                        }
+                        }*/
                     }
                 }
             }

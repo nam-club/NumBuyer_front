@@ -259,7 +259,7 @@ const CalcComponent = (props) => {
                 <div>
                     <Card
                         className={classes.hand + ' ' + ((selector.game.phase === Constants.CALCULATE_PH) && selector.game.handsUpdateFlg ? classes.hand_animation : '')}
-                        sx={{ margin: '0 2%', padding: '1%' }}>
+                        sx={{ margin: '0 1%', padding: '1%' }}>
                         <AreaTagMobile align="left">{selector.msg.lang.YOUR_CARDS}</AreaTagMobile>
                         {(hands && !(selector.game.firstTurnFlg && (selector.game.phase === Constants.READY_PH))
                         ) &&

@@ -29,7 +29,6 @@ import { grey } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
 
 import AblNavigationComponent from './components/AblNavigationComponent';
-import AucMobileComponent from './components/AucMobileComponent';
 import Skeleton from '@mui/material/Skeleton';
 
 import successAuction from '../assets/success_auction.png';
@@ -96,7 +95,6 @@ const Game = () => {
                 if (a.time > 0) {
                     a.time--;
                 }
-                console.log(a.message + " " + a.time);
             }
         }, 1000);
         return () => clearInterval(interval);
@@ -184,7 +182,7 @@ const Game = () => {
                         <Grid item xs={8}>
                             <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={message} messages={messages} />
                             {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
-                                <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]}
+                                <AblNavigationComponent background='linear-gradient(25deg, #ffca28, #000000)' color={grey[50]}
                                     message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                             }
                             {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
@@ -295,7 +293,7 @@ const Game = () => {
                     <Grid container>
                         {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
                             <Grid item xs={4}>
-                                <AblNavigationComponent bgImage={`url(${successAuction})`} color={grey[50]}
+                                <AblNavigationComponent background='linear-gradient(25deg, #ffca28, #000000)' color={grey[50]}
                                     message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
                             </Grid>
                         }
@@ -312,7 +310,7 @@ const Game = () => {
                         : <GoalMessageMobile>{selector.msg.lang.WIN_MSG + ' ' + selector.game.goalCoin + ' ' + selector.msg.lang.COIN}</GoalMessageMobile>
                     }
                     <PlayerInfoComponent myPlayer={myPlayer} players={otherPlayers} />
-                    <Grid container sx={{ marginBottom: '5%', height: '25%', display: 'flex', alignItems: 'center' }}>
+                    <Grid container sx={{ marginBottom: '1%', height: '25%', display: 'flex', alignItems: 'center' }}>
                         <Grid item xs={3}>
                             {(targetCard !== '　'
                                 && (

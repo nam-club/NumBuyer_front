@@ -55,7 +55,6 @@ const PlayerInfoAbilityComponent = (props) => {
                 </AbilityInfoCardMobile>
             :
                 <PlayerAbilityTooltipMobile
-                    arrow
                     PopperProps={{
                     disablePortal: true,
                     }}
@@ -63,7 +62,7 @@ const PlayerInfoAbilityComponent = (props) => {
                     open={openTip}
                     disableFocusListener
                     disableHoverListener
-                    placement="left-end"
+                    placement="bottom-start"
                     title={props.ability.display.find((d) => {return d.lang === selector.msg.lang.LANGUAGE}).comment}>
                     <AbilityInfoCardMobile size="large" variant="contained"
                     sx={{ background: props.background, color: props.color, backgroundImage: props.bgImage, 'textShadow': props.textShadow }}
