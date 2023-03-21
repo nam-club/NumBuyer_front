@@ -12,9 +12,9 @@ import reloadMessage from './assets/reloadMessage.png';
 import shutdown from './assets/shutdown.png';
 import shutdownMono from './assets/shutdownMono.png';
 import shutdownMessage from './assets/shutdownMessage.png';
-import catastrophe from './assets/catastrophe.png';
-import catastropheMono from './assets/catastropheMono.png';
-import catastropheMessage from './assets/catastropheMessage.png';
+import heavyFall from './assets/heavyFall.png';
+import heavyFallMono from './assets/heavyFallMono.png';
+import heavyFallMessage from './assets/heavyFallMessage.png';
 
 // ゲームモード
 export const QUICK_MATCH = 'QUICK_MATCH';
@@ -181,7 +181,7 @@ export const JAM_ABILITIES = [
         display: [
             {
                 lang: "English",
-                name: "Shut Down",
+                name: "ShutDown",
                 comment: "When you use 5 or more cards in your hand, stop everyone's answer phase when you answer correctly.[Passive Ability]",
                 fired_msg: ["The answer phase was terminated!"],
             },
@@ -213,27 +213,27 @@ export const CNF_ABILITIES = [
         display: [
             {
                 lang: "English",
-                name: "Catastrophe",
+                name: "HeavyFall",
                 comment: "Decrease the coins of everyone other than yourself by 10/20/30/40/50 coins (Can only be activated once during the game, and cannot be activated for 3 turns from the start of the game)[Active Ability]",
                 fired_msg: [""],
             },
             {
                 lang: "Japanese",
-                name: "カタストロフィ",
+                name: "大暴落",
                 comment: "自分以外の全員のコインを10/20/30/40/50コイン減らす(ゲーム中1回のみ発動可能でゲーム開始から3ターンは発動不可)[アクティブアビリティ]",
                 fired_msg: [""],
             },
             {
                 lang: "Chinese",
-                name: "灾难",
+                name: "大崩溃",
                 comment: "减少自己以外所有人的金币10/20/30/40/50金币（游戏中只能激活一次，游戏开始后3回合内不能激活）[主动技能]",
                 fired_msg: [""],
             },
         ],
-        bgImage: `url(${catastropheMono})`,
+        bgImage: `url(${heavyFallMono})`,
         bgColor: 'linear-gradient(25deg, #616161, #000000)',
-        selectedBgImage: `url(${catastrophe})`,
-        messageImage: `url(${catastropheMessage})`,
+        selectedBgImage: `url(${heavyFall})`,
+        messageImage: `url(${heavyFallMessage})`,
         tagColor: grey[50],
     },
 ];
@@ -308,7 +308,7 @@ export const INC_PASS = "incorrectWithPass";
 // レスポンスエラー
 export const NO_ROOM_ERR = "error.game.notFound"; // 存在しないルームID
 export const BAD_TIMING_RELOAD_ERR = "error.validation.ability.reload.invalidPhase"; // リロードアビリティはオークションフェーズに発動できない
-export const NOT_MEET_TURN_CATASTROPHE_ERR = "error.validation.ability.catastrophe.notMeetTurn"; // ゲーム開始から3ターン以内は発動できない（カタストロフィ）
+export const NOT_MEET_TURN_HEAVYFALL_ERR = "error.validation.ability.heavyFall.notMeetTurn"; // ゲーム開始から3ターン以内は発動できない（大暴落）
 
 // 変動パラメータ
 export const FLUCT_KEY_COIN = "fluctCoin";

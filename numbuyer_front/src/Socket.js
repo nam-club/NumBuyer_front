@@ -547,8 +547,8 @@ export default function Socket(props) {
                 // 使用できないタイミングのエラー（リロードアビリティ）
                 if (resObj.code === Constants.BAD_TIMING_RELOAD_ERR) {
                     dispatch(setAblErrMsgAction(selector.msg.lang.BAD_TIMING_ABILITY_AUC_ERR));
-                    // 使用できないタイミングのエラー（カタストロフィアビリティ）
-                } else if (resObj.code === Constants.NOT_MEET_TURN_CATASTROPHE_ERR) {
+                    // 使用できないタイミングのエラー（大暴落アビリティ）
+                } else if (resObj.code === Constants.NOT_MEET_TURN_HEAVYFALL_ERR) {
                     dispatch(setAblErrMsgAction(selector.msg.lang.NOT_MEET_ABILITY_3TURN_ERR));
                 }
             } else {
