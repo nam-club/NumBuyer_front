@@ -392,17 +392,17 @@ const Top = () => {
                         <Grid container alignItems="center">
                             <Grid item xs={3} />
                             <Grid item xs={6}>
-                                <Grid container>
+                                <Grid container sx={{ display: 'flex'}}>
                                     {/* ロゴ画像 */}
-                                    <Grid item xs={2}>
+                                    <Grid item xs={2} sx={{ alignSelf: 'center'}}>
                                         <MainLogo src={logo} />
                                     </Grid>
                                     {/* タイトル画像 */}
-                                    <Grid item xs={8}>
+                                    <Grid item xs={8} sx={{ alignSelf: 'center'}}>
                                         <MainTitle src={title} />
                                     </Grid>
                                     {/* バージョン情報 */}
-                                    <Grid item xs={2}>
+                                    <Grid item xs={2} sx={{ alignSelf: 'flex-end'}}>
                                         <VerMsg sx={{ color: grey[50], fontSize: '1.5em' }}>( {Constants.VERSION} )</VerMsg>
                                     </Grid>
                                 </Grid>
@@ -581,18 +581,21 @@ const Top = () => {
                 <>
                     {/* ウィンドウサイズがモバイル版 */}
                     <BackMobile>
-                        {/* ロゴ画像 */}
-                        <div><MainLogoMobile src={logo} /></div>
-                        <Grid container>
-                            <Grid item xs={2} />
+                        <Grid container sx={{ display: 'flex'}}>
+                            <Grid item xs={1.8} />
+                            {/* ロゴ画像 */}
+                            <Grid item xs={1.2} sx={{ alignSelf: 'center'}}>
+                                <div><MainLogoMobile src={logo} /></div>
+                            </Grid>
                             {/* タイトル画像 */}
-                            <Grid item xs={8}>
+                            <Grid item xs={7.2} sx={{ alignSelf: 'center'}}>
                                 <MainTitleMobile src={title} />
                             </Grid>
                             {/* バージョン情報 */}
-                            <Grid item xs={2}>
+                            <Grid item xs={0.8} sx={{ alignSelf: 'flex-end'}}>
                                 <VerMsgMobile sx={{ color: grey[50], fontSize: '0.75em' }}>( {Constants.VERSION} )</VerMsgMobile>
                             </Grid>
+                            <Grid item xs={1} />
                         </Grid>
                         <MenuCardMobile>
                             {/* プレイヤー名入力エリア */}
