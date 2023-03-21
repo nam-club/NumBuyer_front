@@ -190,8 +190,8 @@ const AucComponent = (props) => {
                                 <CoinField inputProps={{ style: {fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%'} } } 
                                 id="standard-basic" value={fee} size="small"
                                 onChange={doChange} />
-                                <ChangeBidButton onClick={() => {changeBid('ー')}}>-</ChangeBidButton>
-                                <ChangeBidButton onClick={() => {changeBid('＋')}}>+</ChangeBidButton>
+                                <ChangeBidButton onClick={() => {changeBid('-')}}>-</ChangeBidButton>
+                                <ChangeBidButton onClick={() => {changeBid('+')}}>+</ChangeBidButton>
                             </div>
                         :   <AuctionArea></AuctionArea>
                         }  
@@ -247,8 +247,8 @@ const AucComponent = (props) => {
                                 onChange={doChange} />
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <ChangeBidButtonMobile onClick={() => {changeBid('＋')}}>+</ChangeBidButtonMobile>
-                                    <ChangeBidButtonMobile onClick={() => {changeBid('ー')}}>-</ChangeBidButtonMobile>
+                                    <ChangeBidButtonMobile onClick={() => {changeBid('+')}}>+</ChangeBidButtonMobile>
+                                    <ChangeBidButtonMobile onClick={() => {changeBid('-')}}>-</ChangeBidButtonMobile>
                                 </Grid>
                             </Grid>
                             {((selector.game.phase === Constants.AUCTION_PH) && selector.msg.validFlg) &&

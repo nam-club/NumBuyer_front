@@ -282,7 +282,7 @@ export const NaviMessagesMobile = styled('p')({
 // スクロール表示（メッセージ）
 export const WrapMessageMobile = styled('div')({
   display: 'flex',
-  overflowY: 'scroll',
+  overflowX: 'scroll',
 });
 
 // 目標カード

@@ -298,7 +298,7 @@ const Game = () => {
                             </Grid>
                         }
                         {ablMessages.length > 0 && ablMessages.filter((a) => a.time > 0).map((am, index) => (
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <AblNavigationComponent key={index}
                                     background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
                             </Grid>
