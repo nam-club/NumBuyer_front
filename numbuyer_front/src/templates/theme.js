@@ -355,13 +355,13 @@ export const MessageBox = styled(Card)({
 
 // メッセージ本体
 export const NaviMessage = styled('p')({
-  fontSize: '1.5em',
+  fontSize: '1.2em',
   margin: 0,
 });
 
 // メッセージ本体（複数行）
 export const NaviMessages = styled('p')({
-  fontSize: '1.2em',
+  fontSize: '1em',
   margin: 0,
 });
 
@@ -644,8 +644,26 @@ export const PlayerInfo = styled('span')({
 
 // プレイヤー情報アイコン
 export const PlayerInfoIcon = styled('img')({
-  width: '8%',
-  height: '20%',
+  width: '20%',
+  margin: '0% 10% 10% 10%',
+});
+
+// 差分パラメータ（プラス）
+export const FluctPlus = styled('span')({
+  margin: 0,
+  padding: 0,
+  fontSize: '1.5em',
+  fontWeight: 100,
+  color: blue[500],
+});
+
+// 差分パラメータ（マイナス）
+export const FluctMinus = styled('span')({
+  margin: 0,
+  padding: 0,
+  fontSize: '1.5em',
+  fontWeight: 100,
+  color: red[500],
 });
 
 // アビリティ情報（プレイヤー一覧）

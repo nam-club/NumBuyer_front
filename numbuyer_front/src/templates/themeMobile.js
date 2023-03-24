@@ -531,7 +531,6 @@ export const FluctPlusMobile = styled('span')({
   fontSize: '1em',
   fontWeight: 100,
   color: blue[500],
-  //background: 'linear-gradient(25deg, #1976d2, #000000)'
 });
 
 // 差分パラメータ（マイナス）
@@ -541,7 +540,6 @@ export const FluctMinusMobile = styled('span')({
   fontSize: '1em',
   fontWeight: 100,
   color: red[500],
-  //background: 'linear-gradient(25deg, #ff1744, #000000)'
 });
 
 // アビリティ情報（プレイヤー一覧）

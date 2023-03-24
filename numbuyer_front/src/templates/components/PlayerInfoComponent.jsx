@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import * as Constants from '../../constants';
 import PlayerInfoAbilityComponent from './organisms/PlayerInfoAbilityComponent';
 
-import { MyPlayerList, PlayerList, PlayerName, PlayerInfoIcon, PlayerInfo } from '../theme';
+import { MyPlayerList, PlayerList, PlayerName, PlayerInfoIcon, PlayerInfo, FluctPlus, FluctMinus } from '../theme';
 import { PlayerListMobile, PlayerNameMobile, PlayerInfoIconMobile, PlayerInfoMobile, FluctPlusMobile, FluctMinusMobile } from '../themeMobile';
 
 import coin from '../../assets/coin.png';
@@ -51,11 +51,28 @@ const PlayerInfoComponent = (props) => {
                     {props.myPlayer &&
                         <MyPlayerList>
                             <PlayerName>{props.myPlayer.playerName}</PlayerName>
-                            <PlayerInfoIcon src={card} /><PlayerInfo>×{props.myPlayer.cardNum}　</PlayerInfo>
-                            <PlayerInfoIcon src={coin} /> <PlayerInfo>{props.myPlayer.coin + ' ' + selector.msg.lang.COIN}</PlayerInfo>
-                            {props.myPlayer.fluctCoin !== '' &&
-                                <PlayerInfo>{props.myPlayer.fluctCoin}</PlayerInfo>
-                            }
+                            <Grid container>
+                                <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                    <PlayerInfoIcon src={card} />
+                                    <PlayerInfo> {props.myPlayer.cardNum}</PlayerInfo>
+                                    {(props.myPlayer.fluctCard && props.myPlayer.fluctCard.code === '+') &&
+                                        <FluctPlus> {props.myPlayer.fluctCard.value}</FluctPlus>
+                                    }
+                                    {(props.myPlayer.fluctCard && props.myPlayer.fluctCard.code === '-') &&
+                                        <FluctMinus> {props.myPlayer.fluctCard.value}</FluctMinus>
+                                    }
+                                </Grid>
+                                <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                    <PlayerInfoIcon src={coin} />
+                                    <PlayerInfo> {props.myPlayer.coin}</PlayerInfo>
+                                    {(props.myPlayer.fluctCoin && props.myPlayer.fluctCoin.code === '+') &&
+                                        <FluctPlus> {props.myPlayer.fluctCoin.value}</FluctPlus>
+                                    }
+                                    {(props.myPlayer.fluctCoin && props.myPlayer.fluctCoin.code === '-') &&
+                                        <FluctMinus> {props.myPlayer.fluctCoin.value}</FluctMinus>
+                                    }
+                                </Grid>
+                            </Grid>
                             {props.myPlayer.firedAbilities && props.myPlayer.firedAbilities.length > 0 ?
                                 <div>
                                     <Grid container>
@@ -82,8 +99,28 @@ const PlayerInfoComponent = (props) => {
                     {props.players && props.players.map((value) => (
                         <PlayerList key={value.playerId}>
                             <PlayerName>{value.playerName}</PlayerName>
-                            <PlayerInfoIcon src={card} /><PlayerInfo>×{value.cardNum}　</PlayerInfo>
-                            <PlayerInfoIcon src={coin} /> <PlayerInfo>{value.coin + ' ' + selector.msg.lang.COIN}</PlayerInfo>
+                            <Grid container>
+                                <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                    <PlayerInfoIcon src={card} />
+                                    <PlayerInfo> {value.cardNum}</PlayerInfo>
+                                    {(value.fluctCard && value.fluctCard.code === '+') &&
+                                        <FluctPlus> {value.fluctCard.value}</FluctPlus>
+                                    }
+                                    {(value.fluctCard && value.fluctCard.code === '-') &&
+                                        <FluctMinus> {value.fluctCard.value}</FluctMinus>
+                                    }
+                                </Grid>
+                                <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                <PlayerInfoIcon src={coin} />
+                                    <PlayerInfo> {value.coin}</PlayerInfo>
+                                    {(value.fluctCoin && value.fluctCoin.code === '+') &&
+                                        <FluctPlus> {value.fluctCoin.value}</FluctPlus>
+                                    }
+                                    {(value.fluctCoin && value.fluctCoin.code === '-') &&
+                                        <FluctMinus> {value.fluctCoin.value}</FluctMinus>
+                                    }
+                                </Grid>
+                            </Grid>
                             {(!value.firedAbilities || value.firedAbilities.length === 0) ?
                                 <div>
                                     <Grid container>

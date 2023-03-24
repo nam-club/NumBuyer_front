@@ -97,8 +97,7 @@ const UseAbilityComponent = (props) => {
                                                             <UseAbilityButton size="large" variant="contained"
                                                                 sx={[{ backgroundImage: value.selectedBgImage, color: value.tagColor, cursor: 'default', 'textShadow': '2px 4px 6px #000000', boxShadow: 6 },
                                                                 { '&:hover': { backgroundImage: value.selectedBgImage, opacity: 0.8, 'textShadow': '2px 4px 6px #000000', boxShadow: 6 } }]}>
-                                                                {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name}
-                                                                 {value.remaining}{value.max}
+                                                                {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name}　{value.remaining}{value.max}
                                                             </UseAbilityButton>
                                                         </Tooltip>
                                                     </div> :
@@ -111,8 +110,7 @@ const UseAbilityComponent = (props) => {
                                                             <UseAbilityButton size="large" variant="contained"
                                                                 sx={{ backgroundImage: value.selectedBgImage, color: value.tagColor, 'textShadow': '2px 4px 6px #000000' }}
                                                                 onClick={() => { handleClickOpen(value) }}>
-                                                                {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name} 
-                                                                {value.remaining}{value.max}
+                                                                {value.display.find((d) => { return d.lang === selector.msg.lang.LANGUAGE }).name}　{value.remaining}{value.max}
                                                             </UseAbilityButton>
                                                         </Tooltip>
                                                     </div>
