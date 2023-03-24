@@ -28,7 +28,8 @@ if (process.env.NODE_ENV !== "development") {
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <Helmet bodyAttributes={{style: 'background: linear-gradient(25deg, #4682b4, #000000)'}}/>
+    <Helmet htmlAttributes={{ style: 'height: 100%' }}
+            bodyAttributes={{ style: 'background: #000000 linear-gradient(25deg, #4682b4, #000000); height: 100%' }} />
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <App />
