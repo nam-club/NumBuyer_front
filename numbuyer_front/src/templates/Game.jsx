@@ -6,7 +6,7 @@ import { setFluctQueuesAction } from '../redux/game/actions';
 import { useStyles, Back, TargetCard, CardTag, CardValue, GoalArea, GoalTag, GoalMessage, FinishModal, FinishMenu } from './theme';
 import {
     useStylesMobile, TimeTagMobile, GoalMessageMobile, TargetCardMobile, CardTagMobile, CardValueMobile, TurnTagMobile, TurnValueMobile,
-    FinishModalMobile, FinishMenuMobile, MessageBoxMobile, NaviMessageMobile, GoalTagMobile
+    FinishModalMobile, FinishMenuMobile, MessageBoxMobile, NaviMessageMobile, GoalTagMobile, WrapMessageMobile
 } from './themeMobile';
 
 import { Queue } from '../class/Queue';
@@ -137,10 +137,35 @@ const Game = () => {
 
         if (selector.game.fluctQueues.length > 0) {
             let fq = selector.game.fluctQueues.find((f) => { return f.queue.playerId === playerId });
-            fluctValue = fq.queue.fluctParams.find((p) => { return p.key === key });
+
+            switch(key) {
+                case Constants.FLUCT_CARD:
+                    fluctValue = fq.queue.fluctCards[0];
+                    break;
+                case Constants.FLUCT_COIN:
+                    fluctValue = fq.queue.fluctCoins[0];
+                    break;
+                default:
+                    break;
+            }
+            console.log("取り出します。");
+            console.log(fluctValue);
+
             if (fluctValue) {
-                fluctParam = {code: fluctValue.value.slice(0, 1), value: fluctValue.value};
-                fq.dequeue();
+                fluctParam = {code: fluctValue.slice(0, 1), value: fluctValue};
+                console.log("消します。");
+                let deleteValue;
+                switch(key) {
+                    case Constants.FLUCT_CARD:
+                        deleteValue = fq.dequeueCards();
+                        break;
+                    case Constants.FLUCT_COIN:
+                        deleteValue = fq.dequeueCoins();
+                        break;
+                    default:
+                        break;
+                }
+                console.log(deleteValue);
             }
         }
 
@@ -181,6 +206,7 @@ const Game = () => {
                         <Grid item xs={1} />
                         <Grid item xs={8}>
                             <NavigationComponent background='linear-gradient(25deg, #9370db, #000000)' color={grey[50]} message={message} messages={messages} />
+                            <WrapMessageMobile>
                             {(selector.game.highestBid > 0 && selector.game.phase === Constants.AUCTION_PH) &&
                                 <AblNavigationComponent background='linear-gradient(25deg, #ffca28, #000000)' color={grey[50]}
                                     message={selector.msg.lang.AUC_HIGHEST_MSG1 + selector.game.highestBid + selector.msg.lang.AUC_HIGHEST_MSG2 + selector.game.highestName + selector.msg.lang.AUC_HIGHEST_MSG3} />
@@ -189,6 +215,7 @@ const Game = () => {
                                 <AblNavigationComponent key={index}
                                     background={am.bgColor} color={am.tagColor} message={am.message} effect={am.effect} />
                             ))}
+                            </WrapMessageMobile>
                         </Grid>
                         <Grid item xs={3}>
                             <TimeComponent targetCard={targetCard} setTargetCard={setTargetCard} auctionCards={auctionCards}

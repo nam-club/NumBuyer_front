@@ -374,18 +374,17 @@ export default function Socket(props) {
                 if (p.fluctuationParameters.length > 0) {
                     // 変動パラメータキューに追加
                     for (let f of p.fluctuationParameters) {
-                        fluctQueues.find((q) => { return q.queue.playerId === p.playerId }).enqueue({ key: f.key, value: f.value });
-                        // アビリティメッセージに追加
-                        /*let coin = Number(f.value);
-                        let fluctValue = '';
-                        if (coin !== 0) {
-                            if (coin < 0) {
-                                fluctValue = coin + selector.msg.lang.COIN;
-                            } else if (coin > 0) {
-                                fluctValue = "+" + coin + selector.msg.lang.COIN;
-                            }
-                            ablMessages = searchPushAblMsg(ablMessages, f.trigger.causedBy, f.trigger.id, p.playerName, fluctValue);
-                        }*/
+                        switch(f.key) {
+                            case Constants.FLUCT_CARD:
+                                fluctQueues.find((q) => { return q.queue.playerId === p.playerId }).enqueueCards(f.value);
+                                break;
+                            case Constants.FLUCT_COIN:
+                                fluctQueues.find((q) => { return q.queue.playerId === p.playerId }).enqueueCoins(f.value);
+                                break;
+                            default:
+                                break;
+                        }
+                        
                     }
                 }
             }

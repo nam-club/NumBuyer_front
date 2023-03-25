@@ -1,14 +1,22 @@
 export class Queue {
     constructor(playerId) {
-        this.queue = {playerId: playerId, fluctParams: []};
+        this.queue = {playerId: playerId, fluctCards: [], fluctCoins: []};
     }
 
-    enqueue(fluctParam) {
-        this.queue.fluctParams.push(fluctParam);
+    enqueueCards(fluctCard) {
+        this.queue.fluctCards.push(fluctCard);
     }
 
-    dequeue() {
-        return this.queue.fluctParams.shift();
+    enqueueCoins(fluctCoin) {
+        this.queue.fluctCoins.push(fluctCoin);
+    }
+
+    dequeueCards() {
+        return this.queue.fluctCards.shift();
+    }
+
+    dequeueCoins() {
+        return this.queue.fluctCoins.shift();
     }
 
     peek() {
