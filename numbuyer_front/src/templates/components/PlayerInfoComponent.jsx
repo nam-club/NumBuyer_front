@@ -14,7 +14,7 @@ import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { grey, yellow } from '@mui/material/colors';
 import { useMediaQuery } from "@mui/material";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 const PlayerInfoComponent = (props) => {
     const selector = useSelector(state => state);

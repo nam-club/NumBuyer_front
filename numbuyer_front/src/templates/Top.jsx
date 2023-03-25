@@ -578,32 +578,30 @@ const Top = () => {
                     </Back>
                 </>
                 :
-                <>
+                <div sx={{display: 'flex', alignItems: 'center'}}>
                     {/* ウィンドウサイズがモバイル版 */}
                     <BackMobile>
+                        {/* ロゴ画像 */}
+                        <div><MainLogoMobile src={logo} /></div>
                         <Grid container sx={{ display: 'flex'}}>
                             <Grid item xs={1.8} />
-                            {/* ロゴ画像 */}
-                            <Grid item xs={1.2} sx={{ alignSelf: 'center'}}>
-                                <div><MainLogoMobile src={logo} /></div>
-                            </Grid>
                             {/* タイトル画像 */}
-                            <Grid item xs={7.2} sx={{ alignSelf: 'center'}}>
-                                <MainTitleMobile src={title} />
+                            <Grid item xs={8} sx={{ alignSelf: 'center'}}>
+                                <MainTitleMobile src={title}/>
                             </Grid>
                             {/* バージョン情報 */}
-                            <Grid item xs={0.8} sx={{ alignSelf: 'flex-end'}}>
+                            <Grid item xs={1} sx={{ alignSelf: 'flex-end'}}>
                                 <VerMsgMobile sx={{ color: grey[50], fontSize: '0.75em' }}>( {Constants.VERSION} )</VerMsgMobile>
                             </Grid>
-                            <Grid item xs={1} />
+                            <Grid item xs={2} />
                         </Grid>
                         <MenuCardMobile>
                             {/* プレイヤー名入力エリア */}
                             <CardContent>
                                 <InputField variant="standard" label={selector.msg.lang.PLAYER_NAME} value={name}
                                     sx={{ margin: '0 10%' }}
-                                    inputProps={{ style: { fontSize: '2em', color: grey[600], marginTop: '2%', marginBottom: '-4%' } }}
-                                    InputLabelProps={{ style: { fontSize: '2em' } }}
+                                    inputProps={{ style: { fontSize: '1.5em', color: grey[600], marginTop: '2%', marginBottom: '-4%' } }}
+                                    InputLabelProps={{ style: { fontSize: '1.5em' } }}
                                     onChange={doChange} />
                             </CardContent>
                             {selector.msg.validFlg &&
@@ -651,7 +649,7 @@ const Top = () => {
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
                                                 color: grey[50], background: 'linear-gradient(25deg, #00bfff, #000000)', boxShadow: 6,
-                                                'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'
+                                                'textShadow': '2px 4px 6px #000000', fontSize: '1em', padding: '5% 0'
                                             },
                                             { '&:hover': { background: 'linear-gradient(25deg, #80dfff, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={() => { clickMatch(Constants.QUICK_MATCH) }}>{selector.msg.lang.QUICK_MATCH}</MatchButtonMobile>
@@ -661,7 +659,7 @@ const Top = () => {
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
                                                 color: grey[50], background: 'linear-gradient(25deg, #da70d6, #000000)', boxShadow: 6,
-                                                'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'
+                                                'textShadow': '2px 4px 6px #000000', fontSize: '1em', padding: '5% 0'
                                             },
                                             { '&:hover': { background: 'linear-gradient(25deg, #d9add7, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={handleAbilityOpen}>{selector.msg.lang.FRIEND_MATCH}</MatchButtonMobile>
@@ -671,7 +669,7 @@ const Top = () => {
                                         <MatchButtonMobile size="large" variant="contained"
                                             sx={[{
                                                 color: grey[50], background: 'linear-gradient(25deg, #00ff7f, #000000)', boxShadow: 6,
-                                                'textShadow': '2px 4px 6px #000000', fontSize: '1.5em', padding: '5.5%'
+                                                'textShadow': '2px 4px 6px #000000', fontSize: '1em', padding: '5% 0'
                                             },
                                             { '&:hover': { background: 'linear-gradient(25deg, #b3ffd9, #000000)', 'textShadow': '2px 4px 6px #000000', opacity: 0.8 } }]}
                                             onClick={() => { clickMatch(Constants.CPU_MATCH) }}>{selector.msg.lang.CPU_MATCH}</MatchButtonMobile>
@@ -839,7 +837,7 @@ const Top = () => {
                             </Fade>
                         </TutorialModal>
                     </BackMobile>
-                </>
+                </div>
             }
         </Typography>
     )

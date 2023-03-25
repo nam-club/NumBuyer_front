@@ -19,8 +19,7 @@ export const theme = createTheme({
 
 // メインロゴ
 export const MainLogoMobile = styled('img')({
-  width: '92%',
-  marginRight: '8%',
+  width: '25%',
 });
 
 // メインタイトル
@@ -30,7 +29,6 @@ export const MainTitleMobile = styled('img')({
 
 // バージョンメッセージ
 export const VerMsgMobile = styled('div')({
-  textAlign: 'right',
   marginBottom: '12%',
 });
 
@@ -42,7 +40,7 @@ export const BackMobile = styled('div')({
 // 言語設定ボタン
 export const LangButtonMobile = styled(Button)({
   margin: '0 2%',
-  fontSize: '1.5em',
+  fontSize: '1em',
   color: grey[50],
   background: grey[600],
   '&:hover': {
@@ -53,7 +51,7 @@ export const LangButtonMobile = styled(Button)({
 // チュートリアルアイコン
 export const TutorialIconMobile = styled(MenuBookIcon)({
   color: grey[50],
-  fontSize: '2.5em',
+  fontSize: '1em',
   margin: 0,
 });
 
@@ -96,14 +94,14 @@ export const TLButtonMobile = styled(Button)({
 
 // トップ・ロビー画面のメニュー
 export const MenuCardMobile = styled(Card)({
-  margin: '2% 12.5% 5% 12.5%',
+  margin: '1% 12.5% 3% 12.5%',
   width: '75%',
 });
 
 // エラーメッセージ
 export const ErrorMessageMobile = styled('p')({
   fontSize: '1em',
-  margin: '5% 10%',
+  margin: '2% 10%',
   color: red[600],
   background: red[100],
 });
@@ -111,8 +109,8 @@ export const ErrorMessageMobile = styled('p')({
 // マッチボタン
 export const MatchButtonMobile = styled(Button)({
   display: 'inline-block',
-  fontSize: '2em',
-  width: '150%',
+  fontSize: '1em',
+  width: '100%',
   margin: '0 10%',
   color: grey[700],
   'whiteSpace': 'nowrap',
